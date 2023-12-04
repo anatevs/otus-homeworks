@@ -5,47 +5,47 @@ namespace ShootEmUp
 {
     public sealed class LevelBackground : MonoBehaviour
     {
-        private float startPositionY;
+        private float _startPositionY;
 
-        private float endPositionY;
+        private float _endPositionY;
 
-        private float movingSpeedY;
+        private float _movingSpeedY;
 
-        private float positionX;
+        private float _positionX;
 
-        private float positionZ;
+        private float _positionZ;
 
-        private Transform myTransform;
+        private Transform _myTransform;
 
         [SerializeField]
-        private Params m_params;
+        private Params _params;
 
         private void Awake()
         {
-            this.startPositionY = this.m_params.m_startPositionY;
-            this.endPositionY = this.m_params.m_endPositionY;
-            this.movingSpeedY = this.m_params.m_movingSpeedY;
-            this.myTransform = this.transform;
-            var position = this.myTransform.position;
-            this.positionX = position.x;
-            this.positionZ = position.z;
+            this._startPositionY = this._params.startPositionY;
+            this._endPositionY = this._params.endPositionY;
+            this._movingSpeedY = this._params.movingSpeedY;
+            this._myTransform = this.transform;
+            var position = this._myTransform.position;
+            this._positionX = position.x;
+            this._positionZ = position.z;
         }
 
         private void FixedUpdate()
         {
-            if (this.myTransform.position.y <= this.endPositionY)
+            if (this._myTransform.position.y <= this._endPositionY)
             {
-                this.myTransform.position = new Vector3(
-                    this.positionX,
-                    this.startPositionY,
-                    this.positionZ
+                this._myTransform.position = new Vector3(
+                    this._positionX,
+                    this._startPositionY,
+                    this._positionZ
                 );
             }
 
-            this.myTransform.position -= new Vector3(
-                this.positionX,
-                this.movingSpeedY * Time.fixedDeltaTime,
-                this.positionZ
+            this._myTransform.position -= new Vector3(
+                this._positionX,
+                this._movingSpeedY * Time.fixedDeltaTime,
+                this._positionZ
             );
         }
 
@@ -53,13 +53,13 @@ namespace ShootEmUp
         public sealed class Params
         {
             [SerializeField]
-            public float m_startPositionY;
+            public float startPositionY;
 
             [SerializeField]
-            public float m_endPositionY;
+            public float endPositionY;
 
             [SerializeField]
-            public float m_movingSpeedY;
+            public float movingSpeedY;
         }
     }
 }

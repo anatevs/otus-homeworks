@@ -7,21 +7,21 @@ namespace ShootEmUp
 {
     public class CharacterDeathObserver : MonoBehaviour
     {
-        [SerializeField] private HitPointsComponent hpComponent;
-        [SerializeField] private GameManager gameManager;
+        [SerializeField] private HitPointsComponent _hpComponent;
+        [SerializeField] private GameManager _gameManager;
 
         private void OnEnable()
         {
-            this.hpComponent.HPempty += this.OnCharacterDeath;
+            this._hpComponent.HPempty += this.OnCharacterDeath;
         }
 
         private void OnDisable()
         {
-            if (hpComponent != null)
+            if (_hpComponent != null)
             {
-                this.hpComponent.HPempty -= this.OnCharacterDeath;
+                this._hpComponent.HPempty -= this.OnCharacterDeath;
             }
         }
-        private void OnCharacterDeath(GameObject _) => this.gameManager.FinishGame();
+        private void OnCharacterDeath(GameObject _) => this._gameManager.FinishGame();
     }
 }

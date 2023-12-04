@@ -6,38 +6,38 @@ namespace ShootEmUp
     {
         public bool IsReached
         {
-            get { return this.isReached; }
+            get { return this._isReached; }
         }
 
-        [SerializeField] private MoveComponent moveComponent;
+        [SerializeField] private MoveComponent _moveComponent;
 
-        private Vector2 destination;
+        private Vector2 _destination;
 
-        private bool isReached;
-        private readonly float posAccurancy = 0.25f;
+        private bool _isReached;
+        private readonly float _posSqrAccurancy = 0.25f * 0.25f;
 
         public void SetDestination(Vector2 endPoint)
         {
-            this.destination = endPoint;
-            this.isReached = false;
+            this._destination = endPoint;
+            this._isReached = false;
         }
 
         private void FixedUpdate()
         {
-            if (this.isReached)
+            if (this._isReached)
             {
                 return;
             }
             
-            var vector = this.destination - (Vector2) this.transform.position;
-            if (vector.magnitude <= posAccurancy)
+            var vector = this._destination - (Vector2) this.transform.position;
+            if (vector.sqrMagnitude <= this._posSqrAccurancy)
             {
-                this.isReached = true;
+                this._isReached = true;
                 return;
             }
 
             var direction = vector.normalized * Time.fixedDeltaTime;
-            this.moveComponent.MoveByRigidbodyVelocity(direction);
+            this._moveComponent.MoveByRigidbodyVelocity(direction);
         }
     }
 }

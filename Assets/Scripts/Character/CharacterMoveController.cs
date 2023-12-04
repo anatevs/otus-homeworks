@@ -6,24 +6,24 @@ using UnityEngine;
 public class CharacterMoveController : MonoBehaviour
 {
     [SerializeField]
-    InputManager keyboardInput;
+    private KeyboardInput _keyboardInput;
 
     [SerializeField]
-    private GameObject character;
+    private GameObject _character;
 
 
     private void OnEnable()
     {
-        keyboardInput.OnMove += MoveCharacter;
+        this._keyboardInput.OnMove += MoveCharacter;
     }
 
     private void OnDisable()
     {
-        keyboardInput.OnMove -= MoveCharacter;
+        this._keyboardInput.OnMove -= MoveCharacter;
     }
 
-    void MoveCharacter(Vector2 direction, float deltaTime)
+    void MoveCharacter(Vector2 direction)
     {
-        this.character.GetComponent<MoveComponent>().MoveByRigidbodyVelocity(direction * deltaTime);
+        this._character.GetComponent<MoveComponent>().MoveByRigidbodyVelocity(direction * Time.deltaTime);
     }
 }

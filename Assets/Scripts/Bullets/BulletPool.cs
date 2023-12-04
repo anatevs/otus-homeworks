@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,24 +7,25 @@ namespace ShootEmUp
     {
         [Header("Spawn")]
         [SerializeField]
-        private Transform worldTransform;
+        private Transform _worldTransform;
 
         [Header("Pool")]
         [SerializeField]
-        private Transform container;
+        private Transform _container;
         
-        [SerializeField] private Bullet prefab;
+        [SerializeField]
+        private Bullet _prefab;
 
         [SerializeField]
-        private int initialCount = 50;
+        private int _initialCount = 50;
 
         private readonly Queue<Bullet> m_bulletPool = new();
 
         private void Awake()
         {
-            for (var i = 0; i < this.initialCount; i++)
+            for (var i = 0; i < this._initialCount; i++)
             {
-                var bullet = Instantiate(this.prefab, this.container);
+                var bullet = Instantiate(this._prefab, this._container);
                 this.m_bulletPool.Enqueue(bullet);
             }
         }
@@ -34,18 +34,18 @@ namespace ShootEmUp
         {
             if (this.m_bulletPool.TryDequeue(out var bullet))
             {
-                bullet.transform.SetParent(this.worldTransform);
+                bullet.transform.SetParent(this._worldTransform);
             }
             else
             {
-                bullet = Instantiate(this.prefab, this.worldTransform);
+                bullet = Instantiate(this._prefab, this._worldTransform);
             }
             return bullet;
         }
 
         public void UnspawnBullet(Bullet bullet)
         {
-            bullet.transform.SetParent(this.container);
+            bullet.transform.SetParent(this._container);
             this.m_bulletPool.Enqueue(bullet);
         }
     }

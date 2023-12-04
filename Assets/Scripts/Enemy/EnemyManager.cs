@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,38 +9,33 @@ namespace ShootEmUp
         private EnemyPool _enemyPool;
 
         [SerializeField]
-        private EnemyPositions enemyPositions;
+        private EnemyPositions _enemyPositions;
 
         [SerializeField]
-        private GameObject character;
+        private GameObject _character;
 
         [SerializeField]
         private BulletSystem _bulletSystem;
-        
-        private readonly HashSet<GameObject> m_activeEnemies = new();
 
-        private IEnumerator Start()
+        private readonly HashSet<GameObject> _activeEnemies = new();
+
+
+        public void SpawnEnemy()
         {
-            while (true)
+            var enemy = this._enemyPool.SpawnEnemy();
+            if (enemy != null)
             {
-                yield return new WaitForSeconds(1);
-                var enemy = this._enemyPool.SpawnEnemy();
-                if (enemy != null)
+                if (this._activeEnemies.Add(enemy))
                 {
-                    if (this.m_activeEnemies.Add(enemy))
-                    {
-                        SetEnemyPositions(enemy, enemyPositions);
-                        EnemyAttackAgent enemyAttackAgent = enemy.GetComponent<EnemyAttackAgent>();
-                        enemyAttackAgent.SetTarget(character);
-                        
-                        enemy.GetComponent<HitPointsComponent>().HPempty += this.OnDestroyed;
-                        enemyAttackAgent.OnFire += this.OnFire;
-                        
-                    }    
+                    SetEnemyPositions(enemy, this._enemyPositions);
+                    EnemyAttackAgent enemyAttackAgent = enemy.GetComponent<EnemyAttackAgent>();
+                    enemyAttackAgent.SetBulletSystem(this._bulletSystem);
+                    enemyAttackAgent.SetTarget(this._character);
+
+                    enemy.GetComponent<HitPointsComponent>().HPempty += this.OnDestroyed;
                 }
             }
         }
-
 
         void SetEnemyPositions(GameObject enemy, EnemyPositions enemyPositions)
         {
@@ -55,26 +49,12 @@ namespace ShootEmUp
 
         private void OnDestroyed(GameObject enemy)
         {
-            if (m_activeEnemies.Remove(enemy))
+            if (_activeEnemies.Remove(enemy))
             {
                 enemy.GetComponent<HitPointsComponent>().HPempty -= this.OnDestroyed;
-                enemy.GetComponent<EnemyAttackAgent>().OnFire -= this.OnFire;
 
-                _enemyPool.UnspawnEnemy(enemy);
+                this._enemyPool.UnspawnEnemy(enemy);
             }
-        }
-
-        private void OnFire(Vector2 position, Vector2 direction)
-        {
-            _bulletSystem.FlyBulletByArgs(new BulletSystem.Args
-            {
-                isPlayer = false,
-                physicsLayer = (int) PhysicsLayer.ENEMY_BULLET,
-                color = Color.red,
-                damage = 1,
-                position = position,
-                velocity = direction * 2.0f
-            });
         }
     }
 }

@@ -7,12 +7,12 @@ namespace ShootEmUp
     {
         public event Action<GameObject> HPempty;
         
-        [SerializeField] private int hitPoints;
+        [SerializeField] private int _hitPoints;
         
         public void TakeDamage(int damage)
         {
-            this.hitPoints -= damage;
-            if (this.hitPoints <= 0)
+            this._hitPoints -= damage;
+            if (this._hitPoints <= 0)
             {
                 this.HPempty?.Invoke(this.gameObject);
             }
