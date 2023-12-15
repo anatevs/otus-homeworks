@@ -19,20 +19,23 @@ namespace ShootEmUp
         [SerializeField]
         private int _initialCount = 50;
 
-        private readonly Queue<Bullet> m_bulletPool = new();
+        [SerializeField]
+        private GameManagerInstaller _installerManager;
+
+        private readonly Queue<Bullet> _bulletPool = new();
 
         private void Awake()
         {
             for (var i = 0; i < this._initialCount; i++)
             {
                 var bullet = Instantiate(this._prefab, this._container);
-                this.m_bulletPool.Enqueue(bullet);
+                this._bulletPool.Enqueue(bullet);
             }
         }
 
         public Bullet SpawnBullet()
         {
-            if (this.m_bulletPool.TryDequeue(out var bullet))
+            if (this._bulletPool.TryDequeue(out var bullet))
             {
                 bullet.transform.SetParent(this._worldTransform);
             }
@@ -40,13 +43,15 @@ namespace ShootEmUp
             {
                 bullet = Instantiate(this._prefab, this._worldTransform);
             }
+            _installerManager.AddObjectGameListeners(bullet.gameObject, true);
             return bullet;
         }
 
         public void UnspawnBullet(Bullet bullet)
         {
             bullet.transform.SetParent(this._container);
-            this.m_bulletPool.Enqueue(bullet);
+            this._bulletPool.Enqueue(bullet);
+            _installerManager.RemoveObjectGameListeners(bullet.gameObject);
         }
     }
 }

@@ -3,16 +3,18 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed partial class BulletSystem : MonoBehaviour
+    public sealed partial class BulletSystem : MonoBehaviour,
+        GameListeners.IFixedUpdate
     {
+        public bool Enabled { get { return true; } }
+
         [SerializeField] private BulletPool _bulletPool;
         [SerializeField] private LevelBounds _levelBounds;
 
         private readonly HashSet<Bullet> _activeBullets = new();
         private readonly List<Bullet> _cache = new();
 
-
-        private void FixedUpdate()
+        public void OnFixedUpdate()
         {
             this._cache.Clear();
             this._cache.AddRange(this._activeBullets);

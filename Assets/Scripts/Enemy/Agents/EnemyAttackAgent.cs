@@ -2,8 +2,14 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyAttackAgent : MonoBehaviour
+    public sealed class EnemyAttackAgent : MonoBehaviour,
+        GameListeners.IStartGame,
+        GameListeners.IPauseGame,
+        GameListeners.IResumeGame,
+        GameListeners.IFixedUpdate
     {
+        public bool Enabled { get; private set; }
+        
         [SerializeField]
         private WeaponComponent _weaponComponent;
         
@@ -20,6 +26,11 @@ namespace ShootEmUp
         private GameObject _target;
         private float _currentTime;
 
+        private void Awake()
+        {
+            Enabled = true;
+        }
+
         public void SetBulletSystem(BulletSystem bulletSystem)
         {
             this._bulletSystem = bulletSystem;
@@ -30,9 +41,22 @@ namespace ShootEmUp
             this._target = target;
         }
 
-        private void FixedUpdate()
+        public void OnStart()
         {
-            if (this._moveAgent == null) 
+            Enabled = true;
+        }
+        public void OnPause()
+        {
+            Enabled = false;
+        }
+        public void OnResume()
+        {
+            Enabled = true;
+        }
+
+        public void OnFixedUpdate()
+        {
+            if (this._moveAgent == null)
             {
                 Debug.Log("there is no EnemyMoveAgent assigned in EnemyAttackAgent!");
                 return;
@@ -49,7 +73,7 @@ namespace ShootEmUp
                 ResetTimer();
             }
         }
-
+        
         private void ResetTimer()
         {
             this._currentTime = this._countdown;

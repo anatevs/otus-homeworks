@@ -210,8 +210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponComponent: {fileID: 5568771391735819374}
   _moveAgent: {fileID: 8186052948131603766}
-  _countdown: 1
-  _bulletSystem: {fileID: 0}
+  _countdown: 3
   _bulletConfig: {fileID: 11400000, guid: 59ade0529aa6efe4aa5726df5fdbbdd7, type: 2}
 --- !u!1 &2239154907127902911
 GameObject:

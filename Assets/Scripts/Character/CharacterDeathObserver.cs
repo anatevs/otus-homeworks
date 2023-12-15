@@ -5,23 +5,28 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public class CharacterDeathObserver : MonoBehaviour
+    public class CharacterDeathObserver : MonoBehaviour,
+        GameListeners.IStartGame,
+        GameListeners.IFinishGame
     {
         [SerializeField] private HitPointsComponent _hpComponent;
         [SerializeField] private GameManager _gameManager;
 
-        private void OnEnable()
+        public void OnStart()
         {
-            this._hpComponent.HPempty += this.OnCharacterDeath;
+            this._hpComponent.OnHPempty += this.OnCharacterDeath;
         }
 
-        private void OnDisable()
+        public void OnFinish()
         {
             if (_hpComponent != null)
             {
-                this._hpComponent.HPempty -= this.OnCharacterDeath;
+                this._hpComponent.OnHPempty -= this.OnCharacterDeath;
             }
         }
+
         private void OnCharacterDeath(GameObject _) => this._gameManager.FinishGame();
+
+        
     }
 }

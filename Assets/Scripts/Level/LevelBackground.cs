@@ -3,8 +3,14 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class LevelBackground : MonoBehaviour
+    public sealed class LevelBackground : MonoBehaviour,
+        GameListeners.IFixedUpdate,
+        GameListeners.IStartGame,
+        GameListeners.IPauseGame,
+        GameListeners.IResumeGame
     {
+        public bool Enabled { get; private set; }
+        
         private float _startPositionY;
 
         private float _endPositionY;
@@ -31,7 +37,12 @@ namespace ShootEmUp
             this._positionZ = position.z;
         }
 
-        private void FixedUpdate()
+        public void OnStart()
+        {
+            Enabled = true;
+        }
+
+        public void OnFixedUpdate()
         {
             if (this._myTransform.position.y <= this._endPositionY)
             {
@@ -47,6 +58,15 @@ namespace ShootEmUp
                 this._movingSpeedY * Time.fixedDeltaTime,
                 this._positionZ
             );
+        }
+
+        public void OnPause()
+        {
+            Enabled = false;
+        }
+        public void OnResume()
+        {
+            Enabled = true;
         }
 
         [Serializable]

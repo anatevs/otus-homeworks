@@ -1,9 +1,9 @@
 using ShootEmUp;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterMoveController : MonoBehaviour
+public class CharacterMoveController : MonoBehaviour,
+    GameListeners.IStartGame,
+    GameListeners.IFinishGame
 {
     [SerializeField]
     private KeyboardInput _keyboardInput;
@@ -11,13 +11,12 @@ public class CharacterMoveController : MonoBehaviour
     [SerializeField]
     private GameObject _character;
 
-
-    private void OnEnable()
+    public void OnStart()
     {
         this._keyboardInput.OnMove += MoveCharacter;
     }
 
-    private void OnDisable()
+    public void OnFinish()
     {
         this._keyboardInput.OnMove -= MoveCharacter;
     }

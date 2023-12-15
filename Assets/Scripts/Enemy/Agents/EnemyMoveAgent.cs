@@ -2,12 +2,15 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyMoveAgent : MonoBehaviour
+    public sealed class EnemyMoveAgent : MonoBehaviour,
+        GameListeners.IFixedUpdate,
+        GameListeners.IStartGame,
+        GameListeners.IPauseGame,
+        GameListeners.IResumeGame
     {
-        public bool IsReached
-        {
-            get { return this._isReached; }
-        }
+        public bool IsReached => _isReached;
+
+        public bool Enabled { get; private set; }
 
         [SerializeField] private MoveComponent _moveComponent;
 
@@ -16,20 +19,25 @@ namespace ShootEmUp
         private bool _isReached;
         private readonly float _posSqrAccurancy = 0.25f * 0.25f;
 
+        private void Awake()
+        {
+            Enabled = true;
+        }
+
         public void SetDestination(Vector2 endPoint)
         {
             this._destination = endPoint;
             this._isReached = false;
         }
 
-        private void FixedUpdate()
+        public void OnFixedUpdate()
         {
             if (this._isReached)
             {
                 return;
             }
-            
-            var vector = this._destination - (Vector2) this.transform.position;
+
+            var vector = this._destination - (Vector2)this.transform.position;
             if (vector.sqrMagnitude <= this._posSqrAccurancy)
             {
                 this._isReached = true;
@@ -38,6 +46,20 @@ namespace ShootEmUp
 
             var direction = vector.normalized * Time.fixedDeltaTime;
             this._moveComponent.MoveByRigidbodyVelocity(direction);
+        }
+
+        public void OnStart()
+        {
+            Enabled = true;
+        }
+
+        public void OnPause()
+        {
+            Enabled = false;
+        }
+        public void OnResume()
+        {
+            Enabled = true;
         }
     }
 }

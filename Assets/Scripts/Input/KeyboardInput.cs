@@ -3,12 +3,18 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class KeyboardInput : MonoBehaviour
+    public sealed class KeyboardInput : MonoBehaviour,
+        GameListeners.IStartGame,
+        GameListeners.IPauseGame,
+        GameListeners.IResumeGame,
+        GameListeners.IUpdate
     {
+        public bool Enabled { get; set; }
+
         public event Action OnFire;
         public event Action<Vector2> OnMove;
 
-        private void Update()
+        public void OnUpdate()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -24,12 +30,26 @@ namespace ShootEmUp
             {
                 return Vector2.left;
             }
-            else if (Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetKey(KeyCode.RightArrow))
             {
                 return Vector2.right;
             }            
             return Vector2.zero;
         }
 
+        public void OnStart()
+        {
+            Enabled = true;
+        }
+
+        public void OnPause()
+        {
+            Enabled = false;
+        }
+
+        public void OnResume()
+        {
+            Enabled = true;
+        }
     }
 }

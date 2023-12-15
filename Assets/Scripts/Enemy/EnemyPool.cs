@@ -16,9 +16,12 @@ namespace ShootEmUp
         [SerializeField]
         private GameObject _prefab;
 
+        [SerializeField]
+        private GameManagerInstaller _installerManager;
+
         private readonly Queue<GameObject> _enemyPool = new();
 
-        private int _poolSize = 7;
+        private readonly int _poolSize = 7;
         
         private void Awake()
         {
@@ -29,21 +32,22 @@ namespace ShootEmUp
             }
         }
 
-        public GameObject SpawnEnemy()
+        public bool TrySpawnEnemy(out GameObject resEnemy)
         {
-            if (!this._enemyPool.TryDequeue(out var enemy))
+            if (this._enemyPool.TryDequeue(out resEnemy))
             {
-                return null;
+                _installerManager.AddObjectGameListeners(resEnemy.gameObject, true);
+                resEnemy.transform.SetParent(this._worldTransform);
+                return true;
             }
-            enemy.transform.SetParent(this._worldTransform);
-
-            return enemy;
+            return false;
         }
 
         public void UnspawnEnemy(GameObject enemy)
         {
             enemy.transform.SetParent(this._container);
             this._enemyPool.Enqueue(enemy);
+            _installerManager.RemoveObjectGameListeners(enemy.gameObject);
         }
     }
 }

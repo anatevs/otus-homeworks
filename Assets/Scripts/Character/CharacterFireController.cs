@@ -4,22 +4,14 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class CharacterFireController : MonoBehaviour
+    public sealed class CharacterFireController : MonoBehaviour,
+        GameListeners.IStartGame,
+        GameListeners.IFinishGame
     {
         [SerializeField] private WeaponComponent _weapon;
         [SerializeField] private KeyboardInput _keyboardInput;
         [SerializeField] private BulletSystem _bulletSystem;
         [SerializeField] private BulletConfig _bulletConfig;
-
-
-        private void OnEnable()
-        {
-            this._keyboardInput.OnFire += OnFlyBullet;
-        }
-        private void OnDisable()
-        {
-            this._keyboardInput.OnFire -= OnFlyBullet;
-        }
 
         public void OnFlyBullet()
         {
@@ -32,6 +24,16 @@ namespace ShootEmUp
                 position = this._weapon.Position,
                 velocity = this._weapon.Rotation * Vector3.up * this._bulletConfig.speed
             });
+        }
+
+        public void OnStart()
+        {
+            this._keyboardInput.OnFire += OnFlyBullet;
+        }
+
+        public void OnFinish()
+        {
+            this._keyboardInput.OnFire -= OnFlyBullet;
         }
     }
 }

@@ -22,17 +22,17 @@ namespace ShootEmUp
 
         public void SpawnEnemy()
         {
-            var enemy = this._enemyPool.SpawnEnemy();
-            if (enemy != null)
+            if (this._enemyPool.TrySpawnEnemy(out var enemy))
             {
                 if (this._activeEnemies.Add(enemy))
                 {
                     SetEnemyPositions(enemy, this._enemyPositions);
+                    
                     EnemyAttackAgent enemyAttackAgent = enemy.GetComponent<EnemyAttackAgent>();
                     enemyAttackAgent.SetBulletSystem(this._bulletSystem);
                     enemyAttackAgent.SetTarget(this._character);
-
-                    enemy.GetComponent<HitPointsComponent>().HPempty += this.OnDestroyed;
+                    
+                    enemy.GetComponent<HitPointsComponent>().OnHPempty += this.OnDestroyed;
                 }
             }
         }
@@ -51,7 +51,7 @@ namespace ShootEmUp
         {
             if (_activeEnemies.Remove(enemy))
             {
-                enemy.GetComponent<HitPointsComponent>().HPempty -= this.OnDestroyed;
+                enemy.GetComponent<HitPointsComponent>().OnHPempty -= this.OnDestroyed;
 
                 this._enemyPool.UnspawnEnemy(enemy);
             }
