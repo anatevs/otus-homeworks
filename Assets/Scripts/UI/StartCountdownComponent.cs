@@ -8,7 +8,7 @@ using UnityEngine.UI;
 namespace ShootEmUp
 {
     public class StartCountdownComponent : MonoBehaviour,
-        GameListeners.IStartGame
+        IStartGame
     {
         public event Action OnCounted;
 
@@ -18,7 +18,7 @@ namespace ShootEmUp
 
         public void OnStart()
         {
-            UnsubscribeFromAll(OnCounted);
+            OnCounted = null;
             gameObject.SetActive(false);
         }
 
@@ -41,18 +41,6 @@ namespace ShootEmUp
                 if (_count <= 0)
                 {
                     OnCounted?.Invoke();
-                }
-            }
-        }
-
-        public void UnsubscribeFromAll(Action action)
-        {
-            Delegate[] listeners = action.GetInvocationList();
-            if (listeners != null && listeners.Length != 0)
-            {
-                for (int i = 0; i < listeners.Length; i++)
-                {
-                    action -= (listeners[i] as Action);
                 }
             }
         }

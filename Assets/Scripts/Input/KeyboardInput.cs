@@ -4,13 +4,9 @@ using UnityEngine;
 namespace ShootEmUp
 {
     public sealed class KeyboardInput : MonoBehaviour,
-        GameListeners.IStartGame,
-        GameListeners.IPauseGame,
-        GameListeners.IResumeGame,
-        GameListeners.IUpdate
+        IUpdate,
+        IPausedUpdate
     {
-        public bool Enabled { get; set; }
-
         public event Action OnFire;
         public event Action<Vector2> OnMove;
 
@@ -24,6 +20,11 @@ namespace ShootEmUp
             OnMove?.Invoke(GetDirection());
         }
 
+        public void OnPausedUpdate()
+        {
+            return;
+        }
+
         private Vector2 GetDirection()
         {
             if (Input.GetKey(KeyCode.LeftArrow))
@@ -35,21 +36,6 @@ namespace ShootEmUp
                 return Vector2.right;
             }            
             return Vector2.zero;
-        }
-
-        public void OnStart()
-        {
-            Enabled = true;
-        }
-
-        public void OnPause()
-        {
-            Enabled = false;
-        }
-
-        public void OnResume()
-        {
-            Enabled = true;
         }
     }
 }

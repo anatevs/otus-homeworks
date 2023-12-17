@@ -2,8 +2,8 @@ using ShootEmUp;
 using UnityEngine;
 
 public class CharacterMoveController : MonoBehaviour,
-    GameListeners.IStartGame,
-    GameListeners.IFinishGame
+    IStartGame,
+    IFinishGame
 {
     [SerializeField]
     private KeyboardInput _keyboardInput;
@@ -13,16 +13,16 @@ public class CharacterMoveController : MonoBehaviour,
 
     public void OnStart()
     {
-        this._keyboardInput.OnMove += MoveCharacter;
+        _keyboardInput.OnMove += MoveCharacter;
     }
 
     public void OnFinish()
     {
-        this._keyboardInput.OnMove -= MoveCharacter;
+        _keyboardInput.OnMove -= MoveCharacter;
     }
 
     void MoveCharacter(Vector2 direction)
     {
-        this._character.GetComponent<MoveComponent>().MoveByRigidbodyVelocity(direction * Time.deltaTime);
+        _character.GetComponent<MoveComponent>().MoveByRigidbodyVelocity(direction * Time.deltaTime);
     }
 }

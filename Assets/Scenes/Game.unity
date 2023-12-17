@@ -255,9 +255,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4051429}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 562ff69be43a6404a827d65559d99e6d, type: 3}
+  m_Script: {fileID: 11500000, guid: 9bb1bceabfac480448233dd9cb3e155e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _activeGameStates: 01000000
 --- !u!1 &20561618
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,7 +555,7 @@ MonoBehaviour:
   _container: {fileID: 1831741369}
   _prefab: {fileID: 201757604187811891, guid: 5fe72886874b4e445b06cf777ca4920d, type: 3}
   _initialCount: 50
-  _installerManager: {fileID: 3951702117947426124}
+  _gameManager: {fileID: 3951702117947426123}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,7 +706,7 @@ MonoBehaviour:
   _worldTransform: {fileID: 1683128698}
   _container: {fileID: 178513672}
   _prefab: {fileID: 559606060570185700, guid: 87fe189881a524806800482ac8eaaa83, type: 3}
-  _installerManager: {fileID: 3951702117947426124}
+  _gameManager: {fileID: 3951702117947426123}
 --- !u!114 &562298208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -883,9 +884,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1031900370}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0934306a49bc8847ab795a04864fc69, type: 3}
+  m_Script: {fileID: 11500000, guid: 9bb1bceabfac480448233dd9cb3e155e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _activeGameStates: 02000000
 --- !u!1 &1049219807
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,7 +1283,7 @@ GameObject:
   - component: {fileID: 1617363579}
   - component: {fileID: 1617363581}
   - component: {fileID: 1617363580}
-  - component: {fileID: 1617363582}
+  - component: {fileID: 1617363583}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -1347,7 +1349,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1617363578}
   m_CullTransparentMesh: 1
---- !u!114 &1617363582
+--- !u!114 &1617363583
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1356,9 +1358,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1617363578}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6600476903d6d94dbe123d942d30bc6, type: 3}
+  m_Script: {fileID: 11500000, guid: 9bb1bceabfac480448233dd9cb3e155e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _activeGameStates: 0200000003000000
 --- !u!1 &1683128697
 GameObject:
   m_ObjectHideFlags: 0
@@ -2279,6 +2282,7 @@ GameObject:
   - component: {fileID: 3951702117947426123}
   - component: {fileID: 3951702117947426124}
   - component: {fileID: 3951702117947426126}
+  - component: {fileID: 3951702117947426127}
   m_Layer: 0
   m_Name: '[GAME_SYSTEM]'
   m_TagString: Untagged
@@ -2317,8 +2321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 697fe7ba192e484db495320b9c01bcd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pauseButton: {fileID: 4051431}
-  _resumeButton: {fileID: 1031900372}
+  _gameState: 0
 --- !u!114 &3951702117947426124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2351,6 +2354,21 @@ MonoBehaviour:
   _startCountdown: {fileID: 2146736584}
   _secondsToStart: 3
   _deltaCount: 1
+--- !u!114 &3951702117947426127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3951702117947426121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e67dbe52a63dc7945a3b00d51fb3a01e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pauseButton: {fileID: 4051431}
+  _resumeButton: {fileID: 1031900372}
+  _gameManager: {fileID: 3951702117947426123}
 --- !u!212 &4162873433806880330
 SpriteRenderer:
   m_ObjectHideFlags: 0

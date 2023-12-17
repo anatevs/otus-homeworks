@@ -7,7 +7,8 @@ using UnityEngine.UI;
 namespace ShootEmUp
 {
 
-    public class StartGameManager : MonoBehaviour
+    public class StartGameManager : MonoBehaviour,
+        IStartGame
     {
         [SerializeField]
         private GameManager _gameManager;
@@ -30,7 +31,7 @@ namespace ShootEmUp
 
             if (_startCountdown != null)
             {
-                _startCountdown.OnCounted += _gameManager.StartListeners;
+                _startCountdown.OnCounted += _gameManager.StartGame;
             }
         }
 
@@ -47,6 +48,11 @@ namespace ShootEmUp
             _startCountdown.gameObject.SetActive(true);
             _startCountdown.InitaliseCounter(_secondsToStart);
             _startButton.gameObject.SetActive(false);
+        }
+
+        public void OnStart()
+        {
+            _startCountdown.OnCounted -= _gameManager.StartGame;
         }
     }
 }

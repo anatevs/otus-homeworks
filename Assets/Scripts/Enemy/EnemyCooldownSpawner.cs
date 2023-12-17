@@ -1,17 +1,12 @@
-using ShootEmUp;
-using System.Collections;
 using UnityEngine;
 
 namespace ShootEmUp
 {
     public class EnemyCooldownSpawner : MonoBehaviour,
-        GameListeners.IStartGame,
-        GameListeners.IPauseGame,
-        GameListeners.IResumeGame,
-        GameListeners.IUpdate
+        IStartGame,
+        IUpdate,
+        IPausedUpdate
     {
-
-        public bool Enabled { get; private set; }
 
         [SerializeField] private EnemyManager _enemyManager;
         [SerializeField] private float _cooldownTime = 1f;
@@ -20,23 +15,17 @@ namespace ShootEmUp
 
         public void OnStart()
         {
-            Enabled = true;
             RefreshCounter();
-        }
-
-        public void OnPause()
-        {
-            Enabled = false;
-        }
-
-        public void OnResume()
-        {
-            Enabled = true;
         }
 
         public void OnUpdate()
         {
             CooldownCounter();
+        }
+
+        public void OnPausedUpdate()
+        {
+            return;
         }
 
         private void CooldownCounter()
@@ -52,6 +41,5 @@ namespace ShootEmUp
             _prevTime = Time.time;
             _enemyManager.SpawnEnemy();
         }
-
     }
 }

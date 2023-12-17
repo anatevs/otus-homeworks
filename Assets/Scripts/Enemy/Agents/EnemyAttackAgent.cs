@@ -3,13 +3,10 @@ using UnityEngine;
 namespace ShootEmUp
 {
     public sealed class EnemyAttackAgent : MonoBehaviour,
-        GameListeners.IStartGame,
-        GameListeners.IPauseGame,
-        GameListeners.IResumeGame,
-        GameListeners.IFixedUpdate
+        IFixedUpdate,
+        IPausedFixedUpdate
+
     {
-        public bool Enabled { get; private set; }
-        
         [SerializeField]
         private WeaponComponent _weaponComponent;
         
@@ -26,74 +23,61 @@ namespace ShootEmUp
         private GameObject _target;
         private float _currentTime;
 
-        private void Awake()
-        {
-            Enabled = true;
-        }
-
         public void SetBulletSystem(BulletSystem bulletSystem)
         {
-            this._bulletSystem = bulletSystem;
+            _bulletSystem = bulletSystem;
         }
         
         public void SetTarget(GameObject target)
         {
-            this._target = target;
-        }
-
-        public void OnStart()
-        {
-            Enabled = true;
-        }
-        public void OnPause()
-        {
-            Enabled = false;
-        }
-        public void OnResume()
-        {
-            Enabled = true;
+            _target = target;
         }
 
         public void OnFixedUpdate()
         {
-            if (this._moveAgent == null)
+            if (_moveAgent == null)
             {
                 Debug.Log("there is no EnemyMoveAgent assigned in EnemyAttackAgent!");
                 return;
             }
 
-            if (!this._moveAgent.IsReached)
+            if (!_moveAgent.IsReached)
             {
                 return;
             }
 
-            if ((this._currentTime -= Time.fixedDeltaTime) <= 0)
+            if ((_currentTime -= Time.fixedDeltaTime) <= 0)
             {
-                this.Fire();
+                Fire();
                 ResetTimer();
             }
         }
-        
+
+        public void OnPausedFixedUpdate()
+        {
+            return;
+        }
+
         private void ResetTimer()
         {
-            this._currentTime = this._countdown;
+            _currentTime = _countdown;
         }
 
         private void Fire()
         {
-            if (this._weaponComponent != null && this._target != null)
+            if (_weaponComponent != null && _target != null)
             {
-                var startPosition = this._weaponComponent.Position;
-                var vector = (Vector2)this._target.transform.position - startPosition;
+                var startPosition = _weaponComponent.Position;
+                var vector = (Vector2)_target.transform.position - startPosition;
                 var direction = vector.normalized;
-                this._bulletSystem.FlyBulletByArgs(new BulletSystem.BulletArgs
+                _bulletSystem.FlyBulletByArgs(new BulletSystem.BulletArgs
                 {
                     isPlayer = false,
-                    physicsLayer = (int)this._bulletConfig.physicsLayer,
-                    color = this._bulletConfig.color,
-                    damage = this._bulletConfig.damage,
+                    physicsLayer = (int)_bulletConfig.physicsLayer,
+                    color = _bulletConfig.color,
+                    damage = _bulletConfig.damage,
                     position = startPosition,
-                    velocity = direction * this._bulletConfig.speed
+                    velocity = direction * _bulletConfig.speed
                 });
             }
         }

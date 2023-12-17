@@ -3,10 +3,11 @@ using UnityEngine;
 namespace ShootEmUp
 {
     public sealed class EnemyMoveAgent : MonoBehaviour,
-        GameListeners.IFixedUpdate,
-        GameListeners.IStartGame,
-        GameListeners.IPauseGame,
-        GameListeners.IResumeGame
+        IFixedUpdate,
+        IPausedFixedUpdate,
+        IStartGame,
+        IPauseGame,
+        IResumeGame
     {
         public bool IsReached => _isReached;
 
@@ -17,7 +18,7 @@ namespace ShootEmUp
         private Vector2 _destination;
 
         private bool _isReached;
-        private readonly float _posSqrAccurancy = 0.25f * 0.25f;
+        private readonly float _posSqrAccuracy = 0.25f * 0.25f;
 
         private void Awake()
         {
@@ -26,26 +27,30 @@ namespace ShootEmUp
 
         public void SetDestination(Vector2 endPoint)
         {
-            this._destination = endPoint;
-            this._isReached = false;
+            _destination = endPoint;
+            _isReached = false;
         }
 
         public void OnFixedUpdate()
         {
-            if (this._isReached)
+            if (_isReached)
             {
                 return;
             }
 
-            var vector = this._destination - (Vector2)this.transform.position;
-            if (vector.sqrMagnitude <= this._posSqrAccurancy)
+            var vector = _destination - (Vector2)transform.position;
+            if (vector.sqrMagnitude <= _posSqrAccuracy)
             {
-                this._isReached = true;
+                _isReached = true;
                 return;
             }
 
             var direction = vector.normalized * Time.fixedDeltaTime;
-            this._moveComponent.MoveByRigidbodyVelocity(direction);
+            _moveComponent.MoveByRigidbodyVelocity(direction);
+        }
+        public void OnPausedFixedUpdate()
+        {
+            return;
         }
 
         public void OnStart()

@@ -17,7 +17,7 @@ namespace ShootEmUp
         private GameObject _prefab;
 
         [SerializeField]
-        private GameManagerInstaller _installerManager;
+        private GameManager _gameManager;
 
         private readonly Queue<GameObject> _enemyPool = new();
 
@@ -25,19 +25,18 @@ namespace ShootEmUp
         
         private void Awake()
         {
-            for (var i = 0; i < this._poolSize; i++)
+            for (var i = 0; i < _poolSize; i++)
             {
-                var enemy = Instantiate(this._prefab, this._container);
-                this._enemyPool.Enqueue(enemy);
+                var enemy = Instantiate(_prefab, _container);
+                _enemyPool.Enqueue(enemy);
             }
         }
 
         public bool TrySpawnEnemy(out GameObject resEnemy)
         {
-            if (this._enemyPool.TryDequeue(out resEnemy))
+            if (_enemyPool.TryDequeue(out resEnemy))
             {
-                _installerManager.AddObjectGameListeners(resEnemy.gameObject, true);
-                resEnemy.transform.SetParent(this._worldTransform);
+                resEnemy.transform.SetParent(_worldTransform);
                 return true;
             }
             return false;
@@ -45,9 +44,8 @@ namespace ShootEmUp
 
         public void UnspawnEnemy(GameObject enemy)
         {
-            enemy.transform.SetParent(this._container);
-            this._enemyPool.Enqueue(enemy);
-            _installerManager.RemoveObjectGameListeners(enemy.gameObject);
+            enemy.transform.SetParent(_container);
+            _enemyPool.Enqueue(enemy);
         }
     }
 }

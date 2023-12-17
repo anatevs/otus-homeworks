@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShootEmUp
 {
     public sealed class CharacterFireController : MonoBehaviour,
-        GameListeners.IStartGame,
-        GameListeners.IFinishGame
+        IStartGame,
+        IFinishGame
     {
         [SerializeField] private WeaponComponent _weapon;
         [SerializeField] private KeyboardInput _keyboardInput;
@@ -18,22 +16,22 @@ namespace ShootEmUp
             _bulletSystem.FlyBulletByArgs(new BulletSystem.BulletArgs
             {
                 isPlayer = true,
-                physicsLayer = (int)this._bulletConfig.physicsLayer,
-                color = this._bulletConfig.color,
-                damage = this._bulletConfig.damage,
-                position = this._weapon.Position,
-                velocity = this._weapon.Rotation * Vector3.up * this._bulletConfig.speed
+                physicsLayer = (int)_bulletConfig.physicsLayer,
+                color = _bulletConfig.color,
+                damage = _bulletConfig.damage,
+                position = _weapon.Position,
+                velocity = _weapon.Rotation * Vector3.up * _bulletConfig.speed
             });
         }
 
         public void OnStart()
         {
-            this._keyboardInput.OnFire += OnFlyBullet;
+            _keyboardInput.OnFire += OnFlyBullet;
         }
 
         public void OnFinish()
         {
-            this._keyboardInput.OnFire -= OnFlyBullet;
+            _keyboardInput.OnFire -= OnFlyBullet;
         }
     }
 }

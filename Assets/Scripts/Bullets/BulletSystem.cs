@@ -4,10 +4,9 @@ using UnityEngine;
 namespace ShootEmUp
 {
     public sealed partial class BulletSystem : MonoBehaviour,
-        GameListeners.IFixedUpdate
+        IFixedUpdate,
+        IPausedFixedUpdate
     {
-        public bool Enabled { get { return true; } }
-
         [SerializeField] private BulletPool _bulletPool;
         [SerializeField] private LevelBounds _levelBounds;
 
@@ -16,22 +15,27 @@ namespace ShootEmUp
 
         public void OnFixedUpdate()
         {
-            this._cache.Clear();
-            this._cache.AddRange(this._activeBullets);
+            _cache.Clear();
+            _cache.AddRange(_activeBullets);
 
-            for (int i = 0, count = this._cache.Count; i < count; i++)
+            for (int i = 0, count = _cache.Count; i < count; i++)
             {
-                var bullet = this._cache[i];
-                if (!this._levelBounds.InBounds(bullet.transform.position))
+                var bullet = _cache[i];
+                if (!_levelBounds.InBounds(bullet.transform.position))
                 {
-                    this.RemoveBullet(bullet);
+                    RemoveBullet(bullet);
                 }
             }
         }
 
+        public void OnPausedFixedUpdate()
+        {
+            return;
+        }
+
         public void FlyBulletByArgs(BulletArgs args)
         {
-            var bullet = this._bulletPool.SpawnBullet();
+            var bullet = _bulletPool.SpawnBullet();
             if (bullet != null)
             {
                 bullet.SetPosition(args.position);
@@ -41,19 +45,19 @@ namespace ShootEmUp
                 bullet.IsPlayer = args.isPlayer;
                 bullet.SetVelocity(args.velocity);
 
-                if (this._activeBullets.Add(bullet))
+                if (_activeBullets.Add(bullet))
                 {
-                    bullet.OnCollisionEntered += this.RemoveBullet;
+                    bullet.OnCollisionEntered += RemoveBullet;
                 }
             }
         }
         
         private void RemoveBullet(Bullet bullet)
         {
-            if (this._activeBullets.Remove(bullet))
+            if (_activeBullets.Remove(bullet))
             {
-                bullet.OnCollisionEntered -= this.RemoveBullet;
-                this._bulletPool.UnspawnBullet(bullet);
+                bullet.OnCollisionEntered -= RemoveBullet;
+                _bulletPool.UnspawnBullet(bullet);
             }
         }
     }
