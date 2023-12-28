@@ -2,20 +2,25 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public class EnemyCooldownSpawner : MonoBehaviour,
+    public class EnemyCooldownSpawner :
         IStartGame,
         IUpdate,
         IPausedUpdate
     {
-
-        [SerializeField] private EnemyManager _enemyManager;
-        [SerializeField] private float _cooldownTime = 1f;
+        private EnemyManager _enemyManager;
+        private float _cooldownTime = 1f;
 
         private float _prevTime;
 
+        public EnemyCooldownSpawner(EnemyManager enemyManager, float cooldownTime)
+        {
+            _enemyManager = enemyManager;
+            _cooldownTime = cooldownTime;
+        }
+
         public void OnStart()
         {
-            RefreshCounter();
+            ResetCounter();
         }
 
         public void OnUpdate()
@@ -32,11 +37,11 @@ namespace ShootEmUp
         {
             if (Time.time - _prevTime >= _cooldownTime)
             {
-                RefreshCounter();
+                ResetCounter();
             }
         }
 
-        private void RefreshCounter()
+        private void ResetCounter()
         {
             _prevTime = Time.time;
             _enemyManager.SpawnEnemy();

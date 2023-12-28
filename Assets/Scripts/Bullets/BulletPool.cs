@@ -1,36 +1,39 @@
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 
 namespace ShootEmUp
 {
-    public class BulletPool : MonoBehaviour
+    public class BulletPool
     {
-        [Header("Spawn")]
-        [SerializeField]
         private Transform _worldTransform;
-
-        [Header("Pool")]
-        [SerializeField]
-        private Transform _container;
-        
-        [SerializeField]
+        private Transform _poolTransform;
+        private int _initialCount = 50;
         private Bullet _prefab;
 
-        [SerializeField]
-        private int _initialCount = 50;
-
-        [SerializeField]
         private GameManager _gameManager;
 
+        private IObjectResolver _objectResolver;
+        
         private readonly Queue<Bullet> _bulletPool = new();
 
-        private void Awake()
-        {
+        public BulletPool(IObjectResolver objectResolver, GameManager gameManager, BulletPoolParams bulletParams)
+        {            
+            _objectResolver = objectResolver;
+
+            _gameManager = gameManager;
+            _worldTransform = bulletParams.worldTransform;
+            _poolTransform = bulletParams.poolTransform;
+            _initialCount = bulletParams.initialCount;
+            _prefab = bulletParams.bulletPrefab;
+
             for (var i = 0; i < _initialCount; i++)
             {
-                var bullet = Instantiate(_prefab, _container);
+                var bullet = _objectResolver.Instantiate(_prefab, _poolTransform);
                 _bulletPool.Enqueue(bullet);
             }
+
         }
 
         public Bullet SpawnBullet()
@@ -41,7 +44,7 @@ namespace ShootEmUp
             }
             else
             {
-                bullet = Instantiate(_prefab, _worldTransform);
+                bullet = _objectResolver.Instantiate(_prefab, _worldTransform);
                 _gameManager.AddListeners(bullet.gameObject);
             }
             return bullet;
@@ -49,7 +52,7 @@ namespace ShootEmUp
 
         public void UnspawnBullet(Bullet bullet)
         {
-            bullet.transform.SetParent(_container);
+            bullet.transform.SetParent(_poolTransform);
             _bulletPool.Enqueue(bullet);
         }
     }

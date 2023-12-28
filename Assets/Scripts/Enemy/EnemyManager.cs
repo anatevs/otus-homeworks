@@ -3,22 +3,22 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyManager : MonoBehaviour
+    public sealed class EnemyManager
     {
-        [SerializeField]
         private EnemyPool _enemyPool;
-
-        [SerializeField]
         private EnemyPositions _enemyPositions;
-
-        [SerializeField]
         private GameObject _character;
-
-        [SerializeField]
         private BulletSystem _bulletSystem;
 
         private readonly HashSet<GameObject> _activeEnemies = new();
 
+        public EnemyManager(EnemyPool enemyPool, EnemyPositions enemyPositions, GameObject target, BulletSystem bulletSystem)
+        {
+            _enemyPool = enemyPool;
+            _enemyPositions = enemyPositions;
+            _character = target;
+            _bulletSystem = bulletSystem;
+        }
 
         public void SpawnEnemy()
         {
@@ -45,7 +45,6 @@ namespace ShootEmUp
             var attackPosition = enemyPositions.RandomAttackPosition();
             enemy.GetComponent<EnemyMoveAgent>().SetDestination(attackPosition.position);
         }
-
 
         private void OnDestroyed(GameObject enemy)
         {

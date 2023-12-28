@@ -2,12 +2,18 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public class CharacterDeathObserver : MonoBehaviour,
+    public class CharacterDeathObserver :
         IStartGame,
         IFinishGame
     {
-        [SerializeField] private HitPointsComponent _hpComponent;
-        [SerializeField] private GameManager _gameManager;
+        private HitPointsComponent _hpComponent;
+        private GameManager _gameManager;
+
+        public CharacterDeathObserver(CharacterComponents characterComponents, GameManager gameManager)
+        {
+            _hpComponent = characterComponents.GetComponent<HitPointsComponent>();
+            _gameManager = gameManager;
+        }
 
         public void OnStart()
         {

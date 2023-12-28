@@ -2,15 +2,25 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class CharacterFireController : MonoBehaviour,
+    public sealed class CharacterFireController :
         IStartGame,
         IFinishGame
     {
-        [SerializeField] private WeaponComponent _weapon;
-        [SerializeField] private KeyboardInput _keyboardInput;
-        [SerializeField] private BulletSystem _bulletSystem;
-        [SerializeField] private BulletConfig _bulletConfig;
+        private WeaponComponent _weapon;
+        
+        private IInputSystem _inputSystem;
+        
+        private BulletSystem _bulletSystem;
+        
+        private BulletConfig _bulletConfig;
 
+        public CharacterFireController(IInputSystem inputSystem, CharacterComponents characterComponents, BulletSystem bulletSystem, BulletConfig bulletConfig)
+        {
+            _inputSystem = inputSystem;
+            _weapon = characterComponents.GetComponent<WeaponComponent>();
+            _bulletSystem = bulletSystem;
+            _bulletConfig = bulletConfig;
+        }
         public void OnFlyBullet()
         {
             _bulletSystem.FlyBulletByArgs(new BulletSystem.BulletArgs
@@ -26,12 +36,12 @@ namespace ShootEmUp
 
         public void OnStart()
         {
-            _keyboardInput.OnFire += OnFlyBullet;
+            _inputSystem.OnFire += OnFlyBullet;
         }
 
         public void OnFinish()
         {
-            _keyboardInput.OnFire -= OnFlyBullet;
+            _inputSystem.OnFire -= OnFlyBullet;
         }
     }
 }

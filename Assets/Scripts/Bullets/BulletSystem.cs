@@ -1,14 +1,19 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed partial class BulletSystem : MonoBehaviour,
+    public sealed partial class BulletSystem :
         IFixedUpdate,
         IPausedFixedUpdate
     {
-        [SerializeField] private BulletPool _bulletPool;
-        [SerializeField] private LevelBounds _levelBounds;
+        private BulletPool _bulletPool;        
+        private LevelBounds _levelBounds;
+
+        public BulletSystem(BulletPool bulletPool, LevelBounds levelBounds)
+        {
+            _bulletPool = bulletPool;
+            _levelBounds = levelBounds;
+        }
 
         private readonly HashSet<Bullet> _activeBullets = new();
         private readonly List<Bullet> _cache = new();

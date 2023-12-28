@@ -1,28 +1,33 @@
-using ShootEmUp;
 using UnityEngine;
 
-public class CharacterMoveController : MonoBehaviour,
-    IStartGame,
-    IFinishGame
+namespace ShootEmUp
 {
-    [SerializeField]
-    private KeyboardInput _keyboardInput;
-
-    [SerializeField]
-    private GameObject _character;
-
-    public void OnStart()
+    public class CharacterMoveController :
+        IStartGame,
+        IFinishGame
     {
-        _keyboardInput.OnMove += MoveCharacter;
-    }
+        private IInputSystem _inputSystem;
+        private MoveComponent _moveComponent;
 
-    public void OnFinish()
-    {
-        _keyboardInput.OnMove -= MoveCharacter;
-    }
+        public CharacterMoveController(IInputSystem inputSystem, CharacterComponents characterComponents)
+        {
+            _inputSystem = inputSystem;
+            _moveComponent = characterComponents.GetComponent<MoveComponent>();
+        }
 
-    void MoveCharacter(Vector2 direction)
-    {
-        _character.GetComponent<MoveComponent>().MoveByRigidbodyVelocity(direction * Time.deltaTime);
+        public void OnStart()
+        {
+            _inputSystem.OnMove += MoveCharacter;
+        }
+
+        public void OnFinish()
+        {
+            _inputSystem.OnMove -= MoveCharacter;
+        }
+
+        void MoveCharacter(Vector2 direction)
+        {
+            _moveComponent.MoveByRigidbodyVelocity(direction * Time.deltaTime);
+        }
     }
 }

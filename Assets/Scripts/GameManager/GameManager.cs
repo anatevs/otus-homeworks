@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ShootEmUp
 {
@@ -14,6 +12,12 @@ namespace ShootEmUp
         private readonly List<IPausedUpdate> _pausedUpdateListeners = new();
         private readonly List<IFixedUpdate> _fixedUpdateListeners = new();
         private readonly List<IPausedFixedUpdate> _pausedFixedUpdateListeners = new();
+
+        private void Awake()
+        {
+            GameObject[] rootGameObjects = gameObject.scene.GetRootGameObjects();
+            AddListeners(rootGameObjects);
+        }
 
         private void Update()
         {

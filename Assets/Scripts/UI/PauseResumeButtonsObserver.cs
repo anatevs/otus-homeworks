@@ -1,17 +1,23 @@
-using UnityEngine;
 using UnityEngine.UI;
 
 namespace ShootEmUp
 {
-    public class PauseResumeButtonsObserver : MonoBehaviour,
+    public class PauseResumeButtonsObserver : 
         IStartGame,
         IFinishGame
     {
+        private Button _pauseButton;
+        
+        private Button _resumeButton;
+        
+        private GameManager _gameManager;
 
-        [SerializeField] private Button _pauseButton;
-        [SerializeField] private Button _resumeButton;
-        [SerializeField] private GameManager _gameManager;
-
+        public PauseResumeButtonsObserver(GameManager gameManager, PauseResumeButtons pauseResumeButtons)
+        {
+            _gameManager = gameManager;
+            _pauseButton = pauseResumeButtons.pauseButton;
+            _resumeButton = pauseResumeButtons.resumeButton;
+        }
 
         public void OnStart()
         {

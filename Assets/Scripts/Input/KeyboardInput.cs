@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class KeyboardInput : MonoBehaviour,
+    public sealed class KeyboardInput : 
+        IInputSystem,
         IUpdate,
         IPausedUpdate
     {

@@ -1,22 +1,24 @@
-using UnityEngine;
-
-
+using System.Collections.Generic;
+using System.Linq;
+using VContainer.Unity;
 
 namespace ShootEmUp
 {
-    [RequireComponent(typeof(GameManager))]
-    
-    public class GameManagerInstaller : MonoBehaviour
+    public class GameManagerInstaller : 
+        IInitializable
     {
-        [SerializeField] private GameObject[] sceneObjectsWithBehaviour;
-
         private GameManager _gameManager;
+        private IGameListener[] _injectedListeners;
 
-        private void Awake()
+        public GameManagerInstaller(GameManager gameManager, IEnumerable<IGameListener> listeners)
         {
-            _gameManager = GetComponent<GameManager>();
-            GameObject[] rootGameObjects = gameObject.scene.GetRootGameObjects();
-            _gameManager.AddListeners(rootGameObjects);            
+            _gameManager = gameManager;
+            _injectedListeners = listeners.ToArray();
+        }
+
+        public void Initialize()
+        {
+            _gameManager.AddListeners(_injectedListeners);
         }
     }
 }

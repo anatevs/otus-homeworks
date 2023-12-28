@@ -1,31 +1,35 @@
-using ShootEmUp;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer.Unity;
 
 namespace ShootEmUp
 {
-
-    public class StartGameManager : MonoBehaviour,
+    public class StartGameManager : 
+        IStartable,
+        ITickable,
         IStartGame
     {
-        [SerializeField]
         private GameManager _gameManager;
 
-        [SerializeField]
         private Button _startButton;
 
-        [SerializeField]
         private StartCountdownComponent _startCountdown;
 
-        [SerializeField]
         private int _secondsToStart = 3;
 
-        [SerializeField]
         private int _deltaCount = 1;
+        
 
-        private void Start()
+        public StartGameManager(GameManager gameManager, StartGameManagerParams startGameManagerParams)
+        {
+            _gameManager = gameManager;
+            _startButton = startGameManagerParams.startButton;
+            _startCountdown = startGameManagerParams.startCountdown;
+            _secondsToStart = startGameManagerParams.secondsToStart;
+            _deltaCount = startGameManagerParams.deltaCount;
+        }
+
+        void IStartable.Start()
         {
             _startButton.onClick.AddListener(StartClicked);
 
@@ -35,7 +39,7 @@ namespace ShootEmUp
             }
         }
 
-        private void Update()
+        void ITickable.Tick()
         {
             if (_startCountdown.isActiveAndEnabled)
             {
@@ -54,5 +58,6 @@ namespace ShootEmUp
         {
             _startCountdown.OnCounted -= _gameManager.StartGame;
         }
+
     }
 }

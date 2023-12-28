@@ -1,37 +1,37 @@
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyPool : MonoBehaviour
+    public sealed class EnemyPool
     {
-        [Header("Spawn")]
-        [SerializeField]
         private Transform _worldTransform;
-
-        [Header("Pool")]
-        [SerializeField]
-        private Transform _container;
-
-        [SerializeField]
+        private Transform _poolTransform;
+        private int _poolSize = 7;
         private GameObject _prefab;
 
-        [SerializeField]
-        private GameManager _gameManager;
+        private IObjectResolver _objectResolver;
 
         private readonly Queue<GameObject> _enemyPool = new();
 
-        private readonly int _poolSize = 7;
-        
-        private void Awake()
+        public EnemyPool(IObjectResolver objectResolver, EnemyPoolParams enemyPoolParams)
         {
+            _objectResolver = objectResolver;
+            
+            _worldTransform = enemyPoolParams.worldTransform;
+            _poolTransform = enemyPoolParams.poolTransform;
+            _poolSize = enemyPoolParams.poolSize;
+            _prefab = enemyPoolParams.enemyPrefab;
+
             for (var i = 0; i < _poolSize; i++)
             {
-                var enemy = Instantiate(_prefab, _container);
+                var enemy = _objectResolver.Instantiate(_prefab, _poolTransform);
                 _enemyPool.Enqueue(enemy);
             }
         }
-
+        
         public bool TrySpawnEnemy(out GameObject resEnemy)
         {
             if (_enemyPool.TryDequeue(out resEnemy))
@@ -44,7 +44,7 @@ namespace ShootEmUp
 
         public void UnspawnEnemy(GameObject enemy)
         {
-            enemy.transform.SetParent(_container);
+            enemy.transform.SetParent(_poolTransform);
             _enemyPool.Enqueue(enemy);
         }
     }
