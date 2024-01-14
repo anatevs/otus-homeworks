@@ -1,19 +1,15 @@
 using UnityEngine;
-using VContainer;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyAttackAgent : MonoBehaviour,
-        IFixedUpdate,
-        IPausedFixedUpdate
-
+    public sealed class EnemyAttackAgent : MonoBehaviour
     {
         [SerializeField]
         private WeaponComponent _weaponComponent;
-        
+
         [SerializeField]
         private EnemyMoveAgent _moveAgent;
-        
+
         [SerializeField]
         private float _countdown;
 
@@ -21,20 +17,22 @@ namespace ShootEmUp
         private BulletConfig _bulletConfig;
 
         private BulletSystem _bulletSystem;
+
         private GameObject _target;
+
         private float _currentTime;
 
         public void SetBulletSystem(BulletSystem bulletSystem)
         {
             _bulletSystem = bulletSystem;
         }
-        
+
         public void SetTarget(GameObject target)
         {
             _target = target;
         }
 
-        public void OnFixedUpdate()
+        public void FixedUpdateAttack()
         {
             if (_moveAgent == null)
             {
@@ -54,11 +52,6 @@ namespace ShootEmUp
             }
         }
 
-        public void OnPausedFixedUpdate()
-        {
-            return;
-        }
-
         private void ResetTimer()
         {
             _currentTime = _countdown;
@@ -71,7 +64,7 @@ namespace ShootEmUp
                 var startPosition = _weaponComponent.Position;
                 var vector = (Vector2)_target.transform.position - startPosition;
                 var direction = vector.normalized;
-                _bulletSystem.FlyBulletByArgs(new BulletSystem.BulletArgs
+                _bulletSystem.FlyBulletByArgs(new BulletArgs
                 {
                     isPlayer = false,
                     physicsLayer = (int)_bulletConfig.physicsLayer,
