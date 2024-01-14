@@ -5,19 +5,20 @@ namespace ShootEmUp
 {
     public class CharacterComponents
     {
-        readonly GameObject _character;
+        public MoveComponent MoveComponent { get; private set; }
+
+        public WeaponComponent WeaponComponent { get; private set; }
+
+        public HitPointsComponent HitPointsComponent { get; private set; }
+
+        private readonly GameObject _character;
 
         public CharacterComponents(GameObject character)
         {
             _character = character;
-        }
-        public T GetComponent<T>()
-        {
-            if (_character.TryGetComponent<T>(out T resComponent))
-            {
-                return resComponent;
-            }
-            else throw new Exception("There is no component of type "+ typeof(T) + " in the " + _character + " game object");
+            MoveComponent = _character.GetComponent<MoveComponent>();
+            WeaponComponent = _character.GetComponent<WeaponComponent>();
+            HitPointsComponent = _character.GetComponent<HitPointsComponent>();
         }
     }
 }
