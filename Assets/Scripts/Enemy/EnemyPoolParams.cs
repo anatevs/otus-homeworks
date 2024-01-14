@@ -4,11 +4,14 @@ using UnityEngine;
 namespace ShootEmUp
 {
     [Serializable]
-    public class EnemyPoolParams
+    public sealed class EnemyPoolParams
     {
         public Transform worldTransform;
+
         public Transform poolTransform;
+
         public int poolSize;
+
         public GameObject enemyPrefab;
     }
 }

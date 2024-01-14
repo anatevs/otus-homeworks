@@ -2,12 +2,13 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public class EnemyCooldownSpawner :
+    public sealed class EnemyCooldownSpawner :
         IStartGame,
         IUpdate,
         IPausedUpdate
     {
         private EnemyManager _enemyManager;
+
         private float _cooldownTime = 1f;
 
         private float _prevTime;

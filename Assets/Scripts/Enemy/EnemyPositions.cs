@@ -5,6 +5,7 @@ namespace ShootEmUp
     public sealed class EnemyPositions
     {
         private Transform[] _spawnPositions;
+
         private Transform[] _attackPositions;
 
         public EnemyPositions(Transform[] spawnPositions, Transform[] attackPositions)

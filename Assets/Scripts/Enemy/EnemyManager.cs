@@ -6,8 +6,11 @@ namespace ShootEmUp
     public sealed class EnemyManager
     {
         private EnemyPool _enemyPool;
+
         private EnemyPositions _enemyPositions;
+
         private GameObject _character;
+
         private BulletSystem _bulletSystem;
 
         private readonly HashSet<GameObject> _activeEnemies = new();
@@ -32,12 +35,12 @@ namespace ShootEmUp
                     enemyAttackAgent.SetBulletSystem(_bulletSystem);
                     enemyAttackAgent.SetTarget(_character);
                     
-                    enemy.GetComponent<HitPointsComponent>().OnHPempty += OnDestroyed;
+                    enemy.GetComponent<HitPointsComponent>().OnHPZero += OnDestroyed;
                 }
             }
         }
 
-        void SetEnemyPositions(GameObject enemy, EnemyPositions enemyPositions)
+        private void SetEnemyPositions(GameObject enemy, EnemyPositions enemyPositions)
         {
             var spawnPosition = enemyPositions.RandomSpawnPosition();
             enemy.transform.position = spawnPosition.position;
@@ -50,9 +53,8 @@ namespace ShootEmUp
         {
             if (_activeEnemies.Remove(enemy))
             {
-                enemy.GetComponent<HitPointsComponent>().OnHPempty -= OnDestroyed;
-
-                _enemyPool.UnspawnEnemy(enemy);
+                enemy.GetComponent<HitPointsComponent>().OnHPZero -= OnDestroyed;
+                _enemyPool.UnSpawnEnemy(enemy);
             }
         }
     }
