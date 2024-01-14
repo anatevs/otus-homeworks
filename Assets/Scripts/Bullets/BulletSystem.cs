@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 namespace ShootEmUp
 {
-    public sealed partial class BulletSystem :
+    public sealed class BulletSystem :
         IFixedUpdate,
         IPausedFixedUpdate
     {
-        private BulletPool _bulletPool;        
+        private BulletPool _bulletPool;
         private LevelBounds _levelBounds;
 
         public BulletSystem(BulletPool bulletPool, LevelBounds levelBounds)
@@ -41,28 +41,25 @@ namespace ShootEmUp
         public void FlyBulletByArgs(BulletArgs args)
         {
             var bullet = _bulletPool.SpawnBullet();
-            if (bullet != null)
-            {
-                bullet.SetPosition(args.position);
-                bullet.SetColor(args.color);
-                bullet.SetPhysicsLayer(args.physicsLayer);
-                bullet.Damage = args.damage;
-                bullet.IsPlayer = args.isPlayer;
-                bullet.SetVelocity(args.velocity);
+            bullet.SetPosition(args.position);
+            bullet.SetColor(args.color);
+            bullet.SetPhysicsLayer(args.physicsLayer);
+            bullet.Damage = args.damage;
+            bullet.IsPlayer = args.isPlayer;
+            bullet.SetVelocity(args.velocity);
 
-                if (_activeBullets.Add(bullet))
-                {
-                    bullet.OnCollisionEntered += RemoveBullet;
-                }
+            if (_activeBullets.Add(bullet))
+            {
+                bullet.OnCollisionEntered += RemoveBullet;
             }
         }
-        
+
         private void RemoveBullet(Bullet bullet)
         {
             if (_activeBullets.Remove(bullet))
             {
                 bullet.OnCollisionEntered -= RemoveBullet;
-                _bulletPool.UnspawnBullet(bullet);
+                _bulletPool.UnSpawnBullet(bullet);
             }
         }
     }

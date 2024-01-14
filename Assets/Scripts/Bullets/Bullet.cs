@@ -10,10 +10,11 @@ namespace ShootEmUp
         public event Action<Bullet> OnCollisionEntered;
 
         public bool IsPlayer { get; set; }
+
         public int Damage { get; set; }
 
         [SerializeField]
-        private new Rigidbody2D _rigidbody2D;
+        private Rigidbody2D _rigidbody2D;
 
         [SerializeField]
         private SpriteRenderer _spriteRenderer;
@@ -25,6 +26,7 @@ namespace ShootEmUp
             _currVelocity = _rigidbody2D.velocity;
             _rigidbody2D.velocity = Vector2.zero;
         }
+
         public void OnResume()
         {
             _rigidbody2D.velocity = _currVelocity;
@@ -54,7 +56,6 @@ namespace ShootEmUp
         {
             DealDamage(collision.gameObject);
             OnCollisionEntered?.Invoke(this);
-
         }
 
         private void DealDamage(GameObject other)
@@ -74,6 +75,5 @@ namespace ShootEmUp
                 hitPoints.TakeDamage(Damage);
             }
         }
-
     }
 }

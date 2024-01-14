@@ -5,24 +5,27 @@ using VContainer.Unity;
 
 namespace ShootEmUp
 {
-    public class BulletPool
+    public sealed class BulletPool
     {
         private Transform _worldTransform;
+
         private Transform _poolTransform;
-        private int _initialCount = 50;
+
+        private int _initialCount;
+
         private Bullet _prefab;
 
-        private GameManager _gameManager;
+        private GameManagerData _gameManagerData;
 
         private IObjectResolver _objectResolver;
-        
+
         private readonly Queue<Bullet> _bulletPool = new();
 
-        public BulletPool(IObjectResolver objectResolver, GameManager gameManager, BulletPoolParams bulletParams)
-        {            
+        public BulletPool(IObjectResolver objectResolver, GameManagerData gameManagerData, BulletPoolParams bulletParams)
+        {
             _objectResolver = objectResolver;
 
-            _gameManager = gameManager;
+            _gameManagerData = gameManagerData;
             _worldTransform = bulletParams.worldTransform;
             _poolTransform = bulletParams.poolTransform;
             _initialCount = bulletParams.initialCount;
@@ -33,7 +36,6 @@ namespace ShootEmUp
                 var bullet = _objectResolver.Instantiate(_prefab, _poolTransform);
                 _bulletPool.Enqueue(bullet);
             }
-
         }
 
         public Bullet SpawnBullet()
@@ -45,12 +47,13 @@ namespace ShootEmUp
             else
             {
                 bullet = _objectResolver.Instantiate(_prefab, _worldTransform);
-                _gameManager.AddListeners(bullet.gameObject);
+                _bulletPool.Enqueue(bullet);
+                _gameManagerData.AddListeners(bullet.gameObject);
             }
             return bullet;
         }
 
-        public void UnspawnBullet(Bullet bullet)
+        public void UnSpawnBullet(Bullet bullet)
         {
             bullet.transform.SetParent(_poolTransform);
             _bulletPool.Enqueue(bullet);
