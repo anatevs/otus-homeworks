@@ -4,9 +4,8 @@ using UnityEngine.UI;
 namespace ShootEmUp
 {
     [Serializable]
-    public class StartGameManagerParams
+    public sealed class StartGameManagerParams
     {
-
         public Button startButton;
 
         public StartCountdownComponent startCountdown;

@@ -1,24 +1,24 @@
 using System.Collections.Generic;
-using System.Linq;
 using VContainer.Unity;
 
 namespace ShootEmUp
 {
-    public class GameManagerInstaller : 
+    public sealed class GameManagerInstaller :
         IInitializable
     {
-        private GameManager _gameManager;
-        private IGameListener[] _injectedListeners;
+        private GameManagerData _gameManagerData;
 
-        public GameManagerInstaller(GameManager gameManager, IEnumerable<IGameListener> listeners)
+        private IEnumerable<IGameListener> _injectedListeners;
+
+        public GameManagerInstaller(GameManagerData gameManagerData, IEnumerable<IGameListener> listeners)
         {
-            _gameManager = gameManager;
-            _injectedListeners = listeners.ToArray();
+            _gameManagerData = gameManagerData;
+            _injectedListeners = listeners;
         }
 
         public void Initialize()
         {
-            _gameManager.AddListeners(_injectedListeners);
+            _gameManagerData.AddListeners(_injectedListeners);
         }
     }
 }

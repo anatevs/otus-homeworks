@@ -1,5 +1,3 @@
-
-
 namespace ShootEmUp
 {
     enum GameState

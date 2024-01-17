@@ -4,7 +4,7 @@ using VContainer.Unity;
 
 namespace ShootEmUp
 {
-    public class StartGameManager : 
+    public sealed class StartGameManager : 
         IStartable,
         ITickable,
         IStartGame
@@ -15,10 +15,9 @@ namespace ShootEmUp
 
         private StartCountdownComponent _startCountdown;
 
-        private int _secondsToStart = 3;
+        private int _secondsToStart;
 
-        private int _deltaCount = 1;
-        
+        private int _deltaCount;
 
         public StartGameManager(GameManager gameManager, StartGameManagerParams startGameManagerParams)
         {
@@ -58,6 +57,5 @@ namespace ShootEmUp
         {
             _startCountdown.OnCounted -= _gameManager.StartGame;
         }
-
     }
 }

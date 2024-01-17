@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-
 namespace ShootEmUp
 {
     public interface IGameListener
@@ -13,7 +8,6 @@ namespace ShootEmUp
     public interface IStartGame : IGameListener
     {
         public void OnStart();
-
     }
 
     public interface IFinishGame : IGameListener
@@ -39,13 +33,14 @@ namespace ShootEmUp
     {
         public void OnPausedUpdate();
     }
+
     public interface IFixedUpdate : IGameListener
     {
         public void OnFixedUpdate();
     }
+
     public interface IPausedFixedUpdate : IGameListener
     {
         public void OnPausedFixedUpdate();
     }
-    
 }
