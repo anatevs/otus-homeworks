@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class KeyboardInput : 
+    public sealed class KeyboardInput :
         IInputSystem,
         IUpdate,
         IPausedUpdate
     {
         public event Action OnFire;
-        public event Action<Vector2> OnMove;
+        public event Action<Vector2> OnMove = delegate { };
 
         public void OnUpdate()
         {
@@ -18,7 +18,7 @@ namespace ShootEmUp
                 OnFire?.Invoke();
             }
 
-            OnMove?.Invoke(GetDirection());
+            OnMove.Invoke(GetDirection());
         }
 
         public void OnPausedUpdate()
@@ -26,7 +26,7 @@ namespace ShootEmUp
             return;
         }
 
-        private Vector2 GetDirection()
+        private static Vector2 GetDirection()
         {
             if (Input.GetKey(KeyCode.LeftArrow))
             {
@@ -35,7 +35,7 @@ namespace ShootEmUp
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 return Vector2.right;
-            }            
+            }
             return Vector2.zero;
         }
     }

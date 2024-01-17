@@ -2,15 +2,15 @@ using UnityEngine.UI;
 
 namespace ShootEmUp
 {
-    public class PauseResumeButtonsObserver : 
+    public sealed class PauseResumeButtonsObserver : 
         IStartGame,
         IFinishGame
     {
-        private Button _pauseButton;
+        private readonly Button _pauseButton;
         
-        private Button _resumeButton;
+        private readonly Button _resumeButton;
         
-        private GameManager _gameManager;
+        private readonly GameManager _gameManager;
 
         public PauseResumeButtonsObserver(GameManager gameManager, PauseResumeButtons pauseResumeButtons)
         {

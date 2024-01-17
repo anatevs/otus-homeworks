@@ -4,10 +4,13 @@ namespace ShootEmUp
 {
     public sealed class LevelBounds
     {
-        private Transform _leftBorder;
-        private Transform _rightBorder;
-        private Transform _bottomBorder;
-        private Transform _topBorder;
+        private readonly Transform _leftBorder;
+
+        private readonly Transform _rightBorder;
+
+        private readonly Transform _bottomBorder;
+
+        private readonly Transform _topBorder;
 
         public LevelBounds(LevelBordersStorage levelBordersStorage)
         {

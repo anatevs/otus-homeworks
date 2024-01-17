@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ShootEmUp
 {
     [Serializable]
-    public class LevelBackgroundParams
+    public sealed class LevelBackgroundParams
     {
         public float startPositionY;
 
@@ -13,6 +13,5 @@ namespace ShootEmUp
         public float movingSpeedY;
 
         public Transform levelBackgroundTransform;
-
     }
 }

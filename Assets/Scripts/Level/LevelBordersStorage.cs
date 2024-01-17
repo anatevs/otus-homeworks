@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ShootEmUp
 {
     [Serializable]
-    public class LevelBordersStorage
+    public sealed class LevelBordersStorage
     {
         [SerializeField]
         public Transform leftBorder;

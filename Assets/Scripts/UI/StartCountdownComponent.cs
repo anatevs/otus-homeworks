@@ -5,13 +5,15 @@ using UnityEngine.UI;
 
 namespace ShootEmUp
 {
-    public class StartCountdownComponent : MonoBehaviour,
+    public sealed class StartCountdownComponent : MonoBehaviour,
         IStartGame
     {
         public event Action OnCounted;
 
         private Text _counterText;
+
         private int _count;
+
         private float _countTime;
 
         public void OnStart()

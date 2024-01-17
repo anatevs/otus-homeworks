@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace ShootEmUp
 {
     [Serializable]
-    public class PauseResumeButtons
+    public sealed class PauseResumeButtons
     {
         public Button pauseButton;
 

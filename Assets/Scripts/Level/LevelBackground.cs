@@ -7,17 +7,17 @@ namespace ShootEmUp
         IPausedFixedUpdate
 
     {
-        private float _startPositionY;
+        private readonly float _startPositionY;
 
-        private float _endPositionY;
+        private readonly float _endPositionY;
 
-        private float _movingSpeedY;
+        private readonly float _movingSpeedY;
 
-        private float _positionX;
+        private readonly float _positionX;
 
-        private float _positionZ;
+        private readonly float _positionZ;
 
-        private Transform _myTransform;
+        private readonly Transform _myTransform;
 
         public LevelBackground(LevelBackgroundParams levelBackgroundParams)
         {
@@ -52,18 +52,5 @@ namespace ShootEmUp
         {
             return;
         }
-
-        //[Serializable]
-        //public sealed class Params
-        //{
-        //    [SerializeField]
-        //    public float startPositionY;
-
-        //    [SerializeField]
-        //    public float endPositionY;
-
-        //    [SerializeField]
-        //    public float movingSpeedY;
-        //}
     }
 }

@@ -3,13 +3,14 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public class ObjectsGameStateController : MonoBehaviour,
+    public sealed class ObjectsGameStateController : MonoBehaviour,
         IStartGame,
         IPauseGame,
         IResumeGame,
         IFinishGame
     {
-        [SerializeField] private GameState[] _activeGameStates = { GameState.Playing };
+        [SerializeField]
+        private GameState[] _activeGameStates = { GameState.Playing };
 
         public void OnStart()
         {
