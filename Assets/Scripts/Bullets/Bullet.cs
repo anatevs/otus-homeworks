@@ -3,13 +3,11 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class Bullet : MonoBehaviour,
-        IPauseGame,
-        IResumeGame
+    public sealed class Bullet : MonoBehaviour
     {
         public event Action<Bullet> OnCollisionEntered;
 
-        public bool IsPlayer { get; set; }
+        public bool IsFromPlayer { get; set; }
 
         public int Damage { get; set; }
 
@@ -19,17 +17,11 @@ namespace ShootEmUp
         [SerializeField]
         private SpriteRenderer _spriteRenderer;
 
-        private Vector2 _currVelocity;
+        private GameObject _collisionObject;
 
-        public void OnPause()
+        public Vector2 GetCurrentVelocity()
         {
-            _currVelocity = _rigidbody2D.velocity;
-            _rigidbody2D.velocity = Vector2.zero;
-        }
-
-        public void OnResume()
-        {
-            _rigidbody2D.velocity = _currVelocity;
+            return _rigidbody2D.velocity;
         }
 
         public void SetVelocity(Vector2 velocity)
@@ -54,26 +46,13 @@ namespace ShootEmUp
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            DealDamage(collision.gameObject);
+            _collisionObject = collision.gameObject;
             OnCollisionEntered?.Invoke(this);
         }
 
-        private void DealDamage(GameObject other)
+        public GameObject GetCollisionObject()
         {
-            if (!other.TryGetComponent(out TeamComponent team))
-            {
-                return;
-            }
-
-            if (IsPlayer == team.IsPlayer)
-            {
-                return;
-            }
-
-            if (other.TryGetComponent(out HitPointsComponent hitPoints))
-            {
-                hitPoints.TakeDamage(Damage);
-            }
+            return _collisionObject;
         }
     }
 }

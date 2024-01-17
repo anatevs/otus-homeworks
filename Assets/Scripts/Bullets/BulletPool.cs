@@ -21,6 +21,8 @@ namespace ShootEmUp
 
         private readonly Queue<Bullet> _bulletPool = new();
 
+        private Dictionary<Bullet, BulletController> _bulletControllers = new();
+
         public BulletPool(IObjectResolver objectResolver, GameManagerData gameManagerData, BulletPoolParams bulletParams)
         {
             _objectResolver = objectResolver;
@@ -35,6 +37,9 @@ namespace ShootEmUp
             {
                 var bullet = _objectResolver.Instantiate(_prefab, _poolTransform);
                 _bulletPool.Enqueue(bullet);
+
+                BulletController bulletController = new BulletController(bullet);
+                _bulletControllers[bullet] = bulletController;
             }
         }
 
@@ -43,12 +48,17 @@ namespace ShootEmUp
             if (_bulletPool.TryDequeue(out var bullet))
             {
                 bullet.transform.SetParent(_worldTransform);
+                _gameManagerData.AddListener(_bulletControllers[bullet]);
             }
             else
             {
                 bullet = _objectResolver.Instantiate(_prefab, _worldTransform);
                 _bulletPool.Enqueue(bullet);
                 _gameManagerData.AddListeners(bullet.gameObject);
+
+                BulletController bulletController = new BulletController(bullet);
+                _bulletControllers[bullet] = bulletController;
+                _gameManagerData.AddListener(_bulletControllers[bullet]);
             }
             return bullet;
         }
@@ -56,6 +66,7 @@ namespace ShootEmUp
         public void UnSpawnBullet(Bullet bullet)
         {
             bullet.transform.SetParent(_poolTransform);
+            _gameManagerData.RemoveListener(_bulletControllers[bullet]);
             _bulletPool.Enqueue(bullet);
         }
     }

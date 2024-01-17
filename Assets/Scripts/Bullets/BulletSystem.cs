@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace ShootEmUp
 {
@@ -7,6 +8,7 @@ namespace ShootEmUp
         IPausedFixedUpdate
     {
         private BulletPool _bulletPool;
+
         private LevelBounds _levelBounds;
 
         public BulletSystem(BulletPool bulletPool, LevelBounds levelBounds)
@@ -45,12 +47,33 @@ namespace ShootEmUp
             bullet.SetColor(args.color);
             bullet.SetPhysicsLayer(args.physicsLayer);
             bullet.Damage = args.damage;
-            bullet.IsPlayer = args.isPlayer;
+            bullet.IsFromPlayer = args.isFromPlayer;
             bullet.SetVelocity(args.velocity);
 
             if (_activeBullets.Add(bullet))
             {
                 bullet.OnCollisionEntered += RemoveBullet;
+                bullet.OnCollisionEntered += DealDamage;
+            }
+        }
+
+        private void DealDamage(Bullet bullet)
+        {
+            GameObject other = bullet.GetCollisionObject();
+
+            if (!other.TryGetComponent(out TeamComponent team))
+            {
+                return;
+            }
+
+            if (bullet.IsFromPlayer == team.IsPlayer)
+            {
+                return;
+            }
+
+            if (other.TryGetComponent(out HitPointsComponent hitPoints))
+            {
+                hitPoints.TakeDamage(bullet.Damage);
             }
         }
 
@@ -59,6 +82,7 @@ namespace ShootEmUp
             if (_activeBullets.Remove(bullet))
             {
                 bullet.OnCollisionEntered -= RemoveBullet;
+                bullet.OnCollisionEntered -= DealDamage;
                 _bulletPool.UnSpawnBullet(bullet);
             }
         }
