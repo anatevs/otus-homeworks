@@ -29,6 +29,6 @@ namespace ShootEmUp
             }
         }
 
-        private void OnCharacterDeath(GameObject _) => _gameManager.FinishGame();
+        private void OnCharacterDeath(HitPointsComponent _) => _gameManager.FinishGame();
     }
 }
