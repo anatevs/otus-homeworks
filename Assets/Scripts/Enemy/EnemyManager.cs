@@ -11,16 +11,13 @@ namespace ShootEmUp
 
         private GameObject _character;
 
-        private BulletSystem _bulletSystem;
-
         private readonly HashSet<GameObject> _activeEnemies = new();
 
-        public EnemyManager(EnemyPool enemyPool, EnemyPositions enemyPositions, GameObject target, BulletSystem bulletSystem)
+        public EnemyManager(EnemyPool enemyPool, EnemyPositions enemyPositions, GameObject target)
         {
             _enemyPool = enemyPool;
             _enemyPositions = enemyPositions;
             _character = target;
-            _bulletSystem = bulletSystem;
         }
 
         public void SpawnEnemy()
@@ -29,32 +26,29 @@ namespace ShootEmUp
             {
                 if (_activeEnemies.Add(enemy))
                 {
-                    SetEnemyPositions(enemy, _enemyPositions);
-                    
-                    EnemyAttackAgent enemyAttackAgent = enemy.GetComponent<EnemyAttackAgent>();
-                    enemyAttackAgent.SetBulletSystem(_bulletSystem);
-                    enemyAttackAgent.SetTarget(_character);
-                    
+                    var spawnPosition = _enemyPositions.RandomSpawnPosition();
+                    enemy.transform.position = spawnPosition.position;
+
+                    var attackPosition = _enemyPositions.RandomAttackPosition();
+                    enemy.GetComponent<EnemyMoveAgent>().SetDestination(attackPosition.position);
+
+                    enemy.GetComponent<EnemyAttackAgent>().Target = _character;
+
                     enemy.GetComponent<HitPointsComponent>().OnHPZero += OnDestroyed;
+                }
+                else
+                {
+                    _enemyPool.UnSpawnEnemy(enemy);
                 }
             }
         }
 
-        private void SetEnemyPositions(GameObject enemy, EnemyPositions enemyPositions)
+        private void OnDestroyed(HitPointsComponent enemyHP)
         {
-            var spawnPosition = enemyPositions.RandomSpawnPosition();
-            enemy.transform.position = spawnPosition.position;
-
-            var attackPosition = enemyPositions.RandomAttackPosition();
-            enemy.GetComponent<EnemyMoveAgent>().SetDestination(attackPosition.position);
-        }
-
-        private void OnDestroyed(GameObject enemy)
-        {
-            if (_activeEnemies.Remove(enemy))
+            if (_activeEnemies.Remove(enemyHP.gameObject))
             {
-                enemy.GetComponent<HitPointsComponent>().OnHPZero -= OnDestroyed;
-                _enemyPool.UnSpawnEnemy(enemy);
+                enemyHP.OnHPZero -= OnDestroyed;
+                _enemyPool.UnSpawnEnemy(enemyHP.gameObject);
             }
         }
     }
