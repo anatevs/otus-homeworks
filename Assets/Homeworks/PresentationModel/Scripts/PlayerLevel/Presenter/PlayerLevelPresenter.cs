@@ -2,27 +2,21 @@ using System;
 
 namespace Lessons.Architecture.PM
 {
-    public sealed class PlayerLevelPresenter : IPlayerLevelPresenter
+    public sealed class PlayerLevelPresenter : 
+        IPlayerLevelPresenter,
+        IDisposable
     {
         public event Action<int, int> OnXPChanged;
         public event Action<int, int, int> OnLevelChanged;
         public event Action OnAvailableLevelUp;
 
-        public int CurrentXP 
-        { 
-            get => _playerLevel.CurrentExperience;
-            private set => _ = _playerLevel.CurrentExperience; 
-        }
-        public int RequiredXP 
-        { 
-            get => _playerLevel.RequiredExperience;
-            private set => _ = _playerLevel.RequiredExperience;
-        }
-        public int CurrentLevel 
-        { 
-            get => _playerLevel.CurrentLevel;
-            private set => _ = _playerLevel.CurrentLevel;
-        }
+        public int CurrentXP => _playerLevel.CurrentExperience;
+
+        public int RequiredXP => _playerLevel.RequiredExperience;
+
+        public int CurrentLevel => _playerLevel.CurrentLevel;
+
+        public string LevelString => $"Level: {_playerLevel.CurrentLevel}";
 
         private readonly PlayerLevel _playerLevel;
 
@@ -54,7 +48,7 @@ namespace Lessons.Architecture.PM
                 _playerLevel.RequiredExperience, _playerLevel.CurrentLevel);
         }
 
-        ~PlayerLevelPresenter()
+        public void Dispose()
         {
             _playerLevel.OnExperienceChanged -= ChangeXP;
             _playerLevel.OnLevelUp -= ChangeLevel;

@@ -18,8 +18,8 @@ namespace Lessons.Architecture.PM
 
         public void ChangeValue(int value)
         {
-            this.Value = value;
-            this.OnValueChanged?.Invoke(value);
+            Value = value;
+            OnValueChanged?.Invoke(value);
         }
     }
 }

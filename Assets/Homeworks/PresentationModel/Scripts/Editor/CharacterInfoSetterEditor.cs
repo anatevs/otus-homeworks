@@ -22,7 +22,7 @@ namespace Lessons.Architecture.PM
                 installer.RemoveStat();
             }
 
-            if (GUILayout.Button("Change Stat"))
+            if (GUILayout.Button("Edit Stat"))
             {
                 installer.ChangeStat();
             }

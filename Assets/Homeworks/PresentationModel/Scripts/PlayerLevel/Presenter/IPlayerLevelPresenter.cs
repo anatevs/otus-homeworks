@@ -11,6 +11,7 @@ namespace Lessons.Architecture.PM
         public int CurrentXP { get; }
         public int RequiredXP { get; }
         public int CurrentLevel { get; }
+        public string LevelString { get; }
 
         public void LevelUp();
     }

@@ -7,10 +7,10 @@ namespace Lessons.Architecture.PM
     public sealed class CharacterInfoPopup : MonoBehaviour
     {
         [SerializeField]
-        private GameObject _characterStatsView;
+        private Transform _characterStatsTransform;
 
         [SerializeField]
-        private GameObject _statViewPrefab;
+        private StatView _statViewPrefab;
 
         [SerializeField]
         private StatsContentArea _statsContentArea;
@@ -30,10 +30,7 @@ namespace Lessons.Architecture.PM
             _characterInfoPresenter = characterInfoPresenter;
             _characterInfoPresenter.OnCharacterStatAdd += AddStatToView;
             _characterInfoPresenter.OnCharacterStatRemove += RemoveStatFromView;
-            _characterInfoPresenter.OnCharacterStatChanged += FillStatViewText;
-
             _characterInfoPresenter.AssingCharacterStats();
-            _statsContentArea.Initialize();
             _statsContentArea.AdjustScrollContentArea();
 
             gameObject.SetActive(true);
@@ -41,43 +38,37 @@ namespace Lessons.Architecture.PM
 
         public void ResetPopup()
         {
-            for (int i = 0; i < _characterStatsView.transform.childCount; i++)
+            for (int i = 0; i < _characterStatsTransform.childCount; i++)
             {
-                Destroy(_characterStatsView.transform.GetChild(i).gameObject);
+                Destroy(_characterStatsTransform.GetChild(i).gameObject);
             }
             _statsDict = new Dictionary<string, StatView>();
         }
 
-        public void AddStatToView(string name, int value)
+        public void AddStatToView(string name, int value, IStatPresenter statPresenter)
         {
-            GameObject statViewGameObject = Instantiate(_statViewPrefab);
-            statViewGameObject.name = name;
-            _statsDict[name] = statViewGameObject.GetComponent<StatView>();
-            FillStatViewText(name, value);
-            statViewGameObject.transform.SetParent(_characterStatsView.transform, false);
+            StatView statView = Instantiate(_statViewPrefab);
+            statView.name = name;
+            _statsDict[name] = statView;
+            statView.transform.SetParent(_characterStatsTransform, false);
+            statView.Show(statPresenter);
             _statsContentArea.AdjustScrollContentArea();
         }
 
         public void RemoveStatFromView(string name)
         {
-            GameObject statViewGameObject = _statsDict[name].gameObject;
-            statViewGameObject.transform.SetParent(null, false);
-            Destroy(statViewGameObject);
+            StatView statView = _statsDict[name];
+            statView.transform.SetParent(null, false);
+            _statsDict[name].Hide();
+            Destroy(statView.gameObject);
             _statsDict.Remove(name);
             _statsContentArea.AdjustScrollContentArea();
-        }
-
-        private void FillStatViewText(string name, int value)
-        {
-            StatView statView = _statsDict[name];
-            statView.StatText.text = $"{name}: {value}";
         }
 
         public void Hide()
         {
             _characterInfoPresenter.OnCharacterStatAdd -= AddStatToView;
             _characterInfoPresenter.OnCharacterStatRemove -= RemoveStatFromView;
-            _characterInfoPresenter.OnCharacterStatChanged -= FillStatViewText;
         }
     }
 }

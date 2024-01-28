@@ -3,7 +3,9 @@ using UnityEngine;
 
 namespace Lessons.Architecture.PM
 {
-    public sealed class UserPresenter : IUserPresenter
+    public sealed class UserPresenter :
+        IUserPresenter,
+        IDisposable
     {
         public event Action OnUserinfoChanged;
 
@@ -48,7 +50,7 @@ namespace Lessons.Architecture.PM
             OnUserinfoChanged?.Invoke();
         }
 
-        ~UserPresenter()
+        public void Dispose()
         {
             _userInfo.OnNameChanged -= OnNameChanged;
             _userInfo.OnDescriptionChanged -= OnDescriprtionChanged;

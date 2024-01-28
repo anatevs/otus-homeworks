@@ -7,7 +7,7 @@ namespace Lessons.Architecture.PM
     public sealed class PlayerLevelPopup : MonoBehaviour
     {
         [SerializeField]
-        private Text _currentLevel;
+        private Text _currentLevelText;
 
         [SerializeField]
         private Slider _XPSlider;
@@ -39,7 +39,7 @@ namespace Lessons.Architecture.PM
 
         private void FillPlayerLevelInfo(int currentXP, int requiredXP, int currentLevel)
         {
-            _currentLevel.text = $"Level: {currentLevel}";
+            _currentLevelText.text = _levelPresenter.LevelString;
             SetSliderMax(requiredXP);
             SetCurrenXP(currentXP, requiredXP);
             FillXPBarText(currentXP, requiredXP);

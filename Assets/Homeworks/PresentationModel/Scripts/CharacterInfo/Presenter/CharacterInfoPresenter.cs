@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
 
 namespace Lessons.Architecture.PM
 {
-    public sealed class CharacterInfoPresenter : ICharacterInfoPresenter
+    public sealed class CharacterInfoPresenter : 
+        ICharacterInfoPresenter,
+        IDisposable
     {
-        public event Action<string, int> OnCharacterStatAdd;
+        public event Action<string, int, IStatPresenter> OnCharacterStatAdd;
 
         public event Action<string> OnCharacterStatRemove;
 
@@ -13,6 +16,8 @@ namespace Lessons.Architecture.PM
         public CharacterInfo CharacterInfo { get => _characterInfo; }
 
         private readonly CharacterInfo _characterInfo;
+
+        private Dictionary<CharacterStat, IStatPresenter> _statPresenters = new();
 
         public CharacterInfoPresenter(CharacterInfo characterInfo)
         {
@@ -25,7 +30,9 @@ namespace Lessons.Architecture.PM
 
         public void AddStat(CharacterStat stat)
         {
-            OnCharacterStatAdd?.Invoke(stat.Name, stat.Value);
+            StatPresenter statPresenter = new StatPresenter(stat);
+            _statPresenters.Add(stat, statPresenter);
+            OnCharacterStatAdd?.Invoke(stat.Name, stat.Value, statPresenter);
         }
 
         public void ChangeStatValue(string name, int newValue)
@@ -35,6 +42,8 @@ namespace Lessons.Architecture.PM
 
         public void RemoveStat(CharacterStat stat)
         {
+            _statPresenters[stat].Dispose();
+            _statPresenters.Remove(stat);
             OnCharacterStatRemove?.Invoke(stat.Name);
         }
 
@@ -43,11 +52,11 @@ namespace Lessons.Architecture.PM
             CharacterStat[] stats = _characterInfo.GetStats();
             for (int i = 0; i < stats.Length; i++)
             {
-                OnCharacterStatAdd?.Invoke(stats[i].Name, stats[i].Value);
+                OnCharacterStatAdd?.Invoke(stats[i].Name, stats[i].Value, _statPresenters[stats[i]]);
             }
         }
 
-        ~CharacterInfoPresenter()
+        public void Dispose()
         {
             _characterInfo.OnStatAdded -= AddStat;
             _characterInfo.OnStatRemoved -= RemoveStat;

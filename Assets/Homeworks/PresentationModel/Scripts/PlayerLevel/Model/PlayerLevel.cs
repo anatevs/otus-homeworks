@@ -11,10 +11,7 @@ namespace Lessons.Architecture.PM
 
         public int CurrentExperience { get; private set; }
 
-        public int RequiredExperience
-        {
-            get { return 100 * (CurrentLevel + 1); }
-        }
+        public int RequiredExperience => 100 * (CurrentLevel + 1);
 
         public void AddExperience(int range)
         {
@@ -35,7 +32,7 @@ namespace Lessons.Architecture.PM
 
         public bool CanLevelUp()
         {
-            return CurrentExperience == this.RequiredExperience;
+            return CurrentExperience == RequiredExperience;
         }
     }
 }

@@ -4,7 +4,7 @@ namespace Lessons.Architecture.PM
 {
     public interface ICharacterInfoPresenter : IPresenter
     {
-        public event Action<string, int> OnCharacterStatAdd;
+        public event Action<string, int, IStatPresenter> OnCharacterStatAdd;
 
         public event Action<string> OnCharacterStatRemove;
 
