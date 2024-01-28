@@ -1046,8 +1046,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e55ab95f9e0667c448633b0634831205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterStatsView: {fileID: 282628378}
-  _statViewPrefab: {fileID: 2889210295107939483, guid: 1fac5b77462baec4b98fef30f4e83543,
+  _characterStatsTransform: {fileID: 282628379}
+  _statViewPrefab: {fileID: 1525595644820114015, guid: 1fac5b77462baec4b98fef30f4e83543,
     type: 3}
   _statsContentArea: {fileID: 1800524078}
 --- !u!1 &1040908424
@@ -1904,7 +1904,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d729d65395d4c984abd41465537f0061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scrollContent: {fileID: 282628378}
+  _rectTransform: {fileID: 1800524077}
+  _gridLayout: {fileID: 282628380}
 --- !u!1 &1809743761
 GameObject:
   m_ObjectHideFlags: 0
@@ -2272,7 +2273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f7dbc661fd94514c99a5fff1a89b430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentLevel: {fileID: 1262440558}
+  _currentLevelText: {fileID: 1262440558}
   _XPSlider: {fileID: 1108781579}
   _XPText: {fileID: 1040908426}
   _levelUpButtonScript: {fileID: 1571007808}
