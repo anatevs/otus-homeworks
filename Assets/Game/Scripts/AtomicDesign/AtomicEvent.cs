@@ -19,3 +19,23 @@ public class AtomicEvent<T>
         OnEvent -= action;
     }
 }
+
+public class AtomicEvent
+{
+    private event Action OnEvent;
+
+    public void Invoke()
+    {
+        OnEvent?.Invoke();
+    }
+
+    public void Subscribe(Action action)
+    {
+        OnEvent += action;
+    }
+
+    public void Unsubscribe(Action action)
+    {
+        OnEvent -= action;
+    }
+}
