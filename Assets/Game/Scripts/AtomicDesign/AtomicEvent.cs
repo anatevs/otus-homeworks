@@ -1,6 +1,6 @@
 using System;
 
-public class AtomicEvent<T>
+public class AtomicEvent<T> : IAtomicEvent<T>
 {
     private event Action<T> OnEvent;
 
@@ -20,7 +20,7 @@ public class AtomicEvent<T>
     }
 }
 
-public class AtomicEvent
+public class AtomicEvent : IAtomicEvent
 {
     private event Action OnEvent;
 
