@@ -1,17 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class Camera : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Awake()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
