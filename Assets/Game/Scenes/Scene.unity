@@ -2049,10 +2049,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1db177222ae731748a478c3f015e0c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDead:
+    _value: 0
+  canMove:
+    _value: 1
+  hp:
+    _value: 10
   moveDirection:
     _value: {x: 0, y: 0, z: 1}
   moveSpeed:
-    _value: 1
+    _value: 0.1
+  rotDirection:
+    _value: {x: -2, y: 0, z: 10}
+  rotSpeed:
+    _value: 5
 --- !u!1 &1366530278
 GameObject:
   m_ObjectHideFlags: 0

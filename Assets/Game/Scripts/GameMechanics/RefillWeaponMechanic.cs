@@ -1,6 +1,5 @@
 ﻿public partial class Player
 {
-    //bullets refill mechanic
     public class RefillWeaponMechanic
     {
         private readonly IAtomicEvent<bool> _canRefill;

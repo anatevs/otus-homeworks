@@ -1,6 +1,7 @@
-﻿public partial class Player
+﻿using UnityEngine;
+
+public partial class Player
 {
-    //shooting mechanic
     public class ShootingMechanic
     {
         private readonly IAtomicAction _onShoot;
@@ -24,7 +25,8 @@
 
         private void MakeShoot()
         {
-            _onShoot.Invoke();
+            _onShoot?.Invoke();
+            Debug.Log("Shoot!");
         }
     }
 }

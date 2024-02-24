@@ -2,18 +2,15 @@
 
 public partial class Player
 {
-    //death mechanic
     public class DeathMechanic
     {
-        private readonly IAtomicAction _onDeath;
+        private readonly AtomicVariable<bool> _isDeath;
         private readonly IAtomicValue<int> _hp;
-        private readonly GameObject _gameObject;
 
-        public DeathMechanic(IAtomicAction onDeath, IAtomicValue<int> hp, GameObject gameObject)
+        public DeathMechanic(AtomicVariable<bool> isDeath, IAtomicValue<int> hp)
         {
-            _onDeath = onDeath;
+            _isDeath = isDeath;
             _hp = hp;
-            _gameObject = gameObject;
         }
 
         public void Update()
@@ -24,7 +21,7 @@ public partial class Player
             }
             else
             {
-                _onDeath?.Invoke();
+                _isDeath.Value = true;
             }
         }
     }

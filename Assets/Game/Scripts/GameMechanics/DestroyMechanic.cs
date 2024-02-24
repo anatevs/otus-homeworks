@@ -6,12 +6,12 @@ public partial class Player
     {
         private readonly GameObject _gameObject;
 
-        private readonly IAtomicEvent _death;
+        private readonly AtomicVariable<bool> _death;
 
-        public DestroyMechanic(GameObject gameObject, IAtomicEvent death)
+        public DestroyMechanic(GameObject gameObject, AtomicVariable<bool> isDeath)
         {
             _gameObject = gameObject;
-            _death = death;
+            _death = isDeath;
         }
 
         public void OnEnable()
@@ -19,14 +19,21 @@ public partial class Player
             _death.Subscribe(OnDeath);
         }
 
-        public void OnDesable()
+        public void OnDisable()
         {
             _death.Unsubscribe(OnDeath);
         }
 
-        private void OnDeath()
+        private void OnDeath(bool isDead)
         {
-            Object.Destroy(_gameObject);
+            if (!isDead)
+            {
+                return;
+            }
+            else
+            {
+                Object.Destroy(_gameObject);
+            }
         }
     }
 }
