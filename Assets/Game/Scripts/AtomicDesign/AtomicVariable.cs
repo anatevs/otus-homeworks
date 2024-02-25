@@ -2,9 +2,9 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class AtomicVariable<T> : IAtomicValue<T>
+public class AtomicVariable<T> : IAtomicVariable<T>
 {
-    private event Action<T> OnValueChanged;
+    public event Action<T> OnValueChanged;
 
     [SerializeField]
     private T _value;
