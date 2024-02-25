@@ -15,11 +15,12 @@ public partial class Player : MonoBehaviour
     public AtomicVariable<Vector3> rotDirection;
     public AtomicVariable<float> rotSpeed;
     
-    public AtomicEvent canRefillWeapon;
+    public AtomicEvent CanRefillWeapon = new AtomicEvent();
     public AtomicVariable<float> weaponRefillTime;
     public AtomicVariable<int> weaponMagazine;
     public AtomicVariable<int> weaponRefillAmount;
 
+    public AtomicEvent OnShoot = new AtomicEvent();
 
     private DeathMechanic _deathMechanic;
     private CanMoveMechanic _canMoveMechanic;
@@ -28,6 +29,7 @@ public partial class Player : MonoBehaviour
     private DestroyMechanic _destroyMechanic;
     private CounterMechanic _counterMechanic_RefillWeapon;
     private RefillWeaponMechanic _refillWeaponMechanic;
+    private ShootingMechanic _shootingMechanic;
 
     public void Awake()
     {
@@ -36,8 +38,9 @@ public partial class Player : MonoBehaviour
         _movementMechanic = new MovementMechanic(gameObject.transform, moveDirection, moveSpeed, canMove);
         _rotationMechanic = new RotationMechanic(transform, rotDirection, rotSpeed, canMove);
         _destroyMechanic = new DestroyMechanic(gameObject, isDead);
-        _counterMechanic_RefillWeapon = new CounterMechanic(canRefillWeapon, weaponRefillTime);
-        _refillWeaponMechanic = new RefillWeaponMechanic(canRefillWeapon, weaponMagazine, weaponRefillAmount);
+        _counterMechanic_RefillWeapon = new CounterMechanic(CanRefillWeapon, weaponRefillTime);
+        _refillWeaponMechanic = new RefillWeaponMechanic(CanRefillWeapon, weaponMagazine, weaponRefillAmount);
+        _shootingMechanic = new ShootingMechanic(OnShoot, weaponMagazine);
     }
 
     public void Update()
@@ -54,6 +57,7 @@ public partial class Player : MonoBehaviour
         _canMoveMechanic.OnEnable();
         _destroyMechanic.OnEnable();
         _refillWeaponMechanic.OnEnable();
+        _shootingMechanic.OnEnable();
     }
 
     public void OnDisable()
@@ -61,5 +65,6 @@ public partial class Player : MonoBehaviour
         _canMoveMechanic.OnDisable();
         _destroyMechanic.OnDisable();
         _refillWeaponMechanic.OnDisable();
+        _shootingMechanic.OnDisable();
     }
 }

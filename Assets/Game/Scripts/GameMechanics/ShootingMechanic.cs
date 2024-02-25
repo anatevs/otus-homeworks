@@ -4,29 +4,38 @@ public partial class Player
 {
     public class ShootingMechanic
     {
-        private readonly IAtomicAction _onShoot;
-        private readonly AtomicEvent _onShootInput;
+        private readonly IAtomicEvent OnShoot;
+        private readonly IAtomicVariable<int> _weaponMagazine;
+        private readonly int _shootAmount;
 
-        public ShootingMechanic(IAtomicAction onShoot, AtomicEvent onShootInput)
+        public ShootingMechanic(IAtomicEvent OnShoot, IAtomicVariable<int> weaponMagazine)
         {
-            _onShoot = onShoot;
-            _onShootInput = onShootInput;
+            this.OnShoot = OnShoot;
+            _weaponMagazine = weaponMagazine;
+            _shootAmount = 1;
         }
 
         public void OnEnable()
         {
-            _onShootInput.Subscribe(MakeShoot);
+            OnShoot.Subscribe(MakeShoot);
         }
 
         public void OnDisable()
         {
-            _onShootInput.Unsubscribe(MakeShoot);
+            OnShoot.Unsubscribe(MakeShoot);
         }
 
         private void MakeShoot()
         {
-            _onShoot?.Invoke();
-            Debug.Log("Shoot!");
+            if (_weaponMagazine.Value <= 0)
+            {
+                return;
+            }
+            else
+            {
+                _weaponMagazine.Value -= _shootAmount;
+                Debug.Log("Shoot!");
+            }
         }
     }
 }
