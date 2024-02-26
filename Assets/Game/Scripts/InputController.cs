@@ -11,7 +11,7 @@ public class InputController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            _player.OnShoot?.Invoke();
+            _player.FireEvent.Invoke();
         }
     }
 }

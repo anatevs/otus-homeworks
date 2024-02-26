@@ -1,28 +1,28 @@
 ﻿public class RefillWeaponMechanic
 {
-    private readonly IAtomicEvent OnCanRefill;
-    private readonly IAtomicVariable<int> _weaponMagazine;
+    private readonly IAtomicEvent _canRefillEvent;
+    private readonly IAtomicVariable<int> _projectileStorage;
     private readonly IAtomicValue<int> _refillAmout;
 
-    public RefillWeaponMechanic(IAtomicEvent OnCanRefill, IAtomicVariable<int> weaponMagazine, IAtomicValue<int> refillAmout)
+    public RefillWeaponMechanic(IAtomicEvent canRefillEvent, IAtomicVariable<int> projectileStorage, IAtomicValue<int> refillAmout)
     {
-        this.OnCanRefill = OnCanRefill;
-        _weaponMagazine = weaponMagazine;
+        this._canRefillEvent = canRefillEvent;
+        _projectileStorage = projectileStorage;
         _refillAmout = refillAmout;
     }
 
     public void OnEnable()
     {
-        OnCanRefill.Subscribe(MakeWeaponRefill);
+        _canRefillEvent.Subscribe(MakeWeaponRefill);
     }
 
     public void OnDisable()
     {
-        OnCanRefill.Unsubscribe(MakeWeaponRefill);
+        _canRefillEvent.Unsubscribe(MakeWeaponRefill);
     }
 
     private void MakeWeaponRefill()
     {
-        _weaponMagazine.Value += _refillAmout.Value;
+        _projectileStorage.Value += _refillAmout.Value;
     }
 }

@@ -1,26 +1,26 @@
-﻿using UnityEngine;
-
-public class ShootingMechanic
+﻿public class TryGetProjectileMechanic
 {
-    private readonly IAtomicEvent OnShoot;
+    private readonly IAtomicEvent _fireEvent;
+    private readonly IAtomicAction _shootAction;
     private readonly IAtomicVariable<int> _weaponMagazine;
     private readonly int _shootAmount;
 
-    public ShootingMechanic(IAtomicEvent OnShoot, IAtomicVariable<int> weaponMagazine)
+    public TryGetProjectileMechanic(IAtomicEvent onFireEvent, IAtomicAction shootAction, IAtomicVariable<int> weaponMagazine)
     {
-        this.OnShoot = OnShoot;
+        _fireEvent = onFireEvent;
+        _shootAction = shootAction;
         _weaponMagazine = weaponMagazine;
         _shootAmount = 1;
     }
 
     public void OnEnable()
     {
-        OnShoot.Subscribe(MakeShoot);
+        _fireEvent.Subscribe(MakeShoot);
     }
 
     public void OnDisable()
     {
-        OnShoot.Unsubscribe(MakeShoot);
+        _fireEvent.Unsubscribe(MakeShoot);
     }
 
     private void MakeShoot()
@@ -32,7 +32,7 @@ public class ShootingMechanic
         else
         {
             _weaponMagazine.Value -= _shootAmount;
-            Debug.Log("Shoot!");
+            _shootAction.Invoke();
         }
     }
 }

@@ -160,7 +160,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
-  _shootPoint: {fileID: 0}
   isCollided:
     _value: 0
   canMove:
@@ -168,6 +167,6 @@ MonoBehaviour:
   damage:
     _value: 0
   moveDirection:
-    _value: {x: 0, y: 0, z: 0}
+    _value: {x: 0, y: 0, z: 1}
   speed:
-    _value: 1
+    _value: 2
