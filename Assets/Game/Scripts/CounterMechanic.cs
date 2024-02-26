@@ -1,32 +1,29 @@
 ﻿using UnityEngine;
 
-public partial class Player
+public class CounterMechanic
 {
-    public class CounterMechanic
+    private IAtomicAction _onCounted;
+    private IAtomicValue<float> _count;
+    private float _timer;
+
+    public CounterMechanic(IAtomicAction onCounted, IAtomicValue<float> count)
     {
-        private IAtomicAction _onCounted;
-        private IAtomicValue<float> _count;
-        private float _timer;
+        _onCounted = onCounted;
+        _count = count;
+        _timer = count.Value;
+    }
 
-        public CounterMechanic(IAtomicAction onCounted, IAtomicValue<float> count)
+    public void Update()
+    {
+        _timer -= Time.deltaTime;
+        if ( _timer > 0 )
         {
-            _onCounted = onCounted;
-            _count = count;
-            _timer = count.Value;
+            return;
         }
-
-        public void Update()
+        else
         {
-            _timer -= Time.deltaTime;
-            if ( _timer > 0 )
-            {
-                return;
-            }
-            else
-            {
-                _timer = _count.Value;
-                _onCounted?.Invoke();
-            }
+            _timer = _count.Value;
+            _onCounted?.Invoke();
         }
     }
 }

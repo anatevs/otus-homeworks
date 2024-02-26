@@ -1,28 +1,25 @@
 ﻿using UnityEngine;
 
-public partial class Player
+public class DeathMechanic
 {
-    public class DeathMechanic
+    private readonly AtomicVariable<bool> _isDeath;
+    private readonly IAtomicValue<int> _hp;
+
+    public DeathMechanic(AtomicVariable<bool> isDeath, IAtomicValue<int> hp)
     {
-        private readonly AtomicVariable<bool> _isDeath;
-        private readonly IAtomicValue<int> _hp;
+        _isDeath = isDeath;
+        _hp = hp;
+    }
 
-        public DeathMechanic(AtomicVariable<bool> isDeath, IAtomicValue<int> hp)
+    public void Update()
+    {
+        if (_hp.Value > 0)
         {
-            _isDeath = isDeath;
-            _hp = hp;
+            return;
         }
-
-        public void Update()
+        else
         {
-            if (_hp.Value > 0)
-            {
-                return;
-            }
-            else
-            {
-                _isDeath.Value = true;
-            }
+            _isDeath.Value = true;
         }
     }
 }

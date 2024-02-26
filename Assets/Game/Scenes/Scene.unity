@@ -2031,6 +2031,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1240709467 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1067890634428359185, guid: 3b5b2ae0f895574449961910366cbf8a,
+    type: 3}
+  m_PrefabInstance: {fileID: 625937915}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1290539686 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6378945258768650400, guid: 3b5b2ae0f895574449961910366cbf8a,
@@ -2394,6 +2400,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 7292962108530562325, guid: 7f12394cd99a93a4c8a18e1a0b1cbf06,
+        type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1290539687}
+    - target: {fileID: 7292962108530562325, guid: 7f12394cd99a93a4c8a18e1a0b1cbf06,
+        type: 3}
+      propertyPath: _shootPoint
+      value: 
+      objectReference: {fileID: 1240709467}
+    - target: {fileID: 7292962108530562325, guid: 7f12394cd99a93a4c8a18e1a0b1cbf06,
+        type: 3}
+      propertyPath: moveDirection._value.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f12394cd99a93a4c8a18e1a0b1cbf06, type: 3}

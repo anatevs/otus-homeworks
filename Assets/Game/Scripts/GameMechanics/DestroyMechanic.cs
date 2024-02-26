@@ -1,39 +1,36 @@
 ﻿using UnityEngine;
 
-public partial class Player
+public class DestroyMechanic
 {
-    public class DestroyMechanic
+    private readonly GameObject _gameObject;
+
+    private readonly AtomicVariable<bool> _death;
+
+    public DestroyMechanic(GameObject gameObject, AtomicVariable<bool> isDeath)
     {
-        private readonly GameObject _gameObject;
+        _gameObject = gameObject;
+        _death = isDeath;
+    }
 
-        private readonly AtomicVariable<bool> _death;
+    public void OnEnable()
+    {
+        _death.Subscribe(OnDeath);
+    }
 
-        public DestroyMechanic(GameObject gameObject, AtomicVariable<bool> isDeath)
+    public void OnDisable()
+    {
+        _death.Unsubscribe(OnDeath);
+    }
+
+    private void OnDeath(bool isDead)
+    {
+        if (!isDead)
         {
-            _gameObject = gameObject;
-            _death = isDeath;
+            return;
         }
-
-        public void OnEnable()
+        else
         {
-            _death.Subscribe(OnDeath);
-        }
-
-        public void OnDisable()
-        {
-            _death.Unsubscribe(OnDeath);
-        }
-
-        private void OnDeath(bool isDead)
-        {
-            if (!isDead)
-            {
-                return;
-            }
-            else
-            {
-                Object.Destroy(_gameObject);
-            }
+            Object.Destroy(_gameObject);
         }
     }
 }

@@ -1,41 +1,38 @@
 ﻿using UnityEngine;
 
-public partial class Player
+public class ShootingMechanic
 {
-    public class ShootingMechanic
+    private readonly IAtomicEvent OnShoot;
+    private readonly IAtomicVariable<int> _weaponMagazine;
+    private readonly int _shootAmount;
+
+    public ShootingMechanic(IAtomicEvent OnShoot, IAtomicVariable<int> weaponMagazine)
     {
-        private readonly IAtomicEvent OnShoot;
-        private readonly IAtomicVariable<int> _weaponMagazine;
-        private readonly int _shootAmount;
+        this.OnShoot = OnShoot;
+        _weaponMagazine = weaponMagazine;
+        _shootAmount = 1;
+    }
 
-        public ShootingMechanic(IAtomicEvent OnShoot, IAtomicVariable<int> weaponMagazine)
+    public void OnEnable()
+    {
+        OnShoot.Subscribe(MakeShoot);
+    }
+
+    public void OnDisable()
+    {
+        OnShoot.Unsubscribe(MakeShoot);
+    }
+
+    private void MakeShoot()
+    {
+        if (_weaponMagazine.Value <= 0)
         {
-            this.OnShoot = OnShoot;
-            _weaponMagazine = weaponMagazine;
-            _shootAmount = 1;
+            return;
         }
-
-        public void OnEnable()
+        else
         {
-            OnShoot.Subscribe(MakeShoot);
-        }
-
-        public void OnDisable()
-        {
-            OnShoot.Unsubscribe(MakeShoot);
-        }
-
-        private void MakeShoot()
-        {
-            if (_weaponMagazine.Value <= 0)
-            {
-                return;
-            }
-            else
-            {
-                _weaponMagazine.Value -= _shootAmount;
-                Debug.Log("Shoot!");
-            }
+            _weaponMagazine.Value -= _shootAmount;
+            Debug.Log("Shoot!");
         }
     }
 }
