@@ -165,7 +165,7 @@ MonoBehaviour:
   canMove:
     _value: 1
   damage:
-    _value: 0
+    _value: 1
   moveDirection:
     _value: {x: 0, y: 0, z: 1}
   speed:

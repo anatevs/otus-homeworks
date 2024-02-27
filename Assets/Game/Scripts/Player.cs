@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public partial class Player : MonoBehaviour
 {
@@ -20,7 +16,6 @@ public partial class Player : MonoBehaviour
     
     public AtomicVariable<Vector3> moveDirection;
     public AtomicVariable<float> moveSpeed;
-    public AtomicVariable<Vector3> rotDirection;
     public AtomicVariable<float> rotSpeed;
     
     public AtomicEvent CanRefillWeapon = new AtomicEvent();
@@ -49,7 +44,7 @@ public partial class Player : MonoBehaviour
         _deathMechanic = new DeathMechanic(isDead, hp);
         _canMoveMechanic = new CanMoveMechanic(isDead, canMove);
         _movementMechanic = new MovementMechanic(gameObject.transform, moveDirection, moveSpeed, canMove);
-        _rotationMechanic = new RotationMechanic(transform, rotDirection, rotSpeed, canMove);
+        _rotationMechanic = new RotationMechanic(transform, moveDirection, rotSpeed, canMove);
         _destroyMechanic = new DestroyMechanic(gameObject, isDead);
         _counterMechanic_RefillWeapon = new CounterMechanic(CanRefillWeapon, weaponRefillTime);
         _refillWeaponMechanic = new RefillWeaponMechanic(CanRefillWeapon, bulletsStorage, weaponRefillAmount);
@@ -63,11 +58,11 @@ public partial class Player : MonoBehaviour
         _movementMechanic.Update();
         _rotationMechanic.Update();
         _counterMechanic_RefillWeapon.Update();
-
     }
 
     private void OnEnable()
     {
+        _takeDamageMechanic.OnEnable();
         _canMoveMechanic.OnEnable();
         _destroyMechanic.OnEnable();
         _refillWeaponMechanic.OnEnable();
@@ -77,6 +72,7 @@ public partial class Player : MonoBehaviour
 
     private void OnDisable()
     {
+        _takeDamageMechanic.OnDisable();
         _canMoveMechanic.OnDisable();
         _destroyMechanic.OnDisable();
         _refillWeaponMechanic.OnDisable();

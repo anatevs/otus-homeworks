@@ -16,7 +16,7 @@ public class TakeDamageMechanic
         _onTakeDamage.Subscribe(MakeDamage);
     }
 
-    public void OnDesable()
+    public void OnDisable()
     {
         _onTakeDamage.Unsubscribe(MakeDamage);
     }

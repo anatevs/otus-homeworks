@@ -23,7 +23,7 @@ public class MovementMechanic
         }
         else
         {
-            _transform.Translate(_direction.Value * _speed.Value * Time.deltaTime);
+            _transform.Translate(_direction.Value * _speed.Value * Time.deltaTime, Space.World);
         }
     }
 }

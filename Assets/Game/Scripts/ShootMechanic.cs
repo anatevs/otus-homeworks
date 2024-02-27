@@ -2,16 +2,16 @@
 
 public class ShootMechanic
 {
-    private IAtomicEvent _shootEvent;
-    private Bullet _bullet;
-    private Transform _shootPoint;
-    private Transform _player;
+    private readonly IAtomicEvent _shootEvent;
+    private readonly Bullet _bullet;
+    private readonly Transform _shootPoint;
+    private readonly Transform _player;
 
-    public ShootMechanic(IAtomicEvent shootEvent, Bullet bullet, Transform position, Transform player)
+    public ShootMechanic(IAtomicEvent shootEvent, Bullet bullet, Transform shootPoint, Transform player)
     {
         _shootEvent = shootEvent;
         _bullet = bullet;
-        _shootPoint = position;
+        _shootPoint = shootPoint;
         _player = player;
     }
 
@@ -28,5 +28,6 @@ public class ShootMechanic
     private void Spawn()
     {
         var bullet = Object.Instantiate(_bullet, _shootPoint.position, _player.rotation);
+        bullet.moveDirection.Value = _player.forward;
     }
 }

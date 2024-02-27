@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public partial class Bullet : MonoBehaviour
@@ -7,7 +5,7 @@ public partial class Bullet : MonoBehaviour
     [SerializeField]
     private Player _player;
 
-    public AtomicVariable<bool> isCollided;
+    public AtomicVariable<bool> isDead;
     public AtomicVariable<bool> canMove;
     public AtomicVariable<int> damage;
 
@@ -19,19 +17,19 @@ public partial class Bullet : MonoBehaviour
     private CanMoveMechanic _canMoveMechanic;
     private MovementMechanic _movementMechanic;
     private DestroyMechanic _destroyMechanic;
+    private CollisionMechanic _collisionMechanic;
 
     public void Awake()
     {
-        _canMoveMechanic = new CanMoveMechanic(isCollided, canMove);
+        _canMoveMechanic = new CanMoveMechanic(isDead, canMove);
         _movementMechanic = new MovementMechanic(transform, moveDirection, speed, canMove);
-        _destroyMechanic = new DestroyMechanic(gameObject, isCollided);
+        _destroyMechanic = new DestroyMechanic(gameObject, isDead);
+        _collisionMechanic = new CollisionMechanic(damage, isDead);
     }
 
     public void Update()
     {
-
         _movementMechanic.Update();
-
     }
 
     public void OnEnable()
@@ -46,8 +44,8 @@ public partial class Bullet : MonoBehaviour
         _destroyMechanic.OnDisable();
     }
 
-    public class CollisionMechanic
+    public void OnTriggerEnter(Collider other)
     {
-        //private 
+        _collisionMechanic.OnTriggerEnter(other);
     }
 }
