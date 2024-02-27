@@ -3,16 +3,28 @@
 public class RotationMechanic
 {
     private readonly Transform _transform;
-    private readonly IAtomicValue<Vector3> _directionVector;
+    private readonly IAtomicVariable<Vector3> _directionVector;
     private readonly IAtomicValue<float> _rotSpeed;
     private readonly IAtomicValue<bool> _canMove;
 
-    public RotationMechanic(Transform transform, IAtomicValue<Vector3> directionVector, IAtomicValue<float> rotSpeed, IAtomicValue<bool> canMove)
+    private float _lerpPersent = 0f;
+
+    public RotationMechanic(Transform transform, IAtomicVariable<Vector3> directionVector, IAtomicValue<float> rotSpeed, IAtomicValue<bool> canMove)
     {
         _transform = transform;
         _directionVector = directionVector;
         _rotSpeed = rotSpeed;
         _canMove = canMove;
+    }
+
+    public void OnEnable()
+    {
+        _directionVector.OnValueChanged += ResetLerp;
+    }
+
+    public void OnDisable()
+    {
+        _directionVector.OnValueChanged -= ResetLerp;
     }
 
     public void Update()
@@ -26,9 +38,19 @@ public class RotationMechanic
             if (_directionVector.Value != Vector3.zero)
             {
                 Quaternion lookQuaternion = Quaternion.LookRotation(_directionVector.Value);
-                _transform.rotation = lookQuaternion;
-                //_transform.rotation = Quaternion.Slerp(_transform.rotation, lookQuaternion, _rotSpeed.Value * Time.deltaTime);
+                _lerpPersent = Mathf.MoveTowards(_lerpPersent, 1f, Time.deltaTime * _rotSpeed.Value);
+                _transform.rotation = Quaternion.Slerp(_transform.rotation, lookQuaternion, _lerpPersent);
+
+                if (_lerpPersent >= 1f)
+                {
+                    //rotation done
+                }
             }
         }
+    }
+
+    private void ResetLerp(Vector3 _)
+    {
+        _lerpPersent = 0f;
     }
 }

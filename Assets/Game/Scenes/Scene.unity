@@ -2407,7 +2407,7 @@ MonoBehaviour:
   rotDirection:
     _value: {x: 0, y: 0, z: 0}
   rotSpeed:
-    _value: 50
+    _value: 1
   weaponRefillTime:
     _value: 2
   bulletsStorage:

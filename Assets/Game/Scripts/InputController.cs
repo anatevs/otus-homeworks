@@ -15,10 +15,8 @@ public class InputController : MonoBehaviour
             {
                 mousePos = hit.point;
             }
-
             _player.rotDirection.Value = (mousePos - _player.transform.position).normalized;
-            Debug.Log("rotdir: " + _player.rotDirection.Value);
-            _player.FireEvent.Invoke();
+            _player.FireEvent?.Invoke();
         }
 
         _player.moveDirection.Value = GetDirection();
