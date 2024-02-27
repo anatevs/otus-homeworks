@@ -23,8 +23,12 @@ public class RotationMechanic
         }
         else
         {
-            Quaternion lookQuaternion = Quaternion.LookRotation(_directionVector.Value);
-            _transform.rotation = Quaternion.Slerp(_transform.rotation, lookQuaternion, _rotSpeed.Value * Time.deltaTime);
+            if (_directionVector.Value != Vector3.zero)
+            {
+                Quaternion lookQuaternion = Quaternion.LookRotation(_directionVector.Value);
+                _transform.rotation = lookQuaternion;
+                //_transform.rotation = Quaternion.Slerp(_transform.rotation, lookQuaternion, _rotSpeed.Value * Time.deltaTime);
+            }
         }
     }
 }

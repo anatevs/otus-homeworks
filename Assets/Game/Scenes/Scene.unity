@@ -2007,20 +2007,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b225b8e27b228a54e80a8b1938188242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerTransform: {fileID: 625937916}
   isDead:
     _value: 0
   canMove:
-    _value: 0
+    _value: 1
   hp:
     _value: 5
   moveDirection:
     _value: {x: 0, y: 0, z: 0}
   moveSpeed:
     _value: 0
-  rotDirection:
-    _value: {x: 0, y: 0, z: 0}
   rotSpeed:
-    _value: 0
+    _value: 3
 --- !u!1 &797904596
 GameObject:
   m_ObjectHideFlags: 0
@@ -2402,11 +2401,13 @@ MonoBehaviour:
   hp:
     _value: 10
   moveDirection:
-    _value: {x: 0, y: 0, z: 1}
+    _value: {x: 0, y: 0, z: 0}
   moveSpeed:
-    _value: 0.1
-  rotSpeed:
     _value: 5
+  rotDirection:
+    _value: {x: 0, y: 0, z: 0}
+  rotSpeed:
+    _value: 50
   weaponRefillTime:
     _value: 2
   bulletsStorage:

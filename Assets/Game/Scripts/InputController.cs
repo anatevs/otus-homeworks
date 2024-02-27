@@ -7,33 +7,46 @@ public class InputController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            Vector3 mousePos = Vector3.zero;
+            Ray castPoint = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(castPoint, out RaycastHit hit))
+            {
+                mousePos = hit.point;
+            }
+
+            _player.rotDirection.Value = (mousePos - _player.transform.position).normalized;
+            Debug.Log("rotdir: " + _player.rotDirection.Value);
             _player.FireEvent.Invoke();
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
+        _player.moveDirection.Value = GetDirection();
+        _player.rotDirection.Value = GetDirection();
+    }
+
+    private Vector3 GetDirection()
+    {
+        if (Input.GetKey(KeyCode.W))
         {
-            _player.moveDirection.Value = Vector3.forward;
-            return;
+            return Vector3.forward;
         }
 
-        if (Input.GetKeyDown(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
-            _player.moveDirection.Value = Vector3.left;
-            return;
+            return Vector3.left;
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S))
         {
-            _player.moveDirection.Value = Vector3.back;
-            return;
+            return Vector3.back;
         }
-        
-        if (Input.GetKeyDown(KeyCode.D))
+
+        else if (Input.GetKey(KeyCode.D))
         {
-            _player.moveDirection.Value = Vector3.right;
-            return;
+            return Vector3.right;
         }
+
+        return Vector3.zero;
     }
 }
