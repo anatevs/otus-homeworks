@@ -24,7 +24,7 @@ public partial class Player : MonoBehaviour
     public AtomicVariable<int> bulletsStorage;
     public AtomicVariable<int> weaponRefillAmount;
 
-    public AtomicEvent FireEvent = new AtomicEvent();
+    public AtomicEvent<Vector3> FireEvent = new AtomicEvent<Vector3>();
     public AtomicVariable<bool> _canShoot;
     public AtomicEvent ShootEvent = new AtomicEvent();
 
@@ -81,5 +81,53 @@ public partial class Player : MonoBehaviour
         _rotationMechanic.OnDisable();
         _tryGetProjectileMechanic.OnDisable();
         _shootMechanic.OnDisable();
+    }
+
+    public class RotationDirectionMechanic
+    {
+        private IAtomicEvent<Vector3> _onFire;
+        private IAtomicAction _shootAction;
+        private IAtomicValue<Vector3> _moveDirection;
+        private IAtomicVariable<Vector3> _rotDirection;
+        private IAtomicVariable<bool> _isShooting;
+        private IAtomicValue<bool> _isRotateDone;
+
+        private Vector3 _shootDirection;
+
+        public void OnEnable()
+        {
+            _onFire.Subscribe(StartFireProcess);
+        }
+
+        public void OnDisable()
+        {
+            _onFire.Unsubscribe(StartFireProcess);
+        }
+
+        public void Update()
+        {
+            if (!_isShooting.Value) 
+            {
+                _rotDirection.Value = _moveDirection.Value;
+            }
+            else
+            {
+                _rotDirection.Value = _shootDirection;
+                if (!_isRotateDone.Value)
+                {
+                    return;
+                }
+                else
+                {
+                    _shootAction.Invoke();
+                }
+            }
+        }
+
+        private void StartFireProcess(Vector3 shootDirection)
+        {
+            _isShooting.Value = true;
+            _shootDirection = shootDirection;
+        }
     }
 }

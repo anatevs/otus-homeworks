@@ -1,11 +1,13 @@
-﻿public class TryGetProjectileMechanic
+﻿using UnityEngine;
+
+public class TryGetProjectileMechanic
 {
-    private readonly IAtomicEvent _fireEvent;
+    private readonly IAtomicEvent<Vector3> _fireEvent;
     private readonly IAtomicAction _shootAction;
     private readonly IAtomicVariable<int> _weaponMagazine;
     private readonly int _shootAmount;
 
-    public TryGetProjectileMechanic(IAtomicEvent onFireEvent, IAtomicAction shootAction, IAtomicVariable<int> weaponMagazine)
+    public TryGetProjectileMechanic(IAtomicEvent<Vector3> onFireEvent, IAtomicAction shootAction, IAtomicVariable<int> weaponMagazine)
     {
         _fireEvent = onFireEvent;
         _shootAction = shootAction;
@@ -23,7 +25,7 @@
         _fireEvent.Unsubscribe(MakeShoot);
     }
 
-    private void MakeShoot()
+    private void MakeShoot(Vector3 _)
     {
         if (_weaponMagazine.Value <= 0)
         {
