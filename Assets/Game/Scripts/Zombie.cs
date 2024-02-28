@@ -57,4 +57,11 @@ public partial class Zombie : MonoBehaviour
         _canMoveMechanic.OnDisable();
         _destroyMechanic.OnDisable();
     }
+
+    public class MakeCollisionDamage
+    {
+        private readonly IAtomicAction _onCounted;
+        private readonly int _damage;
+        private readonly float _timeToDamage;
+    }
 }

@@ -14,7 +14,8 @@ public class TowardsTargetMechanic
 
     public void Update()
     {
-        Vector3 fullDirection = _target.position - _self.position;
-        _direction.Value = new Vector3(fullDirection.x, 0, fullDirection.z);
+        Vector3 fullDirection = (_target.position - _self.position).normalized;
+        fullDirection.y = 0;
+        _direction.Value = fullDirection;
     }
 }

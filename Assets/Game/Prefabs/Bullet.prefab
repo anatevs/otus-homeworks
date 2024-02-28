@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
-  isCollided:
+  isDead:
     _value: 0
   canMove:
     _value: 1
@@ -169,4 +169,4 @@ MonoBehaviour:
   moveDirection:
     _value: {x: 0, y: 0, z: 1}
   speed:
-    _value: 2
+    _value: 10

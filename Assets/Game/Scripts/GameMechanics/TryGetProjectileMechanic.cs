@@ -35,7 +35,6 @@ public class TryGetProjectileMechanic
         {
             _weaponMagazine.Value -= _shootAmount;
             _startFireEvent.Invoke(shootDirection);
-            Debug.Log("magazine shoot");
         }
     }
 }
