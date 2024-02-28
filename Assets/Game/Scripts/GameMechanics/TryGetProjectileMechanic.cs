@@ -3,29 +3,29 @@
 public class TryGetProjectileMechanic
 {
     private readonly IAtomicEvent<Vector3> _fireEvent;
-    private readonly IAtomicAction _shootAction;
+    private readonly IAtomicEvent<Vector3> _startFireEvent;
     private readonly IAtomicVariable<int> _weaponMagazine;
     private readonly int _shootAmount;
 
-    public TryGetProjectileMechanic(IAtomicEvent<Vector3> onFireEvent, IAtomicAction shootAction, IAtomicVariable<int> weaponMagazine)
+    public TryGetProjectileMechanic(IAtomicEvent<Vector3> onFireEvent, IAtomicEvent<Vector3> startFireEvent, IAtomicVariable<int> weaponMagazine)
     {
         _fireEvent = onFireEvent;
-        _shootAction = shootAction;
+        _startFireEvent = startFireEvent;
         _weaponMagazine = weaponMagazine;
         _shootAmount = 1;
     }
 
     public void OnEnable()
     {
-        _fireEvent.Subscribe(MakeShoot);
+        _fireEvent.Subscribe(StartFire);
     }
 
     public void OnDisable()
     {
-        _fireEvent.Unsubscribe(MakeShoot);
+        _fireEvent.Unsubscribe(StartFire);
     }
 
-    private void MakeShoot(Vector3 _)
+    private void StartFire(Vector3 shootDirection)
     {
         if (_weaponMagazine.Value <= 0)
         {
@@ -34,7 +34,8 @@ public class TryGetProjectileMechanic
         else
         {
             _weaponMagazine.Value -= _shootAmount;
-            _shootAction.Invoke();
+            _startFireEvent.Invoke(shootDirection);
+            Debug.Log("magazine shoot");
         }
     }
 }

@@ -14,6 +14,7 @@ public partial class Zombie : MonoBehaviour
     public AtomicVariable<Vector3> moveDirection;
     public AtomicVariable<float> moveSpeed;
     public AtomicVariable<float> rotSpeed;
+    public AtomicVariable<bool> isRotationDone;
 
 
     private TakeDamageMechanic _takeDamageMechanic;
@@ -30,7 +31,7 @@ public partial class Zombie : MonoBehaviour
         _deathMechanic = new DeathMechanic(isDead, hp);
         _canMoveMechanic = new CanMoveMechanic(isDead, canMove);
         _movementMechanic = new MovementMechanic(transform, moveDirection, moveSpeed, canMove);
-        _rotationMechanic = new RotationMechanic(transform, moveDirection, rotSpeed, canMove);
+        _rotationMechanic = new RotationMechanic(transform, moveDirection, rotSpeed, canMove, isRotationDone);
         _destroyMechanic = new DestroyMechanic(gameObject, isDead);
         _towardsTargetMechanic = new TowardsTargetMechanic(_playerTransform, transform, moveDirection);
     }

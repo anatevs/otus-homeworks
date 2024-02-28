@@ -9,18 +9,16 @@ public class InputController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Vector3 mousePos = Vector3.zero;
             Ray castPoint = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(castPoint, out RaycastHit hit))
             {
-                mousePos = hit.point;
+                Vector3 mousePos = hit.point;
+                Vector3 shootDirection = (mousePos - _player.transform.position).normalized;
+                _player.FireEvent?.Invoke(shootDirection);
             }
-            Vector3 shootDirection = (mousePos - _player.transform.position).normalized;
-            _player.FireEvent?.Invoke(shootDirection);
         }
 
         _player.moveDirection.Value = GetDirection();
-        _player.rotDirection.Value = GetDirection();
     }
 
     private Vector3 GetDirection()

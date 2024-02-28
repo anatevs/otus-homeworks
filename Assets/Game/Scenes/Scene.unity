@@ -2020,6 +2020,8 @@ MonoBehaviour:
     _value: 0
   rotSpeed:
     _value: 3
+  isRotationDone:
+    _value: 0
 --- !u!1 &797904596
 GameObject:
   m_ObjectHideFlags: 0
@@ -2407,15 +2409,15 @@ MonoBehaviour:
   rotDirection:
     _value: {x: 0, y: 0, z: 0}
   rotSpeed:
-    _value: 1
+    _value: 50
+  isRotationDone:
+    _value: 0
   weaponRefillTime:
     _value: 2
   bulletsStorage:
-    _value: 0
+    _value: 10
   weaponRefillAmount:
     _value: 1
-  _canShoot:
-    _value: 0
 --- !u!1 &1366530278
 GameObject:
   m_ObjectHideFlags: 0
