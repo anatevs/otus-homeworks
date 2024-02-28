@@ -67,6 +67,7 @@ public partial class Player : MonoBehaviour
         _canMoveMechanic.OnEnable();
         _destroyMechanic.OnEnable();
         _refillWeaponMechanic.OnEnable();
+        _rotationMechanic.OnEnable();
         _tryGetProjectileMechanic.OnEnable();
         _shootMechanic.OnEnable();
     }
@@ -77,6 +78,7 @@ public partial class Player : MonoBehaviour
         _canMoveMechanic.OnDisable();
         _destroyMechanic.OnDisable();
         _refillWeaponMechanic.OnDisable();
+        _rotationMechanic.OnDisable();
         _tryGetProjectileMechanic.OnDisable();
         _shootMechanic.OnDisable();
     }

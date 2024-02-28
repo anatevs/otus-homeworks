@@ -8,6 +8,7 @@ public class RotationMechanic
     private readonly IAtomicValue<bool> _canMove;
 
     private float _lerpPersent = 0f;
+    private bool _canRotate = true;
 
     public RotationMechanic(Transform transform, IAtomicVariable<Vector3> directionVector, IAtomicValue<float> rotSpeed, IAtomicValue<bool> canMove)
     {
@@ -41,9 +42,11 @@ public class RotationMechanic
                 _lerpPersent = Mathf.MoveTowards(_lerpPersent, 1f, Time.deltaTime * _rotSpeed.Value);
                 _transform.rotation = Quaternion.Slerp(_transform.rotation, lookQuaternion, _lerpPersent);
 
-                if (_lerpPersent >= 1f)
+                if (_lerpPersent >= 1f & _canRotate)
                 {
                     //rotation done
+                    _canRotate = false;
+                    Debug.Log("rotation is done");
                 }
             }
         }
@@ -52,5 +55,6 @@ public class RotationMechanic
     private void ResetLerp(Vector3 _)
     {
         _lerpPersent = 0f;
+        _canRotate = true;
     }
 }
