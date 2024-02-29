@@ -15,7 +15,6 @@ public class CollisionMechanic
     {
         if (other.TryGetComponent<Zombie>(out Zombie zombie))
         {
-            Debug.Log("collided with z");
             zombie.OnDamage?.Invoke(_damage.Value);
         }
         _isDead.Value = true;

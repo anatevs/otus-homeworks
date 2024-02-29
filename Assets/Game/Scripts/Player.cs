@@ -21,6 +21,7 @@ public partial class Player : MonoBehaviour
     public AtomicVariable<bool> isRotationDone;
     
     public AtomicEvent CanRefillWeapon = new AtomicEvent();
+    public AtomicEvent OnResetWeaponCounter = new AtomicEvent();
     public AtomicVariable<float> weaponRefillTime;
     public AtomicVariable<int> bulletsStorage;
     public AtomicVariable<int> weaponRefillAmount;
@@ -49,7 +50,7 @@ public partial class Player : MonoBehaviour
         _movementMechanic = new MovementMechanic(transform, moveDirection, moveSpeed, canMove);
         _rotationMechanic = new RotationMechanic(transform, rotDirection, rotSpeed, canMove, isRotationDone);
         _destroyMechanic = new DestroyMechanic(gameObject, isDead);
-        _counterMechanic_RefillWeapon = new CounterMechanic(CanRefillWeapon, weaponRefillTime);
+        _counterMechanic_RefillWeapon = new CounterMechanic(CanRefillWeapon, OnResetWeaponCounter, weaponRefillTime);
         _refillWeaponMechanic = new RefillWeaponMechanic(CanRefillWeapon, bulletsStorage, weaponRefillAmount);
         _tryGetProjectileMechanic = new TryGetProjectileMechanic(FireEvent, StartFireEvent, bulletsStorage);
         _shootRotationMechanic = new ShootRotationMechanic(StartFireEvent, ShootEvent, moveDirection, rotDirection, isRotationDone);

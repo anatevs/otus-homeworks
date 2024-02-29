@@ -16,6 +16,10 @@ public partial class Zombie : MonoBehaviour
     public AtomicVariable<float> rotSpeed;
     public AtomicVariable<bool> isRotationDone;
 
+    public AtomicEvent OnDamageCounted = new AtomicEvent();
+    public AtomicEvent OnResetDamageCounter = new AtomicEvent();
+    public AtomicVariable<float> damageCounter;
+    public AtomicVariable<int> damage;
 
     private TakeDamageMechanic _takeDamageMechanic;
     private DeathMechanic _deathMechanic;
@@ -24,6 +28,8 @@ public partial class Zombie : MonoBehaviour
     private RotationMechanic _rotationMechanic;
     private DestroyMechanic _destroyMechanic;
     private TowardsTargetMechanic _towardsTargetMechanic;
+    private CounterMechanic _counterMechanic_DamageToPlayer;
+    private MakeCollisionDamageMechanic _makeCollisionDamageMechanic;
 
     private void Awake()
     {
@@ -34,6 +40,8 @@ public partial class Zombie : MonoBehaviour
         _rotationMechanic = new RotationMechanic(transform, moveDirection, rotSpeed, canMove, isRotationDone);
         _destroyMechanic = new DestroyMechanic(gameObject, isDead);
         _towardsTargetMechanic = new TowardsTargetMechanic(_playerTransform, transform, moveDirection);
+        _counterMechanic_DamageToPlayer = new CounterMechanic(OnDamageCounted, OnResetDamageCounter, damageCounter);
+        _makeCollisionDamageMechanic = new MakeCollisionDamageMechanic(OnDamageCounted, OnResetDamageCounter, damageCounter, damage);
     }
 
     private void Update()
@@ -42,6 +50,8 @@ public partial class Zombie : MonoBehaviour
         _movementMechanic.Update();
         _rotationMechanic.Update();
         _towardsTargetMechanic.Update();
+        _counterMechanic_DamageToPlayer.Update();
+        _makeCollisionDamageMechanic.Update();
     }
 
     private void OnEnable()
@@ -49,6 +59,8 @@ public partial class Zombie : MonoBehaviour
         _takeDamageMechanic.OnEnable();
         _canMoveMechanic.OnEnable();
         _destroyMechanic.OnEnable();
+        _counterMechanic_DamageToPlayer.OnEnable();
+        _makeCollisionDamageMechanic.OnEnable();
     }
 
     private void OnDisable()
@@ -56,12 +68,17 @@ public partial class Zombie : MonoBehaviour
         _takeDamageMechanic.OnDisable();
         _canMoveMechanic.OnDisable();
         _destroyMechanic.OnDisable();
+        _counterMechanic_DamageToPlayer.OnDisable();
+        _makeCollisionDamageMechanic.OnDisable();
     }
 
-    public class MakeCollisionDamage
+    private void OnTriggerEnter(Collider other)
     {
-        private readonly IAtomicAction _onCounted;
-        private readonly int _damage;
-        private readonly float _timeToDamage;
+        _makeCollisionDamageMechanic.OnTriggerEnter(other);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        _makeCollisionDamageMechanic.OnTriggerExit(other);
     }
 }
