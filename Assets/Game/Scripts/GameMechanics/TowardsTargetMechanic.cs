@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 public class TowardsTargetMechanic
 {
-    private Transform _target;
-    private Transform _self;
-    private IAtomicVariable<Vector3> _direction;
+    private readonly Transform _target;
+    private readonly Transform _self;
+    private readonly IAtomicVariable<Vector3> _direction;
 
     public TowardsTargetMechanic(Transform target, Transform self, IAtomicVariable<Vector3> direction)
     {
@@ -14,8 +14,8 @@ public class TowardsTargetMechanic
 
     public void Update()
     {
-        Vector3 fullDirection = (_target.position - _self.position).normalized;
-        fullDirection.y = 0;
-        _direction.Value = fullDirection;
+        Vector3 direction = (_target.position - _self.position).normalized;
+        direction.y = 0;
+        _direction.Value = direction;
     }
 }

@@ -3,7 +3,6 @@
 public class DestroyMechanic
 {
     private readonly GameObject _gameObject;
-
     private readonly AtomicVariable<bool> _death;
 
     public DestroyMechanic(GameObject gameObject, AtomicVariable<bool> isDeath)

@@ -1,7 +1,7 @@
 ﻿public class LifetimeMechanic
 {
-    private IAtomicEvent _onLifetimeEnd;
-    private IAtomicVariable<bool> _isDead;
+    private readonly IAtomicEvent _onLifetimeEnd;
+    private readonly IAtomicVariable<bool> _isDead;
 
     public LifetimeMechanic(IAtomicEvent onLifetimeEnd, IAtomicVariable<bool> isDead)
     {

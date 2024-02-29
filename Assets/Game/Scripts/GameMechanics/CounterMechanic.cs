@@ -2,9 +2,9 @@
 
 public class CounterMechanic
 {
-    private IAtomicAction _onCounted;
-    private IAtomicEvent _onReset;
-    private IAtomicValue<float> _count;
+    private readonly IAtomicAction _onCounted;
+    private readonly IAtomicEvent _onReset;
+    private readonly IAtomicValue<float> _count;
     private float _timer;
 
     public CounterMechanic(IAtomicAction onCounted, IAtomicEvent onReset, IAtomicValue<float> count)
