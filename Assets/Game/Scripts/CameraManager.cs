@@ -1,34 +1,19 @@
 using UnityEngine;
 
-public class CameraManager : MonoBehaviour
+public partial class CameraManager : MonoBehaviour
 {
+    [SerializeField]
+    private Transform _playerTransform;
+
+    private CameraFollowMechanic _cameraFollowMechanic;
+
     public void Awake()
     {
-        
+        _cameraFollowMechanic = new CameraFollowMechanic(transform, _playerTransform);
     }
 
     void Update()
     {
-        
-    }
-
-    // follow the player mechanic
-    public class CameraFollowMechanic
-    {
-        private readonly Transform _followerTransform;
-        private readonly Transform _followingTransform;
-        private readonly Vector3 _offset;
-
-        public CameraFollowMechanic(Transform followerTransform, Transform followingTransform, Vector3 offset)
-        {
-            _followerTransform = followerTransform;
-            _followingTransform = followingTransform;
-            _offset = offset;
-        }
-
-        public void Update()
-        {
-            _followerTransform.position = _followingTransform.position + _offset;
-        }
+        _cameraFollowMechanic.Update();
     }
 }
