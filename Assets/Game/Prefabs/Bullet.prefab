@@ -170,3 +170,5 @@ MonoBehaviour:
     _value: {x: 0, y: 0, z: 1}
   speed:
     _value: 10
+  _lifetime:
+    _value: 1

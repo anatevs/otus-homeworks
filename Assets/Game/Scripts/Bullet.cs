@@ -14,10 +14,16 @@ public partial class Bullet : MonoBehaviour
 
     public AtomicEvent OnShoot = new AtomicEvent();
 
+    public AtomicEvent OnLifetimeEnd = new AtomicEvent();
+    public AtomicEvent OnLifetimeReset = new AtomicEvent();
+    public AtomicVariable<float> _lifetime;
+
     private CanMoveMechanic _canMoveMechanic;
     private MovementMechanic _movementMechanic;
     private DestroyMechanic _destroyMechanic;
     private CollisionMechanic _collisionMechanic;
+    private CounterMechanic _counterMechanic_Lifetime;
+    private LifetimeMechanic _lifetimeMechanic;
 
     public void Awake()
     {
@@ -25,23 +31,28 @@ public partial class Bullet : MonoBehaviour
         _movementMechanic = new MovementMechanic(transform, moveDirection, speed, canMove);
         _destroyMechanic = new DestroyMechanic(gameObject, isDead);
         _collisionMechanic = new CollisionMechanic(damage, isDead);
+        _counterMechanic_Lifetime = new CounterMechanic(OnLifetimeEnd, OnLifetimeReset, _lifetime);
+        _lifetimeMechanic = new LifetimeMechanic(OnLifetimeEnd, isDead);
     }
 
     public void Update()
     {
         _movementMechanic.Update();
+        _counterMechanic_Lifetime.Update();
     }
 
     public void OnEnable()
     {
         _canMoveMechanic.OnEnable();
         _destroyMechanic.OnEnable();
+        _lifetimeMechanic.OnEnable();
     }
 
     public void OnDisable()
     {
         _canMoveMechanic.OnDisable();
         _destroyMechanic.OnDisable();
+        _lifetimeMechanic.OnDisable();
     }
 
     public void OnTriggerEnter(Collider other)
