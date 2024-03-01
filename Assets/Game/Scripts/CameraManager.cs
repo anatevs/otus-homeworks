@@ -7,12 +7,12 @@ public partial class CameraManager : MonoBehaviour
 
     private CameraFollowMechanic _cameraFollowMechanic;
 
-    public void Awake()
+    private void Awake()
     {
         _cameraFollowMechanic = new CameraFollowMechanic(transform, _playerTransform);
     }
 
-    void Update()
+    private void Update()
     {
         _cameraFollowMechanic.Update();
     }

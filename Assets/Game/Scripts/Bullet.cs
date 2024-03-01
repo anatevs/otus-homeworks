@@ -25,7 +25,7 @@ public partial class Bullet : MonoBehaviour
     private CounterMechanic _counterMechanic_Lifetime;
     private LifetimeMechanic _lifetimeMechanic;
 
-    public void Awake()
+    private void Awake()
     {
         _canMoveMechanic = new CanMoveMechanic(isDead, canMove);
         _movementMechanic = new MovementMechanic(transform, moveDirection, speed, canMove);
@@ -35,27 +35,27 @@ public partial class Bullet : MonoBehaviour
         _lifetimeMechanic = new LifetimeMechanic(OnLifetimeEnd, isDead);
     }
 
-    public void Update()
+    private void Update()
     {
         _movementMechanic.Update();
         _counterMechanic_Lifetime.Update();
     }
 
-    public void OnEnable()
+    private void OnEnable()
     {
         _canMoveMechanic.OnEnable();
         _destroyMechanic.OnEnable();
         _lifetimeMechanic.OnEnable();
     }
 
-    public void OnDisable()
+    private void OnDisable()
     {
         _canMoveMechanic.OnDisable();
         _destroyMechanic.OnDisable();
         _lifetimeMechanic.OnDisable();
     }
 
-    public void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         _collisionMechanic.OnTriggerEnter(other);
     }
