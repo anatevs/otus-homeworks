@@ -2,5 +2,5 @@
 {
     Idle = 0,
     Move = 1,
-    Dead = 4
+    Dead = 2
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public partial class PlayerAnimatorController
 {
-    private static int State = Animator.StringToHash("State");
+    private static int State = Animator.StringToHash("MainState");
 
     private IAtomicValue<Vector3> _moveDirection;
     private IAtomicValue<bool> _isDead;
