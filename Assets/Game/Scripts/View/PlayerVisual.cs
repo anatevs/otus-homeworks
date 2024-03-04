@@ -12,7 +12,8 @@ public class PlayerVisual : MonoBehaviour
 
     private void Awake()
     {
-        _animatorController = new PlayerAnimatorController(_player.moveDirection, _player.isDead, _animator, _player.OnDamage, _player.ShootEvent);
+        _animatorController = new PlayerAnimatorController(_player.moveDirection,
+            _player.isDead, _animator, _player.OnDamage, _player.FireRequest);
     }
 
     private void Update()

@@ -12,15 +12,15 @@ public partial class PlayerAnimatorController
     private Animator _animator;
 
     private IAtomicEvent<int> _onDamage;
-    private IAtomicEvent _shootEvent;
+    private IAtomicEvent _fireRequest;
 
-    public PlayerAnimatorController(IAtomicValue<Vector3> moveDirection, IAtomicValue<bool> isDead, Animator animator, IAtomicEvent<int> onDamage, IAtomicEvent shootEvent)
+    public PlayerAnimatorController(IAtomicValue<Vector3> moveDirection, IAtomicValue<bool> isDead, Animator animator, IAtomicEvent<int> onDamage, IAtomicEvent fireRequest)
     {
         _moveDirection = moveDirection;
         _isDead = isDead;
         _animator = animator;
         _onDamage = onDamage;
-        _shootEvent = shootEvent;
+        _fireRequest = fireRequest;
     }
 
     public void Update()
@@ -31,13 +31,13 @@ public partial class PlayerAnimatorController
     public void OnEnable()
     {
         _onDamage.Subscribe(TakeDamage);
-        _shootEvent.Subscribe(MakeShoot);
+        _fireRequest.Subscribe(MakeShoot);
     }
 
     public void OnDisable()
     {
         _onDamage.Unsubscribe(TakeDamage);
-        _shootEvent.Unsubscribe(MakeShoot);
+        _fireRequest.Unsubscribe(MakeShoot);
     }
 
     private int GetStateValue()

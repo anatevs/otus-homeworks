@@ -2,34 +2,42 @@
 
 public class ShootRotationMechanic
 {
-    private readonly IAtomicEvent<Vector3> _startFire;
-    private readonly IAtomicAction _shootAction;
+    private readonly IAtomicEvent<Vector3> _startFireRotation;
+    private readonly IAtomicAction _fireRequest;
+    private readonly IAtomicEvent _shootIsDone;
+    private readonly IAtomicVariable<bool> _isRotationDone;
     private readonly IAtomicValue<Vector3> _moveDirection;
     private readonly IAtomicVariable<Vector3> _rotDirection;
-    private readonly IAtomicValue<bool> _isRotationDone;
 
     private Vector3 _beforeDirection;
     private bool _isShooting;
 
-    public ShootRotationMechanic(IAtomicEvent<Vector3> startFire,
-        IAtomicAction shootAction, IAtomicValue<Vector3> moveDirection,
-        IAtomicVariable<Vector3> rotDirection, IAtomicValue<bool> isRotationDone)
+    public ShootRotationMechanic(IAtomicEvent<Vector3> startFireRotation,
+        IAtomicAction fireRequest, IAtomicEvent shootIsDone,
+        IAtomicVariable<bool> isRotationDone,
+        IAtomicValue<Vector3> moveDirection,
+        IAtomicVariable<Vector3> rotDirection)
     {
-        _startFire = startFire;
-        _shootAction = shootAction;
+        _startFireRotation = startFireRotation;
+        _fireRequest = fireRequest;
+        _shootIsDone = shootIsDone;
+        _isRotationDone = isRotationDone;
         _moveDirection = moveDirection;
         _rotDirection = rotDirection;
-        _isRotationDone = isRotationDone;
     }
 
     public void OnEnable()
     {
-        _startFire.Subscribe(StartFireProcess);
+        _startFireRotation.Subscribe(StartFireProcess);
+        _isRotationDone.OnValueChanged += SentFireRequest;
+        _shootIsDone.Subscribe(ReturnRotation);
     }
 
     public void OnDisable()
     {
-        _startFire.Unsubscribe(StartFireProcess);
+        _startFireRotation.Unsubscribe(StartFireProcess);
+        _isRotationDone.OnValueChanged -= SentFireRequest;
+        _shootIsDone.Unsubscribe(ReturnRotation);
     }
 
     public void Update()
@@ -38,20 +46,6 @@ public class ShootRotationMechanic
         {
             _rotDirection.Value = _moveDirection.Value;
         }
-        else
-        {
-            if (!_isRotationDone.Value)
-            {
-                return;
-            }
-            else
-            {
-                Debug.Log($"invoke shoot {Time.time}");
-                _shootAction.Invoke();
-                _isShooting = false;
-                _rotDirection.Value = _beforeDirection;
-            }
-        }
     }
 
     private void StartFireProcess(Vector3 shootDirection)
@@ -59,5 +53,19 @@ public class ShootRotationMechanic
         _isShooting = true;
         _beforeDirection = _rotDirection.Value;
         _rotDirection.Value = shootDirection;
+    }
+
+    private void SentFireRequest(bool rotationDone)
+    {
+        if (_isShooting && rotationDone)
+        {
+            _fireRequest.Invoke();
+        }
+    }
+
+    private void ReturnRotation()
+    {
+        _isShooting = false;
+        _rotDirection.Value = _beforeDirection;
     }
 }

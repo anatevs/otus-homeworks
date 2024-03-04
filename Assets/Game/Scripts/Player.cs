@@ -26,9 +26,11 @@ public partial class Player : MonoBehaviour
     public AtomicVariable<int> bulletsStorage;
     public AtomicVariable<int> weaponRefillAmount;
 
-    public AtomicEvent<Vector3> FireEvent = new AtomicEvent<Vector3>();
-    public AtomicEvent<Vector3> StartFireEvent = new AtomicEvent<Vector3>();
+    public AtomicEvent<Vector3> InputFireEvent = new AtomicEvent<Vector3>();
+    public AtomicEvent<Vector3> StartFireRotation = new AtomicEvent<Vector3>();
+    public AtomicEvent FireRequest = new AtomicEvent();
     public AtomicEvent ShootEvent = new AtomicEvent();
+    public AtomicEvent ShootIsDone = new AtomicEvent();
 
     private TakeDamageMechanic _takeDamageMechanic;
     private DeathMechanic _deathMechanic;
@@ -52,9 +54,9 @@ public partial class Player : MonoBehaviour
         _destroyMechanic = new DestroyMechanic(gameObject, isDead);
         _counterMechanic_RefillWeapon = new CounterMechanic(CanRefillWeapon, OnResetWeaponCounter, weaponRefillTime);
         _refillWeaponMechanic = new RefillWeaponMechanic(CanRefillWeapon, bulletsStorage, weaponRefillAmount);
-        _tryGetProjectileMechanic = new TryGetProjectileMechanic(FireEvent, StartFireEvent, bulletsStorage);
-        _shootRotationMechanic = new ShootRotationMechanic(StartFireEvent, ShootEvent, moveDirection, rotDirection, isRotationDone);
-        _shootMechanic = new ShootMechanic(ShootEvent, _bulletPrefab, _shootPoint, transform);
+        _tryGetProjectileMechanic = new TryGetProjectileMechanic(InputFireEvent, StartFireRotation, bulletsStorage);
+        _shootRotationMechanic = new ShootRotationMechanic(StartFireRotation, FireRequest, ShootIsDone, isRotationDone, moveDirection, rotDirection);
+        _shootMechanic = new ShootMechanic(ShootEvent, ShootIsDone, _bulletPrefab, _shootPoint, transform);
     }
 
     private void Update()

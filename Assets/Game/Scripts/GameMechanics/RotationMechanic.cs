@@ -51,7 +51,6 @@ public class RotationMechanic
 
                     if (_lerpPersent >= 1f & !_isRotationDone.Value)
                     {
-                        Debug.Log($"rotation done {Time.time}");
                         _isRotationDone.Value = true;
                         _lerpPersent = 0f;
                     }

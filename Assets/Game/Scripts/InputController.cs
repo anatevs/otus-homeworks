@@ -15,7 +15,7 @@ public class InputController : MonoBehaviour
                 Vector3 mousePos = hit.point;
                 mousePos.y = 0;
                 Vector3 shootDirection = (mousePos - _player.transform.position).normalized;
-                _player.FireEvent?.Invoke(shootDirection);
+                _player.InputFireEvent?.Invoke(shootDirection);
             }
         }
 
