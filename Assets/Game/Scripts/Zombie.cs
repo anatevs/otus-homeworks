@@ -58,6 +58,7 @@ public partial class Zombie : MonoBehaviour
     {
         _takeDamageMechanic.OnEnable();
         _canMoveMechanic.OnEnable();
+        _rotationMechanic.OnEnable();
         _destroyMechanic.OnEnable();
         _counterMechanic_DamageToPlayer.OnEnable();
         _makeCollisionDamageMechanic.OnEnable();
@@ -67,6 +68,7 @@ public partial class Zombie : MonoBehaviour
     {
         _takeDamageMechanic.OnDisable();
         _canMoveMechanic.OnDisable();
+        _rotationMechanic.OnDisable();
         _destroyMechanic.OnDisable();
         _counterMechanic_DamageToPlayer.OnDisable();
         _makeCollisionDamageMechanic.OnDisable();

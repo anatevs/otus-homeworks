@@ -57,6 +57,7 @@ public class RotationMechanic
                 }
                 else
                 {
+                    //Debug.Log($"rot of {_transform.gameObject.name} is done");
                     return;
                 }
             }
@@ -71,6 +72,7 @@ public class RotationMechanic
         {
             _lerpPersent = 0f;
             _isRotationDone.Value = false;
+            //Debug.Log($"new rot of {_transform.gameObject.name}");
         }
     }
 }

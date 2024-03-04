@@ -58,13 +58,11 @@ public partial class PlayerAnimatorController
     private void MakeShoot()
     {
         _animator.SetTrigger(ShootTrigger);
-        Debug.Log($"shoot animation {Time.time}");
     }
 
     private void TakeDamage(int _)
     {
         _animator.SetTrigger(TakeDamageTrigger);
-        Debug.Log("damage");
     }
 
 }
