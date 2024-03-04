@@ -46,6 +46,7 @@ public class ShootRotationMechanic
             }
             else
             {
+                Debug.Log($"invoke shoot {Time.time}");
                 _shootAction.Invoke();
                 _isShooting = false;
                 _rotDirection.Value = _beforeDirection;

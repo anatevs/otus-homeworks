@@ -19,4 +19,14 @@ public class PlayerVisual : MonoBehaviour
     {
         _animatorController.Update();
     }
+
+    private void OnEnable()
+    {
+        _animatorController.OnEnable();
+    }
+
+    private void OnDisable()
+    {
+        _animatorController.OnDisable();
+    }
 }

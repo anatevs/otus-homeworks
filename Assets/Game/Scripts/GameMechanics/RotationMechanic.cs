@@ -43,13 +43,22 @@ public class RotationMechanic
         {
             if (_directionVector.Value != Vector3.zero)
             {
-                Quaternion lookQuaternion = Quaternion.LookRotation(_directionVector.Value);
-                _lerpPersent += Time.deltaTime * _rotSpeed.Value;
-                _transform.rotation = Quaternion.Slerp(_transform.rotation, lookQuaternion, _lerpPersent);
-
-                if (_lerpPersent >= 1f & !_isRotationDone.Value)
+                if (!_isRotationDone.Value)
                 {
-                    _isRotationDone.Value = true;
+                    Quaternion lookQuaternion = Quaternion.LookRotation(_directionVector.Value);
+                    _lerpPersent += Time.deltaTime * _rotSpeed.Value;
+                    _transform.rotation = Quaternion.Slerp(_transform.rotation, lookQuaternion, _lerpPersent);
+
+                    if (_lerpPersent >= 1f & !_isRotationDone.Value)
+                    {
+                        Debug.Log($"rotation done {Time.time}");
+                        _isRotationDone.Value = true;
+                        _lerpPersent = 0f;
+                    }
+                }
+                else
+                {
+                    return;
                 }
             }
         }
