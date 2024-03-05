@@ -3,7 +3,7 @@
 public class RotationMechanic
 {
     private readonly Transform _transform;
-    private readonly IAtomicVariable<Vector3> _directionVector;
+    private readonly AtomicVariable<Vector3> _directionVector;
     private readonly IAtomicValue<float> _rotSpeed;
     private readonly IAtomicValue<bool> _canMove;
     private readonly IAtomicVariable<bool> _isRotationDone;
@@ -12,7 +12,7 @@ public class RotationMechanic
     private Vector3 _prevDirection;
 
     public RotationMechanic(Transform transform, 
-        IAtomicVariable<Vector3> directionVector,
+        AtomicVariable<Vector3> directionVector,
         IAtomicValue<float> rotSpeed, IAtomicValue<bool> canMove,
         IAtomicVariable<bool> isRotationDone)
     {
@@ -25,12 +25,12 @@ public class RotationMechanic
 
     public void OnEnable()
     {
-        _directionVector.OnValueChanged += StartNewRotation;
+        _directionVector.Subscribe(StartNewRotation);
     }
 
     public void OnDisable()
     {
-        _directionVector.OnValueChanged -= StartNewRotation;
+        _directionVector.Unsubscribe(StartNewRotation);
     }
 
     public void Update()

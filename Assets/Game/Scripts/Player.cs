@@ -11,6 +11,7 @@ public partial class Player : MonoBehaviour
     public AtomicEvent<int> OnDamage = new AtomicEvent<int>();
 
     public AtomicVariable<bool> isDead;
+    public AtomicVariable<bool> onDestroy;
     public AtomicVariable<bool> canMove;
     public AtomicVariable<int> hp;
     
@@ -51,7 +52,7 @@ public partial class Player : MonoBehaviour
         _canMoveMechanic = new CanMoveMechanic(isDead, canMove);
         _movementMechanic = new MovementMechanic(transform, moveDirection, moveSpeed, canMove);
         _rotationMechanic = new RotationMechanic(transform, rotDirection, rotSpeed, canMove, isRotationDone);
-        _destroyMechanic = new DestroyMechanic(gameObject, isDead);
+        _destroyMechanic = new DestroyMechanic(gameObject, onDestroy);
         _counterMechanic_RefillWeapon = new CounterMechanic(CanRefillWeapon, OnResetWeaponCounter, weaponRefillTime);
         _refillWeaponMechanic = new RefillWeaponMechanic(CanRefillWeapon, bulletsStorage, weaponRefillAmount);
         _tryGetProjectileMechanic = new TryGetProjectileMechanic(InputFireEvent, StartFireRotation, bulletsStorage);
