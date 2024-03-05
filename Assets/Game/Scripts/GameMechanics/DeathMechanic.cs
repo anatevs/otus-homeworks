@@ -19,7 +19,14 @@ public class DeathMechanic
         }
         else
         {
-            _isDeath.Value = true;
+            if (_isDeath.Value)
+            {
+                return;
+            }
+            else
+            {
+                _isDeath.Value = true;
+            }
         }
     }
 }
