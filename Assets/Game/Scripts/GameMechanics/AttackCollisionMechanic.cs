@@ -1,31 +1,32 @@
 ﻿using UnityEngine;
 
-public class MakeCollisionDamageMechanic
+public class AttackCollisionMechanic
 {
     private readonly IAtomicEvent _onCounted;
     private readonly IAtomicEvent _onResetCounter;
-    private readonly IAtomicVariable<float> _count;
     private readonly IAtomicValue<int> _damage;
         
-    private bool _isMakingDamage;
-    private Player _player;
+    private IAtomicVariable<bool> _isMakingDamage;
+    private Collider _colliderToAttack;
 
-    public MakeCollisionDamageMechanic(IAtomicEvent onCounted,
-        IAtomicEvent onResetCounter, IAtomicVariable<float> count,
-        IAtomicValue<int> damage)
+    private AtomicEvent<int> _playerOnDamage;
+
+    public AttackCollisionMechanic(IAtomicEvent onCounted,
+        IAtomicEvent onResetCounter, IAtomicValue<int> damage,
+        IAtomicVariable<bool> isMakingDamage, Collider colliderToAttack)
     {
         _onCounted = onCounted;
         _onResetCounter = onResetCounter;
-        _count = count;
         _damage = damage;
+        _isMakingDamage = isMakingDamage;
+        _colliderToAttack = colliderToAttack;
 
-        _isMakingDamage = false;
-        _player = null;
+        _playerOnDamage = _colliderToAttack.gameObject.GetComponent<Player>().OnDamage;
     }
 
     public void Update()
     {
-        if (!_isMakingDamage)
+        if (!_isMakingDamage.Value)
         {
             _onResetCounter.Invoke();
         }
@@ -37,17 +38,17 @@ public class MakeCollisionDamageMechanic
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<Player>(out _player))
+        if (other == _colliderToAttack)
         {
-            _isMakingDamage = true;
+            _isMakingDamage.Value = true;
         }
     }
 
     public void OnTriggerExit(Collider other)
     {
-        if (other.gameObject == _player.gameObject)
+        if (other == _colliderToAttack)
         {
-            _isMakingDamage = false;
+            _isMakingDamage.Value = false;
         }
     }
 
@@ -63,6 +64,6 @@ public class MakeCollisionDamageMechanic
 
     private void MakeDamage()
     {
-        _player.OnDamage.Invoke(_damage.Value);
+        _playerOnDamage.Invoke(_damage.Value);
     }
 }

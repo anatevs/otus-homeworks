@@ -5,6 +5,9 @@ public partial class Zombie : MonoBehaviour
     [SerializeField]
     private Transform _playerTransform;
 
+    [SerializeField]
+    private Collider _playerCollider;
+
     public AtomicEvent<int> OnDamage = new AtomicEvent<int>();
 
     public AtomicVariable<bool> isDead;
@@ -20,6 +23,8 @@ public partial class Zombie : MonoBehaviour
     public AtomicEvent OnResetDamageCounter = new AtomicEvent();
     public AtomicVariable<float> damageCounter;
     public AtomicVariable<int> damage;
+    public AtomicVariable<bool> isAttacking;
+    public AtomicEvent AttackRequest;
 
     private TakeDamageMechanic _takeDamageMechanic;
     private DeathMechanic _deathMechanic;
@@ -29,7 +34,7 @@ public partial class Zombie : MonoBehaviour
     private DestroyMechanic _destroyMechanic;
     private TowardsTargetMechanic _towardsTargetMechanic;
     private CounterMechanic _counterMechanic_DamageToPlayer;
-    private MakeCollisionDamageMechanic _makeCollisionDamageMechanic;
+    private AttackCollisionMechanic _makeCollisionDamageMechanic;
 
     private void Awake()
     {
@@ -41,7 +46,7 @@ public partial class Zombie : MonoBehaviour
         _destroyMechanic = new DestroyMechanic(gameObject, isDead);
         _towardsTargetMechanic = new TowardsTargetMechanic(_playerTransform, transform, moveDirection);
         _counterMechanic_DamageToPlayer = new CounterMechanic(OnDamageCounted, OnResetDamageCounter, damageCounter);
-        _makeCollisionDamageMechanic = new MakeCollisionDamageMechanic(OnDamageCounted, OnResetDamageCounter, damageCounter, damage);
+        _makeCollisionDamageMechanic = new AttackCollisionMechanic(OnDamageCounted, OnResetDamageCounter, damage, isAttacking, _playerCollider);
     }
 
     private void Update()
