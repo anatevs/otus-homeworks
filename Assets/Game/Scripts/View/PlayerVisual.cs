@@ -8,12 +8,13 @@ public class PlayerVisual : MonoBehaviour
     [SerializeField]
     private Animator _animator;
 
-    private PlayerAnimatorController _animatorController;
+    private PlayerAnimatorMechanic _animatorController;
 
     private void Awake()
     {
-        _animatorController = new PlayerAnimatorController(_player.moveDirection,
-            _player.isDead, _animator, _player.OnDamage, _player.FireRequest);
+        _animatorController = new PlayerAnimatorMechanic(_animator, 
+            _player.moveDirection, _player.isDead,
+            _player.OnDamage, _player.FireRequest);
     }
 
     private void Update()

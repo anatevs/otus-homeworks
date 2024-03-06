@@ -8,9 +8,13 @@ public partial class Zombie : MonoBehaviour
     [SerializeField]
     private Collider _playerCollider;
 
+    [SerializeField]
+    private Player _player;
+
     public AtomicEvent<int> OnDamage = new AtomicEvent<int>();
 
     public AtomicVariable<bool> isDead;
+    public AtomicVariable<bool> onDestroy;
     public AtomicVariable<bool> canMove;
     public AtomicVariable<int> hp;
 
@@ -21,10 +25,11 @@ public partial class Zombie : MonoBehaviour
 
     public AtomicEvent OnDamageCounted = new AtomicEvent();
     public AtomicEvent OnResetDamageCounter = new AtomicEvent();
+    public AtomicEvent AttackRequest = new AtomicEvent();
     public AtomicVariable<float> damageCounter;
     public AtomicVariable<int> damage;
     public AtomicVariable<bool> isAttacking;
-    public AtomicEvent AttackRequest;
+    public AtomicEvent MakeDamage = new AtomicEvent();
 
     private TakeDamageMechanic _takeDamageMechanic;
     private DeathMechanic _deathMechanic;
@@ -35,6 +40,7 @@ public partial class Zombie : MonoBehaviour
     private TowardsTargetMechanic _towardsTargetMechanic;
     private CounterMechanic _counterMechanic_DamageToPlayer;
     private AttackCollisionMechanic _makeCollisionDamageMechanic;
+    private MakeDamageMechanic _makeDamageMechanic;
 
     private void Awake()
     {
@@ -43,10 +49,11 @@ public partial class Zombie : MonoBehaviour
         _canMoveMechanic = new CanMoveMechanic(isDead, canMove);
         _movementMechanic = new MovementMechanic(transform, moveDirection, moveSpeed, canMove);
         _rotationMechanic = new RotationMechanic(transform, moveDirection, rotSpeed, canMove, isRotationDone);
-        _destroyMechanic = new DestroyMechanic(gameObject, isDead);
+        _destroyMechanic = new DestroyMechanic(gameObject, onDestroy);
         _towardsTargetMechanic = new TowardsTargetMechanic(_playerTransform, transform, moveDirection);
         _counterMechanic_DamageToPlayer = new CounterMechanic(OnDamageCounted, OnResetDamageCounter, damageCounter);
-        _makeCollisionDamageMechanic = new AttackCollisionMechanic(OnDamageCounted, OnResetDamageCounter, damage, isAttacking, _playerCollider);
+        _makeCollisionDamageMechanic = new AttackCollisionMechanic(OnResetDamageCounter, isAttacking, _playerCollider);
+        _makeDamageMechanic = new MakeDamageMechanic(_player.OnDamage, MakeDamage, damage);
     }
 
     private void Update()
@@ -66,7 +73,7 @@ public partial class Zombie : MonoBehaviour
         _rotationMechanic.OnEnable();
         _destroyMechanic.OnEnable();
         _counterMechanic_DamageToPlayer.OnEnable();
-        _makeCollisionDamageMechanic.OnEnable();
+        _makeDamageMechanic.OnEnable();
     }
 
     private void OnDisable()
@@ -76,7 +83,7 @@ public partial class Zombie : MonoBehaviour
         _rotationMechanic.OnDisable();
         _destroyMechanic.OnDisable();
         _counterMechanic_DamageToPlayer.OnDisable();
-        _makeCollisionDamageMechanic.OnDisable();
+        _makeDamageMechanic.OnDisable();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -88,4 +95,31 @@ public partial class Zombie : MonoBehaviour
     {
         _makeCollisionDamageMechanic.OnTriggerExit(other);
     }
+
+    //public class AttackRequestMechanic
+    //{
+    //    private IAtomicEvent _onDamageTimeCounted;
+    //    private IAtomicEvent _attackRequest;
+
+    //    public AttackRequestMechanic(IAtomicEvent onDamageTimeCounted, IAtomicEvent attackRequest)
+    //    {
+    //        _onDamageTimeCounted = onDamageTimeCounted;
+    //        _attackRequest = attackRequest;
+    //    }
+
+    //    public void OnEnable()
+    //    {
+    //        _onDamageTimeCounted.Subscribe(StartAttack);
+    //    }
+
+    //    public void OnDisable()
+    //    {
+    //        _onDamageTimeCounted.Unsubscribe(StartAttack);
+    //    }
+
+    //    private void StartAttack()
+    //    {
+    //        _attackRequest.Invoke();
+    //    }
+    //}
 }

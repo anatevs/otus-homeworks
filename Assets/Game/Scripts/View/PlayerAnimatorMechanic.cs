@@ -1,24 +1,23 @@
 using UnityEngine;
 
-public partial class PlayerAnimatorController
+public partial class PlayerAnimatorMechanic
 {
     private static int State = Animator.StringToHash("MainState");
 
     private static int ShootTrigger = Animator.StringToHash("Shoot");
     private static int TakeDamageTrigger = Animator.StringToHash("TakeDamage");
 
+    private Animator _animator;
     private IAtomicValue<Vector3> _moveDirection;
     private IAtomicValue<bool> _isDead;
-    private Animator _animator;
-
     private IAtomicEvent<int> _onDamage;
     private IAtomicEvent _fireRequest;
 
-    public PlayerAnimatorController(IAtomicValue<Vector3> moveDirection, IAtomicValue<bool> isDead, Animator animator, IAtomicEvent<int> onDamage, IAtomicEvent fireRequest)
+    public PlayerAnimatorMechanic(Animator animator, IAtomicValue<Vector3> moveDirection, IAtomicValue<bool> isDead, IAtomicEvent<int> onDamage, IAtomicEvent fireRequest)
     {
+        _animator = animator;
         _moveDirection = moveDirection;
         _isDead = isDead;
-        _animator = animator;
         _onDamage = onDamage;
         _fireRequest = fireRequest;
     }
