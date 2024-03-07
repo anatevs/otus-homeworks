@@ -3,20 +3,20 @@
 public class AttackCollisionMechanic
 {
     private readonly IAtomicEvent _onResetCounter;
-    private IAtomicVariable<bool> _isMakingDamage;
+    private IAtomicVariable<bool> _isAttacking;
     private Collider _colliderToAttack;
 
     public AttackCollisionMechanic(IAtomicEvent onResetCounter,
-        IAtomicVariable<bool> isMakingDamage, Collider colliderToAttack)
+        IAtomicVariable<bool> isAttacking, Collider colliderToAttack)
     {
         _onResetCounter = onResetCounter;
-        _isMakingDamage = isMakingDamage;
+        _isAttacking = isAttacking;
         _colliderToAttack = colliderToAttack;
     }
 
     public void Update()
     {
-        if (!_isMakingDamage.Value)
+        if (!_isAttacking.Value)
         {
             _onResetCounter.Invoke();
         }
@@ -30,7 +30,7 @@ public class AttackCollisionMechanic
     {
         if (other == _colliderToAttack)
         {
-            _isMakingDamage.Value = true;
+            _isAttacking.Value = true;
 
         }
     }
@@ -39,7 +39,7 @@ public class AttackCollisionMechanic
     {
         if (other == _colliderToAttack)
         {
-            _isMakingDamage.Value = false;
+            _isAttacking.Value = false;
         }
     }
 }
