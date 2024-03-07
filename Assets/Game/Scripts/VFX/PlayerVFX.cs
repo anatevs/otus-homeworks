@@ -11,12 +11,12 @@ public partial class PlayerVFX : MonoBehaviour
     [SerializeField]
     private ParticleSystem _deathParticles;
 
-    private ShootVFXMechanic _shootVFXMechanic;
+    private OnEventVFXMechanic _shootVFXMechanic;
     private DeathVFXMechanic _deathVFXMechanic;
 
     private void Awake()
     {
-        _shootVFXMechanic = new ShootVFXMechanic(_player.ShootIsDone, _shootParticles);
+        _shootVFXMechanic = new OnEventVFXMechanic(_player.ShootIsDone, _shootParticles);
         _deathVFXMechanic = new DeathVFXMechanic(_player.isDead, _deathParticles);
     }
 

@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class ZombieVFX : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private Zombie _zombie;
+
+    [SerializeField]
+    private ParticleSystem _onDamageParticles;
+
+    private OnEventVFXMechanic<int> _onDamageVFXMechanic;
+
+    private void Awake()
     {
-        
+        _onDamageVFXMechanic = new OnEventVFXMechanic<int>(_zombie.OnDamage, _onDamageParticles);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        _onDamageVFXMechanic.OnEnable();
+    }
+
+    private void OnDisable()
+    {
+        _onDamageVFXMechanic.OnDisable();
     }
 }
