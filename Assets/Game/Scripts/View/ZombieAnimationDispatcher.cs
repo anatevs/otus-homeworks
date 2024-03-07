@@ -14,7 +14,10 @@ public class ZombieAnimationDispatcher : MonoBehaviour
     {
         if (eventType == HIT)
         {
-            _zombie.MakeDamage.Invoke();
+            if (_zombie.isAttacking.Value)
+            {
+                _zombie.MakeDamage.Invoke();
+            }
         }
 
         if(eventType == DESTROY)

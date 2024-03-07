@@ -95,31 +95,4 @@ public partial class Zombie : MonoBehaviour
     {
         _makeCollisionDamageMechanic.OnTriggerExit(other);
     }
-
-    //public class AttackRequestMechanic
-    //{
-    //    private IAtomicEvent _onDamageTimeCounted;
-    //    private IAtomicEvent _attackRequest;
-
-    //    public AttackRequestMechanic(IAtomicEvent onDamageTimeCounted, IAtomicEvent attackRequest)
-    //    {
-    //        _onDamageTimeCounted = onDamageTimeCounted;
-    //        _attackRequest = attackRequest;
-    //    }
-
-    //    public void OnEnable()
-    //    {
-    //        _onDamageTimeCounted.Subscribe(StartAttack);
-    //    }
-
-    //    public void OnDisable()
-    //    {
-    //        _onDamageTimeCounted.Unsubscribe(StartAttack);
-    //    }
-
-    //    private void StartAttack()
-    //    {
-    //        _attackRequest.Invoke();
-    //    }
-    //}
 }

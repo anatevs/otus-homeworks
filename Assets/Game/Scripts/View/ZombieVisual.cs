@@ -8,11 +8,12 @@ public class ZombieVisual : MonoBehaviour
     [SerializeField]
     private Animator _animator;
 
-    private ZombieVisualMechanic _zombieVisualMechanic;
+    private ZombieAnimationMechanic _zombieAnimationMechanic;
 
     private void Awake()
     {
-        _zombieVisualMechanic = new ZombieVisualMechanic(_animator,
+        _zombieAnimationMechanic = new ZombieAnimationMechanic(_animator,
+            _zombie.isAttacking,
             _zombie.OnDamageCounted,
             _zombie.moveDirection,
             _zombie.isDead);
@@ -20,16 +21,16 @@ public class ZombieVisual : MonoBehaviour
 
     private void Update()
     {
-        _zombieVisualMechanic.Update();
+        _zombieAnimationMechanic.Update();
     }
 
     private void OnEnable()
     {
-        _zombieVisualMechanic.OnEnable();
+        _zombieAnimationMechanic.OnEnable();
     }
 
     private void OnDisable()
     {
-        _zombieVisualMechanic.OnDisable();
+        _zombieAnimationMechanic.OnDisable();
     }
 }
