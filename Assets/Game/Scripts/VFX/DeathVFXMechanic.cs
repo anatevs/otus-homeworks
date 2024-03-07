@@ -25,7 +25,6 @@ public class DeathVFXMechanic
     {
         if (isDead)
         {
-            Debug.Log("vfx to death");
             _deathVFX.Play();
         }
     }

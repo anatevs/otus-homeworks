@@ -56,7 +56,6 @@ public partial class ZombieAnimationMechanic
 
     private void OnAttack()
     {
-        Debug.Log("on attack anim");
         _animator.SetTrigger(AttackTrigger);
     }
 }

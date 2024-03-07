@@ -38,6 +38,7 @@ public partial class Zombie : MonoBehaviour
     private RotationMechanic _rotationMechanic;
     private DestroyMechanic _destroyMechanic;
     private TowardsTargetMechanic _towardsTargetMechanic;
+    private StayDuringAttackMechanic _stayDuringAttackMechanic;
     private CounterMechanic _counterMechanic_DamageToPlayer;
     private AttackCollisionMechanic _makeCollisionDamageMechanic;
     private MakeDamageMechanic _makeDamageMechanic;
@@ -51,6 +52,7 @@ public partial class Zombie : MonoBehaviour
         _rotationMechanic = new RotationMechanic(transform, moveDirection, rotSpeed, canMove, isRotationDone);
         _destroyMechanic = new DestroyMechanic(gameObject, onDestroy);
         _towardsTargetMechanic = new TowardsTargetMechanic(_playerTransform, transform, moveDirection);
+        _stayDuringAttackMechanic = new StayDuringAttackMechanic(isAttacking, canMove);
         _counterMechanic_DamageToPlayer = new CounterMechanic(OnDamageCounted, OnResetDamageCounter, damageCounter);
         _makeCollisionDamageMechanic = new AttackCollisionMechanic(OnResetDamageCounter, isAttacking, _playerCollider);
         _makeDamageMechanic = new MakeDamageMechanic(_player.OnDamage, MakeDamage, damage);
@@ -72,6 +74,7 @@ public partial class Zombie : MonoBehaviour
         _canMoveMechanic.OnEnable();
         _rotationMechanic.OnEnable();
         _destroyMechanic.OnEnable();
+        _stayDuringAttackMechanic.OnEnable();
         _counterMechanic_DamageToPlayer.OnEnable();
         _makeDamageMechanic.OnEnable();
     }
@@ -82,6 +85,7 @@ public partial class Zombie : MonoBehaviour
         _canMoveMechanic.OnDisable();
         _rotationMechanic.OnDisable();
         _destroyMechanic.OnDisable();
+        _stayDuringAttackMechanic.OnDisable();
         _counterMechanic_DamageToPlayer.OnDisable();
         _makeDamageMechanic.OnDisable();
     }

@@ -30,8 +30,8 @@ public class AttackCollisionMechanic
     {
         if (other == _colliderToAttack)
         {
+            Debug.Log("trigger enter");
             _isAttacking.Value = true;
-
         }
     }
 

@@ -302,7 +302,7 @@ PrefabInstance:
       objectReference: {fileID: 1290539687}
     - target: {fileID: 765907166, guid: a76c89c6a539356478cffc6e1b88e8dc, type: 3}
       propertyPath: hp._value
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 765907166, guid: a76c89c6a539356478cffc6e1b88e8dc, type: 3}
       propertyPath: _playerCollider
@@ -318,7 +318,7 @@ PrefabInstance:
       objectReference: {fileID: 625937916}
     - target: {fileID: 765907166, guid: a76c89c6a539356478cffc6e1b88e8dc, type: 3}
       propertyPath: moveSpeed._value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6486345383869258, guid: a76c89c6a539356478cffc6e1b88e8dc, type: 3}
       propertyPath: m_Radius
@@ -638,7 +638,7 @@ PrefabInstance:
     - target: {fileID: 1711394828305187949, guid: 3b5b2ae0f895574449961910366cbf8a,
         type: 3}
       propertyPath: moveSpeed._value
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1977376666174421823, guid: 3b5b2ae0f895574449961910366cbf8a,
         type: 3}
