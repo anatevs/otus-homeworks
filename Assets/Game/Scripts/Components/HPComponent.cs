@@ -2,14 +2,18 @@ using System;
 
 public class HPComponent : IHPComponent
 {
-    public event Action<int> OnHPChanged;
-    private readonly IAtomicVariable<int> _hp;
+    public event Action<int> OnHPChanged
+    {
+        add { _hp.Subscribe(value); }
+        remove { _hp.Unsubscribe(value); }
+    }
 
-    public HPComponent(IAtomicVariable<int> hp)
+    private readonly AtomicVariable<int> _hp;
+
+    public HPComponent(AtomicVariable<int> hp)
     {
         _hp = hp;
     }
-
 
     public int GetHP()
     {
