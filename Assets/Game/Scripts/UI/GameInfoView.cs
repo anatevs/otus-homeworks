@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class GameInfoView : MonoBehaviour
+public sealed class GameInfoView : MonoBehaviour
 {
     [SerializeField]
     private TMP_Text _hpText;
@@ -10,7 +10,7 @@ public class GameInfoView : MonoBehaviour
     private TMP_Text _bulletsText;
 
     [SerializeField]
-    private TMP_Text _killsText;
+    private TMP_Text _destroyedText;
 
     private GameInfoPresenter _gameInfoPresenter;
 
@@ -58,7 +58,7 @@ public class GameInfoView : MonoBehaviour
 
     private void FillDestroyedCount(int destroyedCount)
     {
-        _killsText.text = $"KILLS: {destroyedCount}";
+        _destroyedText.text = $"KILLS: {destroyedCount}";
     }
 
     private void UpdateBulletCapacity(int newBulletCount)

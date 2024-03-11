@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using VContainer.Unity;
 
-public class GameInfoPresenter : IGameInfoPresenter, 
+public sealed class GameInfoPresenter : IGameInfoPresenter, 
     IStartable,
     IDisposable
 {

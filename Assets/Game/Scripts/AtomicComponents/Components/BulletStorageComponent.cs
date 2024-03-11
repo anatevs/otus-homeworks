@@ -1,6 +1,6 @@
 using System;
 
-public class BulletStorageComponent : IBulletStorageComponent
+public sealed class BulletStorageComponent : IBulletStorageComponent
 {
     public event Action<int> OnStorageChanged 
     {
@@ -8,7 +8,7 @@ public class BulletStorageComponent : IBulletStorageComponent
         remove { _bulletStorage.Unsubscribe(value); }
     }
 
-    private AtomicVariable<int> _bulletStorage;
+    private readonly AtomicVariable<int> _bulletStorage;
 
     public BulletStorageComponent(AtomicVariable<int> bulletStorage)
     {

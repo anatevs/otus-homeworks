@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public partial class Zombie : MonoBehaviour
+public sealed class Zombie : MonoBehaviour
 {
     [SerializeField]
     private Transform _playerTransform;

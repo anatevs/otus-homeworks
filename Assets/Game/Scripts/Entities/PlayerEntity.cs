@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerEntity : Entity
+public sealed class PlayerEntity : Entity
 {
     [SerializeField]
     private Player _player;
@@ -9,5 +9,6 @@ public class PlayerEntity : Entity
     {
         AddComponentToEntity(new HPComponent(_player.hp));
         AddComponentToEntity(new BulletStorageComponent(_player.bulletStorage));
+        AddComponentToEntity(new DeathComponent(_player.isDead));
     }
 }

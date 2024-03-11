@@ -1,6 +1,6 @@
 using System;
 
-public class HPComponent : IHPComponent
+public sealed class HPComponent : IHPComponent
 {
     public event Action<int> OnHPChanged
     {
