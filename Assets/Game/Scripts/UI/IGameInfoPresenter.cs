@@ -8,7 +8,7 @@ public interface IGameInfoPresenter
     event Action<int> OnDestroyZombie;
 
     public int HP { get; }
-    public int BulletCount { get; }
-    public int BulletCapacity { get; }
-    public int Killed { get; }
+    public int BulletsCount { get; }
+    public int BulletsCapacity { get; }
+    public int Destroyed { get; }
 }
