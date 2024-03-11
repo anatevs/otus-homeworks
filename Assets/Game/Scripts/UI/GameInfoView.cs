@@ -1,35 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameInfoView : MonoBehaviour
 {
     [SerializeField]
-    private Text _hpText;
+    private TMP_Text _hpText;
 
     [SerializeField]
-    private Text _bulletsText;
+    private TMP_Text _bulletsText;
 
     [SerializeField]
-    private Text _killsText;
+    private TMP_Text _killsText;
 
     private GameInfoPresenter _gameInfoPresenter;
+
+    private int _prevBulletCount;
+    private int _bulletsCapacity;
 
     public void Show(IGameInfoPresenter gameInfoPresenter)
     {
         _gameInfoPresenter = (GameInfoPresenter)gameInfoPresenter;
 
+        _prevBulletCount = _gameInfoPresenter.BulletsCount;
+        _bulletsCapacity = _gameInfoPresenter.BulletsCount;
+
         FillAllInfo(_gameInfoPresenter.HP,
             _gameInfoPresenter.BulletsCount,
-            _gameInfoPresenter.BulletsCapacity,
             _gameInfoPresenter.Destroyed);
+
+        _gameInfoPresenter.OnHPChanged += FillHPText;
+        _gameInfoPresenter.OnBulletStorageChanged += FillBulletsCount;
     }
 
-    private void FillAllInfo(int hp, int bulletsCount, int bulletsCapacity, int destroyedCount)
+    public void Hide()
+    {
+        _gameInfoPresenter.OnHPChanged -= FillHPText;
+        _gameInfoPresenter.OnBulletStorageChanged -= FillBulletsCount;
+    }
+
+    private void FillAllInfo(int hp, int bulletsCount, int destroyedCount)
     {
         FillHPText(hp);
-        FillBulletsCount(bulletsCount, bulletsCapacity);
+        FillBulletsCount(bulletsCount);
         FillDestroyedCount(destroyedCount);
     }
 
@@ -38,13 +51,28 @@ public class GameInfoView : MonoBehaviour
         _hpText.text = $"HIT POINTS: {hp}";
     }
 
-    private void FillBulletsCount(int bulletsCount, int bulletsCapacity)
+    private void FillBulletsCount(int bulletsCount)
     {
-        _bulletsText.text = $"BULLETS: {bulletsCount}/{bulletsCapacity}";
+        UpdateBulletCapacity(bulletsCount);
+        _bulletsText.text = $"BULLETS: {bulletsCount}/{_bulletsCapacity}";
     }
 
     private void FillDestroyedCount(int destroyedCount)
     {
         _killsText.text = $"KILLS: {destroyedCount}";
+    }
+
+    private void UpdateBulletCapacity(int newBulletCount)
+    {
+        int deltaBullets = newBulletCount - _prevBulletCount;
+        _prevBulletCount = newBulletCount;
+        if (deltaBullets < 0)
+        {
+            return;
+        }
+        else
+        {
+            _bulletsCapacity += deltaBullets;
+        }
     }
 }

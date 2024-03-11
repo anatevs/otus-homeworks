@@ -1,9 +1,10 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-public class PoolManager<T> where T : Component
+public class BulletPool : MonoBehaviour
 {
     private Transform _worldTransform;
 
@@ -11,16 +12,17 @@ public class PoolManager<T> where T : Component
 
     private int _initialCount;
 
-    private T _prefab;
+    private Bullet _prefab;
 
     //private GameManagerData _gameManagerData;
 
     private IObjectResolver _container;
 
-    private readonly Queue<T> _pool = new();
+    private readonly Queue<Bullet> _pool = new();
 
-    public PoolManager(IObjectResolver container, PoolParams<T> poolParams)
+    public BulletPool(IObjectResolver container, PoolParams<Bullet> poolParams)
     {
+        Debug.Log("register bullet pool");
         _container = container;
 
         //_gameManagerData = gameManagerData;
@@ -36,7 +38,7 @@ public class PoolManager<T> where T : Component
         }
     }
 
-    public T Spawn()
+    public Bullet Spawn()
     {
         if (_pool.TryDequeue(out var subject))
         {
@@ -51,7 +53,7 @@ public class PoolManager<T> where T : Component
         return subject;
     }
 
-    public void UnSpawn(T subject)
+    public void UnSpawn(Bullet subject)
     {
         subject.transform.SetParent(_poolTransform);
         _pool.Enqueue(subject);

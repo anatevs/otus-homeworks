@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
-public class BulletStorageComponent : MonoBehaviour
+public class BulletStorageComponent : IBulletStorageComponent
 {
-    // Start is called before the first frame update
-    void Start()
+    public event Action<int> OnStorageChanged 
     {
-        
+        add { _bulletStorage.Subscribe(value); }
+        remove { _bulletStorage.Unsubscribe(value); }
     }
 
-    // Update is called once per frame
-    void Update()
+    private AtomicVariable<int> _bulletStorage;
+
+    public BulletStorageComponent(AtomicVariable<int> bulletStorage)
     {
-        
+        _bulletStorage = bulletStorage;
+    }
+
+    public int GetCurrentCount()
+    {
+        return _bulletStorage.Value;
     }
 }
