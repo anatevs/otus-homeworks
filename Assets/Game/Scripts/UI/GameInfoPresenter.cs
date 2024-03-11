@@ -29,17 +29,26 @@ public class GameInfoPresenter : IGameInfoPresenter,
 
     void IStartable.Start()
     {
-        Debug.Log("presenter init");
         _hpComponent = _playerEntity.GetComponentFromEntity<HPComponent>();
         _bulletStorageComponent = _playerEntity.GetComponentFromEntity<BulletStorageComponent>();
 
-        _hpComponent.OnHPChanged += OnHPChanged;
-        _bulletStorageComponent.OnStorageChanged += OnBulletStorageChanged;
+        _hpComponent.OnHPChanged += ChangeHP;
+        _bulletStorageComponent.OnStorageChanged += ChangeBulletStorage;
     }
 
     public void Dispose()
     {
-        _hpComponent.OnHPChanged -= OnHPChanged;
-        _bulletStorageComponent.OnStorageChanged -= OnBulletStorageChanged;
+        _hpComponent.OnHPChanged -= ChangeHP;
+        _bulletStorageComponent.OnStorageChanged -= ChangeBulletStorage;
+    }
+
+    private void ChangeHP(int hp)
+    {
+        OnHPChanged?.Invoke(hp);
+    }
+
+    private void ChangeBulletStorage(int newBulletsCount)
+    {
+        OnBulletStorageChanged?.Invoke(newBulletsCount);
     }
 }

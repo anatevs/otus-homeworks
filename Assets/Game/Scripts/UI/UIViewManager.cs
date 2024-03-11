@@ -16,7 +16,6 @@ public class UIViewManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("ui start");
         _gameInfoView.Show(_gameInfoPresenter);
     }
 
