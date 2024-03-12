@@ -19,4 +19,9 @@ public sealed class HPComponent : IHPComponent
     {
         return _hp.Value;
     }
+
+    public void SetHP(int value)
+    {
+        _hp.Value = value;
+    }
 }

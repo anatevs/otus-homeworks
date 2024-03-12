@@ -38,10 +38,13 @@ public sealed class PoolManager<T> where T : Component
         if (_pool.TryDequeue(out var subject))
         {
             subject.transform.SetParent(_worldTransform);
+            subject.gameObject.SetActive(true);
         }
         else
         {
-            subject = _container.Instantiate(_prefab, _worldTransform);
+            subject = _container.Instantiate(_prefab);
+            subject.transform.SetParent(_worldTransform);
+            subject.gameObject.SetActive(true);
             _pool.Enqueue(subject);
         }
         return subject;
@@ -50,6 +53,7 @@ public sealed class PoolManager<T> where T : Component
     public void UnSpawn(T subject)
     {
         subject.transform.SetParent(_poolTransform);
+        subject.gameObject.SetActive(false);
         _pool.Enqueue(subject);
     }
 }

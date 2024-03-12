@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class ZombieEntity : Entity_Plain
+public class ZombieEntity : Entity
 {
     private Zombie _zombie;
 
@@ -11,5 +7,6 @@ public class ZombieEntity : Entity_Plain
         _zombie = zombie;
 
         AddComponentToEntity(new DeathComponent(_zombie.isDead));
+        AddComponentToEntity(new HPComponent(_zombie.hp));
     }
 }

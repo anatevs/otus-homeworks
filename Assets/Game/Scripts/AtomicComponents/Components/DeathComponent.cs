@@ -14,4 +14,9 @@ public sealed class DeathComponent : IDeathComponent
     {
         _isDeath = isDeath;
     }
+
+    public void SetIsDeath(bool isDeath)
+    {
+        _isDeath.Value = isDeath;
+    }
 }

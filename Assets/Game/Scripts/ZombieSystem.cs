@@ -1,21 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using VContainer;
 
 public class ZombieSystem : MonoBehaviour
 {
+    private readonly int _initHP = 1;
+
+    private event Action OnCountdown;
+    private readonly float _spawnCooldown = 2f;
+    private float _currentTimer;
+
     private PoolManager<Zombie> _zombiePool;
 
-    private Vector3[] _spawnPoints = 
-    {
-        new Vector3(5, 0, 5),
-        new Vector3(-5, 0, 5),
-        new Vector3(5, 0, -5),
-        new Vector3(-5, 0, -5)
-    };
-
-    private Dictionary<Zombie, ZombieEntity> _entities;
+    private readonly Vector3[] _spawnPoints = 
+        {
+            new Vector3(25, 0, 25),
+            new Vector3(-25, 0, 25),
+            new Vector3(25, 0, -25),
+            new Vector3(-25, 0, -25)
+        };
 
     [Inject]
     public void Construct(PoolManager<Zombie> poolManager)
@@ -23,19 +26,71 @@ public class ZombieSystem : MonoBehaviour
         _zombiePool = poolManager;
     }
 
-    public void SpawnZombie()
+    private void Start()
     {
-        Zombie zombie = _zombiePool.Spawn();
-        zombie.transform.position = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
-        if (_entities.TryGetValue(zombie, out ZombieEntity entity))
+        ResetSpawnTimer();
+    }
+
+    private void Update()
+    {
+        SpawnTimer();
+    }
+
+    private void OnEnable()
+    {
+        OnCountdown += SpawnZombie;
+    }
+
+    private void OnDisable()
+    {
+        OnCountdown -= SpawnZombie;
+    }
+
+    private void SpawnTimer()
+    {
+        _currentTimer -= Time.deltaTime;
+        if (_currentTimer < 0)
         {
-            entity.RemoveAllComponents();
-            entity.Inint(zombie);
+            OnCountdown?.Invoke();
+            ResetSpawnTimer();
         }
         else
         {
-            ZombieEntity zombieEntity = new ZombieEntity();
+            return;
+        }
+    }
+
+    private void ResetSpawnTimer()
+    {
+        _currentTimer = _spawnCooldown;
+    }
+
+    private void SpawnZombie()
+    {
+        Zombie zombie = _zombiePool.Spawn();
+        zombie.transform.position = _spawnPoints[UnityEngine.Random.Range(0, _spawnPoints.Length)];
+        if (zombie.gameObject.TryGetComponent<ZombieEntity>(out ZombieEntity entity))
+        {
+            ResetZombieStates(entity);
+        }
+        else
+        {
+            ZombieEntity zombieEntity = zombie.gameObject.AddComponent<ZombieEntity>();
             zombieEntity.Inint(zombie);
         }
+    }
+
+    private void UnSpawnZombie(Zombie zombie)
+    {
+        _zombiePool.UnSpawn(zombie);
+    }
+
+    private void ResetZombieStates(ZombieEntity zombieEntity)
+    {
+        HPComponent hpComponent = zombieEntity.GetComponentFromEntity<HPComponent>();
+        DeathComponent deathComponent = zombieEntity.GetComponentFromEntity<DeathComponent>();
+
+        hpComponent.SetHP(_initHP);
+        deathComponent.SetIsDeath(false);
     }
 }

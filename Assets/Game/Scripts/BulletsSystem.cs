@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using VContainer;
 
@@ -17,11 +15,5 @@ public class BulletsSystem : MonoBehaviour
     void Start()
     {
         Bullet bullet = _bulletPool.Spawn();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
