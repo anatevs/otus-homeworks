@@ -173,9 +173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b225b8e27b228a54e80a8b1938188242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerTransform: {fileID: 0}
-  _playerCollider: {fileID: 0}
-  _player: {fileID: 0}
   _playerEntity: {fileID: 0}
   isDead:
     _value: 0
@@ -184,7 +181,7 @@ MonoBehaviour:
   canMove:
     _value: 1
   hp:
-    _value: 5
+    _value: 1
   moveDirection:
     _value: {x: 0, y: 0, z: 0}
   moveSpeed:

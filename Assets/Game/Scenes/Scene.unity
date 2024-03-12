@@ -185,7 +185,7 @@ MonoBehaviour:
     worldTransform: {fileID: 1366530279}
     poolTransform: {fileID: 1486932389}
     prefab: {fileID: 765907166, guid: a76c89c6a539356478cffc6e1b88e8dc, type: 3}
-    initCount: 10
+    initCount: 1
 --- !u!1 &91941558
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,25 +329,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 1366530279}
     m_Modifications:
     - target: {fileID: 765907166, guid: a76c89c6a539356478cffc6e1b88e8dc, type: 3}
-      propertyPath: _player
-      value: 
-      objectReference: {fileID: 1290539687}
-    - target: {fileID: 765907166, guid: a76c89c6a539356478cffc6e1b88e8dc, type: 3}
       propertyPath: _playerEntity
       value: 
       objectReference: {fileID: 2101474221}
-    - target: {fileID: 765907166, guid: a76c89c6a539356478cffc6e1b88e8dc, type: 3}
-      propertyPath: _playerCollider
-      value: 
-      objectReference: {fileID: 2101474219}
-    - target: {fileID: 765907166, guid: a76c89c6a539356478cffc6e1b88e8dc, type: 3}
-      propertyPath: _playerTransform
-      value: 
-      objectReference: {fileID: 625937916}
     - target: {fileID: 5879414446769212800, guid: a76c89c6a539356478cffc6e1b88e8dc,
         type: 3}
       propertyPath: m_Name
       value: Zombie
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879414446769212800, guid: a76c89c6a539356478cffc6e1b88e8dc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7964997623459932075, guid: a76c89c6a539356478cffc6e1b88e8dc,
         type: 3}
@@ -1106,11 +1099,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1366530278}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90c18d7362d508e43b94ac4013528707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerEntity: {fileID: 0}
 --- !u!1 &1486932388
 GameObject:
   m_ObjectHideFlags: 0
@@ -1414,12 +1408,6 @@ MonoBehaviour:
   _hpText: {fileID: 6615131717051902429}
   _bulletsText: {fileID: 1625409112}
   _destroyedText: {fileID: 91941560}
---- !u!136 &2101474219 stripped
-CapsuleCollider:
-  m_CorrespondingSourceObject: {fileID: 2691131583617265358, guid: 3b5b2ae0f895574449961910366cbf8a,
-    type: 3}
-  m_PrefabInstance: {fileID: 625937915}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2101474221
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ public class AttackCollisionMechanic
 {
     private readonly IAtomicEvent _onResetCounter;
     private IAtomicVariable<bool> _isAttacking;
-    private Collider _colliderToAttack;
+    private readonly Collider _colliderToAttack;
 
     public AttackCollisionMechanic(IAtomicEvent onResetCounter,
         IAtomicVariable<bool> isAttacking, Collider colliderToAttack)
@@ -30,7 +30,6 @@ public class AttackCollisionMechanic
     {
         if (other == _colliderToAttack)
         {
-            Debug.Log("trigger enter");
             _isAttacking.Value = true;
         }
     }

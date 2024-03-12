@@ -3,7 +3,7 @@ using UnityEngine;
 public sealed class Zombie : MonoBehaviour
 {
     [SerializeField]
-    private Entity _playerEntity;
+    private PlayerEntity _playerEntity;
 
     public AtomicEvent<int> OnDamage = new AtomicEvent<int>();
 
@@ -39,6 +39,17 @@ public sealed class Zombie : MonoBehaviour
 
     private void Awake()
     {
+        //InitZombie(_playerEntity);
+    }
+
+    public void InitZombie(PlayerEntity playerEntity)
+    {
+        Debug.Log("init in zmb");
+        Debug.Log(playerEntity == null);
+
+        _playerEntity = playerEntity;
+        //Debug.Log(_playerEntity == null);
+
         _takeDamageMechanic = new TakeDamageMechanic(OnDamage, hp);
         _deathMechanic = new DeathMechanic(isDead, hp);
         _canMoveMechanic = new CanMoveMechanic(isDead, canMove);

@@ -4,10 +4,13 @@ using VContainer;
 
 public class ZombieSystem : MonoBehaviour
 {
+    [SerializeField]
+    private PlayerEntity _playerEntity;
+
     private readonly int _initHP = 1;
 
     private event Action OnCountdown;
-    private readonly float _spawnCooldown = 2f;
+    private readonly float _spawnCooldown = 3f;
     private float _currentTimer;
 
     private PoolManager<Zombie> _zombiePool;
@@ -29,6 +32,7 @@ public class ZombieSystem : MonoBehaviour
     private void Start()
     {
         ResetSpawnTimer();
+        Debug.Log($"in z sys start {_playerEntity == null}");
     }
 
     private void Update()
@@ -49,11 +53,10 @@ public class ZombieSystem : MonoBehaviour
     private void SpawnTimer()
     {
         _currentTimer -= Time.deltaTime;
-        if (_currentTimer < 0)
+        if (_currentTimer <= 0)
         {
-            OnCountdown?.Invoke();
             ResetSpawnTimer();
-            Debug.Log($"spawn z at {Time.time}");
+            OnCountdown.Invoke();
         }
         else
         {
@@ -70,6 +73,10 @@ public class ZombieSystem : MonoBehaviour
     {
         Zombie zombie = _zombiePool.Spawn();
         zombie.transform.position = _spawnPoints[UnityEngine.Random.Range(0, _spawnPoints.Length)];
+
+        Debug.Log($"in zmb sys {_playerEntity == null}");
+        zombie.InitZombie(_playerEntity);
+
         if (zombie.gameObject.TryGetComponent<ZombieEntity>(out ZombieEntity entity))
         {
             //ResetZombieStates(entity);

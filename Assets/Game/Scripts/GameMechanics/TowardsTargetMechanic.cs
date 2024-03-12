@@ -7,6 +7,7 @@ public class TowardsTargetMechanic
 
     public TowardsTargetMechanic(Transform target, Transform self, IAtomicVariable<Vector3> direction)
     {
+        Debug.Log($"construct tow target with {target}");
         _target = target;
         _self = self;
         _direction = direction;
