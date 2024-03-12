@@ -8,20 +8,16 @@ public sealed class HPComponent : IHPComponent
         remove { _hp.Unsubscribe(value); }
     }
 
+    public int HP 
+    {
+        get => _hp.Value;
+        set => _hp.Value = value;
+    }
+
     private readonly AtomicVariable<int> _hp;
 
     public HPComponent(AtomicVariable<int> hp)
     {
         _hp = hp;
-    }
-
-    public int GetHP()
-    {
-        return _hp.Value;
-    }
-
-    public void SetHP(int value)
-    {
-        _hp.Value = value;
     }
 }

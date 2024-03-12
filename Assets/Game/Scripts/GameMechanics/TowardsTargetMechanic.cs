@@ -14,8 +14,16 @@ public class TowardsTargetMechanic
 
     public void Update()
     {
-        Vector3 direction = (_target.position - _self.position).normalized;
-        direction.y = 0;
-        _direction.Value = direction;
+        if (_target != null)
+        {
+            Vector3 direction = (_target.position - _self.position).normalized;
+            direction.y = 0;
+            _direction.Value = direction;
+        }
+        else
+        {
+            Debug.Log("no target to follow");
+            return;
+        }
     }
 }

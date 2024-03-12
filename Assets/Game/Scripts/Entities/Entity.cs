@@ -38,4 +38,9 @@ public class Entity : MonoBehaviour
 
         throw new Exception ($"Component of type {typeof(T).Name} was not found in entity");
     }
+
+    public void RemoveAllComponents()
+    {
+        _components.Clear();
+    }
 }

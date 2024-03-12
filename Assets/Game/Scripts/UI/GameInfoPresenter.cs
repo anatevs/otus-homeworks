@@ -10,7 +10,7 @@ public sealed class GameInfoPresenter : IGameInfoPresenter,
     public event Action<int> OnBulletStorageChanged;
     public event Action<int> OnDestroyZombie;
 
-    public int HP => _hpComponent.GetHP();
+    public int HP => _hpComponent.HP;
 
     public int BulletsCount => _bulletStorageComponent.GetCurrentCount();
 

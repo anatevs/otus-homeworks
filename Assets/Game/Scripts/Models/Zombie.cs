@@ -3,13 +3,7 @@ using UnityEngine;
 public sealed class Zombie : MonoBehaviour
 {
     [SerializeField]
-    private Transform _playerTransform;
-
-    [SerializeField]
-    private Collider _playerCollider;
-
-    [SerializeField]
-    private Player _player;
+    private Entity _playerEntity;
 
     public AtomicEvent<int> OnDamage = new AtomicEvent<int>();
 
@@ -41,7 +35,7 @@ public sealed class Zombie : MonoBehaviour
     private StayDuringAttackMechanic _stayDuringAttackMechanic;
     private CounterMechanic _counterMechanic_DamageToPlayer;
     private AttackCollisionMechanic _makeCollisionDamageMechanic;
-    private MakeDamageMechanic _makeDamageMechanic;
+    private MakeDamageMechanic2 _makeDamageMechanic;
 
     private void Awake()
     {
@@ -51,11 +45,23 @@ public sealed class Zombie : MonoBehaviour
         _movementMechanic = new MovementMechanic(transform, moveDirection, moveSpeed, canMove);
         _rotationMechanic = new RotationMechanic(transform, moveDirection, rotSpeed, canMove, isRotationDone);
         _destroyMechanic = new DestroyMechanic(gameObject, onDestroy);
-        _towardsTargetMechanic = new TowardsTargetMechanic(_playerTransform, transform, moveDirection);
+
+        _towardsTargetMechanic = new TowardsTargetMechanic
+            (
+            _playerEntity.GetComponentFromEntity<TransformComponent>().Transform,
+            transform, moveDirection
+            );
+
         _stayDuringAttackMechanic = new StayDuringAttackMechanic(isAttacking, canMove);
         _counterMechanic_DamageToPlayer = new CounterMechanic(OnDamageCounted, OnResetDamageCounter, damageCounter);
-        _makeCollisionDamageMechanic = new AttackCollisionMechanic(OnResetDamageCounter, isAttacking, _playerCollider);
-        _makeDamageMechanic = new MakeDamageMechanic(_player.OnDamage, MakeDamage, damage);
+
+        _makeCollisionDamageMechanic = new AttackCollisionMechanic
+            (
+            OnResetDamageCounter, isAttacking,
+            _playerEntity.GetComponentFromEntity<ColliderComponent>().Collider
+            );
+
+        _makeDamageMechanic = new MakeDamageMechanic2(_playerEntity, MakeDamage, damage);
     }
 
     private void Update()

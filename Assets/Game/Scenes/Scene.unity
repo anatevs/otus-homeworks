@@ -333,6 +333,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1290539687}
     - target: {fileID: 765907166, guid: a76c89c6a539356478cffc6e1b88e8dc, type: 3}
+      propertyPath: _playerEntity
+      value: 
+      objectReference: {fileID: 2101474221}
+    - target: {fileID: 765907166, guid: a76c89c6a539356478cffc6e1b88e8dc, type: 3}
       propertyPath: _playerCollider
       value: 
       objectReference: {fileID: 2101474219}
@@ -1043,6 +1047,7 @@ GameObject:
   - component: {fileID: 1366530279}
   - component: {fileID: 1366530280}
   - component: {fileID: 1366530281}
+  - component: {fileID: 1366530282}
   m_Layer: 0
   m_Name: '[World]'
   m_TagString: Untagged
@@ -1092,6 +1097,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d1533b35e730ef42891c05c8db1c3fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1366530282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366530278}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90c18d7362d508e43b94ac4013528707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1486932388

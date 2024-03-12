@@ -53,6 +53,7 @@ public class ZombieSystem : MonoBehaviour
         {
             OnCountdown?.Invoke();
             ResetSpawnTimer();
+            Debug.Log($"spawn z at {Time.time}");
         }
         else
         {
@@ -71,12 +72,15 @@ public class ZombieSystem : MonoBehaviour
         zombie.transform.position = _spawnPoints[UnityEngine.Random.Range(0, _spawnPoints.Length)];
         if (zombie.gameObject.TryGetComponent<ZombieEntity>(out ZombieEntity entity))
         {
-            ResetZombieStates(entity);
+            //ResetZombieStates(entity);
+            entity.RemoveAllComponents();
+            entity.Inint(zombie);
         }
         else
         {
-            ZombieEntity zombieEntity = zombie.gameObject.AddComponent<ZombieEntity>();
-            zombieEntity.Inint(zombie);
+            Debug.Log("no entity in Zmb");
+            //ZombieEntity zombieEntity = zombie.gameObject.AddComponent<ZombieEntity>();
+            //zombieEntity.Inint(zombie);
         }
     }
 
@@ -90,7 +94,7 @@ public class ZombieSystem : MonoBehaviour
         HPComponent hpComponent = zombieEntity.GetComponentFromEntity<HPComponent>();
         DeathComponent deathComponent = zombieEntity.GetComponentFromEntity<DeathComponent>();
 
-        hpComponent.SetHP(_initHP);
+        hpComponent.HP = _initHP;
         deathComponent.SetIsDeath(false);
     }
 }

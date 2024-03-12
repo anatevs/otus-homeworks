@@ -10,5 +10,8 @@ public sealed class PlayerEntity : Entity
         AddComponentToEntity(new HPComponent(_player.hp));
         AddComponentToEntity(new BulletStorageComponent(_player.bulletStorage));
         AddComponentToEntity(new DeathComponent(_player.isDead));
+        AddComponentToEntity(new TransformComponent(_player.transform));
+        AddComponentToEntity(new ColliderComponent(_player.GetComponent<Collider>()));
+        AddComponentToEntity(new OnDamageComponent(_player.OnDamage));
     }
 }

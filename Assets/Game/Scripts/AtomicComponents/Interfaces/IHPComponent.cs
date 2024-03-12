@@ -4,5 +4,5 @@ public interface IHPComponent
 {
     public event Action<int> OnHPChanged;
 
-    public int GetHP();
+    public int HP { get; }
 }
