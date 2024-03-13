@@ -6,6 +6,11 @@ public class Entity : MonoBehaviour
 {
     private List<object> _components = new List<object>();
 
+    public int GetEntitySize()
+    {
+        return _components.Count;
+    }
+
     public void AddComponentToEntity<T>(T component)
     {
         _components.Add(component);

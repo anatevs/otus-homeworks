@@ -30,12 +30,14 @@ public sealed class GameInfoView : MonoBehaviour
 
         _gameInfoPresenter.OnHPChanged += FillHPText;
         _gameInfoPresenter.OnBulletStorageChanged += FillBulletsCount;
+        _gameInfoPresenter.OnDestroyZombie += FillDestroyedCount;
     }
 
     public void Hide()
     {
         _gameInfoPresenter.OnHPChanged -= FillHPText;
         _gameInfoPresenter.OnBulletStorageChanged -= FillBulletsCount;
+        _gameInfoPresenter.OnDestroyZombie -= FillDestroyedCount;
     }
 
     private void FillAllInfo(int hp, int bulletsCount, int destroyedCount)
@@ -58,6 +60,7 @@ public sealed class GameInfoView : MonoBehaviour
 
     private void FillDestroyedCount(int destroyedCount)
     {
+        Debug.Log("fill distr");
         _destroyedText.text = $"KILLS: {destroyedCount}";
     }
 

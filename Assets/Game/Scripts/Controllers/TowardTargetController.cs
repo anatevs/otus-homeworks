@@ -1,16 +1,25 @@
-﻿using UnityEngine;
-public class TowardsTargetMechanic
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TowardTargetController : MonoBehaviour
 {
+    [SerializeField]
+    private PlayerEntity _playerEntity;
+
+    [SerializeField]
+    private ZombieEntity _zombieEntity;
+
     private readonly Transform _target;
     private readonly Transform _self;
     private readonly IAtomicVariable<Vector3> _direction;
 
-    public TowardsTargetMechanic(Transform target, Transform self, IAtomicVariable<Vector3> direction)
-    {
-        _target = target;
-        _self = self;
-        _direction = direction;
-    }
+    //public TowardsTargetMechanic(Transform target, Transform self, IAtomicVariable<Vector3> direction)
+    //{
+    //    _target = target;
+    //    _self = self;
+    //    _direction = direction;
+    //}
 
     public void Update()
     {

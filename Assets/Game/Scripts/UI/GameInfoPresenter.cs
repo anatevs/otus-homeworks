@@ -18,13 +18,16 @@ public sealed class GameInfoPresenter : IGameInfoPresenter,
 
     private readonly PlayerEntity _playerEntity;
 
+    private readonly ZombieSystem _zombieSystem;
+
     private HPComponent _hpComponent;
 
     private BulletStorageComponent _bulletStorageComponent;
 
-    public GameInfoPresenter(PlayerEntity playerEntity)
+    public GameInfoPresenter(PlayerEntity playerEntity, ZombieSystem zombieSystem)
     {
         _playerEntity = playerEntity;
+        _zombieSystem = zombieSystem;
     }
 
     void IStartable.Start()
@@ -34,12 +37,14 @@ public sealed class GameInfoPresenter : IGameInfoPresenter,
 
         _hpComponent.OnHPChanged += ChangeHP;
         _bulletStorageComponent.OnStorageChanged += ChangeBulletStorage;
+        _zombieSystem.OnDestroyZombie += ChangeDestroyedCount;
     }
 
     public void Dispose()
     {
         _hpComponent.OnHPChanged -= ChangeHP;
         _bulletStorageComponent.OnStorageChanged -= ChangeBulletStorage;
+        _zombieSystem.OnDestroyZombie -= ChangeDestroyedCount;
     }
 
     private void ChangeHP(int hp)
@@ -50,5 +55,10 @@ public sealed class GameInfoPresenter : IGameInfoPresenter,
     private void ChangeBulletStorage(int newBulletsCount)
     {
         OnBulletStorageChanged?.Invoke(newBulletsCount);
+    }
+
+    private void ChangeDestroyedCount(int destroyedCount)
+    {
+        OnDestroyZombie?.Invoke(destroyedCount);
     }
 }

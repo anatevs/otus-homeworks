@@ -186,6 +186,12 @@ MonoBehaviour:
     poolTransform: {fileID: 1486932389}
     prefab: {fileID: 765907166, guid: a76c89c6a539356478cffc6e1b88e8dc, type: 3}
     initCount: 1
+  _zombieEntityPoolParams:
+    worldTransform: {fileID: 1366530279}
+    poolTransform: {fileID: 1486932389}
+    prefab: {fileID: 3552112245643145016, guid: a76c89c6a539356478cffc6e1b88e8dc,
+      type: 3}
+    initCount: 1
 --- !u!1 &91941558
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,7 +1110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c18d7362d508e43b94ac4013528707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerEntity: {fileID: 0}
+  _playerEntity: {fileID: 2101474221}
 --- !u!1 &1486932388
 GameObject:
   m_ObjectHideFlags: 0

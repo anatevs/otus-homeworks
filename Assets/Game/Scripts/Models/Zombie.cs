@@ -2,8 +2,7 @@ using UnityEngine;
 
 public sealed class Zombie : MonoBehaviour
 {
-    [SerializeField]
-    private PlayerEntity _playerEntity;
+    public PlayerEntity _playerEntity;
 
     public AtomicEvent<int> OnDamage = new AtomicEvent<int>();
 
@@ -24,18 +23,21 @@ public sealed class Zombie : MonoBehaviour
     public AtomicVariable<int> damage;
     public AtomicVariable<bool> isAttacking;
     public AtomicEvent MakeDamage = new AtomicEvent();
+    public AtomicEvent<GameObject> OnUnspawn = new AtomicEvent<GameObject>();
+
 
     private TakeDamageMechanic _takeDamageMechanic;
     private DeathMechanic _deathMechanic;
     private CanMoveMechanic _canMoveMechanic;
     private MovementMechanic _movementMechanic;
     private RotationMechanic _rotationMechanic;
-    private DestroyMechanic _destroyMechanic;
     private TowardsTargetMechanic _towardsTargetMechanic;
     private StayDuringAttackMechanic _stayDuringAttackMechanic;
     private CounterMechanic _counterMechanic_DamageToPlayer;
     private AttackCollisionMechanic _makeCollisionDamageMechanic;
     private MakeDamageMechanic2 _makeDamageMechanic;
+    //private DestroyMechanic _destroyMechanic;
+    private UnspawnMechanic _unspawnMechanic;
 
     private void Awake()
     {
@@ -44,18 +46,13 @@ public sealed class Zombie : MonoBehaviour
 
     public void InitZombie(PlayerEntity playerEntity)
     {
-        Debug.Log("init in zmb");
-        Debug.Log(playerEntity == null);
-
         _playerEntity = playerEntity;
-        //Debug.Log(_playerEntity == null);
 
         _takeDamageMechanic = new TakeDamageMechanic(OnDamage, hp);
         _deathMechanic = new DeathMechanic(isDead, hp);
         _canMoveMechanic = new CanMoveMechanic(isDead, canMove);
         _movementMechanic = new MovementMechanic(transform, moveDirection, moveSpeed, canMove);
         _rotationMechanic = new RotationMechanic(transform, moveDirection, rotSpeed, canMove, isRotationDone);
-        _destroyMechanic = new DestroyMechanic(gameObject, onDestroy);
 
         _towardsTargetMechanic = new TowardsTargetMechanic
             (
@@ -73,6 +70,11 @@ public sealed class Zombie : MonoBehaviour
             );
 
         _makeDamageMechanic = new MakeDamageMechanic2(_playerEntity, MakeDamage, damage);
+
+        //_destroyMechanic = new DestroyMechanic(gameObject, onDestroy);
+        _unspawnMechanic = new UnspawnMechanic(gameObject, onDestroy, OnUnspawn);
+
+        OnEnableSubscribtions();
     }
 
     private void Update()
@@ -85,15 +87,16 @@ public sealed class Zombie : MonoBehaviour
         _makeCollisionDamageMechanic.Update();
     }
 
-    private void OnEnable()
+    private void OnEnableSubscribtions()
     {
         _takeDamageMechanic.OnEnable();
         _canMoveMechanic.OnEnable();
         _rotationMechanic.OnEnable();
-        _destroyMechanic.OnEnable();
         _stayDuringAttackMechanic.OnEnable();
         _counterMechanic_DamageToPlayer.OnEnable();
         _makeDamageMechanic.OnEnable();
+        //_destroyMechanic.OnEnable();
+        _unspawnMechanic.OnEnable();
     }
 
     private void OnDisable()
@@ -101,10 +104,11 @@ public sealed class Zombie : MonoBehaviour
         _takeDamageMechanic.OnDisable();
         _canMoveMechanic.OnDisable();
         _rotationMechanic.OnDisable();
-        _destroyMechanic.OnDisable();
         _stayDuringAttackMechanic.OnDisable();
         _counterMechanic_DamageToPlayer.OnDisable();
         _makeDamageMechanic.OnDisable();
+        //_destroyMechanic.OnDisable();
+        _unspawnMechanic.OnDisable();
     }
 
     private void OnTriggerEnter(Collider other)

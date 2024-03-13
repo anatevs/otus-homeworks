@@ -45,13 +45,13 @@ public sealed class PoolManager<T> where T : Component
             subject = _container.Instantiate(_prefab);
             subject.transform.SetParent(_worldTransform);
             subject.gameObject.SetActive(true);
-            _pool.Enqueue(subject);
         }
         return subject;
     }
 
     public void UnSpawn(T subject)
     {
+        Debug.Log("return to pool");
         subject.transform.SetParent(_poolTransform);
         subject.gameObject.SetActive(false);
         _pool.Enqueue(subject);

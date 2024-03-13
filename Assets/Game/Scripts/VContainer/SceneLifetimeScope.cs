@@ -11,13 +11,17 @@ public class SceneLifetimeScope : LifetimeScope
     private PoolParams<Bullet> _bulletPoolParams;
 
     [SerializeField]
-    private PoolParams<Zombie> _zombiePoolParams;
+    private PoolParams<ZombieEntity> _zombieEntityPoolParams;
+
+    [SerializeField]
+    private ZombieSystem _zombieSystem;
 
     protected override void Configure(IContainerBuilder builder)
     {
         RegisterEntities(builder);
-        RegisterUIPresenters(builder);
         RegisterPools(builder);
+        RegisterZombieSystem(builder);
+        RegisterUIPresenters(builder);
     }
 
 
@@ -26,19 +30,24 @@ public class SceneLifetimeScope : LifetimeScope
         builder.RegisterComponent<PlayerEntity>(_playerEntity);
     }
 
-    private void RegisterUIPresenters(IContainerBuilder builder)
-    {
-        builder.Register<GameInfoPresenter>(Lifetime.Singleton).
-            AsImplementedInterfaces().
-            AsSelf();
-    }
-
     private void RegisterPools(IContainerBuilder builder)
     {
         builder.Register<PoolManager<Bullet>>(Lifetime.Singleton).
             WithParameter(_bulletPoolParams);
 
-        builder.Register<PoolManager<Zombie>>(Lifetime.Singleton).
-            WithParameter(_zombiePoolParams);
+        builder.Register<PoolManager<ZombieEntity>>(Lifetime.Singleton).
+            WithParameter(_zombieEntityPoolParams);
+    }
+
+    private void RegisterZombieSystem(IContainerBuilder builder)
+    {
+        builder.RegisterComponent<ZombieSystem>(_zombieSystem);
+    }
+
+    private void RegisterUIPresenters(IContainerBuilder builder)
+    {
+        builder.Register<GameInfoPresenter>(Lifetime.Singleton).
+            AsImplementedInterfaces().
+            AsSelf();
     }
 }

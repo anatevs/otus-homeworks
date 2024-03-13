@@ -1,13 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class MakeDamageMechanic2
 {
-    private IAtomicEvent<int> _damagableOnDamage;
-    private Entity _damagableEntity;
-    private IAtomicEvent _makeDamageEvent;
-    private IAtomicValue<int> _damage;
+    private readonly Entity _damagableEntity;
+    private readonly IAtomicEvent _makeDamageEvent;
+    private readonly IAtomicValue<int> _damage;
 
     public MakeDamageMechanic2(Entity damagableEntity, IAtomicEvent makeDamageEvent, IAtomicValue<int> damage)
     {

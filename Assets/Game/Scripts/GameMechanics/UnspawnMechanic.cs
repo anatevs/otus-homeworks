@@ -1,14 +1,16 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public class DestroyMechanic
+public class UnspawnMechanic
 {
     private readonly GameObject _gameObject;
     private readonly AtomicVariable<bool> _isDestroyed;
+    private readonly IAtomicAction<GameObject> _OnUnspawn;
 
-    public DestroyMechanic(GameObject gameObject, AtomicVariable<bool> isDestroyed)
+    public UnspawnMechanic(GameObject gameObject, AtomicVariable<bool> isDestroyed, IAtomicAction<GameObject> OnUnspawn)
     {
         _gameObject = gameObject;
         _isDestroyed = isDestroyed;
+        _OnUnspawn = OnUnspawn;
     }
 
     public void OnEnable()
@@ -21,15 +23,15 @@ public class DestroyMechanic
         _isDestroyed.Unsubscribe(OnDestroy);
     }
 
-    private void OnDestroy(bool isDead)
+    private void OnDestroy(bool isDestroyed)
     {
-        if (!isDead)
+        if (!isDestroyed)
         {
             return;
         }
         else
         {
-            Object.Destroy(_gameObject);
+            _OnUnspawn.Invoke(_gameObject);
         }
     }
 }
