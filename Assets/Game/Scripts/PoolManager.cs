@@ -51,7 +51,6 @@ public sealed class PoolManager<T> where T : Component
 
     public void UnSpawn(T subject)
     {
-        Debug.Log("return to pool");
         subject.transform.SetParent(_poolTransform);
         subject.gameObject.SetActive(false);
         _pool.Enqueue(subject);

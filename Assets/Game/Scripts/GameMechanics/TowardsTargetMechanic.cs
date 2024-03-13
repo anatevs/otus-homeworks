@@ -23,7 +23,7 @@ public class TowardsTargetMechanic
         else
         {
             Debug.Log("no target to follow");
-            return;
+            _direction.Value = Vector3.zero;
         }
     }
 }

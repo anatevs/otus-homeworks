@@ -60,7 +60,6 @@ public sealed class GameInfoView : MonoBehaviour
 
     private void FillDestroyedCount(int destroyedCount)
     {
-        Debug.Log("fill distr");
         _destroyedText.text = $"KILLS: {destroyedCount}";
     }
 

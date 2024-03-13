@@ -70,8 +70,6 @@ public sealed class Zombie : MonoBehaviour
             );
 
         _makeDamageMechanic = new MakeDamageMechanic2(_playerEntity, MakeDamage, damage);
-
-        //_destroyMechanic = new DestroyMechanic(gameObject, onDestroy);
         _unspawnMechanic = new UnspawnMechanic(gameObject, onDestroy, OnUnspawn);
 
         OnEnableSubscribtions();
@@ -95,7 +93,6 @@ public sealed class Zombie : MonoBehaviour
         _stayDuringAttackMechanic.OnEnable();
         _counterMechanic_DamageToPlayer.OnEnable();
         _makeDamageMechanic.OnEnable();
-        //_destroyMechanic.OnEnable();
         _unspawnMechanic.OnEnable();
     }
 
@@ -107,7 +104,6 @@ public sealed class Zombie : MonoBehaviour
         _stayDuringAttackMechanic.OnDisable();
         _counterMechanic_DamageToPlayer.OnDisable();
         _makeDamageMechanic.OnDisable();
-        //_destroyMechanic.OnDisable();
         _unspawnMechanic.OnDisable();
     }
 
