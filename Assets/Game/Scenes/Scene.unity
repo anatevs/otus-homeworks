@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 18385285}
   - component: {fileID: 18385286}
+  - component: {fileID: 18385287}
   m_Layer: 0
   m_Name: '[System]'
   m_TagString: GameContext
@@ -188,6 +189,19 @@ MonoBehaviour:
       type: 3}
     initCount: 1
   _zombieSystem: {fileID: 1366530282}
+  _gameManager: {fileID: 18385287}
+--- !u!114 &18385287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18385282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01b0b4c7f791dbf4183d48641859f265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &91941558
 GameObject:
   m_ObjectHideFlags: 0
@@ -1106,7 +1120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c18d7362d508e43b94ac4013528707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerEntity: {fileID: 2101474221}
 --- !u!1 &1486932388
 GameObject:
   m_ObjectHideFlags: 0

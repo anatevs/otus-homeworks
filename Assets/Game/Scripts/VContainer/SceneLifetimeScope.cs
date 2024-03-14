@@ -16,18 +16,22 @@ public class SceneLifetimeScope : LifetimeScope
     [SerializeField]
     private ZombieSystem _zombieSystem;
 
+    [SerializeField]
+    private GameManager _gameManager;
+
     protected override void Configure(IContainerBuilder builder)
     {
         RegisterEntities(builder);
         RegisterPools(builder);
         RegisterZombieSystem(builder);
         RegisterUIPresenters(builder);
+        RegisterGameListenersAndManager(builder);
     }
-
 
     private void RegisterEntities(IContainerBuilder builder)
     {
-        builder.RegisterComponent<PlayerEntity>(_playerEntity);
+        builder.RegisterComponent<PlayerEntity>(_playerEntity).
+            AsImplementedInterfaces();
     }
 
     private void RegisterPools(IContainerBuilder builder)
@@ -49,5 +53,15 @@ public class SceneLifetimeScope : LifetimeScope
         builder.Register<GameInfoPresenter>(Lifetime.Singleton).
             AsImplementedInterfaces().
             AsSelf();
+    }
+
+    private void RegisterGameListenersAndManager(IContainerBuilder builder)
+    {
+        builder.Register<GameListenersContainer>(Lifetime.Singleton);
+        builder.Register<GameListenersInstaller>(Lifetime.Singleton).
+            AsImplementedInterfaces();
+        builder.RegisterComponent<GameManager>(_gameManager);
+        builder.Register<FinishGameController>(Lifetime.Singleton).
+            AsImplementedInterfaces();
     }
 }

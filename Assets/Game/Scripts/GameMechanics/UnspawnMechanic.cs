@@ -3,24 +3,24 @@ using UnityEngine;
 public class UnspawnMechanic
 {
     private readonly GameObject _gameObject;
-    private readonly AtomicVariable<bool> _isDestroyed;
+    private readonly AtomicVariable<bool> _isDeactivated;
     private readonly IAtomicAction<GameObject> _OnUnspawn;
 
-    public UnspawnMechanic(GameObject gameObject, AtomicVariable<bool> isDestroyed, IAtomicAction<GameObject> OnUnspawn)
+    public UnspawnMechanic(GameObject gameObject, AtomicVariable<bool> isDeactivated, IAtomicAction<GameObject> OnUnspawn)
     {
         _gameObject = gameObject;
-        _isDestroyed = isDestroyed;
+        _isDeactivated = isDeactivated;
         _OnUnspawn = OnUnspawn;
     }
 
     public void OnEnable()
     {
-        _isDestroyed.Subscribe(OnDestroy);
+        _isDeactivated.Subscribe(OnDestroy);
     }
 
     public void OnDisable()
     {
-        _isDestroyed.Unsubscribe(OnDestroy);
+        _isDeactivated.Unsubscribe(OnDestroy);
     }
 
     private void OnDestroy(bool isDestroyed)

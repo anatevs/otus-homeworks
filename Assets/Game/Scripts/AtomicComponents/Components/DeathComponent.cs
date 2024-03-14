@@ -4,19 +4,20 @@ public sealed class DeathComponent : IDeathComponent
 {
     public event Action<bool> OnDeath
     {
-        add { _isDeath.Subscribe(value); }
-        remove { _isDeath.Unsubscribe(value); }
+        add { _isDead.Subscribe(value); }
+        remove { _isDead.Unsubscribe(value); }
     }
 
-    private readonly AtomicVariable<bool> _isDeath;
+    public bool IsDead
+    {
+        get => _isDead.Value;
+        set => _isDead.Value = value;
+    }
+
+    private readonly AtomicVariable<bool> _isDead;
 
     public DeathComponent(AtomicVariable<bool> isDeath)
     {
-        _isDeath = isDeath;
-    }
-
-    public void SetIsDeath(bool isDeath)
-    {
-        _isDeath.Value = isDeath;
+        _isDead = isDeath;
     }
 }

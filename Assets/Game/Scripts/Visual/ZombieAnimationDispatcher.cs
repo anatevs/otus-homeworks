@@ -22,7 +22,7 @@ public class ZombieAnimationDispatcher : MonoBehaviour
 
         if(eventType == DESTROY)
         {
-            _zombie.onDestroy.Value = true;
+            _zombie.isDeactivated.Value = true;
         }
 
     }

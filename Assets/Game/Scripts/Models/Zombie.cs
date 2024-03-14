@@ -2,12 +2,17 @@ using UnityEngine;
 
 public sealed class Zombie : MonoBehaviour
 {
-    public PlayerEntity _playerEntity;
+    public PlayerEntity playerEntity;
+
+    public AtomicVariable<Transform> targetTransform;
+    public Collider targetCollider;
 
     public AtomicEvent<int> OnDamage = new AtomicEvent<int>();
 
+    public AtomicVariable<bool> IsGameFinished;
+
     public AtomicVariable<bool> isDead;
-    public AtomicVariable<bool> onDestroy;
+    public AtomicVariable<bool> isDeactivated;
     public AtomicVariable<bool> canMove;
     public AtomicVariable<int> hp;
 
@@ -23,8 +28,8 @@ public sealed class Zombie : MonoBehaviour
     public AtomicVariable<int> damage;
     public AtomicVariable<bool> isAttacking;
     public AtomicEvent MakeDamage = new AtomicEvent();
+    
     public AtomicEvent<GameObject> OnUnspawn = new AtomicEvent<GameObject>();
-
 
     private TakeDamageMechanic _takeDamageMechanic;
     private DeathMechanic _deathMechanic;
@@ -36,7 +41,6 @@ public sealed class Zombie : MonoBehaviour
     private CounterMechanic _counterMechanic_DamageToPlayer;
     private AttackCollisionMechanic _makeCollisionDamageMechanic;
     private MakeDamageMechanic2 _makeDamageMechanic;
-    //private DestroyMechanic _destroyMechanic;
     private UnspawnMechanic _unspawnMechanic;
 
     private void Awake()
@@ -46,31 +50,24 @@ public sealed class Zombie : MonoBehaviour
 
     public void InitZombie(PlayerEntity playerEntity)
     {
-        _playerEntity = playerEntity;
+        this.playerEntity = playerEntity;
+
+        targetTransform.Value = this.playerEntity.GetComponentFromEntity<TransformComponent>().Transform;
+        targetCollider = this.playerEntity.GetComponentFromEntity<ColliderComponent>().Collider;
 
         _takeDamageMechanic = new TakeDamageMechanic(OnDamage, hp);
         _deathMechanic = new DeathMechanic(isDead, hp);
         _canMoveMechanic = new CanMoveMechanic(isDead, canMove);
         _movementMechanic = new MovementMechanic(transform, moveDirection, moveSpeed, canMove);
         _rotationMechanic = new RotationMechanic(transform, moveDirection, rotSpeed, canMove, isRotationDone);
-
-        _towardsTargetMechanic = new TowardsTargetMechanic
-            (
-            _playerEntity.GetComponentFromEntity<TransformComponent>().Transform,
-            transform, moveDirection
-            );
-
+        _towardsTargetMechanic = new TowardsTargetMechanic(targetTransform, transform, moveDirection);
         _stayDuringAttackMechanic = new StayDuringAttackMechanic(isAttacking, canMove);
         _counterMechanic_DamageToPlayer = new CounterMechanic(OnDamageCounted, OnResetDamageCounter, damageCounter);
 
-        _makeCollisionDamageMechanic = new AttackCollisionMechanic
-            (
-            OnResetDamageCounter, isAttacking,
-            _playerEntity.GetComponentFromEntity<ColliderComponent>().Collider
-            );
+        _makeCollisionDamageMechanic = new AttackCollisionMechanic(OnResetDamageCounter, isAttacking, targetCollider);
 
-        _makeDamageMechanic = new MakeDamageMechanic2(_playerEntity, MakeDamage, damage);
-        _unspawnMechanic = new UnspawnMechanic(gameObject, onDestroy, OnUnspawn);
+        _makeDamageMechanic = new MakeDamageMechanic2(this.playerEntity, MakeDamage, damage);
+        _unspawnMechanic = new UnspawnMechanic(gameObject, isDeactivated, OnUnspawn);
 
         OnEnableSubscribtions();
     }

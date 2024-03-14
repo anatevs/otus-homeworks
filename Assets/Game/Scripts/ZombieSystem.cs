@@ -2,12 +2,17 @@ using System;
 using UnityEngine;
 using VContainer;
 
-public class ZombieSystem : MonoBehaviour
+public class ZombieSystem : 
+    MonoBehaviour,
+    IFinishGameListener
 {
-    [SerializeField]
     private PlayerEntity _playerEntity;
 
     public event Action<int> OnDestroyZombie;
+
+    private event Action<Transform> ChangeTargetTransform;
+    private event Action<bool> SetIsAttacking;
+
     private int _destoyedCount = 0;
 
     private readonly int _initHP = 1;
@@ -15,6 +20,7 @@ public class ZombieSystem : MonoBehaviour
     private event Action OnCountdown;
     private readonly float _spawnCooldown = 3f;
     private float _currentTimer;
+    private bool _stopCountdown;
 
     private PoolManager<ZombieEntity> _zombiePool;
 
@@ -27,18 +33,24 @@ public class ZombieSystem : MonoBehaviour
         };
 
     [Inject]
-    public void Construct(PoolManager<ZombieEntity> poolManager)
+    public void Construct(PoolManager<ZombieEntity> poolManager, PlayerEntity playerEntity)
     {
         _zombiePool = poolManager;
+        _playerEntity = playerEntity;
     }
 
     private void Start()
     {
+        _stopCountdown = false;
         ResetSpawnTimer();
     }
 
     private void Update()
     {
+        if (_stopCountdown)
+        {
+            return;
+        }
         SpawnTimer();
     }
 
@@ -50,6 +62,13 @@ public class ZombieSystem : MonoBehaviour
     private void OnDisable()
     {
         OnCountdown -= SpawnZombie;
+    }
+
+    public void OnFinishGame()
+    {
+        ChangeTargetTransform?.Invoke(transform);
+        SetIsAttacking?.Invoke(false);
+        _stopCountdown = true;
     }
 
     private void SpawnTimer()
@@ -85,6 +104,9 @@ public class ZombieSystem : MonoBehaviour
 
         zombieEntity.GetComponentFromEntity<UnspawnComponent>().OnUnspawn += UnSpawnZombie;
         zombieEntity.GetComponentFromEntity<DeathComponent>().OnDeath += OnDeathZombie;
+
+        ChangeTargetTransform += zombieEntity.GetComponentFromEntity<TargetTransformComponent>().ChangeTargetTransform;
+        SetIsAttacking += zombieEntity.GetComponentFromEntity<IsAttackingComponent>().SetIsAttacking;
     }
 
     private void UnSpawnZombie(GameObject zombieGO)
@@ -95,6 +117,8 @@ public class ZombieSystem : MonoBehaviour
 
         zombieEntity.GetComponentFromEntity<UnspawnComponent>().OnUnspawn -= UnSpawnZombie;
         zombieEntity.GetComponentFromEntity<DeathComponent>().OnDeath -= OnDeathZombie;
+        ChangeTargetTransform -= zombieEntity.GetComponentFromEntity<TargetTransformComponent>().ChangeTargetTransform;
+        SetIsAttacking -= zombieEntity.GetComponentFromEntity<IsAttackingComponent>().SetIsAttacking;
     }
 
     private void ResetZombieStates(ZombieEntity zombieEntity)
@@ -103,7 +127,7 @@ public class ZombieSystem : MonoBehaviour
         DeathComponent deathComponent = zombieEntity.GetComponentFromEntity<DeathComponent>();
 
         hpComponent.HP = _initHP;
-        deathComponent.SetIsDeath(false);
+        deathComponent.IsDead = false;
     }
 
     private void OnDeathZombie(bool isDeath)

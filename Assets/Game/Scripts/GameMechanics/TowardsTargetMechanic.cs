@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 public class TowardsTargetMechanic
 {
-    private readonly Transform _target;
+    private readonly AtomicVariable<Transform> _target;
     private readonly Transform _self;
     private readonly IAtomicVariable<Vector3> _direction;
 
-    public TowardsTargetMechanic(Transform target, Transform self, IAtomicVariable<Vector3> direction)
+    public TowardsTargetMechanic(
+        AtomicVariable<Transform> target, Transform self, 
+        IAtomicVariable<Vector3> direction)
     {
         _target = target;
         _self = self;
@@ -14,16 +16,8 @@ public class TowardsTargetMechanic
 
     public void Update()
     {
-        if (_target != null)
-        {
-            Vector3 direction = (_target.position - _self.position).normalized;
-            direction.y = 0;
-            _direction.Value = direction;
-        }
-        else
-        {
-            Debug.Log("no target to follow");
-            _direction.Value = Vector3.zero;
-        }
+        Vector3 direction = (_target.Value.position - _self.position).normalized;
+        direction.y = 0;
+        _direction.Value = direction;
     }
 }

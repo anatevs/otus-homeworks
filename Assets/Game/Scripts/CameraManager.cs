@@ -1,6 +1,8 @@
 using UnityEngine;
 
-public partial class CameraManager : MonoBehaviour
+public partial class CameraManager : 
+    MonoBehaviour,
+    IFinishGameListener
 {
     [SerializeField]
     private Transform _playerTransform;
@@ -15,5 +17,10 @@ public partial class CameraManager : MonoBehaviour
     private void Update()
     {
         _cameraFollowMechanic.Update();
+    }
+
+    public void OnFinishGame()
+    {
+        _cameraFollowMechanic.OnFinishGame();
     }
 }

@@ -11,5 +11,7 @@ public class ZombieEntity : Entity
         AddComponentToEntity(new HPComponent(_zombie.hp));
         AddComponentToEntity(new DirectionComponent(_zombie.moveDirection));
         AddComponentToEntity(new UnspawnComponent(_zombie.OnUnspawn));
+        AddComponentToEntity(new TargetTransformComponent(_zombie.targetTransform));
+        AddComponentToEntity(new IsAttackingComponent(_zombie.isAttacking));
     }
 }

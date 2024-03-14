@@ -1,11 +1,18 @@
 using UnityEngine;
+using VContainer.Unity;
 
-public sealed class PlayerEntity : Entity
+public sealed class PlayerEntity : Entity,
+    IInitializable
 {
     [SerializeField]
     private Player _player;
 
-    private void Awake()
+    public void Initialize()
+    {
+        Init();
+    }
+
+    private void Init()
     {
         AddComponentToEntity(new HPComponent(_player.hp));
         AddComponentToEntity(new BulletStorageComponent(_player.bulletStorage));

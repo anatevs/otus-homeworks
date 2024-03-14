@@ -173,10 +173,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b225b8e27b228a54e80a8b1938188242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerEntity: {fileID: 0}
+  playerEntity: {fileID: 0}
+  targetTransform:
+    _value: {fileID: 0}
+  targetCollider: {fileID: 0}
+  IsGameFinished:
+    _value: 0
   isDead:
     _value: 0
-  onDestroy:
+  isDeactivated:
     _value: 0
   canMove:
     _value: 1
