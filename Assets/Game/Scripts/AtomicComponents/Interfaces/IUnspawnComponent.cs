@@ -1,7 +1,6 @@
 using System;
-using UnityEngine;
 
 public interface IUnspawnComponent
 {
-    public event Action<GameObject> OnUnspawn;
+    public event Action<Entity> OnUnspawn;
 }

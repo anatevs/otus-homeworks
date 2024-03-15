@@ -3,9 +3,16 @@ using UnityEngine;
 public class InputController : MonoBehaviour
 {
     [SerializeField]
-    private Player _player;
+    private PlayerEntity _playerEntity;
 
     void Update()
+    {
+        MakeFire();
+
+        _playerEntity.GetEntityComponent<MoveDirectionComponent>().Direction = GetDirection();
+    }
+
+    private void MakeFire()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -14,12 +21,10 @@ public class InputController : MonoBehaviour
             {
                 Vector3 mousePos = hit.point;
                 mousePos.y = 0;
-                Vector3 shootDirection = (mousePos - _player.transform.position).normalized;
-                _player.InputFireEvent?.Invoke(shootDirection);
+                Vector3 shootDirection = (mousePos - _playerEntity.transform.position).normalized;
+                _playerEntity.GetEntityComponent<InputFireEventComponent>().OnInputFire(shootDirection);
             }
         }
-
-        _player.moveDirection.Value = GetDirection();
     }
 
     private Vector3 GetDirection()

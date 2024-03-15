@@ -1,32 +1,30 @@
-using UnityEngine;
-
 public class UnspawnMechanic
 {
-    private readonly GameObject _gameObject;
+    private readonly Entity _entity;
     private readonly AtomicVariable<bool> _isDeactivated;
+    private readonly IAtomicAction<Entity> _OnUnspawn;
+    private readonly ZombieInitParams _initParams;
     private readonly IAtomicVariable<bool> _isAttacking;
     private readonly IAtomicVariable<bool> _canMove;
     private readonly IAtomicVariable<int> _hp;
-    private readonly int _initHP;
     private readonly IAtomicVariable<bool> _isDead;
-    private readonly IAtomicAction<GameObject> _OnUnspawn;
-
-    public UnspawnMechanic(GameObject gameObject, 
+    
+    public UnspawnMechanic(Entity entity, 
         AtomicVariable<bool> isDeactivated,
+        IAtomicAction<Entity> OnUnspawn,
+        ZombieInitParams initParams,
         IAtomicVariable<bool> isAttacking,
         IAtomicVariable<bool> canMove,
         IAtomicVariable<int> hp,
-        int initHP,
-        IAtomicVariable<bool> isDead,
-        IAtomicAction<GameObject> OnUnspawn)
+        IAtomicVariable<bool> isDead)
     {
-        _gameObject = gameObject;
+        _entity = entity;
         _isDeactivated = isDeactivated;
+        _OnUnspawn = OnUnspawn;
+        _initParams = initParams;
         _isAttacking = isAttacking;
         _canMove = canMove;
-        _OnUnspawn = OnUnspawn;
         _hp = hp;
-        _initHP = initHP;
         _isDead = isDead;
     }
 
@@ -48,11 +46,12 @@ public class UnspawnMechanic
         }
         else
         {
-            _isAttacking.Value = false;
-            _canMove.Value = true;
-            _hp.Value = _initHP;
-            _OnUnspawn.Invoke(_gameObject);
-            _isDead.Value = false;
+            _OnUnspawn.Invoke(_entity);
+
+            _isAttacking.Value = _initParams.isAttacking;
+            _canMove.Value = _initParams.canMove;
+            _hp.Value = _initParams.hp;
+            _isDead.Value = _initParams.isDead;
         }
     }
 }

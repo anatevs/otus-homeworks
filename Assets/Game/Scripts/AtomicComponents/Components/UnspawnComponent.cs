@@ -1,17 +1,16 @@
 ﻿using System;
-using UnityEngine;
 
 public class UnspawnComponent : IUnspawnComponent
 {
-    public event Action<GameObject> OnUnspawn
+    public event Action<Entity> OnUnspawn
     {
         add { _onUnspawn.Subscribe(value); }
         remove { _onUnspawn.Unsubscribe(value); }
     }
 
-    private readonly AtomicEvent<GameObject> _onUnspawn;
+    private readonly AtomicEvent<Entity> _onUnspawn;
 
-    public UnspawnComponent(AtomicEvent<GameObject> onUnspawn)
+    public UnspawnComponent(AtomicEvent<Entity> onUnspawn)
     {
         _onUnspawn = onUnspawn;
     }

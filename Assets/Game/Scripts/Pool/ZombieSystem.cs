@@ -6,8 +6,6 @@ public class ZombieSystem :
     MonoBehaviour,
     IFinishGameListener
 {
-    private PlayerEntity _playerEntity;
-
     public event Action<int> OnDestroyZombie;
 
     [SerializeField]
@@ -18,8 +16,6 @@ public class ZombieSystem :
     private float _currentTimer;
     private bool _stopCountdown;
 
-    private PoolManager<ZombieEntity> _zombiePool;
-
     private readonly Vector3[] _spawnPoints = 
         {
             new Vector3(25, 0, 25),
@@ -27,6 +23,9 @@ public class ZombieSystem :
             new Vector3(25, 0, -25),
             new Vector3(-25, 0, -25)
         };
+
+    private PoolManager<ZombieEntity> _zombiePool;
+    private PlayerEntity _playerEntity;
 
     [Inject]
     public void Construct(PoolManager<ZombieEntity> poolManager, PlayerEntity playerEntity)
@@ -100,10 +99,9 @@ public class ZombieSystem :
         zombieEntity.GetEntityComponent<DeathComponent>().OnDeath += OnDeathZombie;
     }
 
-    private void UnSpawnZombie(GameObject zombieGO)
+    private void UnSpawnZombie(Entity zombieEntity)
     {
-        ZombieEntity zombieEntity = zombieGO.GetComponent<ZombieEntity>();
-        _zombiePool.UnSpawn(zombieEntity);
+        _zombiePool.UnSpawn((ZombieEntity)zombieEntity);
 
         zombieEntity.GetEntityComponent<UnspawnComponent>().OnUnspawn -= UnSpawnZombie;
         zombieEntity.GetEntityComponent<DeathComponent>().OnDeath -= OnDeathZombie;

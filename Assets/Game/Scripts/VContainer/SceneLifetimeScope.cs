@@ -6,9 +6,6 @@ public class SceneLifetimeScope : LifetimeScope
 {
     [SerializeField]
     private PlayerEntity _playerEntity;
-    
-    [SerializeField]
-    private PoolParams<Bullet> _bulletPoolParams;
 
     [SerializeField]
     private PoolParams<ZombieEntity> _zombieEntityPoolParams;
@@ -36,9 +33,6 @@ public class SceneLifetimeScope : LifetimeScope
 
     private void RegisterPools(IContainerBuilder builder)
     {
-        builder.Register<PoolManager<Bullet>>(Lifetime.Singleton).
-            WithParameter(_bulletPoolParams);
-
         builder.Register<PoolManager<ZombieEntity>>(Lifetime.Singleton).
             WithParameter(_zombieEntityPoolParams);
     }

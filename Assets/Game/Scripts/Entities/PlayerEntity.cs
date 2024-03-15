@@ -14,7 +14,9 @@ public sealed class PlayerEntity : Entity,
 
     private void Init()
     {
+        AddComponentToEntity(new MoveDirectionComponent(_player.moveDirection));
         AddComponentToEntity(new HPComponent(_player.hp));
+        AddComponentToEntity(new InputFireEventComponent(_player.InputFireEvent));
         AddComponentToEntity(new BulletStorageComponent(_player.bulletStorage));
         AddComponentToEntity(new DeathComponent(_player.isDead));
         AddComponentToEntity(new TransformComponent(_player.transform));

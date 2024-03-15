@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public sealed partial class Zombie : MonoBehaviour,
+public sealed class Zombie : MonoBehaviour,
     IFinishGameListener
 {
     public PlayerEntity playerEntity;
 
     [SerializeField]
-    private int _initHP = 1;
+    private ZombieInitParams _zombieInitParams = new();
 
     public AtomicVariable<Transform> targetTransform;
     public Collider targetCollider;
@@ -33,7 +33,7 @@ public sealed partial class Zombie : MonoBehaviour,
     public AtomicVariable<bool> isAttacking;
     public AtomicEvent MakeDamage = new AtomicEvent();
     
-    public AtomicEvent<GameObject> OnUnspawn = new AtomicEvent<GameObject>();
+    public AtomicEvent<Entity> OnUnspawn = new AtomicEvent<Entity>();
 
     private TakeDamageMechanic _takeDamageMechanic;
     private DeathMechanic _deathMechanic;
@@ -65,7 +65,9 @@ public sealed partial class Zombie : MonoBehaviour,
         _counterMechanic_DamageToPlayer = new CounterMechanic(OnDamageCounted, OnResetDamageCounter, damageCounter);
         _makeCollisionDamageMechanic = new AttackCollisionMechanic(OnResetDamageCounter, isAttacking, targetCollider, IsGameFinished);
         _makeDamageMechanic = new MakeDamageMechanic2(this.playerEntity, MakeDamage, damage);
-        _unspawnMechanic = new UnspawnMechanic(gameObject, isDeactivated, isAttacking, canMove, hp, _initHP, isDead, OnUnspawn);
+        _unspawnMechanic = new UnspawnMechanic(gameObject.GetComponent<ZombieEntity>(),
+            isDeactivated, OnUnspawn, _zombieInitParams,
+            isAttacking, canMove, hp, isDead);
         _finishGameMechanic = new OnFinishGameMechanic(IsGameFinished);
 
         OnEnableSubscribtions();
