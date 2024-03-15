@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class StayDuringAttackMechanic
 {
-    private AtomicVariable<bool> _isAttacking;
-    private IAtomicVariable<bool> _canMove;
+    private readonly AtomicVariable<bool> _isAttacking;
+    private readonly IAtomicVariable<bool> _canMove;
+    private readonly IAtomicValue<bool> _isDead;
 
-    public StayDuringAttackMechanic(AtomicVariable<bool> isAttacking, IAtomicVariable<bool> canMove)
+    public StayDuringAttackMechanic(AtomicVariable<bool> isAttacking,
+        IAtomicVariable<bool> canMove, IAtomicValue<bool> isDead)
     {
         _isAttacking = isAttacking;
         _canMove = canMove;
+        _isDead = isDead;
     }
 
     public void OnEnable()
@@ -25,6 +28,13 @@ public class StayDuringAttackMechanic
 
     private void MakeStop(bool isAttacking)
     {
-        _canMove.Value = !isAttacking;
+        if (_isDead.Value)
+        {
+            return;
+        }
+        else
+        {
+            _canMove.Value = !isAttacking;
+        }
     }
 }

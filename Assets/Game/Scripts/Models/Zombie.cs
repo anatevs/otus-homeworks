@@ -5,6 +5,9 @@ public sealed partial class Zombie : MonoBehaviour,
 {
     public PlayerEntity playerEntity;
 
+    [SerializeField]
+    private int _initHP = 1;
+
     public AtomicVariable<Transform> targetTransform;
     public Collider targetCollider;
 
@@ -57,12 +60,12 @@ public sealed partial class Zombie : MonoBehaviour,
         _canMoveMechanic = new CanMoveMechanic(isDead, canMove);
         _movementMechanic = new MovementMechanic(transform, moveDirection, moveSpeed, canMove);
         _rotationMechanic = new RotationMechanic(transform, moveDirection, rotSpeed, canMove, isRotationDone);
-        _towardsTargetMechanic = new TowardsTargetMechanic(targetTransform, transform, moveDirection, IsGameFinished);
-        _stayDuringAttackMechanic = new StayDuringAttackMechanic(isAttacking, canMove);
+        _towardsTargetMechanic = new TowardsTargetMechanic(targetTransform, transform, moveDirection, IsGameFinished, canMove);
+        _stayDuringAttackMechanic = new StayDuringAttackMechanic(isAttacking, canMove, isDead);
         _counterMechanic_DamageToPlayer = new CounterMechanic(OnDamageCounted, OnResetDamageCounter, damageCounter);
         _makeCollisionDamageMechanic = new AttackCollisionMechanic(OnResetDamageCounter, isAttacking, targetCollider, IsGameFinished);
         _makeDamageMechanic = new MakeDamageMechanic2(this.playerEntity, MakeDamage, damage);
-        _unspawnMechanic = new UnspawnMechanic(gameObject, isDeactivated, isAttacking, OnUnspawn);
+        _unspawnMechanic = new UnspawnMechanic(gameObject, isDeactivated, isAttacking, canMove, hp, _initHP, isDead, OnUnspawn);
         _finishGameMechanic = new OnFinishGameMechanic(IsGameFinished);
 
         OnEnableSubscribtions();

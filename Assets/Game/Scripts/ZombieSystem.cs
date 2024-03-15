@@ -10,12 +10,11 @@ public class ZombieSystem :
 
     public event Action<int> OnDestroyZombie;
 
+    [SerializeField]
+    private float _spawnCooldown = 3f;
+
     private int _destoyedCount = 0;
-
-    private readonly int _initHP = 1;
-
     private event Action OnCountdown;
-    private readonly float _spawnCooldown = 3f;
     private float _currentTimer;
     private bool _stopCountdown;
 
@@ -105,19 +104,9 @@ public class ZombieSystem :
     {
         ZombieEntity zombieEntity = zombieGO.GetComponent<ZombieEntity>();
         _zombiePool.UnSpawn(zombieEntity);
-        ResetZombieStates(zombieEntity);
 
         zombieEntity.GetEntityComponent<UnspawnComponent>().OnUnspawn -= UnSpawnZombie;
         zombieEntity.GetEntityComponent<DeathComponent>().OnDeath -= OnDeathZombie;
-    }
-
-    private void ResetZombieStates(ZombieEntity zombieEntity)
-    {
-        HPComponent hpComponent = zombieEntity.GetEntityComponent<HPComponent>();
-        DeathComponent deathComponent = zombieEntity.GetEntityComponent<DeathComponent>();
-
-        hpComponent.HP = _initHP;
-        deathComponent.IsDead = false;
     }
 
     private void OnDeathZombie(bool isDeath)

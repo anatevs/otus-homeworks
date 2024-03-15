@@ -7,7 +7,6 @@ public class ZombieEntity : Entity
         _zombie = zombie;
 
         AddComponentToEntity(new DeathComponent(_zombie.isDead));
-        AddComponentToEntity(new HPComponent(_zombie.hp));
         AddComponentToEntity(new DirectionComponent(_zombie.moveDirection));
         AddComponentToEntity(new UnspawnComponent(_zombie.OnUnspawn));
     }
