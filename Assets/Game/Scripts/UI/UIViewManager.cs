@@ -1,10 +1,15 @@
 using UnityEngine;
 using VContainer;
 
-public class UIViewManager : MonoBehaviour
+public class UIViewManager : 
+    MonoBehaviour,
+    IEndGameListener
 {
     [SerializeField]
     private GameInfoView _gameInfoView;
+
+    [SerializeField]
+    private EndGameView _endGameView;
 
     private GameInfoPresenter _gameInfoPresenter;
 
@@ -22,5 +27,10 @@ public class UIViewManager : MonoBehaviour
     private void OnDisable()
     {
         _gameInfoView.Hide();
+    }
+
+    public void OnEndGame()
+    {
+        _endGameView.Show();
     }
 }

@@ -4,12 +4,17 @@ public class UnspawnMechanic
 {
     private readonly GameObject _gameObject;
     private readonly AtomicVariable<bool> _isDeactivated;
+    private readonly IAtomicVariable<bool> _isAttacking;
     private readonly IAtomicAction<GameObject> _OnUnspawn;
 
-    public UnspawnMechanic(GameObject gameObject, AtomicVariable<bool> isDeactivated, IAtomicAction<GameObject> OnUnspawn)
+    public UnspawnMechanic(GameObject gameObject, 
+        AtomicVariable<bool> isDeactivated,
+        IAtomicVariable<bool> isAttacking,
+        IAtomicAction<GameObject> OnUnspawn)
     {
         _gameObject = gameObject;
         _isDeactivated = isDeactivated;
+        _isAttacking = isAttacking;
         _OnUnspawn = OnUnspawn;
     }
 
@@ -31,6 +36,7 @@ public class UnspawnMechanic
         }
         else
         {
+            _isAttacking.Value = false;
             _OnUnspawn.Invoke(_gameObject);
         }
     }

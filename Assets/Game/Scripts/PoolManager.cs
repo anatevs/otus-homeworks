@@ -5,6 +5,8 @@ using VContainer.Unity;
 
 public sealed class PoolManager<T> where T : Component
 {
+    private readonly GameListenersContainer _listenersContainer;
+
     private readonly Transform _worldTransform;
 
     private readonly Transform _poolTransform;
@@ -17,9 +19,11 @@ public sealed class PoolManager<T> where T : Component
 
     private readonly Queue<T> _pool = new();
 
-    public PoolManager(IObjectResolver container, PoolParams<T> poolParams)
+    public PoolManager(IObjectResolver container, GameListenersContainer gameListenersContainer, PoolParams<T> poolParams)
     {
         _container = container;
+
+        _listenersContainer = gameListenersContainer;
 
         _worldTransform = poolParams.worldTransform;
         _poolTransform = poolParams.poolTransform;
@@ -29,6 +33,7 @@ public sealed class PoolManager<T> where T : Component
         for (var i = 0; i < _initialCount; i++)
         {
             var subject = _container.Instantiate(_prefab, _poolTransform);
+            _listenersContainer.AddListener(subject.gameObject);
             _pool.Enqueue(subject);
         }
     }
@@ -45,6 +50,7 @@ public sealed class PoolManager<T> where T : Component
             subject = _container.Instantiate(_prefab);
             subject.transform.SetParent(_worldTransform);
             subject.gameObject.SetActive(true);
+            _listenersContainer.AddListener(subject.gameObject);
         }
         return subject;
     }

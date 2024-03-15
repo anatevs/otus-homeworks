@@ -344,10 +344,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1366530279}
     m_Modifications:
-    - target: {fileID: 765907166, guid: a76c89c6a539356478cffc6e1b88e8dc, type: 3}
-      propertyPath: _playerEntity
-      value: 
-      objectReference: {fileID: 2101474221}
     - target: {fileID: 5879414446769212800, guid: a76c89c6a539356478cffc6e1b88e8dc,
         type: 3}
       propertyPath: m_Name
@@ -598,6 +594,11 @@ PrefabInstance:
         type: 3}
       propertyPath: hp._value
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711394828305187949, guid: 3b5b2ae0f895574449961910366cbf8a,
+        type: 3}
+      propertyPath: moveSpeed._value
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1711394828305187949, guid: 3b5b2ae0f895574449961910366cbf8a,
         type: 3}
@@ -865,6 +866,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1125839406}
   - component: {fileID: 1125839405}
+  - component: {fileID: 1125839407}
   m_Layer: 5
   m_Name: EndGamePopup
   m_TagString: Untagged
@@ -902,6 +904,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1125839407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125839404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a0bcacc0cd574d4693346b250d4b4ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _endGameView: {fileID: 1125839404}
 --- !u!1 &1185288759
 GameObject:
   m_ObjectHideFlags: 0
@@ -1534,6 +1549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameInfoView: {fileID: 2039635884}
+  _endGameView: {fileID: 1125839407}
 --- !u!222 &3921481626537001966
 CanvasRenderer:
   m_ObjectHideFlags: 0

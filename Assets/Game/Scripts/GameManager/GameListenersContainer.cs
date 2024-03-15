@@ -55,4 +55,15 @@ public class GameListenersContainer
             }
         }
     }
+
+    public void EndListeners()
+    {
+        for (int i = 0; i < _gameListeners.Count; i++)
+        {
+            if (_gameListeners[i] is IEndGameListener endListener)
+            {
+                endListener.OnEndGame();
+            }
+        }
+    }
 }

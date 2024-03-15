@@ -61,7 +61,7 @@ public class SceneLifetimeScope : LifetimeScope
         builder.Register<GameListenersInstaller>(Lifetime.Singleton).
             AsImplementedInterfaces();
         builder.RegisterComponent<GameManager>(_gameManager);
-        builder.Register<FinishGameController>(Lifetime.Singleton).
+        builder.Register<FinishGameManager>(Lifetime.Singleton).
             AsImplementedInterfaces();
     }
 }

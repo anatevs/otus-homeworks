@@ -21,4 +21,9 @@ public class GameManager : MonoBehaviour
     {
         _gameListenersContainer.FinishListeners();
     }
+
+    public void EndGame()
+    {
+        _gameListenersContainer.EndListeners();
+    }
 }

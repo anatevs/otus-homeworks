@@ -16,7 +16,7 @@ public class Entity : MonoBehaviour
         _components.Add(component);
     }
 
-    public bool TryGetComponentFromEntity<T>(out T component)
+    public bool TryGetEntityComponent<T>(out T component)
     {
         for (int i = 0; i < _components.Count; i++)
         {
@@ -31,7 +31,7 @@ public class Entity : MonoBehaviour
         return false;
     }
 
-    public T GetComponentFromEntity<T>()
+    public T GetEntityComponent<T>()
     {
         for (int i = 0; i < _components.Count; i++)
         {

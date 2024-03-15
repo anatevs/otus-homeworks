@@ -32,8 +32,8 @@ public sealed class GameInfoPresenter : IGameInfoPresenter,
 
     void IStartable.Start()
     {
-        _hpComponent = _playerEntity.GetComponentFromEntity<HPComponent>();
-        _bulletStorageComponent = _playerEntity.GetComponentFromEntity<BulletStorageComponent>();
+        _hpComponent = _playerEntity.GetEntityComponent<HPComponent>();
+        _bulletStorageComponent = _playerEntity.GetEntityComponent<BulletStorageComponent>();
 
         _hpComponent.OnHPChanged += ChangeHP;
         _bulletStorageComponent.OnStorageChanged += ChangeBulletStorage;

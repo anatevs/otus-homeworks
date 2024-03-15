@@ -23,6 +23,6 @@ public class MakeDamageMechanic2
 
     private void MakeDamage()
     {
-        _damagableEntity.GetComponentFromEntity<OnDamageComponent>().MakeDamage(_damage.Value);
+        _damagableEntity.GetEntityComponent<OnDamageComponent>().MakeDamage(_damage.Value);
     }
 }

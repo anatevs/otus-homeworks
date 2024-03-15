@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public sealed class Zombie : MonoBehaviour
+public sealed partial class Zombie : MonoBehaviour,
+    IFinishGameListener
 {
     public PlayerEntity playerEntity;
 
@@ -42,32 +43,27 @@ public sealed class Zombie : MonoBehaviour
     private AttackCollisionMechanic _makeCollisionDamageMechanic;
     private MakeDamageMechanic2 _makeDamageMechanic;
     private UnspawnMechanic _unspawnMechanic;
-
-    private void Awake()
-    {
-        //InitZombie(_playerEntity);
-    }
+    private OnFinishGameMechanic _finishGameMechanic;
 
     public void InitZombie(PlayerEntity playerEntity)
     {
         this.playerEntity = playerEntity;
 
-        targetTransform.Value = this.playerEntity.GetComponentFromEntity<TransformComponent>().Transform;
-        targetCollider = this.playerEntity.GetComponentFromEntity<ColliderComponent>().Collider;
+        targetTransform.Value = this.playerEntity.GetEntityComponent<TransformComponent>().Transform;
+        targetCollider = this.playerEntity.GetEntityComponent<ColliderComponent>().Collider;
 
         _takeDamageMechanic = new TakeDamageMechanic(OnDamage, hp);
         _deathMechanic = new DeathMechanic(isDead, hp);
         _canMoveMechanic = new CanMoveMechanic(isDead, canMove);
         _movementMechanic = new MovementMechanic(transform, moveDirection, moveSpeed, canMove);
         _rotationMechanic = new RotationMechanic(transform, moveDirection, rotSpeed, canMove, isRotationDone);
-        _towardsTargetMechanic = new TowardsTargetMechanic(targetTransform, transform, moveDirection);
+        _towardsTargetMechanic = new TowardsTargetMechanic(targetTransform, transform, moveDirection, IsGameFinished);
         _stayDuringAttackMechanic = new StayDuringAttackMechanic(isAttacking, canMove);
         _counterMechanic_DamageToPlayer = new CounterMechanic(OnDamageCounted, OnResetDamageCounter, damageCounter);
-
-        _makeCollisionDamageMechanic = new AttackCollisionMechanic(OnResetDamageCounter, isAttacking, targetCollider);
-
+        _makeCollisionDamageMechanic = new AttackCollisionMechanic(OnResetDamageCounter, isAttacking, targetCollider, IsGameFinished);
         _makeDamageMechanic = new MakeDamageMechanic2(this.playerEntity, MakeDamage, damage);
-        _unspawnMechanic = new UnspawnMechanic(gameObject, isDeactivated, OnUnspawn);
+        _unspawnMechanic = new UnspawnMechanic(gameObject, isDeactivated, isAttacking, OnUnspawn);
+        _finishGameMechanic = new OnFinishGameMechanic(IsGameFinished);
 
         OnEnableSubscribtions();
     }
@@ -112,5 +108,10 @@ public sealed class Zombie : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         _makeCollisionDamageMechanic.OnTriggerExit(other);
+    }
+
+    public void OnFinishGame()
+    {
+        _finishGameMechanic.OnFinishGame();
     }
 }

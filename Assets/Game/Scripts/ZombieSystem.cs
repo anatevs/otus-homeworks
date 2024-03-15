@@ -10,9 +10,6 @@ public class ZombieSystem :
 
     public event Action<int> OnDestroyZombie;
 
-    private event Action<Transform> ChangeTargetTransform;
-    private event Action<bool> SetIsAttacking;
-
     private int _destoyedCount = 0;
 
     private readonly int _initHP = 1;
@@ -66,8 +63,6 @@ public class ZombieSystem :
 
     public void OnFinishGame()
     {
-        ChangeTargetTransform?.Invoke(transform);
-        SetIsAttacking?.Invoke(false);
         _stopCountdown = true;
     }
 
@@ -102,11 +97,8 @@ public class ZombieSystem :
             zombieEntity.Init(zombieEntity.GetComponent<Zombie>());
         }
 
-        zombieEntity.GetComponentFromEntity<UnspawnComponent>().OnUnspawn += UnSpawnZombie;
-        zombieEntity.GetComponentFromEntity<DeathComponent>().OnDeath += OnDeathZombie;
-
-        ChangeTargetTransform += zombieEntity.GetComponentFromEntity<TargetTransformComponent>().ChangeTargetTransform;
-        SetIsAttacking += zombieEntity.GetComponentFromEntity<IsAttackingComponent>().SetIsAttacking;
+        zombieEntity.GetEntityComponent<UnspawnComponent>().OnUnspawn += UnSpawnZombie;
+        zombieEntity.GetEntityComponent<DeathComponent>().OnDeath += OnDeathZombie;
     }
 
     private void UnSpawnZombie(GameObject zombieGO)
@@ -115,16 +107,14 @@ public class ZombieSystem :
         _zombiePool.UnSpawn(zombieEntity);
         ResetZombieStates(zombieEntity);
 
-        zombieEntity.GetComponentFromEntity<UnspawnComponent>().OnUnspawn -= UnSpawnZombie;
-        zombieEntity.GetComponentFromEntity<DeathComponent>().OnDeath -= OnDeathZombie;
-        ChangeTargetTransform -= zombieEntity.GetComponentFromEntity<TargetTransformComponent>().ChangeTargetTransform;
-        SetIsAttacking -= zombieEntity.GetComponentFromEntity<IsAttackingComponent>().SetIsAttacking;
+        zombieEntity.GetEntityComponent<UnspawnComponent>().OnUnspawn -= UnSpawnZombie;
+        zombieEntity.GetEntityComponent<DeathComponent>().OnDeath -= OnDeathZombie;
     }
 
     private void ResetZombieStates(ZombieEntity zombieEntity)
     {
-        HPComponent hpComponent = zombieEntity.GetComponentFromEntity<HPComponent>();
-        DeathComponent deathComponent = zombieEntity.GetComponentFromEntity<DeathComponent>();
+        HPComponent hpComponent = zombieEntity.GetEntityComponent<HPComponent>();
+        DeathComponent deathComponent = zombieEntity.GetEntityComponent<DeathComponent>();
 
         hpComponent.HP = _initHP;
         deathComponent.IsDead = false;

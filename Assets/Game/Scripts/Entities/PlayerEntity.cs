@@ -20,5 +20,6 @@ public sealed class PlayerEntity : Entity,
         AddComponentToEntity(new TransformComponent(_player.transform));
         AddComponentToEntity(new ColliderComponent(_player.GetComponent<Collider>()));
         AddComponentToEntity(new OnDamageComponent(_player.OnDamage));
+        AddComponentToEntity(new DestroyedComponent(_player.onDestroy));
     }
 }
