@@ -1,11 +1,11 @@
 {
   "dependencies": {
-    "com.leopotam.ecslite": {
-      "version": "https://github.com/Leopotam/ecslite.git",
+    "com.scellecs.morpeh": {
+      "version": "https://github.com/scellecs/morpeh.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "984856664a3ae7cff5b8a16eb7ab26ec02cb47d5"
+      "hash": "2eb519ce4a4c3d0cc3096e92d0db1166aa69d88a"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
