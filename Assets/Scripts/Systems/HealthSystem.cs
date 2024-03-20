@@ -1,26 +1,38 @@
-using Scellecs.Morpeh.Systems;
 using UnityEngine;
-using Unity.IL2CPP.CompilerServices;
 using Scellecs.Morpeh;
 
-[Il2CppSetOption(Option.NullChecks, false)]
-[Il2CppSetOption(Option.ArrayBoundsChecks, false)]
-[Il2CppSetOption(Option.DivideByZeroChecks, false)]
-[CreateAssetMenu(menuName = "ECS/Systems/" + nameof(HealthSystem))]
-public sealed class HealthSystem : UpdateSystem
+public class HealthSystem : ISystem
 {
-    private Filter _filter;
-    public override void OnAwake()
+    public World World
     {
-        _filter = this.World.Filter.With<HealthComponent>().Build();
+        get => _world;
+        set => _ = _world;
     }
 
-    public override void OnUpdate(float deltaTime)
+    private Filter _filter;
+
+    private World _world;
+
+    public HealthSystem(World world)
     {
-        foreach(var entity in _filter)
+        _world = world;
+    }
+
+    public void OnAwake()
+    {
+        _filter = _world.Filter.With<HealthComponent>().Build();
+    }
+
+    public void OnUpdate(float deltaTime)
+    {
+        foreach (var entity in _filter)
         {
-            ref var healthComponent = ref entity.GetComponent<HealthComponent>();
-            Debug.Log(healthComponent.value);
+            ref var hp = ref entity.GetComponent<HealthComponent>();
+            Debug.Log(hp.value);
         }
+    }
+
+    public void Dispose()
+    {
     }
 }
