@@ -1,6 +1,4 @@
 using Scellecs.Morpeh;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ECSAdmin : MonoBehaviour
@@ -17,6 +15,7 @@ public class ECSAdmin : MonoBehaviour
 
 
         _systemsGroup.AddSystem(new HealthSystem());
+        _systemsGroup.AddSystem(new DirectToTargetSystem());
         _systemsGroup.AddSystem(new MovementSystem());
 
 
