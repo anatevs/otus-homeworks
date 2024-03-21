@@ -1284,7 +1284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
-    rotation: {x: 0, y: 0, z: 0, w: 0}
+    value: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &1707629691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1298,7 +1298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
-    value: {x: 0, y: 0, z: 1.84}
+    value: {x: 0, y: 0, z: 0}
 --- !u!114 &1707629692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1312,7 +1312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
-    value: {fileID: 1707629682}
+    value: {fileID: 0}
 --- !u!114 &1707629693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1326,7 +1326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
-    value: {x: 0, y: 0, z: 1}
+    value: {x: 0, y: 0, z: 0}
 --- !u!1001 &1738537723
 PrefabInstance:
   m_ObjectHideFlags: 0

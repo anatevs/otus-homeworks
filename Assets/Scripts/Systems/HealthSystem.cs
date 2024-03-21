@@ -21,7 +21,6 @@ public class HealthSystem : ISystem
         foreach (var entity in _filter)
         {
             ref var hp = ref entity.GetComponent<Health>();
-            Debug.Log(hp.value);
         }
     }
 

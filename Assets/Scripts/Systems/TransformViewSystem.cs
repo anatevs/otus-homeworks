@@ -12,6 +12,7 @@ public class TransformViewSystem : ILateSystem
 
     private Stash<Position> _positionStash;
     private Stash<TransformView> _transformView;
+    private Stash<Rotation> _rotationStash;
 
     public void OnAwake()
     {
@@ -23,6 +24,7 @@ public class TransformViewSystem : ILateSystem
 
         _positionStash = this.World.GetStash<Position>();
         _transformView = this.World.GetStash<TransformView>();
+        _rotationStash = this.World.GetStash<Rotation>();
     }
 
     public void OnUpdate(float deltaTime)
@@ -31,6 +33,12 @@ public class TransformViewSystem : ILateSystem
         {
             Position position = _positionStash.Get(entity);
             ref TransformView transformView = ref _transformView.Get(entity);
+
+            if (_rotationStash.Has(entity))
+            {
+                Rotation rotation = _rotationStash.Get(entity);
+                transformView.value.rotation = rotation.value;
+            }
 
             transformView.value.position = position.value;
         }
