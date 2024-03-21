@@ -12,14 +12,14 @@ public sealed class HealthSystem_so : UpdateSystem
     private Filter _filter;
     public override void OnAwake()
     {
-        _filter = this.World.Filter.With<HealthComponent>().Build();
+        _filter = this.World.Filter.With<Health>().Build();
     }
 
     public override void OnUpdate(float deltaTime)
     {
         foreach(var entity in _filter)
         {
-            ref var healthComponent = ref entity.GetComponent<HealthComponent>();
+            ref var healthComponent = ref entity.GetComponent<Health>();
             Debug.Log(healthComponent.value);
         }
     }

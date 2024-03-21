@@ -15,15 +15,20 @@ public class ECSAdmin : MonoBehaviour
 
         _systemsGroup = _world.CreateSystemsGroup();
 
-        
-        _systemsGroup.AddSystem(new HealthSystem(_world));
+
+        _systemsGroup.AddSystem(new HealthSystem());
+        _systemsGroup.AddSystem(new MovementSystem());
+
+
+
+        _systemsGroup.AddSystem(new TransformViewSystem());
 
 
         _world.AddSystemsGroup(order: 0, _systemsGroup);
     }
 
-    private void Update()
-    {
+    //private void Update()
+    //{
         //_world.Update(Time.deltaTime);
-    }
+    //}
 }

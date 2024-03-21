@@ -5,29 +5,22 @@ public class HealthSystem : ISystem
 {
     public World World
     {
-        get => _world;
-        set => _ = _world;
+        get => World.Default;
+        set { }
     }
 
     private Filter _filter;
 
-    private World _world;
-
-    public HealthSystem(World world)
-    {
-        _world = world;
-    }
-
     public void OnAwake()
     {
-        _filter = _world.Filter.With<HealthComponent>().Build();
+        _filter = this.World.Filter.With<Health>().Build();
     }
 
     public void OnUpdate(float deltaTime)
     {
         foreach (var entity in _filter)
         {
-            ref var hp = ref entity.GetComponent<HealthComponent>();
+            ref var hp = ref entity.GetComponent<Health>();
             Debug.Log(hp.value);
         }
     }

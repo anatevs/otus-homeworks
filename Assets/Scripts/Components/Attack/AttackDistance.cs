@@ -5,7 +5,7 @@ using Unity.IL2CPP.CompilerServices;
 [Il2CppSetOption(Option.NullChecks, false)]
 [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
 [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-public struct AttackDelayComponent : IComponent
+public struct AttackDistance : IComponent
 {
     public float value;
 }
