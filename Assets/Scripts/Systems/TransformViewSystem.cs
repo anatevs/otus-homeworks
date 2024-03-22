@@ -1,6 +1,6 @@
 using Scellecs.Morpeh;
 
-public class TransformViewSystem : ILateSystem
+public sealed class TransformViewSystem : ILateSystem
 {
     public World World
     {

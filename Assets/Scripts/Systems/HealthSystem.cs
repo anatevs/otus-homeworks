@@ -1,7 +1,6 @@
-using UnityEngine;
 using Scellecs.Morpeh;
 
-public class HealthSystem : ISystem
+public sealed class HealthSystem : ISystem
 {
     public World World
     {

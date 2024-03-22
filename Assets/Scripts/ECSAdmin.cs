@@ -13,7 +13,6 @@ public class ECSAdmin : MonoBehaviour
 
         _systemsGroup = _world.CreateSystemsGroup();
 
-
         _systemsGroup.AddSystem(new HealthSystem());
         _systemsGroup.AddSystem(new DirectToTargetSystem());
         _systemsGroup.AddSystem(new MovementSystem());
