@@ -28,6 +28,14 @@ public sealed class TeamService<T> where T : ITeam
         }
     }
 
+    public void AddToTeam(IEnumerable<Entity> entities)
+    {
+        foreach (Entity entity in entities)
+        {
+            _members.Add(entity);
+        }
+    }
+
     public void RemoveFromTeam(Entity entity)
     {
         _members.Remove(entity);

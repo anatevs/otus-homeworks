@@ -5,7 +5,7 @@ using TMPro.EditorUtilities;
 using UnityEngine;
 using VContainer;
 
-public class FindTargetSystem<T> : ISystem where T : ITeam
+public class TowardsTargetSystem<T> : ISystem where T : ITeam
 {
     public World World
     {
@@ -19,8 +19,7 @@ public class FindTargetSystem<T> : ISystem where T : ITeam
 
     private TeamService<T> _enemiesService;
 
-    [Inject]
-    public void Construct(TeamService<T> enemiesService)
+    public TowardsTargetSystem(TeamService<T> enemiesService)
     {
         _enemiesService = enemiesService;
     }
@@ -44,7 +43,7 @@ public class FindTargetSystem<T> : ISystem where T : ITeam
             }
             else
             {
-                if (entity.Has<Target>())
+                if (!entity.Has<Target>())
                 {
                     entity.AddComponent<Target>();
                 }
@@ -59,13 +58,12 @@ public class FindTargetSystem<T> : ISystem where T : ITeam
                 enemy.AddComponent<UnderAttackTag>();
                 entity.SetComponent<Target>(new Target { value = enemy });
                 ref MoveDirection moveDirection = ref entity.GetComponent<MoveDirection>();
-                moveDirection.value = enemy.GetComponent<Position>().value - entity.GetComponent<Position>().value;
+                moveDirection.value = (enemy.GetComponent<Position>().value - entity.GetComponent<Position>().value).normalized;
             }
         }
     }
 
     public void Dispose()
     {
-        
     }
 }
