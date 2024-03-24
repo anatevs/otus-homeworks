@@ -1,9 +1,5 @@
 using Scellecs.Morpeh;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro.EditorUtilities;
 using UnityEngine;
-using VContainer;
 
 public class TowardsTargetSystem<T> : ISystem where T : ITeam
 {
@@ -56,6 +52,7 @@ public class TowardsTargetSystem<T> : ISystem where T : ITeam
                     }
                 }
                 enemy.AddComponent<UnderAttackTag>();
+                Debug.Log($"enemy for {entity.ID} is { enemy.ID}");
                 entity.SetComponent<Target>(new Target { value = enemy });
                 ref MoveDirection moveDirection = ref entity.GetComponent<MoveDirection>();
                 moveDirection.value = (enemy.GetComponent<Position>().value - entity.GetComponent<Position>().value).normalized;
