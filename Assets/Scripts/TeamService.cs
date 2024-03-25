@@ -50,6 +50,7 @@ public sealed class TeamService<T> where T : ITeam
             
             if (_members[i].Has<UnderAttackTag>() && !_members[i].Has<IsBase>())
             {
+                Debug.Log($"{_members[i]} is under attack and is not a base");
                 continue;
             }
             else
@@ -58,8 +59,11 @@ public sealed class TeamService<T> where T : ITeam
                     Vector3.SqrMagnitude(point - _members[i].GetComponent<Position>().value);
                 if (currSqrDistance < minSqrDistance)
                 {
+                    minSqrDistance = currSqrDistance;
                     nearest = _members[i];
                 }
+
+                Debug.Log($"{_members[i].ID}, sqrMg: {currSqrDistance}");
             }
         }
         return nearest;

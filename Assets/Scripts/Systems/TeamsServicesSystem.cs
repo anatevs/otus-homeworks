@@ -25,14 +25,13 @@ public class TeamsServicesSystem : ISystem
         _filter = this.World.Filter
             .With<Position>()
             .With<Team>()
+            .With<IsActive>()
             .Build();
 
-        Debug.Log(_filter.IsEmpty());
         foreach (Entity entity in _filter)
         {
             if (entity.GetComponent<Team>().value == TeamType.Red)
             {
-                Debug.Log($"{entity} added to red team");
                 _redTeamService.AddToTeam(entity);
             }
         }

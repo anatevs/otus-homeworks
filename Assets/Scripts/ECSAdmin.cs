@@ -7,14 +7,14 @@ public class ECSAdmin : MonoBehaviour
     private World _world;
     private SystemsGroup _systemsGroup;
 
-    private TowardsTargetSystem<TeamRed> _towardsRed;
+    private DefineTargetSystem<TeamRed> _towardsRed;
 
 
     private TeamService<TeamRed> _redTeamService;
 
 
     [Inject]
-    public void Construct(TowardsTargetSystem<TeamRed> towardsRed,
+    public void Construct(DefineTargetSystem<TeamRed> towardsRed,
         TeamService<TeamRed> redTeamService)
     {
         _towardsRed = towardsRed;
@@ -33,7 +33,7 @@ public class ECSAdmin : MonoBehaviour
         _systemsGroup.AddSystem(new TeamsServicesSystem(_redTeamService));
 
         _systemsGroup.AddSystem(_towardsRed);
-        //_systemsGroup.AddSystem(new DirectToTargetSystem());
+        _systemsGroup.AddSystem(new DirectToTargetSystem());
         _systemsGroup.AddSystem(new MovementSystem());
 
 
