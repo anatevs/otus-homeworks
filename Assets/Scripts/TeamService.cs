@@ -4,7 +4,7 @@ using UnityEngine;
 
 public sealed class TeamService<T> where T : ITeam
 {
-    private List<Entity> _members = new List<Entity>();
+    private readonly List<Entity> _members = new List<Entity>();
 
     private readonly T _team;
 
@@ -47,23 +47,12 @@ public sealed class TeamService<T> where T : ITeam
         Entity nearest = null;
         for (int i = 0; i < _members.Count; i++)
         {
-            
-            if (_members[i].Has<UnderAttackTag>() && !_members[i].Has<IsBase>())
-            {
-                Debug.Log($"{_members[i]} is under attack and is not a base");
-                continue;
-            }
-            else
-            {
-                float currSqrDistance =
+            float currSqrDistance =
                     Vector3.SqrMagnitude(point - _members[i].GetComponent<Position>().value);
-                if (currSqrDistance < minSqrDistance)
-                {
-                    minSqrDistance = currSqrDistance;
-                    nearest = _members[i];
-                }
-
-                Debug.Log($"{_members[i].ID}, sqrMg: {currSqrDistance}");
+            if (currSqrDistance < minSqrDistance)
+            {
+                minSqrDistance = currSqrDistance;
+                nearest = _members[i];
             }
         }
         return nearest;

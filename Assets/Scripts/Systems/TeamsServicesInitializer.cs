@@ -1,7 +1,6 @@
 using Scellecs.Morpeh;
-using UnityEngine;
 
-public class TeamsServicesSystem : ISystem
+public class TeamsServicesInitializer : IInitializer
 {
     public World World
     {
@@ -10,14 +9,17 @@ public class TeamsServicesSystem : ISystem
     }
 
     private Filter _filter;
-    private Stash<Target> _targetStash;
-    private Stash<UnderAttackTag> _underAttackStash;
+    private readonly TeamService<TeamRed> _redTeamService;
+    private readonly TeamService<TeamBlue> _blueTeamService;
 
-    private TeamService<TeamRed> _redTeamService;
-
-    public TeamsServicesSystem(TeamService<TeamRed> redTeamService)
+    public TeamsServicesInitializer
+        (
+        TeamService<TeamRed> redTeamService,
+        TeamService<TeamBlue> blueTeamService
+        )
     {
         _redTeamService = redTeamService;
+        _blueTeamService = blueTeamService;
     }
 
     public void OnAwake()
@@ -34,15 +36,11 @@ public class TeamsServicesSystem : ISystem
             {
                 _redTeamService.AddToTeam(entity);
             }
+            else if (entity.GetComponent<Team>().value == TeamType.Blue)
+            {
+                _blueTeamService.AddToTeam(entity);
+            }
         }
-    }
-
-    public void OnUpdate(float deltaTime)
-    {
-        //foreach (Entity entity in _filter)
-        //{
-            
-        //}
     }
 
     public void Dispose()
