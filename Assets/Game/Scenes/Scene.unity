@@ -480,6 +480,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1711394828305187949, guid: 3b5b2ae0f895574449961910366cbf8a,
         type: 3}
+      propertyPath: _animDispatcher
+      value: 
+      objectReference: {fileID: 1593167938}
+    - target: {fileID: 1711394828305187949, guid: 3b5b2ae0f895574449961910366cbf8a,
+        type: 3}
       propertyPath: moveSpeed._value
       value: 7
       objectReference: {fileID: 0}
@@ -1041,6 +1046,24 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 625937915}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1593167935 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3435628029621325908, guid: 3b5b2ae0f895574449961910366cbf8a,
+    type: 3}
+  m_PrefabInstance: {fileID: 625937915}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1593167938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593167935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 317542e0b333ae342a29127415749255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1625409110
 GameObject:
   m_ObjectHideFlags: 0

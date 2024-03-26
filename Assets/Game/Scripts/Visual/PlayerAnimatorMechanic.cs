@@ -1,19 +1,21 @@
 using UnityEngine;
 
-public partial class PlayerAnimatorMechanic
+public sealed class PlayerAnimatorMechanic
 {
-    private static int State = Animator.StringToHash("MainState");
+    private readonly static int State = Animator.StringToHash("MainState");
 
-    private static int ShootTrigger = Animator.StringToHash("Shoot");
-    private static int TakeDamageTrigger = Animator.StringToHash("TakeDamage");
+    private readonly static int ShootTrigger = Animator.StringToHash("Shoot");
+    private readonly static int TakeDamageTrigger = Animator.StringToHash("TakeDamage");
 
-    private Animator _animator;
-    private IAtomicValue<Vector3> _moveDirection;
-    private IAtomicValue<bool> _isDead;
-    private IAtomicEvent<int> _onDamage;
-    private IAtomicEvent _fireRequest;
+    private readonly Animator _animator;
+    private readonly IAtomicValue<Vector3> _moveDirection;
+    private readonly IAtomicValue<bool> _isDead;
+    private readonly IAtomicEvent<int> _onDamage;
+    private readonly IAtomicEvent _fireRequest;
 
-    public PlayerAnimatorMechanic(Animator animator, IAtomicValue<Vector3> moveDirection, IAtomicValue<bool> isDead, IAtomicEvent<int> onDamage, IAtomicEvent fireRequest)
+    public PlayerAnimatorMechanic(Animator animator,
+        IAtomicValue<Vector3> moveDirection, IAtomicValue<bool> isDead,
+        IAtomicEvent<int> onDamage, IAtomicEvent fireRequest)
     {
         _animator = animator;
         _moveDirection = moveDirection;

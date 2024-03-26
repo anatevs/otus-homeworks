@@ -129,6 +129,7 @@ MonoBehaviour:
   _shootPoint: {fileID: 1067890634428359185}
   _bulletPrefab: {fileID: 7292962108530562325, guid: 7f12394cd99a93a4c8a18e1a0b1cbf06,
     type: 3}
+  _animDispatcher: {fileID: 0}
   isDead:
     _value: 0
   onDestroy:
@@ -149,8 +150,8 @@ MonoBehaviour:
     _value: 0
   weaponRefillTime:
     _value: 2
-  bulletsStorage:
-    _value: 10
+  bulletStorage:
+    _value: 0
   weaponRefillAmount:
     _value: 1
 --- !u!1 &8550233314304206884
@@ -2686,22 +2687,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2190258717553286253}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3435628029621325908 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3587277423659650105, guid: 4754efaa13741644aa1a61e4869e2c0d,
-    type: 3}
-  m_PrefabInstance: {fileID: 2190258717553286253}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &707912855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3435628029621325908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f325a0c55bf846343a4d18ae59cf9078, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player: {fileID: 1711394828305187949}

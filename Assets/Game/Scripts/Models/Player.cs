@@ -1,12 +1,17 @@
 using UnityEngine;
 
-public sealed class Player : MonoBehaviour
+public sealed partial class Player : MonoBehaviour
 {
     [SerializeField]
     private Transform _shootPoint;
 
     [SerializeField]
     private Bullet _bulletPrefab;
+
+    [SerializeField]
+    private AnimationDispatcher _animDispatcher;
+
+    private PlayerAnimEventsNames _animEventsNames;
 
     public AtomicEvent<int> OnDamage = new AtomicEvent<int>();
 
@@ -44,6 +49,8 @@ public sealed class Player : MonoBehaviour
     private TryGetProjectileMechanic _tryGetProjectileMechanic;
     private ShootRotationMechanic _shootRotationMechanic;
     private ShootMechanic _shootMechanic;
+    private AnimEventMechanic_OnShoot _onShootAnimEventMechanic;
+    private AnimEventMechanic_OnDestroy _onDestoyAnimEventMechanic;
 
     private void Awake()
     {
@@ -58,6 +65,8 @@ public sealed class Player : MonoBehaviour
         _tryGetProjectileMechanic = new TryGetProjectileMechanic(InputFireEvent, StartFireRotation, bulletStorage);
         _shootRotationMechanic = new ShootRotationMechanic(StartFireRotation, FireRequest, ShootIsDone, isRotationDone, moveDirection, rotDirection);
         _shootMechanic = new ShootMechanic(ShootEvent, ShootIsDone, _bulletPrefab, _shootPoint, transform);
+        _onShootAnimEventMechanic = new AnimEventMechanic_OnShoot(ShootEvent, _animDispatcher, _animEventsNames);
+        _onDestoyAnimEventMechanic = new AnimEventMechanic_OnDestroy(onDestroy, _animDispatcher, _animEventsNames);
     }
 
     private void Update()
@@ -79,6 +88,8 @@ public sealed class Player : MonoBehaviour
         _tryGetProjectileMechanic.OnEnable();
         _shootRotationMechanic.OnEnable();
         _shootMechanic.OnEnable();
+        _onShootAnimEventMechanic.OnEnable();
+        _onDestoyAnimEventMechanic.OnEnable();
     }
 
     private void OnDisable()
@@ -91,5 +102,7 @@ public sealed class Player : MonoBehaviour
         _tryGetProjectileMechanic.OnDisable();
         _shootRotationMechanic.OnDisable();
         _shootMechanic.OnDisable();
+        _onShootAnimEventMechanic.OnDisable();
+        _onDestoyAnimEventMechanic.OnDisable();
     }
 }
