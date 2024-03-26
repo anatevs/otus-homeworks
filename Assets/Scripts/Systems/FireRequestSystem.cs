@@ -25,9 +25,7 @@ public class FireRequestSystem : ISystem
     {
         foreach (Entity entity in _filter)
         {
-            entity.GetComponent<MoveDirection>().value = Vector3.zero;
-
-            Debug.Log($"fire request from {entity}");
+            entity.AddComponent<Standing>();
 
             entity.RemoveComponent<FireRequest>();
         }

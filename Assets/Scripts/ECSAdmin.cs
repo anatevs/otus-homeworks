@@ -34,9 +34,11 @@ public class ECSAdmin : MonoBehaviour
 
         _systemsGroup.AddSystem(new TargetDefineSystem<TeamBlue, TeamRed>(new TeamBlue(), _redTeamService));
         _systemsGroup.AddSystem(new DirectToTargetSystem());
+        _systemsGroup.AddSystem(new RotationSystem());
         _systemsGroup.AddSystem(new MovementSystem());
+        _systemsGroup.AddSystem(new AttackDistanceSystem());
 
-
+        _systemsGroup.AddSystem(new FireRequestSystem());
 
         _systemsGroup.AddSystem(new TransformViewSystem());
 

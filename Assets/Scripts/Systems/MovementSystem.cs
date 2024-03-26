@@ -17,6 +17,7 @@ public sealed class MovementSystem : ISystem
             .With<Position>()
             .With<MoveDirection>()
             .With<Speed>()
+            .Without<Standing>()
             .Build();
     }
 
@@ -28,11 +29,11 @@ public sealed class MovementSystem : ISystem
             MoveDirection moveDirection = entity.GetComponent<MoveDirection>();
             Speed speed = entity.GetComponent<Speed>();
 
-            if (entity.Has<Rotation>() && (moveDirection.value != Vector3.zero))
-            {
-                ref Rotation rotation = ref entity.GetComponent<Rotation>();
-                rotation.value = Quaternion.LookRotation(moveDirection.value);
-            }
+            //if (entity.Has<Rotation>() && (moveDirection.value != Vector3.zero))
+            //{
+            //    ref Rotation rotation = ref entity.GetComponent<Rotation>();
+            //    rotation.value = Quaternion.LookRotation(moveDirection.value);
+            //}
 
             position.value += moveDirection.value * speed.value * deltaTime;
         }
