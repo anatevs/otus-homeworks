@@ -11,7 +11,7 @@ public sealed partial class Player : MonoBehaviour
     [SerializeField]
     private AnimationDispatcher _animDispatcher;
 
-    private PlayerAnimEventsNames _animEventsNames;
+    private readonly PlayerAnimEventsNames _animEventsNames;
 
     public AtomicEvent<int> OnDamage = new AtomicEvent<int>();
 

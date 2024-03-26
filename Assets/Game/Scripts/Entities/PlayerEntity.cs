@@ -7,7 +7,7 @@ public sealed class PlayerEntity : Entity,
     [SerializeField]
     private Player _player;
 
-    public void Initialize()
+    void IInitializable.Initialize()
     {
         Init();
     }

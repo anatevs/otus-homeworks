@@ -32,9 +32,7 @@ public class StayDuringAttackMechanic
         {
             return;
         }
-        else
-        {
-            _canMove.Value = !isAttacking;
-        }
+
+        _canMove.Value = !isAttacking;
     }
 }

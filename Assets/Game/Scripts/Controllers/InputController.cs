@@ -5,6 +5,13 @@ public class InputController : MonoBehaviour
     [SerializeField]
     private PlayerEntity _playerEntity;
 
+    private Camera _camera;
+
+    private void Start()
+    {
+        _camera = Camera.main;
+    }
+
     void Update()
     {
         MakeFire();
@@ -16,7 +23,7 @@ public class InputController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Ray castPoint = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray castPoint = _camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(castPoint, out RaycastHit hit))
             {
                 Vector3 mousePos = hit.point;
@@ -29,26 +36,8 @@ public class InputController : MonoBehaviour
 
     private Vector3 GetDirection()
     {
-        if (Input.GetKey(KeyCode.W))
-        {
-            return Vector3.forward;
-        }
+        Vector2 inputData = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        else if (Input.GetKey(KeyCode.A))
-        {
-            return Vector3.left;
-        }
-
-        else if (Input.GetKey(KeyCode.S))
-        {
-            return Vector3.back;
-        }
-
-        else if (Input.GetKey(KeyCode.D))
-        {
-            return Vector3.right;
-        }
-
-        return Vector3.zero;
+        return new Vector3(inputData.x, 0, inputData.y);
     }
 }

@@ -15,13 +15,13 @@ public class FinishGameManager :
         _gameManager = gameManager;
     }
 
-    public void PostInitialize()
+    void IPostInitializable.PostInitialize()
     {
         _playerEntity.GetEntityComponent<DeathComponent>().OnDeath += MakeFinishGame;
         _playerEntity.GetEntityComponent<DestroyedComponent>().OnDestroyed += MakeEndGame;
     }
 
-    public void Dispose()
+    void IDisposable.Dispose()
     {
         _playerEntity.GetEntityComponent<DeathComponent>().OnDeath -= MakeFinishGame;
         _playerEntity.GetEntityComponent<DestroyedComponent>().OnDestroyed -= MakeEndGame;

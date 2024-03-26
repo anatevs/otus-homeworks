@@ -14,7 +14,7 @@ public class GameListenersInstaller : IPostInitializable
         _injectedListeners = injectedListeners;
     }
 
-    public void PostInitialize()
+    void IPostInitializable.PostInitialize()
     {
         _listenersContainer.AddListeners(_injectedListeners);
     }
