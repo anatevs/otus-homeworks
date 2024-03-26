@@ -25,9 +25,9 @@ public class GameInfoModel :
     private int _bulletsCapacity;
 
     private readonly PlayerEntity _playerEntity;
-    private readonly ZombieSystem _zombieSystem;
+    private readonly ZombieSpawnSystem _zombieSystem;
 
-    public GameInfoModel(PlayerEntity playerEntity, ZombieSystem zombieSystem)
+    public GameInfoModel(PlayerEntity playerEntity, ZombieSpawnSystem zombieSystem)
     {
         _playerEntity = playerEntity;
         _zombieSystem = zombieSystem;

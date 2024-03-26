@@ -2,19 +2,16 @@ using System;
 using UnityEngine;
 using VContainer;
 
-public class ZombieSystem : 
-    MonoBehaviour,
-    IFinishGameListener
+public class ZombieSpawnSystem : MonoBehaviour
 {
     public event Action<int> OnDestroyZombie;
 
-    [SerializeField]
-    private float _spawnCooldown = 3f;
+    public AtomicVariable<float> _countAmount;
+    private readonly AtomicEvent OnCounted = new AtomicEvent();
+    private readonly AtomicEvent ResetCounter = new AtomicEvent();
+    private CounterMechanic _counterMechanic;
 
     private int _destoyedCount = 0;
-    private event Action OnCountdown;
-    private float _currentTimer;
-    private bool _stopCountdown;
 
     private readonly Vector3[] _spawnPoints = 
         {
@@ -34,53 +31,26 @@ public class ZombieSystem :
         _playerEntity = playerEntity;
     }
 
-    private void Start()
+    private void Awake()
     {
-        _stopCountdown = false;
-        ResetSpawnTimer();
+        _counterMechanic = new CounterMechanic(OnCounted, ResetCounter, _countAmount);
     }
 
     private void Update()
     {
-        if (_stopCountdown)
-        {
-            return;
-        }
-        SpawnTimer();
+        _counterMechanic.Update();
     }
 
     private void OnEnable()
     {
-        OnCountdown += SpawnZombie;
+        OnCounted.Subscribe(SpawnZombie);
+        _counterMechanic.OnEnable();
     }
 
     private void OnDisable()
     {
-        OnCountdown -= SpawnZombie;
-    }
-
-    public void OnFinishGame()
-    {
-        _stopCountdown = true;
-    }
-
-    private void SpawnTimer()
-    {
-        _currentTimer -= Time.deltaTime;
-        if (_currentTimer <= 0)
-        {
-            ResetSpawnTimer();
-            OnCountdown.Invoke();
-        }
-        else
-        {
-            return;
-        }
-    }
-
-    private void ResetSpawnTimer()
-    {
-        _currentTimer = _spawnCooldown;
+        OnCounted.Unsubscribe(SpawnZombie);
+        _counterMechanic.OnDisable();
     }
 
     private void SpawnZombie()

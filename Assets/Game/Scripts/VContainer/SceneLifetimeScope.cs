@@ -11,7 +11,7 @@ public class SceneLifetimeScope : LifetimeScope
     private PoolParams<ZombieEntity> _zombieEntityPoolParams;
 
     [SerializeField]
-    private ZombieSystem _zombieSystem;
+    private ZombieSpawnSystem _zombieSystem;
 
     [SerializeField]
     private GameManager _gameManager;
@@ -42,7 +42,7 @@ public class SceneLifetimeScope : LifetimeScope
 
     private void RegisterZombieSystem(IContainerBuilder builder)
     {
-        builder.RegisterComponent<ZombieSystem>(_zombieSystem);
+        builder.RegisterComponent<ZombieSpawnSystem>(_zombieSystem);
     }
 
     private void RegisterUI(IContainerBuilder builder)
