@@ -16,12 +16,15 @@ public class SceneLifetimeScope : LifetimeScope
     [SerializeField]
     private GameManager _gameManager;
 
+    [SerializeField]
+    private GameInfoView _gameInfoView;
+
     protected override void Configure(IContainerBuilder builder)
     {
         RegisterEntities(builder);
         RegisterPools(builder);
         RegisterZombieSystem(builder);
-        RegisterUIPresenters(builder);
+        RegisterUI(builder);
         RegisterGameListenersAndManager(builder);
     }
 
@@ -42,11 +45,16 @@ public class SceneLifetimeScope : LifetimeScope
         builder.RegisterComponent<ZombieSystem>(_zombieSystem);
     }
 
-    private void RegisterUIPresenters(IContainerBuilder builder)
+    private void RegisterUI(IContainerBuilder builder)
     {
-        builder.Register<GameInfoPresenter>(Lifetime.Singleton).
-            AsImplementedInterfaces().
-            AsSelf();
+        builder.Register<GameInfoModel>(Lifetime.Singleton)
+            .AsImplementedInterfaces()
+            .AsSelf();
+
+        builder.Register<GameInfoController>(Lifetime.Singleton)
+            .WithParameter<GameInfoView>(_gameInfoView)
+            .AsImplementedInterfaces()
+            .AsSelf();
     }
 
     private void RegisterGameListenersAndManager(IContainerBuilder builder)
