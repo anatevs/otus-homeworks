@@ -33,6 +33,11 @@ public class AttackDistanceSystem : ISystem
             {
                 entity.AddComponent<FireRequest>();
             }
+            else
+            {
+                Debug.Log($"{sqrDistance - attackDistance * attackDistance}");
+                entity.RemoveComponent<Standing>();
+            }
         }
     }
 

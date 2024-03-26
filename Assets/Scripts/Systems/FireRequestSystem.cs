@@ -1,7 +1,6 @@
 using Scellecs.Morpeh;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Scellecs.Morpeh.Providers;
+using VContainer;
 
 public class FireRequestSystem : ISystem
 {
@@ -13,12 +12,17 @@ public class FireRequestSystem : ISystem
 
     private Filter _filter;
 
+    [Inject]
+    private World _eventsWorld;
+
     public void OnAwake()
     {
         _filter = this.World.Filter
             .With<FireRequest>()
             .With<Target>()
             .Build();
+
+        
     }
 
     public void OnUpdate(float deltaTime)

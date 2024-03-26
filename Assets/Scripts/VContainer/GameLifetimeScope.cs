@@ -1,3 +1,4 @@
+using Scellecs.Morpeh;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -9,6 +10,7 @@ public class GameLifetimeScope : LifetimeScope
 
     protected override void Configure(IContainerBuilder builder)
     {
+        BuildEventsWorld(builder);
         BuildTeamServices(builder);
     }
 
@@ -18,5 +20,11 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<TeamService<TeamRed>>(Lifetime.Singleton).WithParameter<TeamRed>(new TeamRed());
 
         builder.RegisterComponent<ECSAdmin>(_ECSAdmin);
+    }
+
+    private void BuildEventsWorld(IContainerBuilder builder)
+    {
+        World _eventsWorld = World.Create(ECSWorlds.Events);
+        builder.RegisterComponent<World>(_eventsWorld);
     }
 }

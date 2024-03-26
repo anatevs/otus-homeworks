@@ -7,16 +7,21 @@ public class ECSAdmin : MonoBehaviour
     private World _world;
     private SystemsGroup _systemsGroup;
 
+    private World _eventsWorld;
+    private SystemsGroup _events;
+
     private TeamService<TeamRed> _redTeamService;
     private TeamService<TeamBlue> _blueTeamService;
 
     [Inject]
     public void Construct
         (
+        World eventsWorld,
         TeamService<TeamRed> redTeamService,
         TeamService<TeamBlue> blueTeamService
         )
     {
+        _eventsWorld = eventsWorld;
         _redTeamService = redTeamService;
         _blueTeamService = blueTeamService;
     }
@@ -24,8 +29,10 @@ public class ECSAdmin : MonoBehaviour
     private void Awake()
     {
         _world = World.Default;
-
         _systemsGroup = _world.CreateSystemsGroup();
+
+        _events = _eventsWorld.CreateSystemsGroup();
+
 
         _systemsGroup.AddInitializer(new TeamsServicesInitializer(_redTeamService, _blueTeamService));
 
