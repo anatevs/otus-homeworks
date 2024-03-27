@@ -27,7 +27,7 @@ public class TeamsServicesInitializer : IInitializer
         _filter = this.World.Filter
             .With<Position>()
             .With<Team>()
-            .With<IsActive>()
+            .Without<Inactive>()
             .Build();
 
         foreach (Entity entity in _filter)

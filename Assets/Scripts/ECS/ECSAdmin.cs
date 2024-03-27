@@ -7,23 +7,21 @@ public class ECSAdmin : MonoBehaviour
     private World _world;
     private SystemsGroup _systemsGroup;
 
-    private World _eventsWorld;
-    private SystemsGroup _events;
-
     private TeamService<TeamRed> _redTeamService;
     private TeamService<TeamBlue> _blueTeamService;
+    private PrefabsStorage _prefabStorage;
 
     [Inject]
     public void Construct
         (
-        World eventsWorld,
         TeamService<TeamRed> redTeamService,
-        TeamService<TeamBlue> blueTeamService
+        TeamService<TeamBlue> blueTeamService,
+        PrefabsStorage prefabStorage
         )
     {
-        _eventsWorld = eventsWorld;
         _redTeamService = redTeamService;
         _blueTeamService = blueTeamService;
+        _prefabStorage = prefabStorage;
     }
 
     private void Awake()
@@ -31,10 +29,8 @@ public class ECSAdmin : MonoBehaviour
         _world = World.Default;
         _systemsGroup = _world.CreateSystemsGroup();
 
-        _events = _eventsWorld.CreateSystemsGroup();
-
-
         _systemsGroup.AddInitializer(new TeamsServicesInitializer(_redTeamService, _blueTeamService));
+        _systemsGroup.AddInitializer(new PrefabsInitializer(_prefabStorage));
 
 
         _systemsGroup.AddSystem(new HealthSystem());
@@ -51,10 +47,6 @@ public class ECSAdmin : MonoBehaviour
 
 
         _world.AddSystemsGroup(order: 0, _systemsGroup);
-    }
 
-    //private void Update()
-    //{
-        //_world.Update(Time.deltaTime);
-    //}
+    }
 }

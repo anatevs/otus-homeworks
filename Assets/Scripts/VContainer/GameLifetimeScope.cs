@@ -1,4 +1,3 @@
-using Scellecs.Morpeh;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -8,10 +7,14 @@ public class GameLifetimeScope : LifetimeScope
     [SerializeField]
     private ECSAdmin _ECSAdmin;
 
+    [SerializeField]
+    private PrefabsStorage _prefabsStorage;
+
     protected override void Configure(IContainerBuilder builder)
     {
-        BuildEventsWorld(builder);
         BuildTeamServices(builder);
+
+        BuildPrefabStorage(builder);
     }
 
     private void BuildTeamServices(IContainerBuilder builder)
@@ -22,9 +25,20 @@ public class GameLifetimeScope : LifetimeScope
         builder.RegisterComponent<ECSAdmin>(_ECSAdmin);
     }
 
-    private void BuildEventsWorld(IContainerBuilder builder)
+    private void BuildPrefabStorage(IContainerBuilder builder)
     {
-        World _eventsWorld = World.Create(ECSWorlds.Events);
-        builder.RegisterComponent<World>(_eventsWorld);
+        builder.RegisterComponent<PrefabsStorage>(_prefabsStorage);
     }
+
+
+
+
+
+
+
+
+
+
+
+
 }

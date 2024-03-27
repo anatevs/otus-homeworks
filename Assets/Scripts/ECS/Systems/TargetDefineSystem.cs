@@ -26,6 +26,7 @@ public class TargetDefineSystem<TPlayer, TEnemy> : ISystem
     public void OnAwake()
     {
         _filter = this.World.Filter
+            .With<MobFlag>()
             .With<Position>()
             .With<MoveDirection>()
             .Build();
@@ -49,7 +50,7 @@ public class TargetDefineSystem<TPlayer, TEnemy> : ISystem
             {
                 Entity currTarget = SearchNearestTarget(entity);
                 Entity prevTarget = entity.GetComponent<Target>().value;
-                if (prevTarget.Has<IsActive>() && (currTarget == prevTarget))
+                if (!prevTarget.Has<Inactive>() && (currTarget == prevTarget))
                 {
                     continue;
                 }

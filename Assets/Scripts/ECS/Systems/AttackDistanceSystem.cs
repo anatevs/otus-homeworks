@@ -35,7 +35,7 @@ public class AttackDistanceSystem : ISystem
             }
             else
             {
-                Debug.Log($"{sqrDistance - attackDistance * attackDistance}");
+                //Debug.Log($"{sqrDistance - attackDistance * attackDistance}");
                 entity.RemoveComponent<Standing>();
             }
         }
