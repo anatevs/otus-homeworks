@@ -11,6 +11,6 @@ public sealed class MoveDirectionProvider : MonoProvider<MoveDirection>
     protected override void Initialize()
     {
         base.Initialize();
-        Entity.GetComponent<MoveDirection>().value = Vector3.forward;
+        Entity.GetComponent<MoveDirection>().value = transform.forward;
     }
 }

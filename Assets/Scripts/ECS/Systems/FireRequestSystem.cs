@@ -38,16 +38,23 @@ public class FireRequestSystem : ISystem
         foreach (Entity entity in _filter)
         {
             entity.AddComponent<Standing>();
+
             foreach (Entity prefabEntity in _prefabsFilter)
             {
-                if (prefabEntity.GetComponent<Team>().value == entity.GetComponent<Team>().value)
+                if (prefabEntity.GetComponent<Team>().value == entity.GetComponent<Team>().value
+                    && prefabEntity.GetComponent<PrefabType>().value == _arrow)
                 {
-                    if (prefabEntity.GetComponent<PrefabType>().value == _arrow)
+                    GameObject newGameObject = GameObject.Instantiate(prefabEntity.GetComponent<Prefab>().prefab,
+                        entity.GetComponent<TransformView>().value.position,
+                        entity.GetComponent<Rotation>().value);
+
+                    Entity newEntity = newGameObject.GetComponent<PositionProvider>().Entity;
+                    newEntity.GetComponent<MoveDirection>() = entity.GetComponent<MoveDirection>();
+                    if (newEntity.Has<Inactive>())
                     {
-                        GameObject.Instantiate(prefabEntity.GetComponent<Prefab>().prefab,
-                            entity.GetComponent<TransformView>().value.position,
-                            entity.GetComponent<Rotation>().value);
+                        newEntity.RemoveComponent<Inactive>();
                     }
+                    break;
                 }
             }
 
