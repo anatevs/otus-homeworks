@@ -3,9 +3,9 @@ using UnityEngine;
 public class PrefabsStorage : MonoBehaviour
 {
     [SerializeField]
-    private PrefabParams[] _prefabs;
+    private PrefabAndPoolParams[] _prefabs;
 
-    public PrefabParams[] GetPrefabs()
+    public PrefabAndPoolParams[] GetPrefabs()
     {
         return _prefabs;
     }

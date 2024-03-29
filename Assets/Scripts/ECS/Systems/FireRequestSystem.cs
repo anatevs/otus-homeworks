@@ -50,6 +50,8 @@ public class FireRequestSystem : ISystem
                         entity.GetComponent<TransformView>().value.position,
                         entity.GetComponent<Rotation>().value);
 
+                    //newGameObject.transform.SetParent()
+
                     Entity newEntity = newGameObject.GetComponent<MovableProvider>().Entity;
                     if (newEntity.Has<Inactive>())
                     {

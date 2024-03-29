@@ -10,6 +10,5 @@ public struct SpawnRequest : IComponent
 {
     public ObjectsTypeNames typeName;
     public TeamType teamType;
-    public Vector3 position;
-    public Quaternion rotation;
+    public Transform spawnTransform;
 }

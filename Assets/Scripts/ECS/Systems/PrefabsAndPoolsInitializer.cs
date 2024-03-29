@@ -19,14 +19,19 @@ public sealed class PrefabsAndPoolsInitializer : IInitializer
 
     public void OnAwake()
     {
-        PrefabParams[] prefabsInfo = _prefabStorage.GetPrefabs();
-        for (int i = 0; i < prefabsInfo.Length; i++)
+        PrefabAndPoolParams[] prefabsAndPoolInfo = _prefabStorage.GetPrefabs();
+        for (int i = 0; i < prefabsAndPoolInfo.Length; i++)
         {
-            Entity prefabEntity = this.World.CreateEntity();
-            prefabEntity.AddComponent<Team>() = prefabsInfo[i].teamType;
-            prefabEntity.AddComponent<ObjectType>() = prefabsInfo[i].objectType;
-            prefabEntity.AddComponent<Prefab>() = prefabsInfo[i].prefab;
-            prefabEntity.AddComponent<PoolQueue>().value = new Queue<GameObject>();
+            Entity prefabAndPoolEntity = this.World.CreateEntity();
+            prefabAndPoolEntity.AddComponent<Team>() = prefabsAndPoolInfo[i].teamType;
+            prefabAndPoolEntity.AddComponent<ObjectType>() = prefabsAndPoolInfo[i].objectType;
+            prefabAndPoolEntity.AddComponent<Prefab>() = prefabsAndPoolInfo[i].prefab;
+            prefabAndPoolEntity.AddComponent<PoolParams>() = new PoolParams()
+            {
+                queue = new Queue<GameObject>(),
+                poolTransform = prefabsAndPoolInfo[i].poolTransform,
+                worldTransform = prefabsAndPoolInfo[i].worldTransform
+            };
         }
     }
 
