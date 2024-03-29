@@ -1,6 +1,4 @@
 using Scellecs.Morpeh;
-using UnityEngine;
-using VContainer;
 
 public class TargetDefineSystem<TPlayer, TEnemy> : ISystem
     where TPlayer : ITeam
@@ -68,9 +66,9 @@ public class TargetDefineSystem<TPlayer, TEnemy> : ISystem
 
     private void SetTarget(Entity entity, Entity target)
     {
-        Entity enemy = SearchNearestTarget(entity);
-        enemy.AddComponent<UnderAttackTag>();
-        entity.SetComponent<Target>(new Target { value = enemy });
+        //Entity enemy = SearchNearestTarget(entity);
+        //enemy.AddComponent<UnderAttackTag>();
+        entity.SetComponent<Target>(new Target { value = target });
     }
 
     private Entity SearchNearestTarget(Entity entity)

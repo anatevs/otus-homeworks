@@ -4,6 +4,6 @@ using System;
 public struct PrefabParams
 {
     public Prefab prefab;
-    public PrefabType prefabType;
+    public ObjectType objectType;
     public Team teamType;
 }

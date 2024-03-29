@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public sealed class PoolWithECS
 {
@@ -34,7 +33,7 @@ public sealed class PoolWithECS
 
         for (var i = 0; i < _initialCount; i++)
         {
-            var subject = _container.Instantiate(_prefab, _poolTransform);
+            GameObject subject = _container.Instantiate(_prefab, _poolTransform);
             _listenersContainer.AddListener(subject);
             _pool.Enqueue(subject);
         }
@@ -42,20 +41,19 @@ public sealed class PoolWithECS
 
     public Entity Spawn(Vector3 position, Quaternion rotation)
     {
-        GameObject subject;
-        if (_pool.TryDequeue(out subject))
+        if (_pool.TryDequeue(out GameObject go))
         {
-            subject.transform.SetParent(_worldTransform);
+            go.transform.SetParent(_worldTransform);
         }
         else
         {
-            subject = _container.Instantiate(_prefab, _worldTransform);
-            _listenersContainer.AddListener(subject);
+            go = _container.Instantiate(_prefab, _worldTransform);
+            _listenersContainer.AddListener(go);
         }
-        subject.transform.SetPositionAndRotation(position, rotation);
-        subject.SetActive(true);
+        go.transform.SetPositionAndRotation(position, rotation);
+        go.SetActive(true);
 
-        Entity entity = subject.GetComponent<PositionProvider>().Entity;
+        Entity entity = go.GetComponent<PositionProvider>().Entity;
         if (entity.Has<Inactive>())
         {
             entity.RemoveComponent<Inactive>();
@@ -66,9 +64,9 @@ public sealed class PoolWithECS
     public void UnSpawn(Entity entity)
     {
         entity.AddComponent<Inactive>();
-        GameObject subject = entity.GetComponent<TransformView>().value.gameObject;
-        subject.transform.SetParent(_poolTransform);
-        subject.SetActive(false);
-        _pool.Enqueue(subject);
+        GameObject go = entity.GetComponent<TransformView>().value.gameObject;
+        go.transform.SetParent(_poolTransform);
+        go.SetActive(false);
+        _pool.Enqueue(go);
     }
 }

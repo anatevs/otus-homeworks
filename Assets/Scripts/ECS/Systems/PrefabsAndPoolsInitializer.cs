@@ -1,7 +1,8 @@
 using Scellecs.Morpeh;
+using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class PrefabsInitializer : IInitializer
+public sealed class PrefabsAndPoolsInitializer : IInitializer
 {
     public World World
     {
@@ -11,7 +12,7 @@ public sealed class PrefabsInitializer : IInitializer
 
     private readonly PrefabsStorage _prefabStorage;
 
-    public PrefabsInitializer(PrefabsStorage prefabStorage)
+    public PrefabsAndPoolsInitializer(PrefabsStorage prefabStorage)
     {
         _prefabStorage = prefabStorage;
     }
@@ -23,14 +24,13 @@ public sealed class PrefabsInitializer : IInitializer
         {
             Entity prefabEntity = this.World.CreateEntity();
             prefabEntity.AddComponent<Team>() = prefabsInfo[i].teamType;
-            prefabEntity.AddComponent<PrefabType>() = prefabsInfo[i].prefabType;
+            prefabEntity.AddComponent<ObjectType>() = prefabsInfo[i].objectType;
             prefabEntity.AddComponent<Prefab>() = prefabsInfo[i].prefab;
+            prefabEntity.AddComponent<PoolQueue>().value = new Queue<GameObject>();
         }
     }
 
     public void Dispose()
     {
-        
     }
-
 }

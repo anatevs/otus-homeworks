@@ -14,7 +14,7 @@ public class FireRequestSystem : ISystem
     private Filter _filter;
     private Filter _prefabsFilter;
 
-    private PrefabObjectsTypes _arrow;
+    private ObjectsTypeNames _arrow;
 
     public void OnAwake()
     {
@@ -26,11 +26,11 @@ public class FireRequestSystem : ISystem
 
         _prefabsFilter = this.World.Filter
             .With<Prefab>()
-            .With<PrefabType>()
+            .With<ObjectType>()
             .With<Team>()
             .Build();
 
-        _arrow = PrefabObjectsTypes.Arrow;
+        _arrow = ObjectsTypeNames.Arrow;
     }
 
     public void OnUpdate(float deltaTime)
@@ -39,17 +39,18 @@ public class FireRequestSystem : ISystem
         {
             entity.AddComponent<Standing>();
 
+            //start fire animation...
+
             foreach (Entity prefabEntity in _prefabsFilter)
             {
                 if (prefabEntity.GetComponent<Team>().value == entity.GetComponent<Team>().value
-                    && prefabEntity.GetComponent<PrefabType>().value == _arrow)
+                    && prefabEntity.GetComponent<ObjectType>().value == _arrow)
                 {
                     GameObject newGameObject = GameObject.Instantiate(prefabEntity.GetComponent<Prefab>().prefab,
                         entity.GetComponent<TransformView>().value.position,
                         entity.GetComponent<Rotation>().value);
 
-                    Entity newEntity = newGameObject.GetComponent<PositionProvider>().Entity;
-                    newEntity.GetComponent<MoveDirection>() = entity.GetComponent<MoveDirection>();
+                    Entity newEntity = newGameObject.GetComponent<MovableProvider>().Entity;
                     if (newEntity.Has<Inactive>())
                     {
                         newEntity.RemoveComponent<Inactive>();

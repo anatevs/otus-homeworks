@@ -1,4 +1,4 @@
-public enum PrefabObjectsTypes
+public enum ObjectsTypeNames
 {
     Arrow,
     Archer,
