@@ -11,7 +11,7 @@ public class SpawnSystem : ISystem
         set { }
     }
 
-    private Filter _requestFilter;
+    private Filter _spawnFilter;
     private Filter _prefabsAndPoolFilter;
 
     private Stash<Team> _teamStash;
@@ -19,7 +19,7 @@ public class SpawnSystem : ISystem
 
     public void OnAwake()
     {
-        _requestFilter = this.World.Filter
+        _spawnFilter = this.World.Filter
             .With<SpawnRequest>()
             .Build();
 
@@ -36,7 +36,7 @@ public class SpawnSystem : ISystem
 
     public void OnUpdate(float deltaTime)
     {
-        foreach (Entity entity in _requestFilter)
+        foreach (Entity entity in _spawnFilter)
         {
             SpawnRequest spawnRequest = entity.GetComponent<SpawnRequest>();
             PoolParams poolParams = new();
@@ -108,5 +108,4 @@ public class SpawnSystem : ISystem
     public void Dispose()
     {
     }
-
 }

@@ -29,6 +29,7 @@ public class ECSAdmin : MonoBehaviour
         _world = World.Default;
         _systemsGroup = _world.CreateSystemsGroup();
 
+
         _systemsGroup.AddInitializer(new TeamsServicesInitializer(_redTeamService, _blueTeamService));
         _systemsGroup.AddInitializer(new PrefabsAndPoolsInitializer(_prefabStorage));
 
