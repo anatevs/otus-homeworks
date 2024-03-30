@@ -56,6 +56,7 @@ MonoBehaviour:
   - rid: 4747080545839874054
   - rid: 4747080545839874055
   - rid: 4747080545839874056
+  - rid: 4747080576224460801
   references:
     version: 2
     RefIds:
@@ -91,6 +92,10 @@ MonoBehaviour:
       type: {class: Speed, ns: , asm: Assembly-CSharp}
       data:
         value: 3
+    - rid: 4747080576224460801
+      type: {class: Damage, ns: , asm: Assembly-CSharp}
+      data:
+        value: 1
 --- !u!65 &2544101980322963378
 BoxCollider:
   m_ObjectHideFlags: 0
