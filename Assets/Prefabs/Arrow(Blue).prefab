@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2240616049661668045}
-  - component: {fileID: 2027028454260952841}
   - component: {fileID: 2544101980322963378}
+  - component: {fileID: 5231323086052694560}
   m_Layer: 0
   m_Name: Arrow(Blue)
   m_TagString: Untagged
@@ -34,68 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2027028454260952841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6233400322345556100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8bc5b78ab416f24e947992b57560664, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializedComponents:
-  - rid: 4747080545839874048
-  - rid: 4747080545839874049
-  - rid: 4747080545839874050
-  - rid: 4747080545839874058
-  - rid: 4747080545839874052
-  - rid: 4747080545839874057
-  - rid: 4747080545839874054
-  - rid: 4747080545839874055
-  - rid: 4747080545839874056
-  - rid: 4747080576224460801
-  references:
-    version: 2
-    RefIds:
-    - rid: 4747080545839874048
-      type: {class: Inactive, ns: , asm: Assembly-CSharp}
-    - rid: 4747080545839874049
-      type: {class: Position, ns: , asm: Assembly-CSharp}
-      data:
-        value: {x: 0, y: 0, z: 0}
-    - rid: 4747080545839874050
-      type: {class: Rotation, ns: , asm: Assembly-CSharp}
-      data:
-        value: {x: 0, y: 0, z: 0, w: 0}
-    - rid: 4747080545839874052
-      type: {class: MoveDirection, ns: , asm: Assembly-CSharp}
-      data:
-        value: {x: 0, y: 0, z: 0}
-    - rid: 4747080545839874054
-      type: {class: Team, ns: , asm: Assembly-CSharp}
-      data:
-        value: 0
-    - rid: 4747080545839874055
-      type: {class: ObjectType, ns: , asm: Assembly-CSharp}
-      data:
-        value: 0
-    - rid: 4747080545839874056
-      type: {class: ProjectileFlag, ns: , asm: Assembly-CSharp}
-    - rid: 4747080545839874057
-      type: {class: TransformView, ns: , asm: Assembly-CSharp}
-      data:
-        value: {fileID: 2240616049661668045}
-    - rid: 4747080545839874058
-      type: {class: Speed, ns: , asm: Assembly-CSharp}
-      data:
-        value: 3
-    - rid: 4747080576224460801
-      type: {class: Damage, ns: , asm: Assembly-CSharp}
-      data:
-        value: 1
 --- !u!65 &2544101980322963378
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -104,11 +42,73 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6233400322345556100}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5231323086052694560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6233400322345556100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c24d8d32c4bd0fe4fab8793a8aefa5d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedComponents:
+  - rid: 4747080576224460802
+  - rid: 4747080576224460803
+  - rid: 4747080576224460804
+  - rid: 4747080576224460815
+  - rid: 4747080576224460806
+  - rid: 4747080576224460812
+  - rid: 4747080576224460808
+  - rid: 4747080576224460809
+  - rid: 4747080576224460810
+  - rid: 4747080576224460813
+  references:
+    version: 2
+    RefIds:
+    - rid: 4747080576224460802
+      type: {class: Inactive, ns: , asm: Assembly-CSharp}
+    - rid: 4747080576224460803
+      type: {class: Position, ns: , asm: Assembly-CSharp}
+      data:
+        value: {x: 0, y: 0, z: 0}
+    - rid: 4747080576224460804
+      type: {class: Rotation, ns: , asm: Assembly-CSharp}
+      data:
+        value: {x: 0, y: 0, z: 0, w: 0}
+    - rid: 4747080576224460806
+      type: {class: MoveDirection, ns: , asm: Assembly-CSharp}
+      data:
+        value: {x: 0, y: 0, z: 0}
+    - rid: 4747080576224460808
+      type: {class: Team, ns: , asm: Assembly-CSharp}
+      data:
+        value: 0
+    - rid: 4747080576224460809
+      type: {class: ObjectType, ns: , asm: Assembly-CSharp}
+      data:
+        value: 0
+    - rid: 4747080576224460810
+      type: {class: ProjectileFlag, ns: , asm: Assembly-CSharp}
+    - rid: 4747080576224460812
+      type: {class: TransformView, ns: , asm: Assembly-CSharp}
+      data:
+        value: {fileID: 2240616049661668045}
+    - rid: 4747080576224460813
+      type: {class: Damage, ns: , asm: Assembly-CSharp}
+      data:
+        value: 1
+    - rid: 4747080576224460815
+      type: {class: Speed, ns: , asm: Assembly-CSharp}
+      data:
+        value: 5
 --- !u!1 &6709056508286806430
 GameObject:
   m_ObjectHideFlags: 0

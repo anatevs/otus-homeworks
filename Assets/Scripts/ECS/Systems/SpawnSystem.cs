@@ -1,4 +1,5 @@
 using Scellecs.Morpeh;
+using Scellecs.Morpeh.Providers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -101,7 +102,7 @@ public class SpawnSystem : ISystem
         go.transform.SetParent(worldTransform);
         go.SetActive(true);
 
-        Entity spawnEntity = go.GetComponent<MovableProvider>().Entity;
+        Entity spawnEntity = go.GetComponent<UniversalProvider>().Entity;
         spawnEntity.RemoveComponent<Inactive>();
     }
 

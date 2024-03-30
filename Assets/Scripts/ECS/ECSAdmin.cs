@@ -37,6 +37,7 @@ public class ECSAdmin : MonoBehaviour
         _systemsGroup.AddSystem(new HealthSystem());
 
         _systemsGroup.AddSystem(new TargetDefineSystem<TeamBlue, TeamRed>(new TeamBlue(), _redTeamService));
+        _systemsGroup.AddSystem(new TargetDefineSystem<TeamRed, TeamBlue>(new TeamRed(), _blueTeamService));
         _systemsGroup.AddSystem(new DirectToTargetSystem());
         _systemsGroup.AddSystem(new RotationSystem());
         _systemsGroup.AddSystem(new MovementSystem());
@@ -45,6 +46,7 @@ public class ECSAdmin : MonoBehaviour
         _systemsGroup.AddSystem(new FireRequestSystem());
 
         _systemsGroup.AddSystem(new SpawnSystem());
+        _systemsGroup.AddSystem(new UnspawnSystem());
 
         _systemsGroup.AddSystem(new TransformViewSystem());
 
