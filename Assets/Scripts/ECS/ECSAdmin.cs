@@ -43,6 +43,8 @@ public class ECSAdmin : MonoBehaviour
 
         _systemsGroup.AddSystem(new FireRequestSystem());
 
+        _systemsGroup.AddSystem(new SpawnSystem());
+
         _systemsGroup.AddSystem(new TransformViewSystem());
 
 

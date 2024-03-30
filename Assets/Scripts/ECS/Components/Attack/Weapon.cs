@@ -8,6 +8,6 @@ using Unity.IL2CPP.CompilerServices;
 [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 public struct Weapon : IComponent
 {
-    public ObjectsTypeNames typeName;
+    public ObjectsTypeNames projectileType;
     public Transform firePoint;
 }

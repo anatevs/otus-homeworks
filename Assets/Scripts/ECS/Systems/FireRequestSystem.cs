@@ -20,7 +20,7 @@ public class FireRequestSystem : ISystem
     {
         _filter = this.World.Filter
             .With<FireRequest>()
-            .With<Target>()
+            .With<Weapon>()
             .With<Team>()
             .Build();
 
@@ -39,27 +39,34 @@ public class FireRequestSystem : ISystem
         {
             entity.AddComponent<Standing>();
 
+            Weapon weapon = entity.GetComponent<Weapon>();
+
             //start fire animation...
-
-            foreach (Entity prefabEntity in _prefabsFilter)
+            entity.AddComponent<SpawnRequest>() = new SpawnRequest()
             {
-                if (prefabEntity.GetComponent<Team>().value == entity.GetComponent<Team>().value
-                    && prefabEntity.GetComponent<ObjectType>().value == _arrow)
-                {
-                    GameObject newGameObject = GameObject.Instantiate(prefabEntity.GetComponent<Prefab>().prefab,
-                        entity.GetComponent<TransformView>().value.position,
-                        entity.GetComponent<Rotation>().value);
+                type = weapon.projectileType,
+                team = entity.GetComponent<Team>().value,
+                transform = weapon.firePoint
+            };
 
-                    //newGameObject.transform.SetParent()
+            //foreach (Entity prefabEntity in _prefabsFilter)
+            //{
+            //    if (prefabEntity.GetComponent<Team>().value == entity.GetComponent<Team>().value
+            //        && prefabEntity.GetComponent<ObjectType>().value == _arrow)
+            //    {
+            //        GameObject newGameObject = GameObject.Instantiate(prefabEntity.GetComponent<Prefab>().prefab,
+            //            entity.GetComponent<TransformView>().value.position,
+            //            entity.GetComponent<Rotation>().value);
 
-                    Entity newEntity = newGameObject.GetComponent<MovableProvider>().Entity;
-                    if (newEntity.Has<Inactive>())
-                    {
-                        newEntity.RemoveComponent<Inactive>();
-                    }
-                    break;
-                }
-            }
+
+            //        Entity newEntity = newGameObject.GetComponent<MovableProvider>().Entity;
+            //        if (newEntity.Has<Inactive>())
+            //        {
+            //            newEntity.RemoveComponent<Inactive>();
+            //        }
+            //        break;
+            //    }
+            //}
 
             entity.RemoveComponent<FireRequest>();
         }
@@ -67,6 +74,5 @@ public class FireRequestSystem : ISystem
 
     public void Dispose()
     {
-
     }
 }

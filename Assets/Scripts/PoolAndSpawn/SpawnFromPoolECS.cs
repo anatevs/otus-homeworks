@@ -4,7 +4,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-public sealed class PoolWithECS
+public sealed class SpawnFromPoolECS
 {
     private readonly GameListenersContainer _listenersContainer;
 
@@ -20,7 +20,7 @@ public sealed class PoolWithECS
 
     private readonly Queue<GameObject> _pool = new();
 
-    public PoolWithECS(IObjectResolver container, GameListenersContainer gameListenersContainer, PoolParamsGO poolParams)
+    public SpawnFromPoolECS(IObjectResolver container, GameListenersContainer gameListenersContainer, PoolParamsGO poolParams)
     {
         _container = container;
 

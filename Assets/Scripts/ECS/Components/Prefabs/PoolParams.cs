@@ -9,7 +9,7 @@ using System.Collections.Generic;
 [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 public struct PoolParams : IComponent
 {
-    public Queue<GameObject> queue;
+    public Queue<GameObject> pool;
     public Transform poolTransform;
     public Transform worldTransform;
 }

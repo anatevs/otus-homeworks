@@ -484,6 +484,7 @@ MonoBehaviour:
       value: 0
     poolTransform: {fileID: 377699406}
     worldTransform: {fileID: 335639940}
+    initPoolCount: 10
 --- !u!1 &463166443
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,7 +897,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &858199067
 Transform:
   m_ObjectHideFlags: 0
@@ -1878,46 +1879,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Archer (Blue)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2182423288924946545, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
-        type: 3}
-      propertyPath: serializedComponents.Array.data[7]
-      value: 4747080545839874075
-      objectReference: {fileID: 0}
-    - target: {fileID: 2182423288924946545, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
-        type: 3}
-      propertyPath: serializedComponents.Array.data[10]
-      value: 4747080545839874074
-      objectReference: {fileID: 0}
-    - target: {fileID: 2182423288924946545, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
-        type: 3}
-      propertyPath: managedReferences[4747080545839874073]
-      value: Assembly-CSharp AttackDistance
-      objectReference: {fileID: 0}
-    - target: {fileID: 2182423288924946545, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
-        type: 3}
-      propertyPath: managedReferences[4747080545839874074]
-      value: Assembly-CSharp AttackDistance
-      objectReference: {fileID: 0}
-    - target: {fileID: 2182423288924946545, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
-        type: 3}
-      propertyPath: managedReferences[4747080545839874075]
-      value: Assembly-CSharp ObjectType
-      objectReference: {fileID: 0}
-    - target: {fileID: 2182423288924946545, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
-        type: 3}
-      propertyPath: managedReferences[4747080545839874073].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2182423288924946545, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
-        type: 3}
-      propertyPath: managedReferences[4747080545839874074].value
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2182423288924946545, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
-        type: 3}
-      propertyPath: managedReferences[4747080545839874075].value
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f, type: 3}

@@ -9,4 +9,5 @@ public struct PrefabAndPoolParams
     public Team teamType;
     public Transform poolTransform;
     public Transform worldTransform;
+    public int initPoolCount;
 }

@@ -8,7 +8,7 @@ using Unity.IL2CPP.CompilerServices;
 [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 public struct SpawnRequest : IComponent
 {
-    public ObjectsTypeNames typeName;
-    public TeamType teamType;
-    public Transform spawnTransform;
+    public ObjectsTypeNames type;
+    public TeamType team;
+    public Transform transform;
 }

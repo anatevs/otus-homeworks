@@ -19,19 +19,27 @@ public sealed class PrefabsAndPoolsInitializer : IInitializer
 
     public void OnAwake()
     {
-        PrefabAndPoolParams[] prefabsAndPoolInfo = _prefabStorage.GetPrefabs();
-        for (int i = 0; i < prefabsAndPoolInfo.Length; i++)
+        PrefabAndPoolParams[] info = _prefabStorage.GetPrefabs();
+        for (int i = 0; i < info.Length; i++)
         {
-            Entity prefabAndPoolEntity = this.World.CreateEntity();
-            prefabAndPoolEntity.AddComponent<Team>() = prefabsAndPoolInfo[i].teamType;
-            prefabAndPoolEntity.AddComponent<ObjectType>() = prefabsAndPoolInfo[i].objectType;
-            prefabAndPoolEntity.AddComponent<Prefab>() = prefabsAndPoolInfo[i].prefab;
-            prefabAndPoolEntity.AddComponent<PoolParams>() = new PoolParams()
+            Entity infoEntity = this.World.CreateEntity();
+            infoEntity.AddComponent<Team>() = info[i].teamType;
+            infoEntity.AddComponent<ObjectType>() = info[i].objectType;
+            infoEntity.AddComponent<Prefab>() = info[i].prefab;
+            infoEntity.AddComponent<PoolParams>() = new PoolParams()
             {
-                queue = new Queue<GameObject>(),
-                poolTransform = prefabsAndPoolInfo[i].poolTransform,
-                worldTransform = prefabsAndPoolInfo[i].worldTransform
+                pool = new Queue<GameObject>(),
+                poolTransform = info[i].poolTransform,
+                worldTransform = info[i].worldTransform
             };
+
+            for (int j = 0; j < info[i].initPoolCount; j++)
+            {
+                GameObject go = GameObject.Instantiate(info[i].prefab.prefab);
+                go.SetActive(false);
+                go.transform.SetParent(info[i].poolTransform);
+                infoEntity.GetComponent<PoolParams>().pool.Enqueue(go);
+            }
         }
     }
 
