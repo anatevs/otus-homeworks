@@ -37,7 +37,6 @@ public class TargetDefineSystem<TPlayer, TEnemy> : ISystem
                 SetTarget(entity, target);
             }
         }
-
     }
 
     public void OnUpdate(float deltaTime)
@@ -66,8 +65,6 @@ public class TargetDefineSystem<TPlayer, TEnemy> : ISystem
 
     private void SetTarget(Entity entity, Entity target)
     {
-        //Entity enemy = SearchNearestTarget(entity);
-        //enemy.AddComponent<UnderAttackTag>();
         entity.SetComponent<Target>(new Target { value = target });
     }
 
