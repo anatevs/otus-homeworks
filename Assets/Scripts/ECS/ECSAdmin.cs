@@ -7,20 +7,17 @@ public class ECSAdmin : MonoBehaviour
     private World _world;
     private SystemsGroup _systemsGroup;
 
-    private TeamService<TeamRed> _redTeamService;
-    private TeamService<TeamBlue> _blueTeamService;
+    private TeamService _teamService;
     private PrefabsStorage _prefabStorage;
 
     [Inject]
     public void Construct
         (
-        TeamService<TeamRed> redTeamService,
-        TeamService<TeamBlue> blueTeamService,
+        TeamService teamService,
         PrefabsStorage prefabStorage
         )
     {
-        _redTeamService = redTeamService;
-        _blueTeamService = blueTeamService;
+        _teamService = teamService;
         _prefabStorage = prefabStorage;
     }
 
@@ -29,15 +26,13 @@ public class ECSAdmin : MonoBehaviour
         _world = World.Default;
         _systemsGroup = _world.CreateSystemsGroup();
 
-
-        _systemsGroup.AddInitializer(new TeamsServicesInitializer(_redTeamService, _blueTeamService));
         _systemsGroup.AddInitializer(new PrefabsAndPoolsInitializer(_prefabStorage));
 
+        _systemsGroup.AddSystem(new TeamServiceSystem(_teamService));
+        _systemsGroup.AddSystem(new TargetDefineSystem(_teamService));
 
         _systemsGroup.AddSystem(new HealthSystem());
 
-        _systemsGroup.AddSystem(new TargetDefineSystem<TeamBlue, TeamRed>(new TeamBlue(), _redTeamService));
-        _systemsGroup.AddSystem(new TargetDefineSystem<TeamRed, TeamBlue>(new TeamRed(), _blueTeamService));
         _systemsGroup.AddSystem(new DirectToTargetSystem());
         _systemsGroup.AddSystem(new RotationSystem());
         _systemsGroup.AddSystem(new MovementSystem());

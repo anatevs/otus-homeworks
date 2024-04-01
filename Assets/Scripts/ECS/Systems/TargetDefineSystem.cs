@@ -1,8 +1,6 @@
 using Scellecs.Morpeh;
 
-public class TargetDefineSystem<TPlayer, TEnemy> : ISystem
-    where TPlayer : ITeam
-    where TEnemy : ITeam
+public class TargetDefineSystem : ISystem
 {
     public World World
     {
@@ -11,14 +9,11 @@ public class TargetDefineSystem<TPlayer, TEnemy> : ISystem
     }
 
     private Filter _filter;
+    private readonly TeamService _teamService;
 
-    private readonly TeamService<TEnemy> _enemiesService;
-    private readonly TPlayer _playerTeam;
-
-    public TargetDefineSystem(TPlayer playerTeam,TeamService<TEnemy> enemiesService)
+    public TargetDefineSystem(TeamService teamService)
     {
-        _playerTeam = playerTeam;
-        _enemiesService = enemiesService;
+        _teamService = teamService;
     }
 
     public void OnAwake()
@@ -27,38 +22,29 @@ public class TargetDefineSystem<TPlayer, TEnemy> : ISystem
             .With<MobFlag>()
             .With<Position>()
             .With<MoveDirection>()
+            .With<Team>()
             .Build();
 
         foreach (Entity entity in _filter)
         {
-            if (entity.GetComponent<Team>().value == _playerTeam.TeamType)
-            {
-                Entity target = SearchNearestTarget(entity);
-                SetTarget(entity, target);
-            }
+            Entity target = SearchNearestTarget(entity);
+            SetTarget(entity, target);
         }
     }
 
     public void OnUpdate(float deltaTime)
     {
-        foreach(Entity entity in _filter)
+        foreach (Entity entity in _filter)
         {
-            if (entity.GetComponent<Team>().value == _playerTeam.TeamType)
+            Entity currTarget = SearchNearestTarget(entity);
+            Entity prevTarget = entity.GetComponent<Target>().value;
+            if (!prevTarget.Has<Inactive>() && (currTarget == prevTarget))
             {
-                Entity currTarget = SearchNearestTarget(entity);
-                Entity prevTarget = entity.GetComponent<Target>().value;
-                if (!prevTarget.Has<Inactive>() && (currTarget == prevTarget))
-                {
-                    continue;
-                }
-                else
-                {
-                    SetTarget(entity, currTarget);
-                }
+                continue;
             }
             else
             {
-                continue;
+                SetTarget(entity, currTarget);
             }
         }
     }
@@ -70,7 +56,9 @@ public class TargetDefineSystem<TPlayer, TEnemy> : ISystem
 
     private Entity SearchNearestTarget(Entity entity)
     {
-        return _enemiesService.FindNearest(entity.GetComponent<Position>().value);
+        return _teamService.FindNearestEnemy(
+            entity.GetComponent<Position>().value,
+            entity.GetComponent<Team>().value);
     }
 
     public void Dispose()

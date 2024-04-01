@@ -19,8 +19,7 @@ public class GameLifetimeScope : LifetimeScope
 
     private void BuildTeamServices(IContainerBuilder builder)
     {
-        builder.Register<TeamService<TeamBlue>>(Lifetime.Singleton).WithParameter<TeamBlue>(new TeamBlue());
-        builder.Register<TeamService<TeamRed>>(Lifetime.Singleton).WithParameter<TeamRed>(new TeamRed());
+        builder.Register<TeamService>(Lifetime.Singleton);
 
         builder.RegisterComponent<ECSAdmin>(_ECSAdmin);
     }

@@ -1,60 +1,51 @@
 using Scellecs.Morpeh;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public sealed class TeamService<T> where T : ITeam
+public class TeamService
 {
-    private readonly List<Entity> _members = new List<Entity>();
+    private readonly Dictionary<TeamType, List<Entity>> _teamContainers = new();
 
-    private readonly T _team;
-
-    public TeamService(T team)
+    public void Init()
     {
-        _team = team;
+        foreach (TeamType team in Enum.GetValues(typeof(TeamType)))
+        {
+            _teamContainers[team] = new List<Entity>();
+        }
     }
 
     public void AddToTeam(Entity entity)
     {
-        if (entity.GetComponent<Team>().value != _team.TeamType)
-        {
-            Debug.Log($"try to add entity of team " +
-                $"{entity.GetComponent<Team>().value}" +
-                $" to the TeamService with team {_team.TeamType}");
-            return;
-        }
-        else
-        {
-            _members.Add(entity);
-        }
-    }
-
-    public void AddToTeam(IEnumerable<Entity> entities)
-    {
-        foreach (Entity entity in entities)
-        {
-            _members.Add(entity);
-        }
+        TeamType selfTeam = entity.GetComponent<Team>().value;
+        _teamContainers[selfTeam].Add(entity);
     }
 
     public void RemoveFromTeam(Entity entity)
     {
-        _members.Remove(entity);
+        TeamType selfTeam = entity.GetComponent<Team>().value;
+        _teamContainers[selfTeam].Remove(entity);
     }
 
-    public Entity FindNearest(Vector3 point)
+    private Entity FindNearest(Vector3 point, List<Entity> members)
     {
         float minSqrDistance = float.MaxValue;
         Entity nearest = null;
-        for (int i = 0; i < _members.Count; i++)
+        for (int i = 0; i < members.Count; i++)
         {
             float currSqrDistance =
-                    Vector3.SqrMagnitude(point - _members[i].GetComponent<Position>().value);
+                    Vector3.SqrMagnitude(point - members[i].GetComponent<Position>().value);
             if (currSqrDistance < minSqrDistance)
             {
                 minSqrDistance = currSqrDistance;
-                nearest = _members[i];
+                nearest = members[i];
             }
         }
         return nearest;
+    }
+
+    public Entity FindNearestEnemy(Vector3 point, TeamType selfTeam)
+    {
+        return FindNearest(point, _teamContainers[(TeamType) (((int)selfTeam + 1)%2)]);
     }
 }
