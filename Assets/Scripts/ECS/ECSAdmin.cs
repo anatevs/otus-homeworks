@@ -46,6 +46,9 @@ public class ECSAdmin : MonoBehaviour
         _systemsGroup.AddSystem(new TransformViewSystem());
 
 
+        
+
+
         _world.AddSystemsGroup(order: 0, _systemsGroup);
 
     }

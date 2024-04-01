@@ -49,25 +49,6 @@ public class FireRequestSystem : ISystem
                 transform = weapon.firePoint
             };
 
-            //foreach (Entity prefabEntity in _prefabsFilter)
-            //{
-            //    if (prefabEntity.GetComponent<Team>().value == entity.GetComponent<Team>().value
-            //        && prefabEntity.GetComponent<ObjectType>().value == _arrow)
-            //    {
-            //        GameObject newGameObject = GameObject.Instantiate(prefabEntity.GetComponent<Prefab>().prefab,
-            //            entity.GetComponent<TransformView>().value.position,
-            //            entity.GetComponent<Rotation>().value);
-
-
-            //        Entity newEntity = newGameObject.GetComponent<MovableProvider>().Entity;
-            //        if (newEntity.Has<Inactive>())
-            //        {
-            //            newEntity.RemoveComponent<Inactive>();
-            //        }
-            //        break;
-            //    }
-            //}
-
             entity.RemoveComponent<FireRequest>();
         }
     }

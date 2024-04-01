@@ -1731,6 +1731,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Archer (Blue)
       objectReference: {fileID: 0}
+    - target: {fileID: 2182423288924946545, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
+        type: 3}
+      propertyPath: serializedComponents.Array.size
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182423288924946545, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
+        type: 3}
+      propertyPath: serializedComponents.Array.data[14]
+      value: 5861487725420478465
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182423288924946545, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
+        type: 3}
+      propertyPath: managedReferences[5861487725420478465]
+      value: Assembly-CSharp FireEvent
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f, type: 3}
 --- !u!1001 &4048197697565618751
