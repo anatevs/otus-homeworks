@@ -1,4 +1,5 @@
 using Scellecs.Morpeh;
+using UnityEngine;
 
 public class DirectToTargetSystem : ISystem
 {
@@ -26,8 +27,10 @@ public class DirectToTargetSystem : ISystem
             Position position = entity.GetComponent<Position>();
             ref MoveDirection moveDirection = ref entity.GetComponent<MoveDirection>();
             Position target = entity.GetComponent<Target>().value.GetComponent<Position>();
+            Vector3 direction = (target.value - position.value).normalized;
+            direction.y = 0;
 
-            moveDirection.value = (target.value - position.value).normalized;
+            moveDirection.value = direction;
         }
     }
 

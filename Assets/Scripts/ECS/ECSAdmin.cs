@@ -27,8 +27,8 @@ public class ECSAdmin : MonoBehaviour
         _systemsGroup = _world.CreateSystemsGroup();
 
         _systemsGroup.AddInitializer(new PrefabsAndPoolsInitializer(_prefabStorage));
+        _systemsGroup.AddInitializer(new TeamServiceInitializer(_teamService));
 
-        _systemsGroup.AddSystem(new TeamServiceSystem(_teamService));
         _systemsGroup.AddSystem(new TargetDefineSystem(_teamService));
 
         _systemsGroup.AddSystem(new HealthSystem());
@@ -40,8 +40,8 @@ public class ECSAdmin : MonoBehaviour
 
         _systemsGroup.AddSystem(new FireRequestSystem());
 
-        _systemsGroup.AddSystem(new SpawnSystem());
-        _systemsGroup.AddSystem(new UnspawnSystem());
+        _systemsGroup.AddSystem(new SpawnSystem(_teamService));
+        _systemsGroup.AddSystem(new UnspawnSystem(_teamService));
 
         _systemsGroup.AddSystem(new TransformViewSystem());
 

@@ -15,6 +15,13 @@ public class UnspawnSystem : ISystem
     private Stash<Team> _teamStash;
     private Stash<ObjectType> _typeStash;
 
+    private TeamService _teamService;
+
+    public UnspawnSystem(TeamService teamService)
+    {
+        _teamService = teamService;
+    }
+
     public void OnAwake()
     {
         _unspawnFilter = this.World.Filter
@@ -63,6 +70,8 @@ public class UnspawnSystem : ISystem
     private void Unspawn(Entity entity, PoolParams poolParams)
     {
         entity.AddComponent<Inactive>();
+        _teamService.RemoveFromTeam(entity);
+
         GameObject go = entity.GetComponent<TransformView>().value.gameObject;
         go.SetActive(false);
         go.transform.SetParent(poolParams.poolTransform);

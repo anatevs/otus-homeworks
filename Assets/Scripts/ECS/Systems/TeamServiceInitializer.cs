@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using UnityEngine;
 
-public class TeamServiceSystem : ISystem
+public class TeamServiceInitializer : IInitializer
 {
     public World World
     {
@@ -12,7 +12,7 @@ public class TeamServiceSystem : ISystem
     private Filter _filter;
     private readonly TeamService _teamService;
 
-    public TeamServiceSystem(TeamService teamService)
+    public TeamServiceInitializer(TeamService teamService)
     {
         _teamService = teamService;
     }
@@ -31,11 +31,6 @@ public class TeamServiceSystem : ISystem
         {
             _teamService.AddToTeam(entity);
         }
-    }
-
-    public void OnUpdate(float deltaTime)
-    {
-        
     }
 
     public void Dispose()

@@ -18,13 +18,19 @@ public class TeamService
     public void AddToTeam(Entity entity)
     {
         TeamType selfTeam = entity.GetComponent<Team>().value;
-        _teamContainers[selfTeam].Add(entity);
+        if (entity.Has<MobFlag>())
+        {
+            _teamContainers[selfTeam].Add(entity);
+        }
     }
 
     public void RemoveFromTeam(Entity entity)
     {
         TeamType selfTeam = entity.GetComponent<Team>().value;
-        _teamContainers[selfTeam].Remove(entity);
+        if (entity.Has<MobFlag>())
+        {
+            _teamContainers[selfTeam].Remove(entity);
+        }
     }
 
     private Entity FindNearest(Vector3 point, List<Entity> members)

@@ -18,6 +18,13 @@ public class SpawnSystem : ISystem
     private Stash<Team> _teamStash;
     private Stash<ObjectType> _typeStash;
 
+    private TeamService _teamService;
+
+    public SpawnSystem(TeamService teamService)
+    {
+        _teamService = teamService;
+    }
+
     public void OnAwake()
     {
         _spawnFilter = this.World.Filter
@@ -104,6 +111,8 @@ public class SpawnSystem : ISystem
 
         Entity spawnEntity = go.GetComponent<UniversalProvider>().Entity;
         spawnEntity.RemoveComponent<Inactive>();
+
+        _teamService.AddToTeam(spawnEntity);
     }
 
     public void Dispose()
