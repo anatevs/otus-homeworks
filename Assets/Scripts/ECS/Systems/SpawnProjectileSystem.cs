@@ -1,9 +1,6 @@
 using Scellecs.Morpeh;
-using Scellecs.Morpeh.Providers;
-using UnityEngine;
-using VContainer;
 
-public class FireRequestSystem : ISystem
+public class SpawnProjectileSystem : ISystem
 {
     public World World
     {
@@ -12,35 +9,20 @@ public class FireRequestSystem : ISystem
     }
 
     private Filter _filter;
-    private Filter _prefabsFilter;
-
-    private ObjectsTypeNames _arrow;
 
     public void OnAwake()
     {
         _filter = this.World.Filter
-            .With<FireRequest>()
+            .With<SpawnProjectileRequest>()
             .With<Weapon>()
             .With<Team>()
             .Build();
-
-        _prefabsFilter = this.World.Filter
-            .With<Prefab>()
-            .With<ObjectType>()
-            .With<Team>()
-            .Build();
-
-        _arrow = ObjectsTypeNames.Arrow;
     }
 
     public void OnUpdate(float deltaTime)
     {
         foreach (Entity entity in _filter)
         {
-            entity.AddComponent<Standing>();
-
-            //start fire animation...
-
             Weapon weapon = entity.GetComponent<Weapon>();
 
             entity.AddComponent<SpawnRequest>() = new SpawnRequest()
@@ -50,7 +32,7 @@ public class FireRequestSystem : ISystem
                 transform = weapon.firePoint
             };
 
-            entity.RemoveComponent<FireRequest>();
+            entity.RemoveComponent<SpawnProjectileRequest>();
         }
     }
 
