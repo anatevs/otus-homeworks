@@ -30,6 +30,7 @@ public class TeamService
         if (entity.Has<MobFlag>())
         {
             _teamContainers[selfTeam].Remove(entity);
+            Debug.Log($"remove {entity} from it's container");
         }
     }
 

@@ -1,4 +1,5 @@
 using Scellecs.Morpeh;
+using UnityEngine;
 
 public sealed class HealthSystem : ISystem
 {
@@ -19,7 +20,11 @@ public sealed class HealthSystem : ISystem
     {
         foreach (var entity in _filter)
         {
-            ref var hp = ref entity.GetComponent<Health>();
+            int hp = entity.GetComponent<Health>().value;
+            if (hp <= 0)
+            {
+                entity.AddComponent<UnspawnRequest>();
+            }
         }
     }
 

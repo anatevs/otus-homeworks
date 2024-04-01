@@ -1,4 +1,5 @@
 using Scellecs.Morpeh;
+using UnityEngine;
 
 public class TargetDefineSystem : ISystem
 {
@@ -38,7 +39,7 @@ public class TargetDefineSystem : ISystem
         {
             Entity currTarget = SearchNearestTarget(entity);
             Entity prevTarget = entity.GetComponent<Target>().value;
-            if (!prevTarget.Has<Inactive>() && (currTarget == prevTarget))
+            if (!prevTarget.IsNullOrDisposed() && (currTarget == prevTarget))
             {
                 continue;
             }

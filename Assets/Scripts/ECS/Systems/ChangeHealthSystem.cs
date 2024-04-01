@@ -25,7 +25,7 @@ public class ChangeHealthSystem : ISystem
             entity.GetComponent<Health>().value -=
                 entity.GetComponent<HealthChangeRequest>().value;
 
-            Debug.Log($"health of {entity} now is {entity.GetComponent<Health>().value}");
+            //Debug.Log($"health of {entity} now is {entity.GetComponent<Health>().value}");
 
             entity.RemoveComponent<HealthChangeRequest>();
         }

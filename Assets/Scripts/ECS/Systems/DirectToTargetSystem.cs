@@ -17,6 +17,7 @@ public class DirectToTargetSystem : ISystem
             .With<Position>()
             .With<MoveDirection>()
             .With<Target>()
+            .Without<Inactive>()
             .Build();
     }
 
