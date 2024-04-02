@@ -45,7 +45,7 @@ public class ECSAdmin : MonoBehaviour
 
         _systemsGroup.AddSystem(new TransformViewSystem());
 
-
+        _systemsGroup.AddSystem(new AnimationStatesSystem_Mob());
         
 
 

@@ -12,6 +12,12 @@ public class MobProvider : MovableProvider
     protected override void Initialize()
     {
         base.Initialize();
+
+        //Entity.AddComponent<Standing>();
+        Entity.AddComponent<CanFireTag>();
+        Entity.AddComponent<MobFlag>();
+        Entity.AddComponent<Target>();
+
         Entity.AddComponent<AnimatorView>().value = _animator;
         _dispatcher.OnEventReceived += ReceiveAnimEvent;
     }

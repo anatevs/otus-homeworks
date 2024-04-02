@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class ProjectileProvider : MovableProvider
 {
+    protected override void Initialize()
+    {
+        base.Initialize();
+        Entity.AddComponent<ProjectileFlag>();
+    }
+
     private void OnTriggerEnter(Collider collider)
     {
         Debug.Log("collision!");

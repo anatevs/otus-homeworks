@@ -52,6 +52,10 @@ public class TargetDefineSystem : ISystem
 
     private void SetTarget(Entity entity, Entity target)
     {
+        if (entity.Has<Standing>())
+        {
+            entity.RemoveComponent<Standing>();
+        }
         entity.SetComponent<Target>(new Target { value = target });
     }
 

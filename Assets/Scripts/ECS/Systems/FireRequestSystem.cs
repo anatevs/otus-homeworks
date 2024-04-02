@@ -12,9 +12,9 @@ public class FireRequestSystem : ISystem
     }
 
     private Filter _filter;
-    private Filter _prefabsFilter;
 
-    private ObjectsTypeNames _arrow;
+    private static readonly int _fire =
+        Animator.StringToHash(MobAnimationTriggers.Attack);
 
     public void OnAwake()
     {
@@ -22,15 +22,9 @@ public class FireRequestSystem : ISystem
             .With<FireRequest>()
             .With<Weapon>()
             .With<Team>()
+            .With<AnimatorView>()
             .Build();
 
-        _prefabsFilter = this.World.Filter
-            .With<Prefab>()
-            .With<ObjectType>()
-            .With<Team>()
-            .Build();
-
-        _arrow = ObjectsTypeNames.Arrow;
     }
 
     public void OnUpdate(float deltaTime)
@@ -40,15 +34,17 @@ public class FireRequestSystem : ISystem
             entity.AddComponent<Standing>();
 
             //start fire animation...
+            Animator animator = entity.GetComponent<AnimatorView>().value;
 
-            Weapon weapon = entity.GetComponent<Weapon>();
+            animator.SetTrigger(_fire);
+            //Weapon weapon = entity.GetComponent<Weapon>();
 
-            entity.AddComponent<SpawnRequest>() = new SpawnRequest()
-            {
-                type = weapon.projectileType,
-                team = entity.GetComponent<Team>().value,
-                transform = weapon.firePoint
-            };
+            //entity.AddComponent<SpawnRequest>() = new SpawnRequest()
+            //{
+            //    type = weapon.projectileType,
+            //    team = entity.GetComponent<Team>().value,
+            //    transform = weapon.firePoint
+            //};
 
             entity.RemoveComponent<FireRequest>();
         }

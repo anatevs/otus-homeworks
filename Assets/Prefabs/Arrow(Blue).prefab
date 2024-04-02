@@ -61,32 +61,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedComponents:
   - rid: 4747080576224460802
-  - rid: 4747080576224460803
-  - rid: 4747080576224460804
   - rid: 4747080576224460815
-  - rid: 4747080576224460806
-  - rid: 4747080576224460812
   - rid: 4747080576224460808
   - rid: 4747080576224460809
-  - rid: 4747080576224460810
   - rid: 4747080576224460813
   references:
     version: 2
     RefIds:
     - rid: 4747080576224460802
       type: {class: Inactive, ns: , asm: Assembly-CSharp}
-    - rid: 4747080576224460803
-      type: {class: Position, ns: , asm: Assembly-CSharp}
-      data:
-        value: {x: 0, y: 0, z: 0}
-    - rid: 4747080576224460804
-      type: {class: Rotation, ns: , asm: Assembly-CSharp}
-      data:
-        value: {x: 0, y: 0, z: 0, w: 0}
-    - rid: 4747080576224460806
-      type: {class: MoveDirection, ns: , asm: Assembly-CSharp}
-      data:
-        value: {x: 0, y: 0, z: 0}
     - rid: 4747080576224460808
       type: {class: Team, ns: , asm: Assembly-CSharp}
       data:
@@ -95,12 +78,6 @@ MonoBehaviour:
       type: {class: ObjectType, ns: , asm: Assembly-CSharp}
       data:
         value: 0
-    - rid: 4747080576224460810
-      type: {class: ProjectileFlag, ns: , asm: Assembly-CSharp}
-    - rid: 4747080576224460812
-      type: {class: TransformView, ns: , asm: Assembly-CSharp}
-      data:
-        value: {fileID: 2240616049661668045}
     - rid: 4747080576224460813
       type: {class: Damage, ns: , asm: Assembly-CSharp}
       data:
