@@ -130,31 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1263304700}
     m_Modifications:
-    - target: {fileID: 8644950590960456548, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
-        type: 3}
-      propertyPath: _animator
-      value: 
-      objectReference: {fileID: 1957583986}
-    - target: {fileID: 8644950590960456548, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
-        type: 3}
-      propertyPath: _dispatcher
-      value: 
-      objectReference: {fileID: 1957583985}
-    - target: {fileID: 8644950590960456548, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
-        type: 3}
-      propertyPath: serializedComponents.Array.data[0]
-      value: 5861487747689349138
-      objectReference: {fileID: 0}
-    - target: {fileID: 8644950590960456548, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
-        type: 3}
-      propertyPath: managedReferences[5861487747689349138]
-      value: Assembly-CSharp Speed
-      objectReference: {fileID: 0}
-    - target: {fileID: 8644950590960456548, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
-        type: 3}
-      propertyPath: managedReferences[5861487747689349138].value
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8692576747330127513, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
         type: 3}
       propertyPath: m_Name
@@ -1488,24 +1463,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 610202263357044901, guid: 147fe68df44677a4c825999f9fcc6c5d,
     type: 3}
   m_PrefabInstance: {fileID: 1919196836}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1957583985 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 312409824, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1870072545585007306}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65ab9bc2d84ae8f4aa0b59daab3dbb8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!95 &1957583986 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 1870072544967355838, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1870072545585007306}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2068001049
 GameObject:

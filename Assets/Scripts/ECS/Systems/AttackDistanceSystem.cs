@@ -17,7 +17,6 @@ public class AttackDistanceSystem : ISystem
             .With<Position>()
             .With<AttackDistance>()
             .With<Target>()
-            .Without<Standing>()
             .Build();
     }
 
@@ -29,13 +28,10 @@ public class AttackDistanceSystem : ISystem
             Vector3 position = entity.GetComponent<Position>().value;
             Vector3 targetPosition = entity.GetComponent<Target>().value.GetComponent<Position>().value;
             float sqrDistance = Vector3.SqrMagnitude(position - targetPosition);
-            if ((sqrDistance <= attackDistance * attackDistance) && entity.Has<CanFireTag>())
+            if ((sqrDistance <= attackDistance * attackDistance))
             {
+                entity.SetComponent(new Standing());
                 entity.AddComponent<FireRequest>();
-            }
-            else
-            {
-                entity.RemoveComponent<Standing>();
             }
         }
     }

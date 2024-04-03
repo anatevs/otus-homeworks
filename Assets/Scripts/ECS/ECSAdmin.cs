@@ -36,6 +36,8 @@ public class ECSAdmin : MonoBehaviour
         _systemsGroup.AddSystem(new MovementSystem());
         _systemsGroup.AddSystem(new AttackDistanceSystem());
 
+        //_systemsGroup.AddSystem(new AnimationMoveSystem_Mob());
+
         _systemsGroup.AddSystem(new FireRequestSystem());
 
         _systemsGroup.AddSystem(new SpawnProjectileSystem());
@@ -48,7 +50,6 @@ public class ECSAdmin : MonoBehaviour
         _systemsGroup.AddSystem(new TransformViewSystem());
 
         _systemsGroup.AddSystem(new AnimationStatesSystem_Mob());
-        
 
 
         _world.AddSystemsGroup(order: 0, _systemsGroup);

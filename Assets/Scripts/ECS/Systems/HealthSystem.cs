@@ -1,5 +1,4 @@
 using Scellecs.Morpeh;
-using UnityEngine;
 
 public sealed class HealthSystem : ISystem
 {
@@ -13,7 +12,9 @@ public sealed class HealthSystem : ISystem
 
     public void OnAwake()
     {
-        _filter = this.World.Filter.With<Health>().Build();
+        _filter = this.World.Filter
+            .With<Health>()
+            .Build();
     }
 
     public void OnUpdate(float deltaTime)

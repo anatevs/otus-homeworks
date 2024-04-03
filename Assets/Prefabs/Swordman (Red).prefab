@@ -77,19 +77,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedComponents:
-  - rid: 5861487747689349122
+  - rid: 5861487747689349138
   - rid: 5861487747689349133
   - rid: 5861487747689349134
   - rid: 5861487747689349137
-  _animator: {fileID: 0}
-  _dispatcher: {fileID: 0}
+  _animator: {fileID: 8692576747537636603}
+  _dispatcher: {fileID: 1331106829}
   references:
     version: 2
     RefIds:
-    - rid: 5861487747689349122
-      type: {class: Speed, ns: , asm: Assembly-CSharp}
-      data:
-        value: 5
     - rid: 5861487747689349133
       type: {class: Team, ns: , asm: Assembly-CSharp}
       data:
@@ -102,6 +98,10 @@ MonoBehaviour:
       type: {class: AttackDistance, ns: , asm: Assembly-CSharp}
       data:
         value: 1
+    - rid: 5861487747689349138
+      type: {class: Speed, ns: , asm: Assembly-CSharp}
+      data:
+        value: 0
 --- !u!1001 &8692576747530256569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -214,3 +214,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65ab9bc2d84ae8f4aa0b59daab3dbb8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &8692576747537636603 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9542722, guid: bcc60fdbd3a37b44cbc0cb99db483477,
+    type: 3}
+  m_PrefabInstance: {fileID: 8692576747530256569}
+  m_PrefabAsset: {fileID: 0}
