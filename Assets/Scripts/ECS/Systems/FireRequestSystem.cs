@@ -9,32 +9,44 @@ public class FireRequestSystem : ISystem
         set { }
     }
 
-    private Filter _filter;
+    private Filter _shootFilter;
+    private Stash<ObjectType> _typeStash;
 
     private static readonly int _fire =
         Animator.StringToHash(MobAnimationTriggers.Attack);
 
     public void OnAwake()
     {
-        _filter = this.World.Filter
+        _shootFilter = this.World.Filter
             .With<FireRequest>()
-            .With<Weapon>()
+            .With<ShootingWeapon>()
             .With<Team>()
             .With<AnimatorView>()
             .Build();
+
+        _typeStash = this.World.GetStash<ObjectType>();
     }
 
     public void OnUpdate(float deltaTime)
     {
-        foreach (Entity entity in _filter)
+        foreach (Entity entity in _shootFilter)
         {
-            if (entity.Has<CanFireTag>())
-            {
-                Animator animator = entity.GetComponent<AnimatorView>().value;
-                animator.SetTrigger(_fire);
+            Animator animator = entity.GetComponent<AnimatorView>().value;
+            ObjectsTypeNames typeName = _typeStash.Get(entity).value;
 
-                entity.RemoveComponent<CanFireTag>();
+            if (typeName == ObjectsTypeNames.Archer)
+            {
+                if (entity.Has<CanFireTag>())
+                {
+                    animator.SetTrigger(_fire);
+                    entity.RemoveComponent<CanFireTag>();
+                }
             }
+            else if (typeName == ObjectsTypeNames.Swordman)
+            {
+                entity.AddComponent<AttackingTag>();
+            }
+
             entity.RemoveComponent<FireRequest>();
         }
     }

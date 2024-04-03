@@ -14,7 +14,7 @@ public class SpawnProjectileSystem : ISystem
     {
         _filter = this.World.Filter
             .With<SpawnProjectileRequest>()
-            .With<Weapon>()
+            .With<ShootingWeapon>()
             .With<Team>()
             .Build();
     }
@@ -23,7 +23,7 @@ public class SpawnProjectileSystem : ISystem
     {
         foreach (Entity entity in _filter)
         {
-            Weapon weapon = entity.GetComponent<Weapon>();
+            ShootingWeapon weapon = entity.GetComponent<ShootingWeapon>();
 
             entity.AddComponent<SpawnRequest>() = new SpawnRequest()
             {

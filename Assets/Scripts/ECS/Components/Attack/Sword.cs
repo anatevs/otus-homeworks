@@ -1,11 +1,12 @@
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine;
 
 [System.Serializable]
 [Il2CppSetOption(Option.NullChecks, false)]
 [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
 [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-public struct AttackDelay : IComponent
+public struct Sword : IComponent
 {
-    public float value;
+    public TriggerEnterListener triggerEnter;
 }

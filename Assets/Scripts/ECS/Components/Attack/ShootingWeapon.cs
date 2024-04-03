@@ -6,7 +6,8 @@ using Unity.IL2CPP.CompilerServices;
 [Il2CppSetOption(Option.NullChecks, false)]
 [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
 [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-public struct AttackCounter : IComponent
+public struct ShootingWeapon : IComponent
 {
-    public float value;
+    public ObjectsTypeNames projectileType;
+    public Transform firePoint;
 }

@@ -1,9 +1,6 @@
 using Scellecs.Morpeh;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class AttackDelaySystem : ISystem
+public class FireDelaySystem : ISystem
 {
     public World World
     {
@@ -17,8 +14,8 @@ public class AttackDelaySystem : ISystem
     {
         _filter = this.World.Filter
             .With<MobFlag>()
-            .With<AttackDelay>()
-            .With<AttackCounter>()
+            .With<FireDelay>()
+            .With<FireDelayCounter>()
             .Without<CanFireTag>()
             .Build();
     }
@@ -27,10 +24,10 @@ public class AttackDelaySystem : ISystem
     {
         foreach (Entity entity in _filter)
         {
-            ref AttackCounter counter = ref entity.GetComponent<AttackCounter>();
+            ref FireDelayCounter counter = ref entity.GetComponent<FireDelayCounter>();
             counter.value += deltaTime;
 
-            float delay = entity.GetComponent<AttackDelay>().value;
+            float delay = entity.GetComponent<FireDelay>().value;
 
             if (counter.value >= delay )
             {

@@ -80,10 +80,11 @@ MonoBehaviour:
   - rid: 5861487747689349122
   - rid: 5861487747689349123
   - rid: 5861487747689349125
-  - rid: 5861487747689349132
   - rid: 5861487747689349131
-  - rid: 5861487747689349129
   - rid: 5861487747689349141
+  - rid: 5861487747689349152
+  - rid: 5861487747689349150
+  - rid: 5861487747689349156
   _animator: {fileID: 1870072544967355838}
   _dispatcher: {fileID: 312409824}
   references:
@@ -101,23 +102,27 @@ MonoBehaviour:
       type: {class: ObjectType, ns: , asm: Assembly-CSharp}
       data:
         value: 1
-    - rid: 5861487747689349129
-      type: {class: Weapon, ns: , asm: Assembly-CSharp}
-      data:
-        projectileType: 0
-        firePoint: {fileID: 5768525920118794643}
     - rid: 5861487747689349131
       type: {class: AttackDistance, ns: , asm: Assembly-CSharp}
       data:
         value: 10
-    - rid: 5861487747689349132
-      type: {class: AttackDelay, ns: , asm: Assembly-CSharp}
-      data:
-        value: 5
     - rid: 5861487747689349141
       type: {class: Health, ns: , asm: Assembly-CSharp}
       data:
         value: 10
+    - rid: 5861487747689349150
+      type: {class: FireDelayCounter, ns: , asm: Assembly-CSharp}
+      data:
+        value: 0
+    - rid: 5861487747689349152
+      type: {class: FireDelay, ns: , asm: Assembly-CSharp}
+      data:
+        value: 15
+    - rid: 5861487747689349156
+      type: {class: ShootingWeapon, ns: , asm: Assembly-CSharp}
+      data:
+        projectileType: 0
+        firePoint: {fileID: 5768525920118794643}
 --- !u!1 &2258412066776006709
 GameObject:
   m_ObjectHideFlags: 0
