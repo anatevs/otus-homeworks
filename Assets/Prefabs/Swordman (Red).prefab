@@ -46,7 +46,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 3.2, z: 1.6}
+  m_Size: {x: 1.4, y: 3.2, z: 1.4}
   m_Center: {x: 0, y: 1.6, z: 0}
 --- !u!54 &8650792560150866323
 Rigidbody:
@@ -81,7 +81,7 @@ MonoBehaviour:
   - rid: 5861487747689349133
   - rid: 5861487747689349134
   - rid: 5861487747689349137
-  - rid: 5861487747689349143
+  - rid: 5861487747689349172
   _animator: {fileID: 8692576747537636603}
   _dispatcher: {fileID: 1331106829}
   references:
@@ -103,10 +103,10 @@ MonoBehaviour:
       type: {class: Speed, ns: , asm: Assembly-CSharp}
       data:
         value: 0
-    - rid: 5861487747689349143
+    - rid: 5861487747689349172
       type: {class: Health, ns: , asm: Assembly-CSharp}
       data:
-        value: 1
+        value: 10
 --- !u!1001 &8692576747530256569
 PrefabInstance:
   m_ObjectHideFlags: 0

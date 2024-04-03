@@ -23,8 +23,6 @@ public class WeaponProvider : UniversalProvider
                     other.AddComponent<HealthChangeRequest>().value =
                         Entity.GetComponent<Damage>().value;
                 }
-
-                //Entity.AddComponent<UnspawnRequest>();
             }
         }
     }

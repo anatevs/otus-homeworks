@@ -1,4 +1,5 @@
 using Scellecs.Morpeh;
+using UnityEngine;
 
 public class TargetDefineSystem : ISystem
 {
@@ -9,6 +10,7 @@ public class TargetDefineSystem : ISystem
     }
 
     private Filter _filter;
+    private Stash<Target> _targetStash;
     private readonly TeamService _teamService;
 
     public TargetDefineSystem(TeamService teamService)
@@ -25,6 +27,8 @@ public class TargetDefineSystem : ISystem
             .With<Team>()
             .Build();
 
+        _targetStash = this.World.GetStash<Target>();
+
         foreach (Entity entity in _filter)
         {
             Entity target = SearchNearestTarget(entity);
@@ -40,11 +44,13 @@ public class TargetDefineSystem : ISystem
 
             if (currTarget.IsNullOrDisposed())
             {
-                entity.RemoveComponent<Target>();
+                _targetStash.Remove(entity);
+                entity.RemoveComponent<AttackingTag>();
+
                 continue;
             }
 
-            Entity prevTarget = entity.GetComponent<Target>().value;
+            Entity prevTarget = _targetStash.Get(entity).value;
             if (!prevTarget.IsNullOrDisposed() && (currTarget == prevTarget))
             {
                 continue;
@@ -58,11 +64,10 @@ public class TargetDefineSystem : ISystem
 
     private void SetTarget(Entity entity, Entity target)
     {
-        if (entity.Has<Standing>())
-        {
-            entity.RemoveComponent<Standing>();
-        }
-        entity.SetComponent<Target>(new Target { value = target });
+        entity.RemoveComponent<Standing>();
+        entity.RemoveComponent<AttackingTag>();
+
+        _targetStash.Set(entity, new Target { value = target });
     }
 
     private Entity SearchNearestTarget(Entity entity)

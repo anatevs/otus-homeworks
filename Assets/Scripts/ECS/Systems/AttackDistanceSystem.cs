@@ -31,7 +31,10 @@ public class AttackDistanceSystem : ISystem
             if ((sqrDistance <= attackDistance * attackDistance))
             {
                 entity.SetComponent(new Standing());
-                entity.AddComponent<FireRequest>();
+                if (!entity.Has<AttackingTag>())
+                {
+                    entity.AddComponent<FireRequest>();
+                }
             }
         }
     }

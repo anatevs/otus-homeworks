@@ -19,7 +19,7 @@ public class FireRequestSystem : ISystem
     {
         _shootFilter = this.World.Filter
             .With<FireRequest>()
-            .With<ShootingWeapon>()
+            //.With<ShootingWeapon>()
             .With<Team>()
             .With<AnimatorView>()
             .Build();
