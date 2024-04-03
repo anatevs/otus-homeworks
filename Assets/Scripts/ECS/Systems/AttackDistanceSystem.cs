@@ -10,6 +10,7 @@ public class AttackDistanceSystem : ISystem
     }
 
     private Filter _filter;
+    private Stash<Position> _positionStash;
 
     public void OnAwake()
     {
@@ -18,6 +19,8 @@ public class AttackDistanceSystem : ISystem
             .With<AttackDistance>()
             .With<Target>()
             .Build();
+
+        _positionStash = this.World.GetStash<Position>();
     }
 
     public void OnUpdate(float deltaTime)
@@ -25,12 +28,17 @@ public class AttackDistanceSystem : ISystem
         foreach (Entity entity in _filter)
         {
             float attackDistance = entity.GetComponent<AttackDistance>().value;
-            Vector3 position = entity.GetComponent<Position>().value;
-            Vector3 targetPosition = entity.GetComponent<Target>().value.GetComponent<Position>().value;
+            Vector3 position = _positionStash.Get(entity).value;
+            
+            Entity target = entity.GetComponent<Target>().value;
+            Vector3 targetPosition = _positionStash.Get(target).value;
+            float targetStop = target.GetComponent<StoppingDistance>().value;
             float sqrDistance = Vector3.SqrMagnitude(position - targetPosition);
-            if ((sqrDistance <= attackDistance * attackDistance))
+            float stopDistance = attackDistance + targetStop;
+            if ((sqrDistance <= stopDistance * stopDistance))
             {
                 entity.SetComponent(new Standing());
+
                 if (!entity.Has<AttackingTag>())
                 {
                     entity.AddComponent<FireRequest>();

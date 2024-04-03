@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8692576747330127514}
-  - component: {fileID: 5870685999437297219}
   - component: {fileID: 8650792560150866323}
+  - component: {fileID: 6549315800484484191}
   - component: {fileID: 8644950590960456548}
   m_Layer: 0
   m_Name: Swordman (Red)
@@ -35,19 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!65 &5870685999437297219
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8692576747330127513}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.4, y: 3.2, z: 1.4}
-  m_Center: {x: 0, y: 1.6, z: 0}
 --- !u!54 &8650792560150866323
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -64,6 +51,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &6549315800484484191
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.7
+  m_Height: 3.2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.6, z: 0}
 --- !u!114 &8644950590960456548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,7 +82,8 @@ MonoBehaviour:
   - rid: 5861487747689349133
   - rid: 5861487747689349134
   - rid: 5861487747689349137
-  - rid: 5861487747689349172
+  - rid: 5861487747689349174
+  - rid: 5861487747689349182
   _animator: {fileID: 8692576747537636603}
   _dispatcher: {fileID: 1331106829}
   references:
@@ -103,10 +105,14 @@ MonoBehaviour:
       type: {class: Speed, ns: , asm: Assembly-CSharp}
       data:
         value: 0
-    - rid: 5861487747689349172
+    - rid: 5861487747689349174
       type: {class: Health, ns: , asm: Assembly-CSharp}
       data:
-        value: 10
+        value: 3
+    - rid: 5861487747689349182
+      type: {class: StoppingDistance, ns: , asm: Assembly-CSharp}
+      data:
+        value: 0.7
 --- !u!1001 &8692576747530256569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -215,7 +221,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8692576747530307905}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.84666073, y: 0.029999997, z: 0.15}
