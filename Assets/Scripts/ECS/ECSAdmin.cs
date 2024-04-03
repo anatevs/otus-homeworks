@@ -38,6 +38,8 @@ public class ECSAdmin : MonoBehaviour
 
         _systemsGroup.AddSystem(new FireRequestSystem());
 
+        _systemsGroup.AddSystem(new SpawnProjectileSystem());
+
         _systemsGroup.AddSystem(new SpawnSystem(_teamService));
         _systemsGroup.AddSystem(new ChangeHealthSystem());
         _systemsGroup.AddSystem(new HealthSystem());

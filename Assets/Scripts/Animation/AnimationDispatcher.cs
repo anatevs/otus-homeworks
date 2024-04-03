@@ -7,6 +7,7 @@ public class AnimationDispatcher : MonoBehaviour
 
     private void ReceiveEvent(string eventName)
     {
-        OnEventReceived?.Invoke(eventName);
+        Debug.Log(eventName);
+        OnEventReceived.Invoke(eventName);
     }
 }

@@ -13,12 +13,12 @@ public class MobProvider : MovableProvider
     {
         base.Initialize();
 
-        //Entity.AddComponent<Standing>();
-        Entity.AddComponent<CanFireTag>();
-        Entity.AddComponent<MobFlag>();
-        Entity.AddComponent<Target>();
+        Entity.SetComponent(new Standing());
+        Entity.SetComponent(new CanFireTag());
+        Entity.SetComponent(new MobFlag());
+        Entity.SetComponent(new Target());
 
-        Entity.AddComponent<AnimatorView>().value = _animator;
+        Entity.SetComponent(new AnimatorView() { value = _animator });
         _dispatcher.OnEventReceived += ReceiveAnimEvent;
     }
 

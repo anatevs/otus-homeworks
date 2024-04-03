@@ -7,7 +7,7 @@ public class ProjectileProvider : MovableProvider
     protected override void Initialize()
     {
         base.Initialize();
-        Entity.AddComponent<ProjectileFlag>();
+        Entity.SetComponent<ProjectileFlag>(new ProjectileFlag());
     }
 
     private void OnTriggerEnter(Collider collider)
