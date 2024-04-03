@@ -38,6 +38,13 @@ public class TargetDefineSystem : ISystem
         foreach (Entity entity in _filter)
         {
             Entity currTarget = SearchNearestTarget(entity);
+
+            if (currTarget.IsNullOrDisposed())
+            {
+                entity.RemoveComponent<Target>();
+                continue;
+            }
+
             Entity prevTarget = entity.GetComponent<Target>().value;
             if (!prevTarget.IsNullOrDisposed() && (currTarget == prevTarget))
             {

@@ -83,6 +83,7 @@ MonoBehaviour:
   - rid: 5861487747689349132
   - rid: 5861487747689349131
   - rid: 5861487747689349129
+  - rid: 5861487747689349141
   _animator: {fileID: 1870072544967355838}
   _dispatcher: {fileID: 312409824}
   references:
@@ -113,6 +114,10 @@ MonoBehaviour:
       type: {class: AttackDelay, ns: , asm: Assembly-CSharp}
       data:
         value: 5
+    - rid: 5861487747689349141
+      type: {class: Health, ns: , asm: Assembly-CSharp}
+      data:
+        value: 10
 --- !u!1 &2258412066776006709
 GameObject:
   m_ObjectHideFlags: 0

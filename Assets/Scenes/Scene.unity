@@ -410,6 +410,12 @@ MonoBehaviour:
     poolTransform: {fileID: 1548248887}
     worldTransform: {fileID: 1263304700}
     initPoolCount: 0
+--- !u!4 &454149097 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2111445840}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &463166443
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,6 +895,7 @@ Transform:
   - {fileID: 516669618}
   - {fileID: 1870072545187884919}
   - {fileID: 74384898}
+  - {fileID: 454149097}
   m_Father: {fileID: 800337253}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1558,6 +1565,75 @@ Transform:
   m_Father: {fileID: 1334465665}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &2111445840
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1263304700}
+    m_Modifications:
+    - target: {fileID: 8692576747330127513, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
+        type: 3}
+      propertyPath: m_Name
+      value: Swordman (Red) (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a, type: 3}
 --- !u!4 &1870072545187884919 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2440321295428197704, guid: d722497b74e8f604a875227ad9a23670,
@@ -1571,6 +1647,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1263304700}
     m_Modifications:
+    - target: {fileID: 1707629683, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f, type: 3}
+      propertyPath: serializedComponents.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1707629683, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f, type: 3}
+      propertyPath: serializedComponents.Array.data[7]
+      value: 5861487747689349144
+      objectReference: {fileID: 0}
+    - target: {fileID: 1707629683, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f, type: 3}
+      propertyPath: managedReferences[5861487747689349144]
+      value: Assembly-CSharp AttackCounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 1707629683, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f, type: 3}
+      propertyPath: managedReferences[5861487747689349144].value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1870072543877420728, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
         type: 3}
       propertyPath: m_RootOrder
