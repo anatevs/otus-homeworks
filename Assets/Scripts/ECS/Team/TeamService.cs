@@ -18,7 +18,7 @@ public class TeamService
     public void AddToTeam(Entity entity)
     {
         TeamType selfTeam = entity.GetComponent<Team>().value;
-        if (entity.Has<MobFlag>())
+        if (entity.Has<MobFlag>() || entity.Has<BaseFlag>())
         {
             _teamContainers[selfTeam].Add(entity);
         }
@@ -30,7 +30,6 @@ public class TeamService
         if (entity.Has<MobFlag>())
         {
             _teamContainers[selfTeam].Remove(entity);
-            Debug.Log($"remove {entity} from it's container");
         }
     }
 

@@ -13,7 +13,7 @@ public class MobProvider : MovableProvider
     {
         base.Initialize();
 
-        Entity.SetComponent(new Standing());
+        Entity.SetComponent(new StandingFlag());
         Entity.SetComponent(new CanFireTag());
         Entity.SetComponent(new MobFlag());
         Entity.SetComponent(new Target());

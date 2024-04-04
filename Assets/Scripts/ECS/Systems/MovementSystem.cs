@@ -16,7 +16,7 @@ public sealed class MovementSystem : ISystem
             .With<Position>()
             .With<MoveDirection>()
             .With<Speed>()
-            .Without<Standing>()
+            .Without<StandingFlag>()
             .Build();
     }
 

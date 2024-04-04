@@ -25,6 +25,7 @@ public class TargetDefineSystem : ISystem
             .With<Position>()
             .With<MoveDirection>()
             .With<Team>()
+            .Without<Inactive>()
             .Build();
 
         _targetStash = this.World.GetStash<Target>();
@@ -64,7 +65,7 @@ public class TargetDefineSystem : ISystem
 
     private void SetTarget(Entity entity, Entity target)
     {
-        entity.RemoveComponent<Standing>();
+        entity.RemoveComponent<StandingFlag>();
         entity.RemoveComponent<AttackingTag>();
 
         _targetStash.Set(entity, new Target { value = target });

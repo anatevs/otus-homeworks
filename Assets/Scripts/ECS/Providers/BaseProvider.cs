@@ -12,6 +12,7 @@ public class BaseProvider : UniversalProvider
     {
         base.Initialize();
 
+        Entity.AddComponent<BaseFlag>();
         Entity.AddComponent<Position>() = new Position() { value = transform.position };
     }
 

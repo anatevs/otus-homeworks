@@ -19,9 +19,9 @@ public class FireRequestSystem : ISystem
     {
         _shootFilter = this.World.Filter
             .With<FireRequest>()
-            //.With<ShootingWeapon>()
             .With<Team>()
             .With<AnimatorView>()
+            .Without<Inactive>()
             .Build();
 
         _typeStash = this.World.GetStash<ObjectType>();

@@ -29,6 +29,8 @@ public class ECSAdmin : MonoBehaviour
         _systemsGroup.AddInitializer(new PrefabsAndPoolsInitializer(_prefabStorage));
         _systemsGroup.AddInitializer(new TeamServiceInitializer(_teamService));
 
+        _systemsGroup.AddSystem(new FinishGameSystem());
+
         _systemsGroup.AddSystem(new TargetDefineSystem(_teamService));
 
         _systemsGroup.AddSystem(new DirectToTargetSystem());
@@ -49,6 +51,7 @@ public class ECSAdmin : MonoBehaviour
         _systemsGroup.AddSystem(new TransformViewSystem());
 
         _systemsGroup.AddSystem(new AnimationStatesSystem_Mob());
+
 
 
         _world.AddSystemsGroup(order: 0, _systemsGroup);

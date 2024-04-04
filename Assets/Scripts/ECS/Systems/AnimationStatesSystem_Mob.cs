@@ -12,7 +12,8 @@ public class AnimationStatesSystem_Mob : ISystem
     private static readonly int _mainState = Animator.StringToHash("MainState");
 
     private Filter _filter;
-    private Stash<Standing> _standing;
+    private Stash<StandingFlag> _standing;
+    private Stash<Inactive> _inactive;
     private Stash<AttackingTag> _attacking;
 
     public void OnAwake()
@@ -22,7 +23,8 @@ public class AnimationStatesSystem_Mob : ISystem
             .With<AnimatorView>()
             .Build();
 
-        _standing = this.World.GetStash<Standing>();
+        _standing = this.World.GetStash<StandingFlag>();
+        _inactive = this.World.GetStash<Inactive>();
         _attacking = this.World.GetStash<AttackingTag>();
     }
 
@@ -31,18 +33,25 @@ public class AnimationStatesSystem_Mob : ISystem
         foreach (Entity entity in _filter)
         {
             Animator animator = entity.GetComponent<AnimatorView>().value;
-            if (_standing.Has(entity))
+            if (_inactive.Has(entity))
             {
                 animator.SetInteger(_mainState, (int)MobAnimationStates.Idle);
             }
             else
             {
-                animator.SetInteger(_mainState, (int)MobAnimationStates.Move);
-            }
+                if (_standing.Has(entity))
+                {
+                    animator.SetInteger(_mainState, (int)MobAnimationStates.Idle);
+                }
+                else
+                {
+                    animator.SetInteger(_mainState, (int)MobAnimationStates.Move);
+                }
 
-            if (_attacking.Has(entity))
-            {
-                animator.SetInteger(_mainState, (int)MobAnimationStates.Attack);
+                if (_attacking.Has(entity))
+                {
+                    animator.SetInteger(_mainState, (int)MobAnimationStates.Attack);
+                }
             }
         }
     }

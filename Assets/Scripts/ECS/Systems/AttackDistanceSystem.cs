@@ -18,6 +18,7 @@ public class AttackDistanceSystem : ISystem
             .With<Position>()
             .With<AttackDistance>()
             .With<Target>()
+            .Without<Inactive>()
             .Build();
 
         _positionStash = this.World.GetStash<Position>();
@@ -37,7 +38,7 @@ public class AttackDistanceSystem : ISystem
             float stopDistance = attackDistance + targetStop;
             if ((sqrDistance <= stopDistance * stopDistance))
             {
-                entity.SetComponent(new Standing());
+                entity.SetComponent(new StandingFlag());
 
                 if (!entity.Has<AttackingTag>())
                 {

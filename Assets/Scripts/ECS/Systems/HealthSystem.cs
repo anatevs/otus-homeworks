@@ -14,6 +14,7 @@ public sealed class HealthSystem : ISystem
     {
         _filter = this.World.Filter
             .With<Health>()
+            .Without<Inactive>()
             .Build();
     }
 
@@ -24,6 +25,11 @@ public sealed class HealthSystem : ISystem
             int hp = entity.GetComponent<Health>().value;
             if (hp <= 0)
             {
+                if (entity.Has<BaseFlag>())
+                {
+                    entity.AddComponent<FinishGameRequest>();
+                    break;
+                }
                 entity.AddComponent<UnspawnRequest>();
             }
         }
