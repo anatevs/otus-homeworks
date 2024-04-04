@@ -1,6 +1,6 @@
 using Scellecs.Morpeh;
 
-public class TeamServiceInitializer : IInitializer
+public sealed class TeamServiceInitializer : IInitializer
 {
     public World World
     {

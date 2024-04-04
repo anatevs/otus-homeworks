@@ -1,6 +1,6 @@
 using Scellecs.Morpeh;
 
-public class ChangeHealthSystem : ISystem
+public sealed class ChangeHealthSystem : ISystem
 {
     public World World
     {

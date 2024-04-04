@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using UnityEngine;
 
-public class RotationSystem : ISystem
+public sealed class RotationSystem : ISystem
 {
     public World World
     {

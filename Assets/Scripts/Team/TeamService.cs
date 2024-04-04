@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class TeamService
+public sealed class TeamService
 {
     private readonly Dictionary<TeamType, List<Entity>> _teamContainers = new();
 

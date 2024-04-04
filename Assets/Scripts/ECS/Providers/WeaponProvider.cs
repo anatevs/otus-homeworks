@@ -2,7 +2,7 @@ using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
 using UnityEngine;
 
-public class WeaponProvider : UniversalProvider
+public sealed class WeaponProvider : UniversalProvider
 {
     private void OnTriggerEnter(Collider collider)
     {
@@ -16,14 +16,14 @@ public class WeaponProvider : UniversalProvider
                 int damage = Entity.GetComponent<Damage>().value;
                 if (other.Has<TakeDamageEvent>())
                 {
-                    other.AddComponent<TakeDamageEvent>().value += damage;
+                    other.GetComponent<TakeDamageEvent>().value += damage;
                 }
                 else
                 {
                     other.AddComponent<TakeDamageEvent>().value = damage;
                 }
 
-                if (Entity.Has<ProjectileFlag>())
+                if (Entity.Has<ProjectileFlag>() && !Entity.Has<UnspawnRequest>())
                 {
                     Entity.AddComponent<UnspawnRequest>();
                 }

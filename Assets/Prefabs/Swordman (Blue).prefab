@@ -59,7 +59,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5942098219209811784}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.7
   m_Height: 3.2
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedComponents:
-  - rid: 5861487747689349122
+  - rid: 5861487792972103705
   - rid: 5861487747689349123
   - rid: 5861487747689349146
   - rid: 5861487747689349183
@@ -89,10 +89,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 5861487747689349122
-      type: {class: Speed, ns: , asm: Assembly-CSharp}
-      data:
-        value: 5
     - rid: 5861487747689349123
       type: {class: Team, ns: , asm: Assembly-CSharp}
       data:
@@ -111,6 +107,10 @@ MonoBehaviour:
         value: 3
     - rid: 5861487792972103689
       type: {class: Health, ns: , asm: Assembly-CSharp}
+      data:
+        value: 3
+    - rid: 5861487792972103705
+      type: {class: Speed, ns: , asm: Assembly-CSharp}
       data:
         value: 3
 --- !u!1001 &5942098220078932328

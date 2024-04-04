@@ -2,7 +2,7 @@ using Scellecs.Morpeh;
 using UnityEngine;
 using VContainer;
 
-public class ECSAdmin : MonoBehaviour
+public sealed class ECSAdmin : MonoBehaviour
 {
     private World _world;
     private SystemsGroup _systemsGroup;

@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using UnityEngine;
 
-public class FireRequestSystem : ISystem
+public sealed class FireRequestSystem : ISystem
 {
     public World World
     {

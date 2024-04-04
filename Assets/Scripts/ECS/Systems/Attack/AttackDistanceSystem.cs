@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using UnityEngine;
 
-public class AttackDistanceSystem : ISystem
+public sealed class AttackDistanceSystem : ISystem
 {
     public World World
     {

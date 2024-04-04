@@ -2,7 +2,7 @@ using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
 using UnityEngine;
 
-public class BaseProvider : UniversalProvider
+public sealed class BaseProvider : UniversalProvider
 {
     protected override void Initialize()
     {

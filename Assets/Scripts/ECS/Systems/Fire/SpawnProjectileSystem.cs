@@ -1,6 +1,6 @@
 using Scellecs.Morpeh;
 
-public class SpawnProjectileSystem : ISystem
+public sealed class SpawnProjectileSystem : ISystem
 {
     public World World
     {

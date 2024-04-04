@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using UnityEngine;
 
-public class MobProvider : MovableProvider
+public sealed class MobProvider : MovableProvider
 {
     [SerializeField]
     private Animator _animator;
@@ -27,7 +27,7 @@ public class MobProvider : MovableProvider
     {
         if (eventName == MobAnimationEvents.Shoot)
         {
-            Entity.AddComponent<SpawnProjectileRequest>();
+            Entity.SetComponent(new SpawnProjectileRequest());
         }
 
         else if (eventName == MobAnimationEvents.Death)

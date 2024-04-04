@@ -1,9 +1,7 @@
 using Scellecs.Morpeh;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class ClearEventsSystem : ISystem
+public sealed class ClearEventsSystem : ISystem
 {
     public World World
     {

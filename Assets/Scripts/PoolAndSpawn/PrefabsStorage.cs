@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PrefabsStorage : MonoBehaviour
+public sealed class PrefabsStorage : MonoBehaviour
 {
     [SerializeField]
     private PrefabAndPoolParams[] _prefabs;

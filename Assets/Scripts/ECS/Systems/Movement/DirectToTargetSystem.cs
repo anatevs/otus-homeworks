@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using UnityEngine;
 
-public class DirectToTargetSystem : ISystem
+public sealed class DirectToTargetSystem : ISystem
 {
     public World World
     {

@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using UnityEngine;
 
-public class UnspawnSystem : ISystem
+public sealed class UnspawnSystem : ISystem
 {
     public World World
     {

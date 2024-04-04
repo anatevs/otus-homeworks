@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using UnityEngine;
 
-public class AnimationTakeDamageSystem : ISystem
+public sealed class AnimationTakeDamageSystem : ISystem
 {
     public World World
     {

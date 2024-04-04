@@ -3,7 +3,7 @@ using Scellecs.Morpeh.Providers;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnSystem : ISystem
+public sealed class SpawnSystem : ISystem
 {
     public World World
     {
@@ -17,7 +17,7 @@ public class SpawnSystem : ISystem
     private Stash<Team> _teamStash;
     private Stash<ObjectType> _typeStash;
 
-    private TeamService _teamService;
+    private readonly TeamService _teamService;
 
     public SpawnSystem(TeamService teamService)
     {

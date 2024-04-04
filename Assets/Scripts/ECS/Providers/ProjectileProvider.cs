@@ -1,6 +1,6 @@
 using Scellecs.Morpeh;
 
-public class ProjectileProvider : MovableProvider
+public sealed class ProjectileProvider : MovableProvider
 {
     protected override void Initialize()
     {

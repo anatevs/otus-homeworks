@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using UnityEngine;
 
-public class FinishGameSystem : ISystem
+public sealed class FinishGameSystem : ISystem
 {
     public World World
     {
@@ -38,7 +38,9 @@ public class FinishGameSystem : ISystem
                     gameEntity.SetComponent<Inactive>(new Inactive());
                 }
 
-                Debug.Log($"Game is over, {(TeamType) (((int) entity.GetComponent<Team>().value + 1)%2)} is win");
+                Debug.Log($"Game is over," +
+                    $" {(TeamType) (((int) entity.GetComponent<Team>().value + 1)%2)}" +
+                    $" team is win");
             }
         }
     }
