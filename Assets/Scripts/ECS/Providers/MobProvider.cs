@@ -25,12 +25,12 @@ public class MobProvider : MovableProvider
 
     private void ReceiveAnimEvent(string eventName)
     {
-        if (eventName == "Shoot")
+        if (eventName == MobAnimationEvents.Shoot)
         {
             Entity.AddComponent<SpawnProjectileRequest>();
         }
 
-        else if (eventName == "Death")
+        else if (eventName == MobAnimationEvents.Death)
         {
             Entity.AddComponent<UnspawnRequest>();
         }

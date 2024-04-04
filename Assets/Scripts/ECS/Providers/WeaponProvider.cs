@@ -23,6 +23,12 @@ public class WeaponProvider : UniversalProvider
                     other.AddComponent<HealthChangeRequest>().value =
                         Entity.GetComponent<Damage>().value;
                 }
+
+                if (other.Has<AnimatorView>())
+                {
+                    Animator animator = other.GetComponent<AnimatorView>().value;
+                    animator.SetTrigger(Animator.StringToHash(MobAnimationTriggers.TakeDamage));
+                }
             }
         }
     }

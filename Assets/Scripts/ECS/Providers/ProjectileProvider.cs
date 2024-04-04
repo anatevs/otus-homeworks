@@ -31,6 +31,12 @@ public class ProjectileProvider : MovableProvider
                 }
 
                 Entity.AddComponent<UnspawnRequest>();
+
+                if (other.Has<AnimatorView>())
+                {
+                    Animator animator = other.GetComponent<AnimatorView>().value;
+                    animator.SetTrigger(Animator.StringToHash(MobAnimationTriggers.TakeDamage));
+                }
             }
         }
     }

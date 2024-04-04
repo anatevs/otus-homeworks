@@ -81,7 +81,7 @@ MonoBehaviour:
   - rid: 5861487747689349138
   - rid: 5861487747689349133
   - rid: 5861487747689349134
-  - rid: 5861487747689349137
+  - rid: 5861487747689349191
   - rid: 5861487747689349174
   - rid: 5861487747689349182
   _animator: {fileID: 8692576747537636603}
@@ -97,10 +97,6 @@ MonoBehaviour:
       type: {class: ObjectType, ns: , asm: Assembly-CSharp}
       data:
         value: 2
-    - rid: 5861487747689349137
-      type: {class: AttackDistance, ns: , asm: Assembly-CSharp}
-      data:
-        value: 1
     - rid: 5861487747689349138
       type: {class: Speed, ns: , asm: Assembly-CSharp}
       data:
@@ -113,6 +109,10 @@ MonoBehaviour:
       type: {class: StoppingDistance, ns: , asm: Assembly-CSharp}
       data:
         value: 0.7
+    - rid: 5861487747689349191
+      type: {class: AttackDistance, ns: , asm: Assembly-CSharp}
+      data:
+        value: 3
 --- !u!1001 &8692576747530256569
 PrefabInstance:
   m_ObjectHideFlags: 0
