@@ -13,21 +13,19 @@ public class WeaponProvider : UniversalProvider
             if (Entity.GetComponent<Team>().value != other.GetComponent<Team>().value
                 && other.Has<Health>())
             {
-                if (other.Has<HealthChangeRequest>())
+                int damage = Entity.GetComponent<Damage>().value;
+                if (other.Has<TakeDamageEvent>())
                 {
-                    other.GetComponent<HealthChangeRequest>().value +=
-                        Entity.GetComponent<Damage>().value;
+                    other.AddComponent<TakeDamageEvent>().value += damage;
                 }
                 else
                 {
-                    other.AddComponent<HealthChangeRequest>().value =
-                        Entity.GetComponent<Damage>().value;
+                    other.AddComponent<TakeDamageEvent>().value = damage;
                 }
 
-                if (other.Has<AnimatorView>())
+                if (Entity.Has<ProjectileFlag>())
                 {
-                    Animator animator = other.GetComponent<AnimatorView>().value;
-                    animator.SetTrigger(Animator.StringToHash(MobAnimationTriggers.TakeDamage));
+                    Entity.AddComponent<UnspawnRequest>();
                 }
             }
         }

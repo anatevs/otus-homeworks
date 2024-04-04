@@ -28,19 +28,4 @@ public class GameLifetimeScope : LifetimeScope
     {
         builder.RegisterComponent<PrefabsStorage>(_prefabsStorage);
     }
-
-    private void BuildCollisionManagers(IContainerBuilder builder)
-    {
-        //builder.Register(ProjectileCollisionManager<MovableProvider>())
-    }
-
-
-
-
-
-
-
-
-
-
 }

@@ -79,7 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedComponents:
   - rid: 5861487747689349190
-  - rid: 5861487747689349189
+  - rid: 5861487792972103681
   - rid: 5861487747689349187
   references:
     version: 2
@@ -88,14 +88,14 @@ MonoBehaviour:
       type: {class: StoppingDistance, ns: , asm: Assembly-CSharp}
       data:
         value: 4
-    - rid: 5861487747689349189
-      type: {class: Health, ns: , asm: Assembly-CSharp}
-      data:
-        value: 15
     - rid: 5861487747689349190
       type: {class: Team, ns: , asm: Assembly-CSharp}
       data:
         value: 1
+    - rid: 5861487792972103681
+      type: {class: Health, ns: , asm: Assembly-CSharp}
+      data:
+        value: 5
 --- !u!1001 &2880407732272326060
 PrefabInstance:
   m_ObjectHideFlags: 0

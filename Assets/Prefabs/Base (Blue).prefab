@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6854243942854037326}
   - component: {fileID: 8007345727664539011}
   - component: {fileID: 3873461738174397774}
+  - component: {fileID: 2475559403175938833}
   m_Layer: 0
   m_Name: Base (Blue)
   m_TagString: Untagged
@@ -64,6 +65,37 @@ CapsuleCollider:
   m_Height: 15
   m_Direction: 1
   m_Center: {x: 0, y: 2, z: 0}
+--- !u!114 &2475559403175938833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981802089077454633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a6585e2c27013d428aa28a780f4db49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedComponents:
+  - rid: 5861487792972103683
+  - rid: 5861487792972103681
+  - rid: 5861487747689349187
+  references:
+    version: 2
+    RefIds:
+    - rid: 5861487747689349187
+      type: {class: StoppingDistance, ns: , asm: Assembly-CSharp}
+      data:
+        value: 4
+    - rid: 5861487792972103681
+      type: {class: Health, ns: , asm: Assembly-CSharp}
+      data:
+        value: 5
+    - rid: 5861487792972103683
+      type: {class: Team, ns: , asm: Assembly-CSharp}
+      data:
+        value: 0
 --- !u!1001 &7657002863764277129
 PrefabInstance:
   m_ObjectHideFlags: 0

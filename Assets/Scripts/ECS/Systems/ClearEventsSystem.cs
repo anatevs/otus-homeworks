@@ -11,11 +11,11 @@ public class ClearEventsSystem : ISystem
         set { }
     }
 
-    private List<Stash> _stashes = new List<Stash>();
+    private readonly List<Stash> _stashes = new List<Stash>();
 
     public void OnAwake()
     {
-        AddEventToClear<FireEvent>();
+        AddEventToClear<TakeDamageEvent>();
     }
 
     public void OnUpdate(float deltaTime)

@@ -9,6 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4680618576761120442}
+  - component: {fileID: -1453995049948546477}
+  - component: {fileID: -7792485566936726279}
+  - component: {fileID: -3554327701404397135}
   m_Layer: 0
   m_Name: Arrow(Red)
   m_TagString: Untagged
@@ -32,6 +35,74 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &-1453995049948546477
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486587451354004274}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2, y: 0.2, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-7792485566936726279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486587451354004274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c24d8d32c4bd0fe4fab8793a8aefa5d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedComponents:
+  - rid: 4747080576224460802
+  - rid: 4747080576224460815
+  - rid: 5861487792972103687
+  - rid: 4747080576224460809
+  - rid: 4747080576224460813
+  references:
+    version: 2
+    RefIds:
+    - rid: 4747080576224460802
+      type: {class: Inactive, ns: , asm: Assembly-CSharp}
+    - rid: 4747080576224460809
+      type: {class: ObjectType, ns: , asm: Assembly-CSharp}
+      data:
+        value: 0
+    - rid: 4747080576224460813
+      type: {class: Damage, ns: , asm: Assembly-CSharp}
+      data:
+        value: 1
+    - rid: 4747080576224460815
+      type: {class: Speed, ns: , asm: Assembly-CSharp}
+      data:
+        value: 5
+    - rid: 5861487792972103687
+      type: {class: Team, ns: , asm: Assembly-CSharp}
+      data:
+        value: 1
+--- !u!114 &-3554327701404397135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486587451354004274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 301427bd8483a9a4b80f4ef608597b4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedComponents: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &4004982190034295362
 GameObject:
   m_ObjectHideFlags: 0

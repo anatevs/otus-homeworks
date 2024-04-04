@@ -72,7 +72,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5942098219209811784}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08e984df4bd21e942b7e3107ac4ef5f1, type: 3}
   m_Name: 
@@ -82,7 +82,7 @@ MonoBehaviour:
   - rid: 5861487747689349123
   - rid: 5861487747689349146
   - rid: 5861487747689349183
-  - rid: 5861487747689349141
+  - rid: 5861487792972103689
   - rid: 5861487747689349180
   _animator: {fileID: 5942098220088343850}
   _dispatcher: {fileID: 243443527528137794}
@@ -97,10 +97,6 @@ MonoBehaviour:
       type: {class: Team, ns: , asm: Assembly-CSharp}
       data:
         value: 0
-    - rid: 5861487747689349141
-      type: {class: Health, ns: , asm: Assembly-CSharp}
-      data:
-        value: 10
     - rid: 5861487747689349146
       type: {class: ObjectType, ns: , asm: Assembly-CSharp}
       data:
@@ -111,6 +107,10 @@ MonoBehaviour:
         value: 0.7
     - rid: 5861487747689349183
       type: {class: AttackDistance, ns: , asm: Assembly-CSharp}
+      data:
+        value: 3
+    - rid: 5861487792972103689
+      type: {class: Health, ns: , asm: Assembly-CSharp}
       data:
         value: 3
 --- !u!1001 &5942098220078932328

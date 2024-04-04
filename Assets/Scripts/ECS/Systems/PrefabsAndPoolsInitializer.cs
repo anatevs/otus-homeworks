@@ -1,4 +1,5 @@
 using Scellecs.Morpeh;
+using Scellecs.Morpeh.Providers;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,6 +37,16 @@ public sealed class PrefabsAndPoolsInitializer : IInitializer
             for (int j = 0; j < info[i].initPoolCount; j++)
             {
                 GameObject go = GameObject.Instantiate(info[i].prefab.prefab);
+
+                if (go.TryGetComponent<UniversalProvider>(out var provider))
+                {
+                    provider.Entity.SetComponent(new Inactive());
+                }
+                else
+                {
+                    throw new System.Exception($"{go} doesn't have provider");
+                }
+
                 go.SetActive(false);
                 go.transform.SetParent(info[i].poolTransform);
                 infoEntity.GetComponent<PoolParams>().pool.Enqueue(go);

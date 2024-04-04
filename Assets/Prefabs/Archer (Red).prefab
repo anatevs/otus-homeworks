@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2440321295428197704}
   - component: {fileID: 6754791649840226537}
   - component: {fileID: 4162028076585745292}
+  - component: {fileID: 2671678522021099957}
   m_Layer: 0
   m_Name: Archer (Red)
   m_TagString: Untagged
@@ -64,6 +65,101 @@ CapsuleCollider:
   m_Height: 3.2
   m_Direction: 1
   m_Center: {x: 0, y: 1.6, z: 0}
+--- !u!114 &2671678522021099957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2440321295428197707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08e984df4bd21e942b7e3107ac4ef5f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedComponents:
+  - rid: 5861487747689349122
+  - rid: 5861487792972103682
+  - rid: 5861487747689349125
+  - rid: 5861487747689349131
+  - rid: 5861487792972103690
+  - rid: 5861487792972103693
+  - rid: 5861487747689349150
+  - rid: 5861487792972103685
+  - rid: 5861487747689349178
+  _animator: {fileID: 2440321294343513678}
+  _dispatcher: {fileID: 65493306403043703}
+  references:
+    version: 2
+    RefIds:
+    - rid: 5861487747689349122
+      type: {class: Speed, ns: , asm: Assembly-CSharp}
+      data:
+        value: 5
+    - rid: 5861487747689349125
+      type: {class: ObjectType, ns: , asm: Assembly-CSharp}
+      data:
+        value: 1
+    - rid: 5861487747689349131
+      type: {class: AttackDistance, ns: , asm: Assembly-CSharp}
+      data:
+        value: 10
+    - rid: 5861487747689349150
+      type: {class: FireDelayCounter, ns: , asm: Assembly-CSharp}
+      data:
+        value: 0
+    - rid: 5861487747689349178
+      type: {class: StoppingDistance, ns: , asm: Assembly-CSharp}
+      data:
+        value: 0.7
+    - rid: 5861487792972103682
+      type: {class: Team, ns: , asm: Assembly-CSharp}
+      data:
+        value: 1
+    - rid: 5861487792972103685
+      type: {class: ShootingWeapon, ns: , asm: Assembly-CSharp}
+      data:
+        projectileType: 0
+        firePoint: {fileID: 1238035048238076818}
+    - rid: 5861487792972103690
+      type: {class: Health, ns: , asm: Assembly-CSharp}
+      data:
+        value: 3
+    - rid: 5861487792972103693
+      type: {class: FireDelay, ns: , asm: Assembly-CSharp}
+      data:
+        value: 5
+--- !u!1 &6712242599016954538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1238035048238076818}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1238035048238076818
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6712242599016954538}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2440321294353088902}
+  m_RootOrder: 62
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2440321294352993016
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -150,7 +246,7 @@ PrefabInstance:
     - target: {fileID: 9563318, guid: 04c79b5f6e9ebab48af48fdcf7b6d570, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 1545ba011c3a4264faea258a66e0295f, type: 2}
+      objectReference: {fileID: 9100000, guid: 521b550218473c0489e3ce48e56f88be, type: 2}
     - target: {fileID: 13742854, guid: 04c79b5f6e9ebab48af48fdcf7b6d570, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -176,6 +272,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04c79b5f6e9ebab48af48fdcf7b6d570, type: 3}
+--- !u!95 &2440321294343513678 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9563318, guid: 04c79b5f6e9ebab48af48fdcf7b6d570,
+    type: 3}
+  m_PrefabInstance: {fileID: 2440321294352993016}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2440321294352904524 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 179124, guid: 04c79b5f6e9ebab48af48fdcf7b6d570,
+    type: 3}
+  m_PrefabInstance: {fileID: 2440321294352993016}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &65493306403043703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2440321294352904524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65ab9bc2d84ae8f4aa0b59daab3dbb8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2440321294353088902 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 494462, guid: 04c79b5f6e9ebab48af48fdcf7b6d570,

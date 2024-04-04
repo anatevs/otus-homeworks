@@ -69,7 +69,7 @@ public class UnspawnSystem : ISystem
 
     private void Unspawn(Entity entity, PoolParams poolParams)
     {
-        entity.AddComponent<Inactive>();
+        entity.SetComponent<Inactive>(new Inactive());
         _teamService.RemoveFromTeam(entity);
 
         GameObject go = entity.GetComponent<TransformView>().value.gameObject;

@@ -1,6 +1,7 @@
 using Scellecs.Morpeh;
+using UnityEngine;
 
-public class ChangeHealthSystem : ISystem
+public class AnimationTakeDamageSystem : ISystem
 {
     public World World
     {
@@ -14,6 +15,7 @@ public class ChangeHealthSystem : ISystem
     {
         _changeFilter = this.World.Filter
             .With<TakeDamageEvent>()
+            .With<AnimatorView>()
             .Build();
     }
 
@@ -21,8 +23,8 @@ public class ChangeHealthSystem : ISystem
     {
         foreach (Entity entity in _changeFilter)
         {
-            entity.GetComponent<Health>().value -=
-                entity.GetComponent<TakeDamageEvent>().value;
+            Animator animator = entity.GetComponent<AnimatorView>().value;
+            animator.SetTrigger(Animator.StringToHash(MobAnimationTriggers.TakeDamage));
         }
     }
 

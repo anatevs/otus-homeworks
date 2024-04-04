@@ -82,8 +82,8 @@ MonoBehaviour:
   - rid: 5861487747689349123
   - rid: 5861487747689349125
   - rid: 5861487747689349131
-  - rid: 5861487747689349141
-  - rid: 5861487747689349152
+  - rid: 5861487792972103688
+  - rid: 5861487792972103692
   - rid: 5861487747689349150
   - rid: 5861487747689349156
   - rid: 5861487747689349178
@@ -108,18 +108,10 @@ MonoBehaviour:
       type: {class: AttackDistance, ns: , asm: Assembly-CSharp}
       data:
         value: 10
-    - rid: 5861487747689349141
-      type: {class: Health, ns: , asm: Assembly-CSharp}
-      data:
-        value: 10
     - rid: 5861487747689349150
       type: {class: FireDelayCounter, ns: , asm: Assembly-CSharp}
       data:
         value: 0
-    - rid: 5861487747689349152
-      type: {class: FireDelay, ns: , asm: Assembly-CSharp}
-      data:
-        value: 15
     - rid: 5861487747689349156
       type: {class: ShootingWeapon, ns: , asm: Assembly-CSharp}
       data:
@@ -129,6 +121,14 @@ MonoBehaviour:
       type: {class: StoppingDistance, ns: , asm: Assembly-CSharp}
       data:
         value: 0.7
+    - rid: 5861487792972103688
+      type: {class: Health, ns: , asm: Assembly-CSharp}
+      data:
+        value: 3
+    - rid: 5861487792972103692
+      type: {class: FireDelay, ns: , asm: Assembly-CSharp}
+      data:
+        value: 5
 --- !u!1 &2258412066776006709
 GameObject:
   m_ObjectHideFlags: 0

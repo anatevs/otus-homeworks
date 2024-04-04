@@ -27,6 +27,9 @@ public class DirectToTargetSystem : ISystem
         {
             Position position = entity.GetComponent<Position>();
             ref MoveDirection moveDirection = ref entity.GetComponent<MoveDirection>();
+            Entity tg = entity.GetComponent<Target>().value;
+            Position tgpos = tg.GetComponent<Position>();
+
             Position target = entity.GetComponent<Target>().value.GetComponent<Position>();
             Vector3 direction = (target.value - position.value).normalized;
             direction.y = 0;

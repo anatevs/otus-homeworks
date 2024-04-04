@@ -29,11 +29,10 @@ public class ECSAdmin : MonoBehaviour
         _systemsGroup.AddInitializer(new PrefabsAndPoolsInitializer(_prefabStorage));
         _systemsGroup.AddInitializer(new TeamServiceInitializer(_teamService));
 
-        _systemsGroup.AddSystem(new FinishGameSystem());
 
         _systemsGroup.AddSystem(new TargetDefineSystem(_teamService));
-
         _systemsGroup.AddSystem(new DirectToTargetSystem());
+
         _systemsGroup.AddSystem(new RotationSystem());
         _systemsGroup.AddSystem(new MovementSystem());
         _systemsGroup.AddSystem(new AttackDistanceSystem());
@@ -42,19 +41,23 @@ public class ECSAdmin : MonoBehaviour
         _systemsGroup.AddSystem(new FireDelaySystem());
 
         _systemsGroup.AddSystem(new SpawnProjectileSystem());
-
         _systemsGroup.AddSystem(new SpawnSystem(_teamService));
+
         _systemsGroup.AddSystem(new ChangeHealthSystem());
         _systemsGroup.AddSystem(new HealthSystem());
+
         _systemsGroup.AddSystem(new UnspawnSystem(_teamService));
 
         _systemsGroup.AddSystem(new TransformViewSystem());
 
         _systemsGroup.AddSystem(new AnimationStatesSystem_Mob());
+        _systemsGroup.AddSystem(new AnimationTakeDamageSystem());
 
+        _systemsGroup.AddSystem(new ClearEventsSystem());
+
+        _systemsGroup.AddSystem(new FinishGameSystem());
 
 
         _world.AddSystemsGroup(order: 0, _systemsGroup);
-
     }
 }
