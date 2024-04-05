@@ -62,10 +62,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedComponents:
   - rid: 4747080576224460802
-  - rid: 4747080576224460815
+  - rid: 5861487792972103729
   - rid: 4747080576224460808
   - rid: 4747080576224460809
   - rid: 4747080576224460813
+  - rid: 5861487792972103728
   references:
     version: 2
     RefIds:
@@ -83,7 +84,12 @@ MonoBehaviour:
       type: {class: Damage, ns: , asm: Assembly-CSharp}
       data:
         value: 1
-    - rid: 4747080576224460815
+    - rid: 5861487792972103728
+      type: {class: DelayCounter, ns: , asm: Assembly-CSharp}
+      data:
+        delay: 120
+        counter: 0
+    - rid: 5861487792972103729
       type: {class: Speed, ns: , asm: Assembly-CSharp}
       data:
         value: 5

@@ -1,6 +1,6 @@
 using Scellecs.Morpeh;
 
-public sealed class FireDelaySystem : ISystem
+public class ProjectileLifetime : ISystem
 {
     public World World
     {
@@ -13,9 +13,9 @@ public sealed class FireDelaySystem : ISystem
     public void OnAwake()
     {
         _filter = this.World.Filter
-            .With<MobFlag>()
+            .With<ProjectileFlag>()
             .With<DelayCounter>()
-            .Without<CanFireTag>()
+            .Without<Inactive>()
             .Build();
     }
 
@@ -28,9 +28,9 @@ public sealed class FireDelaySystem : ISystem
 
             float delay = entity.GetComponent<DelayCounter>().delay;
 
-            if (counter.counter >= delay )
+            if (counter.counter >= delay)
             {
-                entity.AddComponent<CanFireTag>();
+                entity.AddComponent<UnspawnRequest>();
                 counter.counter = 0;
             }
         }

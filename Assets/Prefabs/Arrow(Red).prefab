@@ -66,6 +66,7 @@ MonoBehaviour:
   - rid: 5861487792972103687
   - rid: 4747080576224460809
   - rid: 4747080576224460813
+  - rid: 5861487792972103719
   references:
     version: 2
     RefIds:
@@ -87,6 +88,11 @@ MonoBehaviour:
       type: {class: Team, ns: , asm: Assembly-CSharp}
       data:
         value: 1
+    - rid: 5861487792972103719
+      type: {class: DelayCounter, ns: , asm: Assembly-CSharp}
+      data:
+        delay: 120
+        counter: 0
 --- !u!114 &-3554327701404397135
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -83,10 +83,9 @@ MonoBehaviour:
   - rid: 5861487747689349125
   - rid: 5861487747689349131
   - rid: 5861487792972103690
-  - rid: 5861487792972103693
-  - rid: 5861487747689349150
   - rid: 5861487792972103685
   - rid: 5861487747689349178
+  - rid: 5861487792972103711
   _animator: {fileID: 2440321294343513678}
   _dispatcher: {fileID: 65493306403043703}
   references:
@@ -100,10 +99,6 @@ MonoBehaviour:
       type: {class: AttackDistance, ns: , asm: Assembly-CSharp}
       data:
         value: 10
-    - rid: 5861487747689349150
-      type: {class: FireDelayCounter, ns: , asm: Assembly-CSharp}
-      data:
-        value: 0
     - rid: 5861487747689349178
       type: {class: StoppingDistance, ns: , asm: Assembly-CSharp}
       data:
@@ -121,14 +116,15 @@ MonoBehaviour:
       type: {class: Health, ns: , asm: Assembly-CSharp}
       data:
         value: 3
-    - rid: 5861487792972103693
-      type: {class: FireDelay, ns: , asm: Assembly-CSharp}
-      data:
-        value: 5
     - rid: 5861487792972103707
       type: {class: Speed, ns: , asm: Assembly-CSharp}
       data:
         value: 3
+    - rid: 5861487792972103711
+      type: {class: DelayCounter, ns: , asm: Assembly-CSharp}
+      data:
+        delay: 5
+        counter: 0
 --- !u!1 &6712242599016954538
 GameObject:
   m_ObjectHideFlags: 0

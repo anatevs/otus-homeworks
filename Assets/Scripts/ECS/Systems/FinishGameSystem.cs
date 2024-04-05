@@ -1,5 +1,4 @@
 using Scellecs.Morpeh;
-using UnityEngine;
 
 public sealed class FinishGameSystem : ISystem
 {
@@ -12,6 +11,13 @@ public sealed class FinishGameSystem : ISystem
     private Filter _basesFilter;
     private Filter _gameObjectsFilter;
     private Stash<FinishGameRequest> _finishStash;
+
+    private readonly FinishGameWindow _finishWindow;
+
+    public FinishGameSystem(FinishGameWindow finishWindow)
+    {
+        _finishWindow = finishWindow;
+    }
 
     public void OnAwake()
     {
@@ -38,9 +44,8 @@ public sealed class FinishGameSystem : ISystem
                     gameEntity.SetComponent<Inactive>(new Inactive());
                 }
 
-                Debug.Log($"Game is over," +
-                    $" {(TeamType) (((int) entity.GetComponent<Team>().value + 1)%2)}" +
-                    $" team is win");
+                TeamType winner = (TeamType)(((int)entity.GetComponent<Team>().value + 1) % 2);
+                _finishWindow.Show(winner);
             }
         }
     }

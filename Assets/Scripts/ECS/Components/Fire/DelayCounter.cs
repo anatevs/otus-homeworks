@@ -1,12 +1,12 @@
 using Scellecs.Morpeh;
-using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 
 [System.Serializable]
 [Il2CppSetOption(Option.NullChecks, false)]
 [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
 [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-public struct FireDelayCounter : IComponent
+public struct DelayCounter : IComponent
 {
-    public float value;
+    public float delay;
+    public float counter;
 }

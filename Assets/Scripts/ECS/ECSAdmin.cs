@@ -4,6 +4,9 @@ using VContainer;
 
 public sealed class ECSAdmin : MonoBehaviour
 {
+    [SerializeField]
+    FinishGameWindow _finishWindow;
+
     private World _world;
     private SystemsGroup _systemsGroup;
 
@@ -46,6 +49,8 @@ public sealed class ECSAdmin : MonoBehaviour
         _systemsGroup.AddSystem(new ChangeHealthSystem());
         _systemsGroup.AddSystem(new HealthSystem());
 
+        _systemsGroup.AddSystem(new ProjectileLifetime());
+
         _systemsGroup.AddSystem(new UnspawnSystem(_teamService));
 
         _systemsGroup.AddSystem(new TransformViewSystem());
@@ -55,7 +60,7 @@ public sealed class ECSAdmin : MonoBehaviour
 
         _systemsGroup.AddSystem(new ClearEventsSystem());
 
-        _systemsGroup.AddSystem(new FinishGameSystem());
+        _systemsGroup.AddSystem(new FinishGameSystem(_finishWindow));
 
 
         _world.AddSystemsGroup(order: 0, _systemsGroup);
