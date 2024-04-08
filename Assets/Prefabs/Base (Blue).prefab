@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 647802741}
+  - component: {fileID: 3518000623010475715}
   m_Layer: 0
   m_Name: VFX
   m_TagString: Untagged
@@ -32,6 +33,21 @@ Transform:
   m_Father: {fileID: 6854243942854037326}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3518000623010475715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647802740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2816990f5172024ca6e9f33cccdaf9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _events:
+  - time: 1
+    eventName: 0
 --- !u!1 &981802089077454633
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,9 +128,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedComponents:
   - rid: 5861487792972103683
-  - rid: 5861487792972103699
+  - rid: 5861487893779316739
   - rid: 5861487747689349187
-  hpView: {fileID: 0}
+  _hpView: {fileID: 0}
+  _destroyVFX: {fileID: 1031391632979911258}
+  _vfxDispatcher: {fileID: 3518000623010475715}
   references:
     version: 2
     RefIds:
@@ -126,7 +144,7 @@ MonoBehaviour:
       type: {class: Team, ns: , asm: Assembly-CSharp}
       data:
         value: 0
-    - rid: 5861487792972103699
+    - rid: 5861487893779316739
       type: {class: Health, ns: , asm: Assembly-CSharp}
       data:
         value: 30
@@ -339,6 +357,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43cc1a347ac43cd498e91db9fb766337, type: 3}
+--- !u!198 &1031391632979911258 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19883616, guid: 43cc1a347ac43cd498e91db9fb766337,
+    type: 3}
+  m_PrefabInstance: {fileID: 1031391632999351354}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1031391632999256234 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 496784, guid: 43cc1a347ac43cd498e91db9fb766337,

@@ -280,12 +280,12 @@ PrefabInstance:
     - target: {fileID: 6837061768053742934, guid: c041548ad5f52014d8ae27de23cf2764,
         type: 3}
       propertyPath: moveWithTransform
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6837061768053742934, guid: c041548ad5f52014d8ae27de23cf2764,
         type: 3}
       propertyPath: InitialModule.gravityModifier.scalar
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6837061768053742935, guid: c041548ad5f52014d8ae27de23cf2764,
         type: 3}

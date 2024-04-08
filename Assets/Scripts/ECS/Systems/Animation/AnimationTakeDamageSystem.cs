@@ -9,11 +9,11 @@ public sealed class AnimationTakeDamageSystem : ISystem
         set { }
     }
 
-    private Filter _changeFilter;
+    private Filter _filter;
 
     public void OnAwake()
     {
-        _changeFilter = this.World.Filter
+        _filter = this.World.Filter
             .With<TakeDamageEvent>()
             .With<AnimatorView>()
             .Build();
@@ -21,7 +21,7 @@ public sealed class AnimationTakeDamageSystem : ISystem
 
     public void OnUpdate(float deltaTime)
     {
-        foreach (Entity entity in _changeFilter)
+        foreach (Entity entity in _filter)
         {
             Animator animator = entity.GetComponent<AnimatorView>().value;
             animator.SetTrigger(Animator.StringToHash(MobAnimationTriggers.TakeDamage));

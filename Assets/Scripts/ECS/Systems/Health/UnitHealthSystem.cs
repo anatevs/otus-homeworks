@@ -1,6 +1,7 @@
 using Scellecs.Morpeh;
+using System;
 
-public sealed class HealthSystem : ISystem
+public sealed class UnitHealthSystem : ISystem
 {
     public World World
     {
@@ -15,6 +16,7 @@ public sealed class HealthSystem : ISystem
         _filter = this.World.Filter
             .With<Health>()
             .Without<Inactive>()
+            .With<MobFlag>()
             .Build();
     }
 
@@ -25,11 +27,6 @@ public sealed class HealthSystem : ISystem
             int hp = entity.GetComponent<Health>().value;
             if (hp <= 0)
             {
-                if (entity.Has<BaseFlag>())
-                {
-                    entity.AddComponent<FinishGameRequest>();
-                    break;
-                }
                 entity.AddComponent<UnspawnRequest>();
             }
         }

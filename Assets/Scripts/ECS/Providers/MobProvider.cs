@@ -23,6 +23,8 @@ public sealed class MobProvider : MovableProvider
 
         Entity.SetComponent(new AnimatorView() { value = _animator });
         _dispatcher.OnEventReceived += ReceiveAnimEvent;
+
+        Entity.SetComponent(new DamageVFX() { value = _damageVFX });
     }
 
 
@@ -37,5 +39,11 @@ public sealed class MobProvider : MovableProvider
         {
             Entity.AddComponent<UnspawnRequest>();
         }
+    }
+
+    protected override void Deinitialize()
+    {
+        base.Deinitialize();
+        _dispatcher.OnEventReceived -= ReceiveAnimEvent;
     }
 }

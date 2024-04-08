@@ -45,6 +45,7 @@ public sealed class FinishGameSystem : ISystem
                 }
 
                 TeamType winner = (TeamType)(((int)entity.GetComponent<Team>().value + 1) % 2);
+
                 _finishWindow.Show(winner);
             }
         }

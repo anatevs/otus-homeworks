@@ -10,18 +10,12 @@ public sealed class ECSAdmin : MonoBehaviour
     private World _world;
     private SystemsGroup _systemsGroup;
 
-    private TeamService _teamService;
-    private PrefabsStorage _prefabStorage;
+    private IObjectResolver _resolver;
 
     [Inject]
-    public void Construct
-        (
-        TeamService teamService,
-        PrefabsStorage prefabStorage
-        )
+    public void Construct(IObjectResolver resolver)
     {
-        _teamService = teamService;
-        _prefabStorage = prefabStorage;
+        _resolver = resolver;
     }
 
     private void Awake()
@@ -29,11 +23,11 @@ public sealed class ECSAdmin : MonoBehaviour
         _world = World.Default;
         _systemsGroup = _world.CreateSystemsGroup();
 
-        _systemsGroup.AddInitializer(new PrefabsAndPoolsInitializer(_prefabStorage));
-        _systemsGroup.AddInitializer(new TeamServiceInitializer(_teamService));
+        _systemsGroup.AddInitializer(new PrefabsAndPoolsInitializer(_resolver.Resolve<PrefabsStorage>()));
+        _systemsGroup.AddInitializer(new TeamServiceInitializer(_resolver.Resolve<TeamService>()));
 
 
-        _systemsGroup.AddSystem(new TargetDefineSystem(_teamService));
+        _systemsGroup.AddSystem(new TargetDefineSystem(_resolver.Resolve<TeamService>()));
         _systemsGroup.AddSystem(new DirectToTargetSystem());
 
         _systemsGroup.AddSystem(new RotationSystem());
@@ -44,19 +38,22 @@ public sealed class ECSAdmin : MonoBehaviour
         _systemsGroup.AddSystem(new FireDelaySystem());
 
         _systemsGroup.AddSystem(new SpawnProjectileSystem());
-        _systemsGroup.AddSystem(new SpawnSystem(_teamService));
+        _systemsGroup.AddSystem(new SpawnSystem(_resolver.Resolve<TeamService>()));
 
-        _systemsGroup.AddSystem(new ChangeHealthSystem());
-        _systemsGroup.AddSystem(new HealthSystem());
+        _systemsGroup.AddSystem(new TakeDamageSystem());
+        _systemsGroup.AddSystem(new UnitHealthSystem());
+        _systemsGroup.AddSystem(new BaseHealthSystem());
 
         _systemsGroup.AddSystem(new ProjectileLifetime());
 
-        _systemsGroup.AddSystem(new UnspawnSystem(_teamService));
+        _systemsGroup.AddSystem(new UnspawnSystem(_resolver.Resolve<TeamService>()));
 
         _systemsGroup.AddSystem(new TransformViewSystem());
 
         _systemsGroup.AddSystem(new AnimationStatesSystem_Mob());
         _systemsGroup.AddSystem(new AnimationTakeDamageSystem());
+
+        _systemsGroup.AddSystem(new VFXTakeDamageSystem());
 
         _systemsGroup.AddSystem(new ClearEventsSystem());
 

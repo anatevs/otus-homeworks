@@ -1,6 +1,7 @@
 using Scellecs.Morpeh;
+using UnityEngine;
 
-public sealed class ChangeHealthSystem : ISystem
+public class VFXTakeDamageSystem : ISystem
 {
     public World World
     {
@@ -8,21 +9,22 @@ public sealed class ChangeHealthSystem : ISystem
         set { }
     }
 
-    private Filter _changeFilter;
+    private Filter _filter;
 
     public void OnAwake()
     {
-        _changeFilter = this.World.Filter
+        _filter = this.World.Filter
             .With<TakeDamageEvent>()
+            .With<DamageVFX>()
             .Build();
     }
 
     public void OnUpdate(float deltaTime)
     {
-        foreach (Entity entity in _changeFilter)
+        foreach (Entity entity in _filter)
         {
-            entity.GetComponent<Health>().value -=
-                entity.GetComponent<TakeDamageEvent>().value;
+            ParticleSystem particleSystem = entity.GetComponent<DamageVFX>().value;
+            particleSystem.Play();
         }
     }
 
