@@ -59,7 +59,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 981802089077454633}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 4
   m_Height: 15
@@ -79,8 +79,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedComponents:
   - rid: 5861487792972103683
-  - rid: 5861487792972103681
+  - rid: 5861487792972103699
   - rid: 5861487747689349187
+  hpView: {fileID: 0}
   references:
     version: 2
     RefIds:
@@ -88,14 +89,14 @@ MonoBehaviour:
       type: {class: StoppingDistance, ns: , asm: Assembly-CSharp}
       data:
         value: 4
-    - rid: 5861487792972103681
-      type: {class: Health, ns: , asm: Assembly-CSharp}
-      data:
-        value: 5
     - rid: 5861487792972103683
       type: {class: Team, ns: , asm: Assembly-CSharp}
       data:
         value: 0
+    - rid: 5861487792972103699
+      type: {class: Health, ns: , asm: Assembly-CSharp}
+      data:
+        value: 30
 --- !u!1001 &7657002863764277129
 PrefabInstance:
   m_ObjectHideFlags: 0
