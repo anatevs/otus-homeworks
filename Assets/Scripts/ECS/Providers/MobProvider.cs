@@ -9,6 +9,9 @@ public sealed class MobProvider : MovableProvider
     [SerializeField]
     AnimationDispatcher _dispatcher;
 
+    [SerializeField]
+    ParticleSystem _damageVFX;
+
     protected override void Initialize()
     {
         base.Initialize();
