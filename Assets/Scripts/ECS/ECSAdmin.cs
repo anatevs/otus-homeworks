@@ -28,16 +28,17 @@ public sealed class ECSAdmin : MonoBehaviour
 
 
         _systemsGroup.AddSystem(new TargetDefineSystem(_resolver.Resolve<TeamService>()));
-        _systemsGroup.AddSystem(new DirectToTargetSystem());
+        _systemsGroup.AddSystem(new TargetPointingSystem());
 
         _systemsGroup.AddSystem(new RotationSystem());
         _systemsGroup.AddSystem(new MovementSystem());
         _systemsGroup.AddSystem(new AttackDistanceSystem());
 
         _systemsGroup.AddSystem(new FireRequestSystem());
-        _systemsGroup.AddSystem(new FireDelaySystem());
+        _systemsGroup.AddSystem(new FireReloadingSystem());
 
         _systemsGroup.AddSystem(new SpawnProjectileSystem());
+        _systemsGroup.AddSystem(new PoolRequestSystem());
         _systemsGroup.AddSystem(new SpawnSystem(_resolver.Resolve<TeamService>()));
 
         _systemsGroup.AddSystem(new TakeDamageSystem());

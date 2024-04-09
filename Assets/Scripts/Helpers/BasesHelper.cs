@@ -71,7 +71,7 @@ public sealed class BasesHelper : MonoBehaviour
 
     private void CreateMob(ObjectsTypeNames mobType)
     {
-        _base.Entity.AddComponent<SpawnRequest>() = new SpawnRequest()
+        _base.Entity.AddComponent<PoolRequest>() = new PoolRequest()
         {
             type = mobType,
             team = _baseTeam,

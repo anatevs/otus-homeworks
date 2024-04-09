@@ -1,6 +1,6 @@
 using Scellecs.Morpeh;
 
-public sealed class FireDelaySystem : ISystem
+public sealed class FireReloadingSystem : ISystem
 {
     public World World
     {

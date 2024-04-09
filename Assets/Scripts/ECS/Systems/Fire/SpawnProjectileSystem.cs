@@ -25,7 +25,7 @@ public sealed class SpawnProjectileSystem : ISystem
         {
             ShootingWeapon weapon = entity.GetComponent<ShootingWeapon>();
 
-            entity.AddComponent<SpawnRequest>() = new SpawnRequest()
+            entity.AddComponent<PoolRequest>() = new PoolRequest()
             {
                 type = weapon.projectileType,
                 team = entity.GetComponent<Team>().value,

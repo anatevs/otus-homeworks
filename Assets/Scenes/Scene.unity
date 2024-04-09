@@ -781,18 +781,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 1415540851}
---- !u!114 &647802742 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3518000623010475715, guid: 7abfb19faaf1147e9816d9c6709f4689,
-    type: 3}
-  m_PrefabInstance: {fileID: 7657002863243684347}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2816990f5172024ca6e9f33cccdaf9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &653492620
 GameObject:
   m_ObjectHideFlags: 0
@@ -2175,27 +2163,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1623582632}
   m_CullTransparentMesh: 1
---- !u!1 &1636136872 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6766406676925953295, guid: 8a1b0d6453bf9b940998ffaf9f615572,
-    type: 3}
-  m_PrefabInstance: {fileID: 5600894757809515289}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1636136874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1636136872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2816990f5172024ca6e9f33cccdaf9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _events:
-  - time: 30
-    eventName: 0
 --- !u!1001 &1738537723
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2523,21 +2490,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Base (Red)
       objectReference: {fileID: 0}
-    - target: {fileID: 4619127337693369612, guid: 8a1b0d6453bf9b940998ffaf9f615572,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6854243942801966708, guid: 8a1b0d6453bf9b940998ffaf9f615572,
         type: 3}
       propertyPath: _hpView
       value: 
       objectReference: {fileID: 1606693073}
-    - target: {fileID: 6854243942801966708, guid: 8a1b0d6453bf9b940998ffaf9f615572,
-        type: 3}
-      propertyPath: _vfxDispatcher
-      value: 
-      objectReference: {fileID: 1636136874}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a1b0d6453bf9b940998ffaf9f615572, type: 3}
 --- !u!4 &6854243942801966706 stripped
@@ -2575,31 +2532,6 @@ PrefabInstance:
       propertyPath: _hpView
       value: 
       objectReference: {fileID: 271103547}
-    - target: {fileID: 2475559403175938833, guid: 7abfb19faaf1147e9816d9c6709f4689,
-        type: 3}
-      propertyPath: _vfxDispatcher
-      value: 
-      objectReference: {fileID: 647802742}
-    - target: {fileID: 2475559403175938833, guid: 7abfb19faaf1147e9816d9c6709f4689,
-        type: 3}
-      propertyPath: serializedComponents.Array.data[1]
-      value: 5861487893779316736
-      objectReference: {fileID: 0}
-    - target: {fileID: 2475559403175938833, guid: 7abfb19faaf1147e9816d9c6709f4689,
-        type: 3}
-      propertyPath: managedReferences[5861487893779316736]
-      value: Assembly-CSharp Health
-      objectReference: {fileID: 0}
-    - target: {fileID: 2475559403175938833, guid: 7abfb19faaf1147e9816d9c6709f4689,
-        type: 3}
-      propertyPath: managedReferences[5861487893779316736].value
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3518000623010475715, guid: 7abfb19faaf1147e9816d9c6709f4689,
-        type: 3}
-      propertyPath: _events.Array.data[0].time
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6854243942854037326, guid: 7abfb19faaf1147e9816d9c6709f4689,
         type: 3}
       propertyPath: m_RootOrder

@@ -6,8 +6,9 @@ using Unity.IL2CPP.CompilerServices;
 [Il2CppSetOption(Option.NullChecks, false)]
 [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
 [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-public struct SpawnRequest : IComponent
+public struct PoolRequest : IComponent
 {
-    public GameObject spawnGO;
-    public Transform worldTransform;
+    public ObjectsTypeNames type;
+    public TeamType team;
+    public Transform transform;
 }

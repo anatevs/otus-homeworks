@@ -1,5 +1,4 @@
 using Scellecs.Morpeh;
-using System;
 
 public sealed class UnitHealthSystem : ISystem
 {
@@ -24,6 +23,7 @@ public sealed class UnitHealthSystem : ISystem
     {
         foreach (var entity in _filter)
         {
+            
             int hp = entity.GetComponent<Health>().value;
             if (hp <= 0)
             {
