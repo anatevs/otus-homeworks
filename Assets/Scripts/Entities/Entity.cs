@@ -2,13 +2,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Entity
+public class Entity : MonoBehaviour
 {
     private readonly Dictionary<ComponentName, IComponent> _components = new();
 
     public void Add(IComponent component)
     {
-        Debug.Log(_components);
         if (_components.ContainsKey(component.Name))
         {
             throw new Exception($"you are trying to add " +
