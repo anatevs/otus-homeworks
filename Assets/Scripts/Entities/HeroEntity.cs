@@ -1,17 +1,13 @@
-using System.Collections;
-using UnityEngine;
-
 public class HeroEntity : Entity
 {
-    [SerializeField]
-    private int _hp;
-
-    [SerializeField]
-    private int _damage;
+    private HeroModel _model;
 
     private void Awake()
     {
-        Add(new HPComponent(_hp));
-        Add(new DamageComponent(_damage));
+        _model = GetComponent<HeroModel>();
+
+        Add(new IsActiveComponent(false));
+        Add(new HPComponent(_model.HP));
+        Add(new DamageComponent(_model.Damage));
     }
 }

@@ -1,7 +1,7 @@
-public readonly struct AttackEvent : IEvent
+public readonly struct AttackEvent
 {
-    public readonly int damage;
     public readonly Entity target;
+    public readonly int damage;
 
     public AttackEvent(Entity target, int damage)
     {

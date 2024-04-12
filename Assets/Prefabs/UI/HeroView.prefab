@@ -325,6 +325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 383512545514860529}
   - component: {fileID: 8763992113062683896}
+  - component: {fileID: 9047876469813407587}
   - component: {fileID: 2248400013603729624}
   m_Layer: 5
   m_Name: HeroView
@@ -426,6 +427,20 @@ MonoBehaviour:
     m_RotationOrder: 4
   backDuration: 0.5
   punchSFX: {fileID: 8300000, guid: 2d88ba13b6e704829a737e409185d1ea, type: 3}
+--- !u!114 &9047876469813407587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383512545514860528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e2f7d616e1673c409a5379c86b4e573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hp: 0
+  _damage: 0
 --- !u!114 &2248400013603729624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,8 +453,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1450ef7a6bd7cd04ebbb578e8d64db01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 0
-  _damage: 0
 --- !u!1 &383512545822542975
 GameObject:
   m_ObjectHideFlags: 0

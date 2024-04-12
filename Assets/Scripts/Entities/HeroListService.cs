@@ -1,50 +1,65 @@
 using System.Collections.Generic;
 using UI;
-using UnityEngine;
 using System;
 
-public class HeroListService : MonoBehaviour
+
+public class HeroListService : IDisposable
 {
-    [SerializeField]
-    private HeroListView _redHerosView;
+    public event Action<HeroEntity> OnViewClicked;
 
-    [SerializeField]
-    private HeroListView _blueHerosView;
+    private readonly UIService _uiService;
 
-    private Dictionary<HeroView, HeroEntity> _redViewsModels;
-    private Dictionary<HeroView, HeroEntity> _blueViewsModels;
+    private readonly Dictionary<HeroView, HeroEntity> _viewsEntities = new();
 
-    private Dictionary<Team, List<HeroEntity>> _heroModels = new();
+    private readonly Dictionary<Team, HeroEntityList> _heroEntities = new();
 
-    private void Awake()
+    public HeroListService(UIService uiService)
     {
-        InitModels(_redHerosView.GetViews(), Team.Red, _redViewsModels);
-        InitModels(_blueHerosView.GetViews(), Team.Blue, _blueViewsModels);
+        _uiService = uiService;
 
-        //_heroModels.Add(Team.Red, _redHeroModels);
-        //_heroModels.Add(Team.Blue, _blueHeroModels);
-
-        //_redHeroModels[0].Set(new IsActiveComponent(true));
+        InitEntities();
     }
 
-    private void InitModels(IReadOnlyList<HeroView> heroViews,
-        Team team,
-        Dictionary<HeroView, HeroEntity> viewsModels)
+    private void InitEntities()
     {
         foreach (Team teamName in Enum.GetValues(typeof(Team)))
         {
-            _heroModels.Add(teamName, new List<HeroEntity>());
+            HeroListView heroListView;
 
-            foreach (HeroView heroView in heroViews)
+            if (teamName == Team.Red)
             {
-                HeroEntity model = heroView.GetComponent<HeroEntity>();
-                model.Add(new IsActiveComponent(false));
-                model.Add(new TeamComponent(team));
-
-                viewsModels.Add(heroView, model);
+                heroListView = _uiService.GetRedPlayer();
             }
-        }
+            else
+            {
+                heroListView = _uiService.GetBluePlayer();
+            }
 
-        
+            List<HeroEntity> heroList = new();
+
+            foreach (HeroView heroView in heroListView.GetViews())
+            {
+                HeroEntity entity = heroView.GetComponent<HeroEntity>();
+                entity.Add(new TeamComponent(teamName));
+
+                heroList.Add(entity);
+                _viewsEntities.Add(heroView, entity);
+            }
+
+            _heroEntities.Add(teamName, new HeroEntityList(heroList));
+
+            heroListView.OnHeroClicked += OnClickedEvent;
+        }
+    }
+
+    private void OnClickedEvent(HeroView heroView)
+    {
+        OnViewClicked.Invoke(_viewsEntities[heroView]);
+    }
+
+    void IDisposable.Dispose()
+    {
+        _uiService.GetRedPlayer().OnHeroClicked -= OnClickedEvent;
+        _uiService.GetBluePlayer().OnHeroClicked -= OnClickedEvent;
     }
 }

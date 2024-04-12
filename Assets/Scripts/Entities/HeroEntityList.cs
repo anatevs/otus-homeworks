@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeroEntityList : MonoBehaviour
+public class HeroEntityList
 {
+    private int _currentActive;
+    private int _nextActive;
+
     private List<HeroEntity> _list;
 
-    private int _currentActive;
-
-    private int _nextActive;
+    public HeroEntityList(List<HeroEntity> list)
+    {
+        _list = list;
+    }
 
     private int OnNextMove()
     {
