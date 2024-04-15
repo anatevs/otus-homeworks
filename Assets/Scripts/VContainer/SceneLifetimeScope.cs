@@ -8,6 +8,8 @@ public class SceneLifetimeScope : LifetimeScope
     [SerializeField]
     private UIService _uiService;
 
+    private Team _startTeam = Team.Red;
+
     protected override void Configure(IContainerBuilder builder)
     {
         RegisterServices(builder);
@@ -20,7 +22,8 @@ public class SceneLifetimeScope : LifetimeScope
         builder.RegisterEntryPoint<HeroListService>()
             .WithParameter(_uiService).AsSelf();
 
-        builder.Register<CurrentTeamData>(Lifetime.Singleton);
+        builder.Register<CurrentTeamData>(Lifetime.Singleton)
+            .WithParameter(_startTeam);
     }
 
     private void RegisterContlollers(IContainerBuilder builder)
@@ -35,6 +38,8 @@ public class SceneLifetimeScope : LifetimeScope
 
         builder.RegisterEntryPoint<AttackHandler>();
         builder.RegisterEntryPoint<DealDamageHandler>();
+        builder.RegisterEntryPoint<DestoyHandler>();
+
         //builder.RegisterEntryPoint<NextMoveHandler>();
     }
 }

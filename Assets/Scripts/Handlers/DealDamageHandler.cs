@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -13,12 +11,12 @@ public class DealDamageHandler : IInitializable, IDisposable
         _eventBus = eventBus;
     }
 
-    public void Initialize()
+    void IInitializable.Initialize()
     {
         _eventBus.Subscribe<DealDamageEvent>(DealDamage);
     }
 
-    public void Dispose()
+    void IDisposable.Dispose()
     {
         _eventBus.Unsubscribe<DealDamageEvent>(DealDamage);
     }
@@ -30,17 +28,20 @@ public class DealDamageHandler : IInitializable, IDisposable
 
         if (!(entity.TryGet(out HPComponent hpComponent)))
         {
-            Debug.Log($"damage is not possible," +
+            Debug.Log($"damage is not possible:" +
                 $" no hp component on entity {entity}");
         }
         else
         {
-            int hp = hpComponent.Value;
-            Debug.Log($"{entity.Get<TeamComponent>().value} {entity.name} before damage hp: {hp}");
+            hpComponent.Value -= damage;
+            entity.Set(hpComponent);
 
-            hpComponent.Value = hp - damage;
-            
-            Debug.Log($"{entity.Get<TeamComponent>().value} {entity.name} hp: {hpComponent.Value}");
+            //Debug.Log($"{entity.Get<TeamComponent>().value} {entity.name} hp: {entity.Get<HPComponent>().Value}");
+
+            if (hpComponent.Value == 0)
+            {
+                _eventBus.RaiseEvent(new DestroyEvent(entity));
+            }
         }
     }
 }

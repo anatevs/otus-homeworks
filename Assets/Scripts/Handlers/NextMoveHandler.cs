@@ -18,12 +18,12 @@ public class NextMoveHandler : IInitializable, IDisposable
         _nextMoveEvent = nextMoveEvent;
     }
 
-    public void Initialize()
+    void IInitializable.Initialize()
     {
         _eventBus.Subscribe<NextMoveEvent>(RaiseEvent);
     }
 
-    public void Dispose()
+    void IDisposable.Dispose()
     {
         _eventBus.Unsubscribe<NextMoveEvent>(RaiseEvent);
     }

@@ -3,7 +3,7 @@ public class CurrentTeamData
     public Team Player
     {
         get => _player;
-        set
+        private set
         {
             _player = value;
             SetEnemy();
@@ -18,8 +18,23 @@ public class CurrentTeamData
     private Team _player;
     private Team _enemy;
 
+    public CurrentTeamData(Team playerTeam)
+    {
+        Player = playerTeam;
+    }
+
+    public void SwitchTeams()
+    {
+        Player = GetOpposite(_enemy);
+    }
+
     private void SetEnemy()
     {
-        _enemy = (Team)(((int)Player + 1) % 2);
+        _enemy = GetOpposite(_player);
+    }
+
+    private Team GetOpposite(Team team)
+    {
+        return (Team)(((int)team + 1) % 2);
     }
 }

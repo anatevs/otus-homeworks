@@ -1,24 +1,22 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using VContainer.Unity;
 
-public class AttackHandler : IInitializable, IDisposable
+public sealed class AttackHandler : IInitializable, IDisposable
 {
-    private EventBus _eventBus;
+    private readonly EventBus _eventBus;
 
     public AttackHandler(EventBus eventBus)
     {
         _eventBus = eventBus;
     }
 
-    public void Initialize()
+    void IInitializable.Initialize()
     {
         _eventBus.Subscribe<AttackEvent>(Attack);
     }
 
-    public void Dispose()
+    void IDisposable.Dispose()
     {
         _eventBus.Unsubscribe<AttackEvent>(Attack);
     }
@@ -38,9 +36,8 @@ public class AttackHandler : IInitializable, IDisposable
         {
             _eventBus.RaiseEvent(new DealDamageEvent(target, damage.value));
 
-            Debug.Log($"{hero.Get<TeamComponent>().value} {hero.name} " +
-                $"attacked {target.Get<TeamComponent>().value} {target.name}");
+            //Debug.Log($"{hero.Get<TeamComponent>().value} {hero.name} " +
+            //    $"attacked {target.Get<TeamComponent>().value} {target.name}");
         }
     }
-
 }
