@@ -11,9 +11,10 @@ namespace UI
         private const int BACK_LAYER = 0;
 
         public event Action<HeroView> OnHeroClicked;
+        public event Action<int> OnHeroDestroyed;
 
         [SerializeField]
-        private HeroView[] views;
+        private HeroView[] _views;
 
         private Canvas canvas;
 
@@ -24,7 +25,7 @@ namespace UI
 
         private void OnEnable()
         {
-            foreach (var view in this.views)
+            foreach (var view in this._views)
             {
                 view.OnClicked += () => this.OnHeroClicked?.Invoke(view);
             }
@@ -46,17 +47,22 @@ namespace UI
 
         public IReadOnlyList<HeroView> GetViews()
         {
-            return this.views;
+            return this._views;
         }
 
         public HeroView GetView(int index)
         {
-            return this.views[index];
+            return this._views[index];
         }
 
         public void SetActive(bool isActive)
         {
             this.canvas.sortingOrder = isActive ? FORWARD_LAYER : BACK_LAYER;
+        }
+
+        private void OnViewDestroyed(int index)
+        {
+            _views[index].gameObject.SetActive(false);
         }
     }
 }

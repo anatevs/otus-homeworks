@@ -6,11 +6,17 @@ using VContainer.Unity;
 public class HeroClickController : IInitializable, IDisposable
 {
     private HeroListService _heroListService;
+    private CurrentTeamData _teamData;
+    private EventBus _eventBus;
+
+    private readonly int _returnDamage = 1;
 
     [Inject]
-    public void Construct(HeroListService heroListService)
+    public void Construct(HeroListService heroListService, CurrentTeamData teamData, EventBus eventBus)
     {
         _heroListService = heroListService;
+        _teamData = teamData;
+        _eventBus = eventBus;
     }
 
     void IInitializable.Initialize()
@@ -20,9 +26,17 @@ public class HeroClickController : IInitializable, IDisposable
 
     private void OnClickedHero(HeroEntity entity)
     {
-        Debug.Log(entity);
-        //if clicked on enemy's team entity
-        // _eventBus.Add(new AttackEvent(player, target));
+        Team team = entity.Get<TeamComponent>().value;
+        if (team != _teamData.Enemy)
+        {
+            return;
+        }
+        else
+        {
+            HeroEntity playerHero = _heroListService.GetCurrentActive(team);
+            _eventBus.RaiseEvent(new AttackEvent(entity, playerHero.Get<DamageComponent>().value));
+            _eventBus.RaiseEvent(new DealDamageEvent(playerHero, _returnDamage));
+        }
     }
 
     void IDisposable.Dispose()

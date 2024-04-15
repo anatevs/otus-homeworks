@@ -6,15 +6,17 @@ public class HeroEntityList
 {
     private int _currentActive;
     private int _nextActive;
+    private List<int> _removedIndexes = new List<int>();
 
-    private List<HeroEntity> _list;
+
+    private readonly List<HeroEntity> _list;
 
     public HeroEntityList(List<HeroEntity> list)
     {
         _list = list;
     }
 
-    private int OnNextMove()
+    public int OnNextMove()
     {
         _currentActive = _nextActive;
         SetNextIndex();
@@ -22,7 +24,7 @@ public class HeroEntityList
         return _currentActive;
     }
 
-    private void OnRemove(HeroEntity entity)
+    public void OnRemove(HeroEntity entity)
     {
         int removedIdx = _list.IndexOf(entity);
         _list.RemoveAt(removedIdx);
@@ -31,7 +33,23 @@ public class HeroEntityList
 
     private void SetNextIndex()
     {
-        _nextActive = (_currentActive + 1) % _list.Count;
+        int nextUnchecked = (_currentActive + 1) % _list.Count;
+        if (_removedIndexes.Count > 0)
+        {
+            for (int i = 0; i < _removedIndexes.Count; i++)
+            {
+                if (_removedIndexes[i] == nextUnchecked)
+                {
+                    nextUnchecked = (nextUnchecked + 1) % _list.Count;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+
+        _nextActive = nextUnchecked;
     }
 
     private void UpdateIndexes(int removedIndex)
@@ -45,5 +63,20 @@ public class HeroEntityList
         {
             SetNextIndex();
         }
+    }
+
+    public HeroEntity Get(int index)
+    {
+        return _list[index];
+    }
+
+    public int GetCurrentActiveIndex()
+    {
+        return _currentActive;
+    }
+
+    public HeroEntity GetCurrentActive()
+    {
+        return _list[_currentActive];
     }
 }

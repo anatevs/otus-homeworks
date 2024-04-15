@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UI;
 using System;
-
+using UnityEngine;
 
 public class HeroListService : IDisposable
 {
@@ -11,7 +11,9 @@ public class HeroListService : IDisposable
 
     private readonly Dictionary<HeroView, HeroEntity> _viewsEntities = new();
 
-    private readonly Dictionary<Team, HeroEntityList> _heroEntities = new();
+    private readonly Dictionary<Team, HeroEntityList> _entities = new();
+
+    private readonly Dictionary<Team, HeroListView> _views = new();
 
     public HeroListService(UIService uiService)
     {
@@ -45,11 +47,15 @@ public class HeroListService : IDisposable
                 heroList.Add(entity);
                 _viewsEntities.Add(heroView, entity);
             }
-
-            _heroEntities.Add(teamName, new HeroEntityList(heroList));
+            _entities.Add(teamName, new HeroEntityList(heroList));
+            _views.Add(teamName, heroListView);
 
             heroListView.OnHeroClicked += OnClickedEvent;
         }
+
+        //maybe need to init 1st active in some other class...
+        _entities[Team.Red].Get(0).Set(new IsActiveComponent(true));
+        _uiService.GetRedPlayer().GetView(0).SetActive(true);
     }
 
     private void OnClickedEvent(HeroView heroView)
@@ -61,5 +67,25 @@ public class HeroListService : IDisposable
     {
         _uiService.GetRedPlayer().OnHeroClicked -= OnClickedEvent;
         _uiService.GetBluePlayer().OnHeroClicked -= OnClickedEvent;
+    }
+
+    public HeroEntityList GetEntityList(Team team)
+    {
+        return _entities[team];
+    }
+
+    public HeroEntity GetCurrentActive(Team team)
+    {
+        return _entities[team].GetCurrentActive();
+    }
+
+    public HeroEntity GetEntity(Team team, int index)
+    {
+        return _entities[team].Get(index);
+    }
+
+    public HeroView GetView(Team team, int index)
+    {
+        return _views[team].GetView(index);
     }
 }

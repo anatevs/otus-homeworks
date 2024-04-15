@@ -1,4 +1,4 @@
-public class HeroEntity : Entity
+public sealed class HeroEntity : Entity
 {
     private HeroModel _model;
 
@@ -6,7 +6,6 @@ public class HeroEntity : Entity
     {
         _model = GetComponent<HeroModel>();
 
-        Add(new IsActiveComponent(false));
         Add(new HPComponent(_model.HP));
         Add(new DamageComponent(_model.Damage));
     }

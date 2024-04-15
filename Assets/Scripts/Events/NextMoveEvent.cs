@@ -1,9 +1,9 @@
 public struct NextMoveEvent
 {
-    public readonly Team team;
+    public readonly Team playingTeam;
 
     public NextMoveEvent(Team team)
     {
-        this.team = team;
+        playingTeam = team;
     }
 }

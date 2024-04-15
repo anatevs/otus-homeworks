@@ -4,55 +4,62 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    private readonly Dictionary<ComponentName, IComponent> _components = new();
+    private readonly Dictionary<Type, IComponent> _components = new();
 
-    public void Add(IComponent component)
+    public void Add<T>(T component) where T : IComponent
     {
-        if (_components.ContainsKey(component.Name))
+        Type type = component.GetType();
+
+        if (_components.ContainsKey(type))
         {
             throw new Exception($"you are trying to add " +
-                $"a component of type {component.Name} " +
+                $"a component of type {type} " +
                 $"that already exist in the entity {this}");
         }
         else
         {
-            _components.Add(component.Name, component);
+            _components.Add(type, component);
         }
+
     }
 
-    public void Set(IComponent component)
+    public void Set<T>(T component) where T : IComponent
     {
-        if (_components.ContainsKey(component.Name))
+        Type type = component.GetType();
+
+        if (_components.ContainsKey(type))
         {
-            _components[component.Name] = component;
+            _components[type] = component;
         }
         else
         {
-            _components.Add(component.Name, component);
+            _components.Add(type, component);
         }
     }
 
-    public IComponent Get(ComponentName componentName)
+    public T Get<T>() where T : IComponent
     {
-        return _components[componentName];
+        return (T)_components[typeof(T)];
     }
 
-    public bool TryGet(ComponentName name, out IComponent component)
+    public bool TryGet<T>(out T component) where T : IComponent
     {
-        if (_components.ContainsKey(name))
+        Type type = typeof(T);
+
+        if (_components.ContainsKey(type))
         {
-            component = _components[name];
+            component = (T)_components[type];
             return true;
         }
         else
         {
-            component = null;
+            component = default;
             return false;
         }
     }
 
-    public void Remove(IComponent component)
+    public void Remove<T>(T component) where T : IComponent
     {
-        _components.Remove(component.Name);
+        _components.Remove(component.GetType());
     }
 }

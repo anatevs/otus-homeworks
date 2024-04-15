@@ -12,17 +12,27 @@ public class SceneLifetimeScope : LifetimeScope
     {
         RegisterServices(builder);
         RegisterContlollers(builder);
+        RegisterEventBus(builder);
     }
 
     private void RegisterServices(IContainerBuilder builder)
     {
         builder.RegisterEntryPoint<HeroListService>()
             .WithParameter(_uiService).AsSelf();
+
+        builder.Register<CurrentTeamData>(Lifetime.Singleton);
     }
 
     private void RegisterContlollers(IContainerBuilder builder)
     {
         builder.RegisterEntryPoint<HeroClickController>()
             .AsSelf();
+    }
+
+    private void RegisterEventBus(IContainerBuilder builder)
+    {
+        builder.Register<EventBus>(Lifetime.Singleton);
+
+        //builder.RegisterEntryPoint<NextMoveHandler>();
     }
 }
