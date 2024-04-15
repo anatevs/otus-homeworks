@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class HeroModel : MonoBehaviour
 {
-    public int HP => _hp;
-    public int Damage => _damage;
+    public int HP => _initHP;
+    public int Damage => _initDamage;
 
     [SerializeField]
-    private int _hp;
+    private int _initHP;
 
     [SerializeField]
-    private int _damage;
+    private int _initDamage;
 }

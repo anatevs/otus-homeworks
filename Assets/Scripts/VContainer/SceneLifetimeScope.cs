@@ -33,6 +33,8 @@ public class SceneLifetimeScope : LifetimeScope
     {
         builder.Register<EventBus>(Lifetime.Singleton);
 
+        builder.RegisterEntryPoint<AttackHandler>();
+        builder.RegisterEntryPoint<DealDamageHandler>();
         //builder.RegisterEntryPoint<NextMoveHandler>();
     }
 }

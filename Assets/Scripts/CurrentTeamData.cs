@@ -10,7 +10,7 @@ public class CurrentTeamData
         }
     }
 
-    public Team Enemy 
+    public Team Enemy
     {
         get => _enemy;
     }

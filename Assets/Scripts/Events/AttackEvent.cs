@@ -1,11 +1,11 @@
 public readonly struct AttackEvent
 {
-    public readonly Entity target;
-    public readonly int damage;
+    public readonly HeroEntity target;
+    public readonly HeroEntity hero;
 
-    public AttackEvent(Entity target, int damage)
+    public AttackEvent(HeroEntity target, HeroEntity hero)
     {
         this.target = target;
-        this.damage = damage;
+        this.hero = hero;
     }
 }

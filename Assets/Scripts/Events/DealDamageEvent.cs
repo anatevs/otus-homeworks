@@ -1,9 +1,9 @@
 public readonly struct DealDamageEvent
 {
     public readonly int damage;
-    public readonly Entity entity;
+    public readonly HeroEntity entity;
 
-    public DealDamageEvent(Entity entity, int damage)
+    public DealDamageEvent(HeroEntity entity, int damage)
     {
         this.entity = entity;
         this.damage = damage;

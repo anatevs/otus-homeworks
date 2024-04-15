@@ -1,4 +1,4 @@
-public struct NextMoveEvent
+public readonly struct NextMoveEvent
 {
     public readonly Team playingTeam;
 

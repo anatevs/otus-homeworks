@@ -9,7 +9,7 @@ public class HeroClickController : IInitializable, IDisposable
     private CurrentTeamData _teamData;
     private EventBus _eventBus;
 
-    private readonly int _returnDamage = 1;
+    private readonly int _backDamage = 1;
 
     [Inject]
     public void Construct(HeroListService heroListService, CurrentTeamData teamData, EventBus eventBus)
@@ -22,20 +22,23 @@ public class HeroClickController : IInitializable, IDisposable
     void IInitializable.Initialize()
     {
         _heroListService.OnViewClicked += OnClickedHero;
+
+        _teamData.Player = Team.Red;
     }
 
-    private void OnClickedHero(HeroEntity entity)
+    private void OnClickedHero(HeroEntity clickedEntity)
     {
-        Team team = entity.Get<TeamComponent>().value;
+        Team team = clickedEntity.Get<TeamComponent>().value;
+        Debug.Log(team);
         if (team != _teamData.Enemy)
         {
             return;
         }
         else
         {
-            HeroEntity playerHero = _heroListService.GetCurrentActive(team);
-            _eventBus.RaiseEvent(new AttackEvent(entity, playerHero.Get<DamageComponent>().value));
-            _eventBus.RaiseEvent(new DealDamageEvent(playerHero, _returnDamage));
+            HeroEntity playerHero = _heroListService.GetCurrentActive(_teamData.Player);
+            //_eventBus.RaiseEvent(new AttackEvent(clickedEntity, playerHero));
+            _eventBus.RaiseEvent(new DealDamageEvent(playerHero, _backDamage));
         }
     }
 
