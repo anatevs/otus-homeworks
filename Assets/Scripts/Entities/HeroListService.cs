@@ -70,7 +70,7 @@ public class HeroListService : IDisposable
 
     private void OnClickedEvent(HeroView heroView)
     {
-        OnViewClicked.Invoke(_viewsEntities[heroView]);
+        OnViewClicked?.Invoke(_viewsEntities[heroView]);
     }
 
     public HeroEntityList GetEntityList(Team team)

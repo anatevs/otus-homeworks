@@ -29,7 +29,6 @@ public class Pipeline
         _currentIndex++;
         if (_currentIndex >= _tasks.Count)
         {
-            _tasks.Clear();
             _currentIndex = 0;
 
             OnFinished?.Invoke();

@@ -13,7 +13,7 @@ public class SceneLifetimeScope : LifetimeScope
     protected override void Configure(IContainerBuilder builder)
     {
         RegisterServices(builder);
-        RegisterContlollers(builder);
+        //RegisterContlollers(builder);
         RegisterEventBus(builder);
     }
 
