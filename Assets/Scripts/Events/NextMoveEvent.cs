@@ -1,9 +1,9 @@
 public readonly struct NextMoveEvent
 {
-    public readonly Team playingTeam;
+    public readonly HeroEntity prevPlayer;
 
-    public NextMoveEvent(Team team)
+    public NextMoveEvent(HeroEntity prevPlayer)
     {
-        playingTeam = team;
+        this.prevPlayer = prevPlayer;
     }
 }

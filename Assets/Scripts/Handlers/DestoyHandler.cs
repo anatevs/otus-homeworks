@@ -7,10 +7,12 @@ using VContainer.Unity;
 public sealed class DestoyHandler : IInitializable, IDisposable
 {
     private readonly EventBus _eventBus;
+    private readonly HeroListService _heroListService;
 
-    public DestoyHandler(EventBus eventBus)
+    public DestoyHandler(EventBus eventBus, HeroListService heroListService)
     {
         _eventBus = eventBus;
+        _heroListService = heroListService;
     }
 
     void IInitializable.Initialize()
@@ -26,6 +28,9 @@ public sealed class DestoyHandler : IInitializable, IDisposable
     private void OnDestroy(DestroyEvent evnt)
     {
         HeroEntity entity = evnt.entity;
+
+        _heroListService.RemoveHero(entity);
+
         entity.Set(new IsActiveComponent(false));
 
         entity.gameObject.SetActive(false);

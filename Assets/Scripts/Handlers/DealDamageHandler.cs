@@ -36,7 +36,7 @@ public class DealDamageHandler : IInitializable, IDisposable
             hpComponent.Value -= damage;
             entity.Set(hpComponent);
 
-            //Debug.Log($"{entity.Get<TeamComponent>().value} {entity.name} hp: {entity.Get<HPComponent>().Value}");
+            Debug.Log($"{entity.Get<TeamComponent>().value} {entity.name} hp: {entity.Get<HPComponent>().Value}");
 
             if (hpComponent.Value == 0)
             {

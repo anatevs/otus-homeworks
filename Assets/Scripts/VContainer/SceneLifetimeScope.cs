@@ -40,6 +40,6 @@ public class SceneLifetimeScope : LifetimeScope
         builder.RegisterEntryPoint<DealDamageHandler>();
         builder.RegisterEntryPoint<DestoyHandler>();
 
-        //builder.RegisterEntryPoint<NextMoveHandler>();
+        builder.RegisterEntryPoint<NextMoveHandler>();
     }
 }

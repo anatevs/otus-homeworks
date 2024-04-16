@@ -25,7 +25,7 @@ public sealed class HeroClickController : IInitializable, IDisposable
     private void OnClickedHero(HeroEntity clickedEntity)
     {
         Team team = clickedEntity.Get<TeamComponent>().value;
-        //Debug.Log(team);
+        Debug.Log(team);
         if (team != _teamData.Enemy)
         {
             return;
@@ -36,7 +36,7 @@ public sealed class HeroClickController : IInitializable, IDisposable
             _eventBus.RaiseEvent(new AttackEvent(clickedEntity, playerHero));
             _eventBus.RaiseEvent(new DealDamageEvent(playerHero, _backDamage));
 
-
+            _eventBus.RaiseEvent(new NextMoveEvent(playerHero));
         }
     }
 

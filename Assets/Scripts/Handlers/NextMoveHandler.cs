@@ -7,15 +7,15 @@ using VContainer.Unity;
 
 public class NextMoveHandler : IInitializable, IDisposable
 {
-    private EventBus _eventBus;
-    private HeroListService _heroListService;
-    private NextMoveEvent _nextMoveEvent;
+    private readonly EventBus _eventBus;
+    private readonly HeroListService _heroListService;
+    private readonly CurrentTeamData _teamData;
 
-    public NextMoveHandler(EventBus eventBus, HeroListService heroListService, NextMoveEvent nextMoveEvent)
+    public NextMoveHandler(EventBus eventBus, HeroListService heroListService, CurrentTeamData teamData)
     {
         _eventBus = eventBus;
         _heroListService = heroListService;
-        _nextMoveEvent = nextMoveEvent;
+        _teamData = teamData;
     }
 
     void IInitializable.Initialize()
@@ -30,16 +30,17 @@ public class NextMoveHandler : IInitializable, IDisposable
 
     private void RaiseEvent(NextMoveEvent nextMoveEvent)
     {
-        Team team = nextMoveEvent.playingTeam;
-        //int currIndex = _heroListService.GetEntityList(team).GetCurrentActiveIndex();
+        HeroEntity prevPlayer = nextMoveEvent.prevPlayer;
+        prevPlayer.Set(new IsActiveComponent(false));
 
-        //HeroEntity currentHero = _heroListService.GetEntity(team, currIndex);
-        //HeroView heroView = _heroListService.GetView(team, currIndex);
+        _teamData.SwitchTeams();
+        Team currentTeam = _teamData.Player;
 
-        HeroEntity currentHero = _heroListService.GetCurrentActive(team);
+        Debug.Log(currentTeam);
+
+        _heroListService.PrepareNextMove(currentTeam);
+        HeroEntity currentHero = _heroListService.GetCurrentActive(currentTeam);
 
         currentHero.Set(new IsActiveComponent(true));
-
-
     }
 }

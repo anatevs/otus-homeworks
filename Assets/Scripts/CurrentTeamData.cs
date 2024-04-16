@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class CurrentTeamData
 {
     public Team Player
@@ -25,7 +27,7 @@ public class CurrentTeamData
 
     public void SwitchTeams()
     {
-        Player = GetOpposite(_enemy);
+        Player = _enemy;
     }
 
     private void SetEnemy()
