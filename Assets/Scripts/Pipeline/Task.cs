@@ -1,18 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class Task : MonoBehaviour
+public abstract class Task
 {
-    // Start is called before the first frame update
-    void Start()
+    private event Action Callback;
+
+    public void Run(Action FinishCallback)
     {
-        
+        Callback = FinishCallback;
+        OnRun();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected abstract void OnRun();
+
+    public void Finish()
     {
-        
+        if (Callback != null)
+        {
+            Action CachedCallback = Callback;
+            CachedCallback.Invoke();
+            Callback = null;
+        }
+
+        OnFinished();
+    }
+
+    protected virtual void OnFinished()
+    {
     }
 }
