@@ -1,31 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using VContainer.Unity;
-
-public sealed class DestoyHandler : IInitializable, IDisposable
+public sealed class DestoyHandler : BaseHandler<DestroyEvent>
 {
-    private readonly EventBus _eventBus;
     private readonly HeroListService _heroListService;
 
-    public DestoyHandler(EventBus eventBus, HeroListService heroListService)
+    public DestoyHandler(EventBus eventBus, HeroListService heroListService) : base(eventBus)
     {
-        _eventBus = eventBus;
         _heroListService = heroListService;
     }
 
-    void IInitializable.Initialize()
-    {
-        _eventBus.Subscribe<DestroyEvent>(OnDestroy);
-    }
-
-    void IDisposable.Dispose()
-    {
-        _eventBus.Unsubscribe<DestroyEvent>(OnDestroy);
-    }
-
-    private void OnDestroy(DestroyEvent evnt)
+    protected override void RaiseEvent(DestroyEvent evnt)
     {
         HeroEntity entity = evnt.entity;
 

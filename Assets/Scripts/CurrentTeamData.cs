@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class CurrentTeamData
 {
     public Team Player

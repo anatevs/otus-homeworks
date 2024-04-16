@@ -1,27 +1,12 @@
-using System;
 using UnityEngine;
-using VContainer.Unity;
 
-public class DealDamageHandler : IInitializable, IDisposable
+public class DealDamageHandler : BaseHandler<DealDamageEvent>
 {
-    private EventBus _eventBus;
-
-    public DealDamageHandler(EventBus eventBus)
+    public DealDamageHandler(EventBus eventBus) : base(eventBus)
     {
-        _eventBus = eventBus;
     }
 
-    void IInitializable.Initialize()
-    {
-        _eventBus.Subscribe<DealDamageEvent>(DealDamage);
-    }
-
-    void IDisposable.Dispose()
-    {
-        _eventBus.Unsubscribe<DealDamageEvent>(DealDamage);
-    }
-
-    private void DealDamage(DealDamageEvent evnt)
+    protected override void RaiseEvent(DealDamageEvent evnt)
     {
         HeroEntity entity = evnt.entity;
         int damage = evnt.damage;
@@ -40,7 +25,7 @@ public class DealDamageHandler : IInitializable, IDisposable
 
             if (hpComponent.Value == 0)
             {
-                _eventBus.RaiseEvent(new DestroyEvent(entity));
+                EventBus.RaiseEvent(new DestroyEvent(entity));
             }
         }
     }

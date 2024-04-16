@@ -8,7 +8,7 @@ public class SceneLifetimeScope : LifetimeScope
     [SerializeField]
     private UIService _uiService;
 
-    private Team _startTeam = Team.Red;
+    private readonly Team _startTeam = Team.Red;
 
     protected override void Configure(IContainerBuilder builder)
     {
