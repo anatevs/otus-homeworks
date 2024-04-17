@@ -6,6 +6,16 @@ using VContainer.Unity;
 
 public class HeroListService : IDisposable
 {
+    public Action<InfoComponent> OnClicked;
+
+    public Action<InfoComponent> OnDestroy;
+
+    public Action<InfoComponent, bool> OnSetActive;
+
+    public Action<InfoComponent, int, int> OnChangeHP;
+
+
+
     public event Action<HeroEntity> OnViewClicked;
 
     private readonly UIService _uiService;
@@ -47,10 +57,14 @@ public class HeroListService : IDisposable
 
             List<HeroEntity> heroList = new();
 
+            int i = 0;
             foreach (HeroView heroView in heroListView.GetViews())
             {
                 HeroEntity entity = heroView.GetComponent<HeroEntity>();
                 entity.Add(new TeamComponent(teamName));
+                entity.Add(new IDComponent(i++));
+
+                entity.Add(new InfoComponent(teamName, i));
 
                 heroList.Add(entity);
                 _viewsEntities.Add(heroView, entity);
@@ -63,6 +77,8 @@ public class HeroListService : IDisposable
 
         //maybe need to init 1st active in some other class...
         _entities[Team.Red].Get(0).Set(new IsActiveComponent(true));
+
+        //SetActive(Team.Red, 0, true);
         _entities[Team.Red].OnNextMove();
 
         _uiService.GetRedPlayer().GetView(0).SetActive(true);
@@ -93,10 +109,32 @@ public class HeroListService : IDisposable
         return _views[team].GetView(index);
     }
 
-    public void RemoveHero(HeroEntity hero)
+    public void SetActive(InfoComponent info, bool isActive)
     {
-        Team team = hero.Get<TeamComponent>().value;
-        _entities[team].OnRemove(hero);
+        HeroEntity entity = GetEntity(info.team, info.id);
+        entity.Set(new IsActiveComponent(isActive));
+
+        //if (isActive)
+        //{
+        //    _entities[team].OnNextMove();
+        //}
+
+        OnSetActive?.Invoke(info, isActive);
+    }
+
+    public void OnHPChanged(InfoComponent info, int hp)
+    {
+        HeroEntity entity = GetEntity(info.team, info.id);
+
+        OnChangeHP?.Invoke(info, hp, entity.Get<DamageComponent>().value);
+    }
+
+    public void RemoveHero(HeroEntity entity)
+    {
+        Team team = entity.Get<TeamComponent>().value;
+        _entities[team].OnRemove(entity);
+
+        OnDestroy?.Invoke(entity.Get<InfoComponent>());
     }
 
     public void PrepareNextMove(Team team)

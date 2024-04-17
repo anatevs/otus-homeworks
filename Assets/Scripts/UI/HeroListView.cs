@@ -11,7 +11,6 @@ namespace UI
         private const int BACK_LAYER = 0;
 
         public event Action<HeroView> OnHeroClicked;
-        public event Action<int> OnHeroDestroyed;
 
         [SerializeField]
         private HeroView[] _views;
@@ -60,9 +59,19 @@ namespace UI
             this.canvas.sortingOrder = isActive ? FORWARD_LAYER : BACK_LAYER;
         }
 
-        private void OnViewDestroyed(int index)
+        public void OnViewSetActive(int index, bool isActive)
+        {
+            _views[index].SetActive(isActive);
+        }
+
+        public void OnViewDestroyed(int index)
         {
             _views[index].gameObject.SetActive(false);
+        }
+
+        public void SetStats(int index, int hp, int damage)
+        {
+            _views[index].SetStats($"{damage}/{hp}");
         }
     }
 }
