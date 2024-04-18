@@ -54,6 +54,11 @@ namespace UI
             return this._views[index];
         }
 
+        public int GetIndex(HeroView view)
+        {
+            return Array.IndexOf(_views, view);
+        }
+
         public void SetActive(bool isActive)
         {
             this.canvas.sortingOrder = isActive ? FORWARD_LAYER : BACK_LAYER;

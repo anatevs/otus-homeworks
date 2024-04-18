@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,14 +29,14 @@ public class HeroEntityList
 
     private void SetNextIndex()
     {
-        int nextUnchecked = CalcNextIndex(_currentActive);//(_currentActive + 1) % _list.Count;
+        int nextUnchecked = CalcNextIndex(_currentActive);
         if (_removedIndexes.Count > 0)
         {
             for (int i = 0; i < _removedIndexes.Count; i++)
             {
                 if (_removedIndexes[i] == nextUnchecked)
                 {
-                    nextUnchecked = CalcNextIndex(nextUnchecked);//(nextUnchecked + 1) % _list.Count;
+                    nextUnchecked = CalcNextIndex(nextUnchecked);
                 }
                 else
                 {

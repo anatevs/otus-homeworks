@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 
-public class HeroServicePresenter : IDisposable
+public sealed class HeroServicePresenter : IDisposable
 {
     public event Action<InfoComponent, bool> OnSetActive;
 
@@ -11,17 +12,22 @@ public class HeroServicePresenter : IDisposable
 
     public event Action<InfoComponent, int, int> OnChangeStats;
 
-    //public HeroEntityList HeroEntityList => _heroList;
+    public event Action<Team, int> OnClickHero;
+
 
     private readonly HeroListService _heroListService;
 
     public HeroServicePresenter(HeroListService heroListService)
     {
+        Debug.Log("ctor heroServPres");
+
         _heroListService = heroListService;
 
         _heroListService.OnDestroy += DestroyHero;
         _heroListService.OnSetActive += OnActiveSet;
         _heroListService.OnChangeHP += OnStatChanged;
+
+        OnClickHero += _heroListService.OnHeroClicked;
     }
 
     private void DestroyHero(InfoComponent info)
@@ -39,10 +45,17 @@ public class HeroServicePresenter : IDisposable
         OnChangeStats?.Invoke(info, hp, damage);
     }
 
+    public void OnHeroClicked(Team team, int id)
+    {
+        OnClickHero?.Invoke(team, id);
+    }
+
     void IDisposable.Dispose()
     {
         _heroListService.OnDestroy -= DestroyHero;
         _heroListService.OnSetActive -= OnActiveSet;
         _heroListService.OnChangeHP -= OnStatChanged;
+
+        OnClickHero -= _heroListService.OnHeroClicked;
     }
 }

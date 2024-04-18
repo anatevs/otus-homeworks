@@ -1255,6 +1255,7 @@ MonoBehaviour:
   - {fileID: 1917274683}
   - {fileID: 800622862}
   _uiService: {fileID: 1854234147}
+  _heroServiceView: {fileID: 1854234148}
 --- !u!114 &800622866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1538,6 +1539,7 @@ GameObject:
   - component: {fileID: 1854234144}
   - component: {fileID: 1854234143}
   - component: {fileID: 1854234147}
+  - component: {fileID: 1854234148}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1642,6 +1644,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bluePlayer: {fileID: 743752126}
   _redPlayer: {fileID: 389887961}
+--- !u!114 &1854234148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854234142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6740b80a9bee4c94ba99e659dce9cc6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1917274683
 GameObject:
   m_ObjectHideFlags: 0

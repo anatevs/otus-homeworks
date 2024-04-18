@@ -19,7 +19,7 @@ public sealed class HeroClickController : IInitializable, IDisposable
 
     void IInitializable.Initialize()
     {
-        _heroListService.OnViewClicked += OnClickedHero;
+        _heroListService.OnClickEntity += OnClickedHero;
     }
 
     private void OnClickedHero(HeroEntity clickedEntity)
@@ -42,6 +42,6 @@ public sealed class HeroClickController : IInitializable, IDisposable
 
     void IDisposable.Dispose()
     {
-        _heroListService.OnViewClicked -= OnClickedHero;
+        _heroListService.OnClickEntity -= OnClickedHero;
     }
 }

@@ -6,17 +6,16 @@ using VContainer.Unity;
 
 public class HeroListService : IDisposable
 {
-    public Action<InfoComponent> OnClicked;
+    public event Action<InfoComponent> OnDestroy;
 
-    public Action<InfoComponent> OnDestroy;
+    public event Action<InfoComponent, bool> OnSetActive;
 
-    public Action<InfoComponent, bool> OnSetActive;
+    public event Action<InfoComponent, int, int> OnChangeHP;
 
-    public Action<InfoComponent, int, int> OnChangeHP;
+    //public event Action<Team, int> OnClickView;
 
 
-
-    public event Action<HeroEntity> OnViewClicked;
+    public event Action<HeroEntity> OnClickEntity;
 
     private readonly UIService _uiService;
 
@@ -33,11 +32,6 @@ public class HeroListService : IDisposable
         InitEntities();
     }
 
-    void IDisposable.Dispose()
-    {
-        _uiService.GetRedPlayer().OnHeroClicked -= OnClickedEvent;
-        _uiService.GetBluePlayer().OnHeroClicked -= OnClickedEvent;
-    }
 
 
     private void InitEntities()
@@ -72,8 +66,10 @@ public class HeroListService : IDisposable
             _entities.Add(teamName, new HeroEntityList(heroList));
             _views.Add(teamName, heroListView);
 
-            heroListView.OnHeroClicked += OnClickedEvent;
+            //heroListView.OnHeroClicked += OnClickedEvent;
         }
+
+        //OnClickView += OnHeroClicked;
 
         //maybe need to init 1st active in some other class...
         _entities[Team.Red].Get(0).Set(new IsActiveComponent(true));
@@ -84,9 +80,15 @@ public class HeroListService : IDisposable
         _uiService.GetRedPlayer().GetView(0).SetActive(true);
     }
 
-    private void OnClickedEvent(HeroView heroView)
+    //private void OnClickedEvent(HeroView heroView)
+    //{
+    //    OnViewClicked?.Invoke(_viewsEntities[heroView]);
+    //}
+
+    public void OnHeroClicked(Team team, int id)
     {
-        OnViewClicked?.Invoke(_viewsEntities[heroView]);
+        Debug.Log("click in model");
+        OnClickEntity?.Invoke(GetEntity(team, id));
     }
 
     public HeroEntityList GetEntityList(Team team)
@@ -140,5 +142,13 @@ public class HeroListService : IDisposable
     public void PrepareNextMove(Team team)
     {
         _entities[team].OnNextMove();
+    }
+
+    void IDisposable.Dispose()
+    {
+        //OnClickView -= OnHeroClicked;
+
+        //_uiService.GetRedPlayer().OnHeroClicked -= OnClickedEvent;
+        //_uiService.GetBluePlayer().OnHeroClicked -= OnClickedEvent;
     }
 }

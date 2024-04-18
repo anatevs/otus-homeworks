@@ -17,18 +17,18 @@ public class TurnTask : Task
 
     protected override void OnRun()
     {
-        _heroListService.OnViewClicked += OnClickedHero;
+        _heroListService.OnClickEntity += OnHeroClicked;
 
         Debug.Log("Run turn task");
     }
 
     protected override void OnFinished()
     {
-        _heroListService.OnViewClicked -= OnClickedHero;
+        _heroListService.OnClickEntity -= OnHeroClicked;
         Debug.Log("turn task is finished");
     }
 
-    private void OnClickedHero(HeroEntity clickedEntity)
+    private void OnHeroClicked(HeroEntity clickedEntity)
     {
         Team team = clickedEntity.Get<TeamComponent>().value;
         Debug.Log(team);
