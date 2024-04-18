@@ -6,13 +6,13 @@ public class StartTask : Task
 {
     protected override void OnRun()
     {
-        Debug.Log("start task run");
+        Debug.Log("start task is run");
 
         Finish();
     }
 
     protected override void OnFinished()
     {
-        Debug.Log("start task is finished");
+        //Debug.Log("start task is finished");
     }
 }

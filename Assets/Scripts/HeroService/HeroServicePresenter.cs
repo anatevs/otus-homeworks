@@ -10,9 +10,11 @@ public sealed class HeroServicePresenter : IDisposable
 
     public event Action<InfoComponent> OnDestroy;
 
+    public event Action<InfoComponent, InfoComponent> OnAttack;
+
     public event Action<InfoComponent, int, int> OnChangeStats;
 
-    public event Action<Team, int> OnClickHero;
+    public event Action<Team, int> OnHeroClicked;
 
 
     private readonly HeroListService _heroListService;
@@ -22,10 +24,11 @@ public sealed class HeroServicePresenter : IDisposable
         _heroListService = heroListService;
 
         _heroListService.OnDestroy += DestroyHero;
-        _heroListService.OnSetActive += OnActiveSet;
-        _heroListService.OnChangeHP += OnStatChanged;
+        _heroListService.OnSetActive += SetActive;
+        _heroListService.OnAttack += Attack;
+        _heroListService.OnChangeHP += ChangeStat;
 
-        OnClickHero += _heroListService.OnHeroClicked;
+        OnHeroClicked += _heroListService.ClickHero;
     }
 
     private void DestroyHero(InfoComponent info)
@@ -33,27 +36,33 @@ public sealed class HeroServicePresenter : IDisposable
         OnDestroy?.Invoke(info);
     }
 
-    private void OnActiveSet(InfoComponent info, bool isActive)
+    private void SetActive(InfoComponent info, bool isActive)
     {
         OnSetActive?.Invoke(info, isActive);
     }
 
-    private void OnStatChanged(InfoComponent info, int hp, int damage)
+    private void Attack(InfoComponent hero, InfoComponent target)
+    {
+        OnAttack?.Invoke(hero, target);
+    }
+
+    private void ChangeStat(InfoComponent info, int hp, int damage)
     {
         OnChangeStats?.Invoke(info, hp, damage);
     }
 
-    public void OnHeroClicked(Team team, int id)
+    public void ClickHero(Team team, int id)
     {
-        OnClickHero?.Invoke(team, id);
+        OnHeroClicked?.Invoke(team, id);
     }
 
     void IDisposable.Dispose()
     {
         _heroListService.OnDestroy -= DestroyHero;
-        _heroListService.OnSetActive -= OnActiveSet;
-        _heroListService.OnChangeHP -= OnStatChanged;
+        _heroListService.OnSetActive -= SetActive;
+        _heroListService.OnAttack -= Attack;
+        _heroListService.OnChangeHP -= ChangeStat;
 
-        OnClickHero -= _heroListService.OnHeroClicked;
+        OnHeroClicked -= _heroListService.ClickHero;
     }
 }

@@ -20,9 +20,10 @@ public sealed class HeroServiceView : MonoBehaviour, IDisposable
 
         SetListViews();
 
-        _presenter.OnSetActive += OnSetActive;
-        _presenter.OnDestroy += OnHeroDestoyed;
-        _presenter.OnChangeStats += OnStatsChanged;
+        _presenter.OnSetActive += SetActive;
+        _presenter.OnDestroy += DestroyHero;
+        _presenter.OnAttack += Attack;
+        _presenter.OnChangeStats += ChangeStats;
 
         _listViews[Team.Red].OnHeroClicked += OnClickedHeroRed;
         _listViews[Team.Blue].OnHeroClicked += OnClickedHeroBlue;
@@ -46,17 +47,25 @@ public sealed class HeroServiceView : MonoBehaviour, IDisposable
         }
     }
 
-    private void OnSetActive(InfoComponent info, bool isActive)
+    private void SetActive(InfoComponent info, bool isActive)
     {
         _listViews[info.team].SetActive(isActive);
     }
 
-    private void OnHeroDestoyed(InfoComponent info)
+    private void DestroyHero(InfoComponent info)
     {
         _listViews[info.team].OnViewDestroyed(info.id);
     }
 
-    private void OnStatsChanged(InfoComponent info, int hp, int damage)
+    private void Attack(InfoComponent hero, InfoComponent target)
+    {
+        HeroView heroView = _listViews[hero.team].GetView(hero.id);
+        HeroView targetView = _listViews[target.team].GetView(target.id);
+
+        heroView.AnimateAttack(targetView);
+    }
+
+    private void ChangeStats(InfoComponent info, int hp, int damage)
     {
         _listViews[info.team].SetStats(info.id, hp, damage);
     }
@@ -77,14 +86,14 @@ public sealed class HeroServiceView : MonoBehaviour, IDisposable
         HeroListView heroListView = _listViews[team];
         int index = heroListView.GetIndex(heroView);
 
-        _presenter.OnHeroClicked(team, index);
+        _presenter.ClickHero(team, index);
     }
 
     void IDisposable.Dispose()
     {
-        _presenter.OnSetActive -= OnSetActive;
-        _presenter.OnDestroy -= OnHeroDestoyed;
-        _presenter.OnChangeStats -= OnStatsChanged;
+        _presenter.OnSetActive -= SetActive;
+        _presenter.OnDestroy -= DestroyHero;
+        _presenter.OnChangeStats -= ChangeStats;
 
         _listViews[Team.Red].OnHeroClicked -= OnClickedHeroRed;
         _listViews[Team.Blue].OnHeroClicked -= OnClickedHeroBlue;

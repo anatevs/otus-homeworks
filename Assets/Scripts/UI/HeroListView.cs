@@ -56,7 +56,15 @@ namespace UI
 
         public int GetIndex(HeroView view)
         {
-            return Array.IndexOf(_views, view);
+            for (int i = 0; i < _views.Length; i++)
+            {
+                if (_views[i] == view)
+                {
+                    return i;
+                }
+            }
+            throw new Exception($"hero view of {view.name} " +
+                $"is not contained in HeroViewList");
         }
 
         public void SetActive(bool isActive)

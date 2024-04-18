@@ -22,5 +22,5 @@ public abstract class BaseHandler<T> : IInitializable, IDisposable
         _eventBus.Unsubscribe<T>(RaiseEvent);
     }
 
-    protected abstract void RaiseEvent(T nextMoveEvent);
+    protected abstract void RaiseEvent(T evnt);
 }

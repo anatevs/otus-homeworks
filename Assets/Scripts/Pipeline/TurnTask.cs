@@ -19,13 +19,13 @@ public class TurnTask : Task
     {
         _heroListService.OnClickEntity += OnHeroClicked;
 
-        Debug.Log("turn task run");
+        //Debug.Log("turn task is run");
     }
 
     protected override void OnFinished()
     {
         _heroListService.OnClickEntity -= OnHeroClicked;
-        Debug.Log("turn task is finished");
+        //Debug.Log("turn task is finished");
     }
 
     private void OnHeroClicked(HeroEntity clickedEntity)

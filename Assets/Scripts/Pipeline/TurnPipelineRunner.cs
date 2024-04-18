@@ -3,7 +3,7 @@ using VContainer;
 
 public sealed class TurnPipelineRunner : MonoBehaviour
 {
-    private bool _isRunOnFinish = true;
+    private readonly bool _isRunOnFinish = true;
 
     private TurnPipeline _turnPipeline;
 

@@ -10,6 +10,8 @@ public sealed class HeroListService : IDisposable
 
     public event Action<InfoComponent, bool> OnSetActive;
 
+    public event Action<InfoComponent, InfoComponent> OnAttack;
+
     public event Action<InfoComponent, int, int> OnChangeHP;
 
     public event Action<HeroEntity> OnClickEntity;
@@ -64,7 +66,7 @@ public sealed class HeroListService : IDisposable
         _uiService.GetRedPlayer().GetView(0).SetActive(true);
     }
 
-    public void OnHeroClicked(Team team, int id)
+    public void ClickHero(Team team, int id)
     {
         OnClickEntity?.Invoke(GetEntity(team, id));
     }
@@ -97,13 +99,6 @@ public sealed class HeroListService : IDisposable
         OnSetActive?.Invoke(info, isActive);
     }
 
-    public void OnHPChanged(InfoComponent info, int hp)
-    {
-        HeroEntity entity = GetEntity(info.team, info.id);
-
-        OnChangeHP?.Invoke(info, hp, entity.Get<DamageComponent>().value);
-    }
-
     public void RemoveHero(HeroEntity entity)
     {
         Team team = entity.Get<InfoComponent>().team;
@@ -111,6 +106,21 @@ public sealed class HeroListService : IDisposable
 
         OnDestroy?.Invoke(entity.Get<InfoComponent>());
     }
+
+    public void Attack(HeroEntity hero, HeroEntity target)
+    {
+        OnAttack?.Invoke(hero.Get<InfoComponent>(),
+            target.Get<InfoComponent>());
+    }
+
+    public void ChangeHP(InfoComponent info, int hp)
+    {
+        HeroEntity entity = GetEntity(info.team, info.id);
+
+        OnChangeHP?.Invoke(info, hp, entity.Get<DamageComponent>().value);
+    }
+
+    
 
     public void PrepareNextMove(Team team)
     {

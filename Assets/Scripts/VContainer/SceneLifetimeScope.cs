@@ -48,4 +48,11 @@ public sealed class SceneLifetimeScope : LifetimeScope
 
         builder.RegisterEntryPoint<PipelineInstaller>(Lifetime.Singleton);
     }
+
+    private void RegisterVisualPipeline(IContainerBuilder builder)
+    {
+        builder.Register<VisualPipeline>(Lifetime.Singleton);
+
+        builder.RegisterEntryPoint<AttackVisualHandler>();
+    }
 }
