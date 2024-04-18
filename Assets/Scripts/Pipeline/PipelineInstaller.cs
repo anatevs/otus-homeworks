@@ -1,29 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using VContainer;
-using VContainerExtensions;
+using VContainer.Unity;
+using VContainerExt;
 
-public sealed class PipelineInstaller : MonoBehaviour
+public sealed class PipelineInstaller : IInitializable, IDisposable
 {
-    private readonly Pipeline _pipeline = new();
+    private readonly TurnPipeline _turnPipeline;
 
-    private IObjectResolver _objectResolver;
+    private readonly IObjectResolver _objectResolver;
 
-    [Inject]
-    public void Constuct(IObjectResolver objResolver)
+    public PipelineInstaller(TurnPipeline turnPipeline, IObjectResolver objResolver)
     {
+        _turnPipeline = turnPipeline;
         _objectResolver = objResolver;
     }
 
-    private void Awake()
+    void IInitializable.Initialize()
     {
-        _pipeline.AddTask(new StartTask());
-        _pipeline.AddTask(ObjectResolverExtension.ResolveInstance<TurnTask>(_objectResolver));
+        _turnPipeline.AddTask(new StartTask());
+        _turnPipeline.AddTask(ObjectResolverExtension.ResolveInstance<TurnTask>(_objectResolver));
     }
 
-    private void Start()
+    void IDisposable.Dispose()
     {
-        _pipeline.Run();
+        _turnPipeline.Clear();
+        _objectResolver?.Dispose();
     }
 }

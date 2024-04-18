@@ -69,7 +69,6 @@ public sealed class HeroServiceView : MonoBehaviour, IDisposable
 
     private void OnClickedHeroRed(HeroView heroView)
     {
-        Debug.Log("click on red");
         OnClickReact(Team.Red, heroView);
     }
 

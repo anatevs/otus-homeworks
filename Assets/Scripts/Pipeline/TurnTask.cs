@@ -19,7 +19,7 @@ public class TurnTask : Task
     {
         _heroListService.OnClickEntity += OnHeroClicked;
 
-        Debug.Log("Run turn task");
+        Debug.Log("turn task run");
     }
 
     protected override void OnFinished()
@@ -30,8 +30,7 @@ public class TurnTask : Task
 
     private void OnHeroClicked(HeroEntity clickedEntity)
     {
-        Team team = clickedEntity.Get<TeamComponent>().value;
-        Debug.Log(team);
+        Team team = clickedEntity.Get<InfoComponent>().team;
         if (team != _teamData.Enemy)
         {
             return;

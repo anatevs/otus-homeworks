@@ -1213,7 +1213,7 @@ GameObject:
   m_Component:
   - component: {fileID: 800622863}
   - component: {fileID: 800622865}
-  - component: {fileID: 800622866}
+  - component: {fileID: 800622867}
   m_Layer: 0
   m_Name: '[Game]'
   m_TagString: Untagged
@@ -1255,8 +1255,7 @@ MonoBehaviour:
   - {fileID: 1917274683}
   - {fileID: 800622862}
   _uiService: {fileID: 1854234147}
-  _heroServiceView: {fileID: 1854234148}
---- !u!114 &800622866
+--- !u!114 &800622867
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1265,7 +1264,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 800622862}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f25f4788cc0642f4497db8b30e6033b4, type: 3}
+  m_Script: {fileID: 11500000, guid: a2d40d6127b0fe34c9a8f521dc23375f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &1141858329 stripped

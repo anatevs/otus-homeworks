@@ -3,7 +3,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-public class SceneLifetimeScope : LifetimeScope
+public sealed class SceneLifetimeScope : LifetimeScope
 {
     [SerializeField]
     private UIService _uiService;
@@ -13,8 +13,8 @@ public class SceneLifetimeScope : LifetimeScope
     protected override void Configure(IContainerBuilder builder)
     {
         RegisterServices(builder);
-        //RegisterContlollers(builder);
         RegisterEventBus(builder);
+        RegisterPipeline(builder);
     }
 
     private void RegisterServices(IContainerBuilder builder)
@@ -31,12 +31,6 @@ public class SceneLifetimeScope : LifetimeScope
             .AsSelf();
     }
 
-    private void RegisterContlollers(IContainerBuilder builder)
-    {
-        builder.RegisterEntryPoint<HeroClickController>()
-            .AsSelf();
-    }
-
     private void RegisterEventBus(IContainerBuilder builder)
     {
         builder.Register<EventBus>(Lifetime.Singleton);
@@ -46,5 +40,12 @@ public class SceneLifetimeScope : LifetimeScope
         builder.RegisterEntryPoint<DestoyHandler>();
 
         builder.RegisterEntryPoint<NextMoveHandler>();
+    }
+
+    private void RegisterPipeline(IContainerBuilder builder)
+    {
+        builder.Register<TurnPipeline>(Lifetime.Singleton);
+
+        builder.RegisterEntryPoint<PipelineInstaller>(Lifetime.Singleton);
     }
 }

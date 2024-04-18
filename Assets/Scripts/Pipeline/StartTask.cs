@@ -6,7 +6,7 @@ public class StartTask : Task
 {
     protected override void OnRun()
     {
-        Debug.Log("Run start task");
+        Debug.Log("start task run");
 
         Finish();
     }

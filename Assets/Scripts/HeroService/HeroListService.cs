@@ -47,10 +47,7 @@ public sealed class HeroListService : IDisposable
             foreach (HeroView heroView in heroListView.GetViews())
             {
                 HeroEntity entity = heroView.GetComponent<HeroEntity>();
-                entity.Add(new TeamComponent(teamName));
-                entity.Add(new IDComponent(i++));
-
-                entity.Add(new InfoComponent(teamName, i));
+                entity.Add(new InfoComponent(teamName, i++));
 
                 heroList.Add(entity);
             }
@@ -69,14 +66,13 @@ public sealed class HeroListService : IDisposable
 
     public void OnHeroClicked(Team team, int id)
     {
-        Debug.Log("click in model");
         OnClickEntity?.Invoke(GetEntity(team, id));
     }
 
-    public HeroEntityList GetEntityList(Team team)
-    {
-        return _entities[team];
-    }
+    //public HeroEntityList GetEntityList(Team team)
+    //{
+    //    return _entities[team];
+    //}
 
     public HeroEntity GetCurrentActive(Team team)
     {
@@ -110,7 +106,7 @@ public sealed class HeroListService : IDisposable
 
     public void RemoveHero(HeroEntity entity)
     {
-        Team team = entity.Get<TeamComponent>().value;
+        Team team = entity.Get<InfoComponent>().team;
         _entities[team].OnRemove(entity);
 
         OnDestroy?.Invoke(entity.Get<InfoComponent>());

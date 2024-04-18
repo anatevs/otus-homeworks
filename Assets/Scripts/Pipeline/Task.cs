@@ -18,8 +18,9 @@ public abstract class Task
         if (Callback != null)
         {
             Action CachedCallback = Callback;
-            CachedCallback.Invoke();
             Callback = null;
+
+            CachedCallback.Invoke();
         }
 
         OnFinished();

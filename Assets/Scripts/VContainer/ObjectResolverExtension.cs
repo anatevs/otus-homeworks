@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using VContainer;
 
-namespace VContainerExtensions
+namespace VContainerExt
 {
     public static class ObjectResolverExtension
     {
