@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 using VContainer.Unity;
 
-public class HeroListService : IDisposable
+public sealed class HeroListService : IDisposable
 {
     public event Action<InfoComponent> OnDestroy;
 
@@ -12,18 +12,12 @@ public class HeroListService : IDisposable
 
     public event Action<InfoComponent, int, int> OnChangeHP;
 
-    //public event Action<Team, int> OnClickView;
-
-
     public event Action<HeroEntity> OnClickEntity;
+
 
     private readonly UIService _uiService;
 
-    private readonly Dictionary<HeroView, HeroEntity> _viewsEntities = new();
-
     private readonly Dictionary<Team, HeroEntityList> _entities = new();
-
-    private readonly Dictionary<Team, HeroListView> _views = new();
 
     public HeroListService(UIService uiService)
     {
@@ -31,8 +25,6 @@ public class HeroListService : IDisposable
 
         InitEntities();
     }
-
-
 
     private void InitEntities()
     {
@@ -61,15 +53,10 @@ public class HeroListService : IDisposable
                 entity.Add(new InfoComponent(teamName, i));
 
                 heroList.Add(entity);
-                _viewsEntities.Add(heroView, entity);
             }
             _entities.Add(teamName, new HeroEntityList(heroList));
-            _views.Add(teamName, heroListView);
 
-            //heroListView.OnHeroClicked += OnClickedEvent;
         }
-
-        //OnClickView += OnHeroClicked;
 
         //maybe need to init 1st active in some other class...
         _entities[Team.Red].Get(0).Set(new IsActiveComponent(true));
@@ -79,11 +66,6 @@ public class HeroListService : IDisposable
 
         _uiService.GetRedPlayer().GetView(0).SetActive(true);
     }
-
-    //private void OnClickedEvent(HeroView heroView)
-    //{
-    //    OnViewClicked?.Invoke(_viewsEntities[heroView]);
-    //}
 
     public void OnHeroClicked(Team team, int id)
     {
@@ -104,11 +86,6 @@ public class HeroListService : IDisposable
     public HeroEntity GetEntity(Team team, int index)
     {
         return _entities[team].Get(index);
-    }
-
-    public HeroView GetView(Team team, int index)
-    {
-        return _views[team].GetView(index);
     }
 
     public void SetActive(InfoComponent info, bool isActive)
@@ -146,9 +123,5 @@ public class HeroListService : IDisposable
 
     void IDisposable.Dispose()
     {
-        //OnClickView -= OnHeroClicked;
-
-        //_uiService.GetRedPlayer().OnHeroClicked -= OnClickedEvent;
-        //_uiService.GetBluePlayer().OnHeroClicked -= OnClickedEvent;
     }
 }

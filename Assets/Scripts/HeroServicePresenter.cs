@@ -19,8 +19,6 @@ public sealed class HeroServicePresenter : IDisposable
 
     public HeroServicePresenter(HeroListService heroListService)
     {
-        Debug.Log("ctor heroServPres");
-
         _heroListService = heroListService;
 
         _heroListService.OnDestroy += DestroyHero;

@@ -15,8 +15,6 @@ public sealed class HeroServiceView : MonoBehaviour, IDisposable
     [Inject]
     public void Construct(HeroServicePresenter heroServicePresenter, UIService uiService)
     {
-        Debug.Log("ctor heroServView");
-
         _presenter = heroServicePresenter;
         _uiService = uiService;
 
