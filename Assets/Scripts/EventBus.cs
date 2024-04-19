@@ -6,6 +6,10 @@ public sealed class EventBus
 {
     private readonly Dictionary<Type, IEventBusHandlersList> _events = new();
 
+    private bool _isRunning;
+
+    private readonly Queue<IEvent> _eventsQueue = new();
+
     public void Subscribe<T>(Action<T> handler)
     {
         Type type = typeof(T);
@@ -28,16 +32,33 @@ public sealed class EventBus
         }
     }
 
-    public void RaiseEvent<T>(T evnt)
+    public void RaiseEvent<T>(T evnt) where T : IEvent
     {
+        if (_isRunning)
+        {
+            _eventsQueue.Enqueue(evnt);
+            return;
+        }
+
+        _isRunning = true;
+
         Type type = evnt.GetType();
 
         if (!_events.ContainsKey(type))
         {
             Debug.Log($"no subscribers to event {type}");
+            _isRunning = false;
             return;
         }
+
         _events[type].RaiseEvent(evnt);
+
+        _isRunning = false;
+
+        if (_eventsQueue.TryDequeue(out IEvent eventOnQueue))
+        {
+            RaiseEvent(eventOnQueue);
+        }
     }
 
 

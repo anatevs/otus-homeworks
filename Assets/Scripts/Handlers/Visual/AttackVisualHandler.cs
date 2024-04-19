@@ -1,15 +1,16 @@
 public class AttackVisualHandler : BaseHandler<AttackEvent>
 {
-    VisualPipeline _visualPipeline;
+    private readonly VisualPipeline _visualPipeline;
+    private readonly HeroServiceView _heroServiceView;
 
-    public AttackVisualHandler(EventBus eventBus, VisualPipeline visualPipeline) : base(eventBus)
+    public AttackVisualHandler(EventBus eventBus, VisualPipeline visualPipeline, HeroServiceView heroServiceView) : base(eventBus)
     {
         _visualPipeline = visualPipeline;
+        _heroServiceView = heroServiceView;
     }
 
     protected override void RaiseEvent(AttackEvent attackEvent)
     {
-
-        //_heroListService.Attack(attackEvent.hero, attackEvent.target);
+        _visualPipeline.AddTask(new AttackVisualTask(_heroServiceView, attackEvent.hero, attackEvent.target));
     }
 }

@@ -1255,6 +1255,7 @@ MonoBehaviour:
   - {fileID: 1917274683}
   - {fileID: 800622862}
   _uiService: {fileID: 1854234147}
+  _heroServiceView: {fileID: 1854234148}
 --- !u!114 &800622867
 MonoBehaviour:
   m_ObjectHideFlags: 0

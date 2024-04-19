@@ -1,4 +1,4 @@
-public readonly struct AttackEvent
+public readonly struct AttackEvent : IEvent
 {
     public readonly HeroEntity target;
     public readonly HeroEntity hero;

@@ -1,10 +1,11 @@
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using UI;
 using UnityEngine;
 using VContainer;
 
-public sealed class HeroServiceView : MonoBehaviour, IDisposable
+public sealed class HeroServiceView : MonoBehaviour
 {
     private UIService _uiService;
 
@@ -18,11 +19,24 @@ public sealed class HeroServiceView : MonoBehaviour, IDisposable
         _presenter = heroServicePresenter;
         _uiService = uiService;
 
+        //SetListViews();
+
+        //_presenter.OnSetActive += SetActive;
+        //_presenter.OnDestroy += DestroyHero;
+        //_presenter.OnAttack += Attack;
+        //_presenter.OnChangeStats += ChangeStats;
+
+        //_listViews[Team.Red].OnHeroClicked += OnClickedHeroRed;
+        //_listViews[Team.Blue].OnHeroClicked += OnClickedHeroBlue;
+    }
+
+    private void Awake()
+    {
         SetListViews();
 
         _presenter.OnSetActive += SetActive;
         _presenter.OnDestroy += DestroyHero;
-        _presenter.OnAttack += Attack;
+        //_presenter.OnAttack += Attack;
         _presenter.OnChangeStats += ChangeStats;
 
         _listViews[Team.Red].OnHeroClicked += OnClickedHeroRed;
@@ -52,17 +66,27 @@ public sealed class HeroServiceView : MonoBehaviour, IDisposable
         _listViews[info.team].SetActive(isActive);
     }
 
-    private void DestroyHero(InfoComponent info)
+    public void DestroyHero(InfoComponent info)
     {
         _listViews[info.team].OnViewDestroyed(info.id);
     }
 
-    private void Attack(InfoComponent hero, InfoComponent target)
+    public UniTask AttackTask(InfoComponent hero, InfoComponent target)
     {
         HeroView heroView = _listViews[hero.team].GetView(hero.id);
         HeroView targetView = _listViews[target.team].GetView(target.id);
 
-        heroView.AnimateAttack(targetView);
+        return heroView.AnimateAttack(targetView);
+    }
+
+    public async void Attack(InfoComponent hero, InfoComponent target)
+    {
+        HeroView heroView = _listViews[hero.team].GetView(hero.id);
+        HeroView targetView = _listViews[target.team].GetView(target.id);
+
+
+
+        await heroView.AnimateAttack(targetView);
     }
 
     private void ChangeStats(InfoComponent info, int hp, int damage)
@@ -89,7 +113,7 @@ public sealed class HeroServiceView : MonoBehaviour, IDisposable
         _presenter.ClickHero(team, index);
     }
 
-    void IDisposable.Dispose()
+    void OnDisable()
     {
         _presenter.OnSetActive -= SetActive;
         _presenter.OnDestroy -= DestroyHero;

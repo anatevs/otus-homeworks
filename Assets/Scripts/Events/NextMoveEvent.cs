@@ -1,4 +1,4 @@
-public readonly struct NextMoveEvent
+public readonly struct NextMoveEvent : IEvent
 {
     public readonly HeroEntity prevPlayer;
 

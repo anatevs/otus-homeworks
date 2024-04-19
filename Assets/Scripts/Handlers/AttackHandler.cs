@@ -19,9 +19,6 @@ public sealed class AttackHandler : BaseHandler<AttackEvent>
         else
         {
             EventBus.RaiseEvent(new DealDamageEvent(target, damage.value));
-
-            //Debug.Log($"{hero.Get<TeamComponent>().value} {hero.name} " +
-            //    $"attacked {target.Get<TeamComponent>().value} {target.name}");
         }
     }
 }

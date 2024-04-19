@@ -104,7 +104,7 @@ public sealed class HeroListService : IDisposable
         Team team = entity.Get<InfoComponent>().team;
         _entities[team].OnRemove(entity);
 
-        OnDestroy?.Invoke(entity.Get<InfoComponent>());
+        //OnDestroy?.Invoke(entity.Get<InfoComponent>());
     }
 
     public void Attack(HeroEntity hero, HeroEntity target)

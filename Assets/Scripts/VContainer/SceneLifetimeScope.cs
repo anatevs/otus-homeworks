@@ -8,6 +8,9 @@ public sealed class SceneLifetimeScope : LifetimeScope
     [SerializeField]
     private UIService _uiService;
 
+    [SerializeField]
+    private HeroServiceView _heroServiceView;
+
     private readonly Team _startTeam = Team.Red;
 
     protected override void Configure(IContainerBuilder builder)
@@ -15,6 +18,7 @@ public sealed class SceneLifetimeScope : LifetimeScope
         RegisterServices(builder);
         RegisterEventBus(builder);
         RegisterPipeline(builder);
+        RegisterVisualPipeline(builder);
     }
 
     private void RegisterServices(IContainerBuilder builder)
@@ -29,6 +33,8 @@ public sealed class SceneLifetimeScope : LifetimeScope
 
         builder.RegisterEntryPoint<HeroServicePresenter>()
             .AsSelf();
+
+        builder.RegisterComponent(_heroServiceView);
     }
 
     private void RegisterEventBus(IContainerBuilder builder)
@@ -54,5 +60,7 @@ public sealed class SceneLifetimeScope : LifetimeScope
         builder.Register<VisualPipeline>(Lifetime.Singleton);
 
         builder.RegisterEntryPoint<AttackVisualHandler>();
+
+        builder.RegisterEntryPoint<DestroyVisualHandler>();
     }
 }
