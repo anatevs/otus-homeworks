@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 
-public class DealDamageVisualTask : MonoBehaviour
+public class DealDamageVisualTask : Task
 {
-    // Start is called before the first frame update
-    void Start()
+    private readonly HeroServiceView _heroServiceView;
+    private readonly InfoComponent _infoComponent;
+    private readonly int _hp;
+    private readonly int _damage;
+
+    public DealDamageVisualTask(HeroServiceView heroServiceView, InfoComponent infoComponent, int hp, int damage)
     {
-        
+        _heroServiceView = heroServiceView;
+        _infoComponent = infoComponent;
+        _hp = hp;
+        _damage = damage;
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void OnRun()
     {
-        
+        _heroServiceView.ChangeStats(_infoComponent, _hp, _damage);
+
+        Finish();
     }
 }

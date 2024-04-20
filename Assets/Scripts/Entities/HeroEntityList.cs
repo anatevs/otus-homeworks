@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class HeroEntityList
 {
-    private int _currentActive;
-    private int _nextActive;
+    private int _currentActive = -1;
+    private int _nextActive = 0;
     private readonly List<int> _removedIndexes = new List<int>();
 
     private readonly List<HeroEntity> _list;
@@ -16,20 +16,21 @@ public class HeroEntityList
 
     public void OnNextMove()
     {
-        _currentActive = _nextActive;
         SetNextIndex();
+        _currentActive = _nextActive;
     }
 
     public void OnRemove(HeroEntity entity)
     {
         int removedIdx = _list.IndexOf(entity);
-        _list.RemoveAt(removedIdx);
-        UpdateIndexes(removedIdx);
+        _removedIndexes.Add(removedIdx);
+        _removedIndexes.Sort();
     }
 
     private void SetNextIndex()
     {
         int nextUnchecked = CalcNextIndex(_currentActive);
+
         if (_removedIndexes.Count > 0)
         {
             for (int i = 0; i < _removedIndexes.Count; i++)
@@ -38,32 +39,14 @@ public class HeroEntityList
                 {
                     nextUnchecked = CalcNextIndex(nextUnchecked);
                 }
-                else
-                {
-                    break;
-                }
             }
         }
-
         _nextActive = nextUnchecked;
     }
 
     private int CalcNextIndex(int prev)
     {
         return (prev + 1) % _list.Count;
-    }
-
-    private void UpdateIndexes(int removedIndex)
-    {
-        if (removedIndex <= _currentActive)
-        {
-            _nextActive = _currentActive;
-            _currentActive--;
-        }
-        else
-        {
-            SetNextIndex();
-        }
     }
 
     public HeroEntity Get(int index)

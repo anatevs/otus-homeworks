@@ -81,7 +81,7 @@ public sealed class HeroServiceView : MonoBehaviour
         return heroView.AnimateAttack(targetView);
     }
 
-    private void ChangeStats(InfoComponent info, int hp, int damage)
+    public void ChangeStats(InfoComponent info, int hp, int damage)
     {
         _listViews[info.team].SetStats(info.id, hp, damage);
     }

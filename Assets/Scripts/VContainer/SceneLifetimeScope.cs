@@ -64,6 +64,8 @@ public sealed class SceneLifetimeScope : LifetimeScope
 
         builder.RegisterEntryPoint<AttackVisualHandler>();
 
+        builder.RegisterEntryPoint<DealDamageVisualHandler>();
+
         builder.RegisterEntryPoint<DestroyVisualHandler>();
     }
 }
