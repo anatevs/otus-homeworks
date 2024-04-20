@@ -41,6 +41,7 @@ public sealed class SceneLifetimeScope : LifetimeScope
     {
         builder.Register<EventBus>(Lifetime.Singleton);
 
+        builder.RegisterEntryPoint<ChangeActiveHandler>();
         builder.RegisterEntryPoint<AttackHandler>();
         builder.RegisterEntryPoint<DealDamageHandler>();
         builder.RegisterEntryPoint<DestoyHandler>();
@@ -58,6 +59,8 @@ public sealed class SceneLifetimeScope : LifetimeScope
     private void RegisterVisualPipeline(IContainerBuilder builder)
     {
         builder.Register<VisualPipeline>(Lifetime.Singleton);
+
+        builder.RegisterEntryPoint<ChangeActiveVisualHandler>();
 
         builder.RegisterEntryPoint<AttackVisualHandler>();
 

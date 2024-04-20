@@ -11,8 +11,7 @@ public class NextMoveHandler : BaseHandler<NextMoveEvent>
 
     protected override void RaiseEvent(NextMoveEvent nextMoveEvent)
     {
-        HeroEntity prevPlayer = nextMoveEvent.prevPlayer;
-        prevPlayer.Set(new IsActiveComponent(false));
+        HeroEntity prevHero = nextMoveEvent.prevHero;
 
         _teamData.SwitchTeams();
         Team currentTeam = _teamData.Player;
@@ -20,6 +19,6 @@ public class NextMoveHandler : BaseHandler<NextMoveEvent>
         _heroListService.PrepareNextMove(currentTeam);
         HeroEntity currentHero = _heroListService.GetCurrentActive(currentTeam);
 
-        currentHero.Set(new IsActiveComponent(true));
+        EventBus.RaiseEvent(new ChangeActiveEvent(prevHero, currentHero));
     }
 }

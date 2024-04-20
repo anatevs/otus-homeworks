@@ -67,12 +67,12 @@ namespace UI
                 $"is not contained in HeroViewList");
         }
 
-        public void SetActive(bool isActive)
+        public void SetActiveTeam(bool isActive)
         {
             this.canvas.sortingOrder = isActive ? FORWARD_LAYER : BACK_LAYER;
         }
 
-        public void OnViewSetActive(int index, bool isActive)
+        public void SetActiveHero(int index, bool isActive)
         {
             _views[index].SetActive(isActive);
         }

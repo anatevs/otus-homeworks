@@ -34,7 +34,7 @@ public sealed class HeroServiceView : MonoBehaviour
     {
         SetListViews();
 
-        _presenter.OnSetActive += SetActive;
+        _presenter.OnSetActive += SetActiveTeamAndHero;
         _presenter.OnDestroy += DestroyHero;
         //_presenter.OnAttack += Attack;
         _presenter.OnChangeStats += ChangeStats;
@@ -61,10 +61,12 @@ public sealed class HeroServiceView : MonoBehaviour
         }
     }
 
-    private void SetActive(InfoComponent info, bool isActive)
+    public void SetActiveTeamAndHero(InfoComponent info, bool isActive)
     {
-        _listViews[info.team].SetActive(isActive);
+        _listViews[info.team].SetActiveTeam(isActive);
+        _listViews[info.team].SetActiveHero(info.id, isActive);
     }
+
 
     public void DestroyHero(InfoComponent info)
     {
@@ -77,16 +79,6 @@ public sealed class HeroServiceView : MonoBehaviour
         HeroView targetView = _listViews[target.team].GetView(target.id);
 
         return heroView.AnimateAttack(targetView);
-    }
-
-    public async void Attack(InfoComponent hero, InfoComponent target)
-    {
-        HeroView heroView = _listViews[hero.team].GetView(hero.id);
-        HeroView targetView = _listViews[target.team].GetView(target.id);
-
-
-
-        await heroView.AnimateAttack(targetView);
     }
 
     private void ChangeStats(InfoComponent info, int hp, int damage)
@@ -115,7 +107,7 @@ public sealed class HeroServiceView : MonoBehaviour
 
     void OnDisable()
     {
-        _presenter.OnSetActive -= SetActive;
+        _presenter.OnSetActive -= SetActiveTeamAndHero;
         _presenter.OnDestroy -= DestroyHero;
         _presenter.OnChangeStats -= ChangeStats;
 
