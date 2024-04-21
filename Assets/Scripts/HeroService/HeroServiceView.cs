@@ -11,39 +11,29 @@ public sealed class HeroServiceView : MonoBehaviour
 
     private HeroServicePresenter _presenter;
 
-    private readonly Dictionary<Team, HeroListView> _listViews = new();
+    private readonly Dictionary<Team, HeroListView> _viewsLists = new();
 
     [Inject]
     public void Construct(HeroServicePresenter heroServicePresenter, UIService uiService)
     {
         _presenter = heroServicePresenter;
         _uiService = uiService;
-
-        //SetListViews();
-
-        //_presenter.OnSetActive += SetActive;
-        //_presenter.OnDestroy += DestroyHero;
-        //_presenter.OnAttack += Attack;
-        //_presenter.OnChangeStats += ChangeStats;
-
-        //_listViews[Team.Red].OnHeroClicked += OnClickedHeroRed;
-        //_listViews[Team.Blue].OnHeroClicked += OnClickedHeroBlue;
     }
 
     private void Awake()
     {
-        SetListViews();
+        InitListViews();
 
         _presenter.OnSetActive += SetActiveTeamAndHero;
         _presenter.OnDestroy += DestroyHero;
         //_presenter.OnAttack += Attack;
         _presenter.OnChangeStats += ChangeStats;
 
-        _listViews[Team.Red].OnHeroClicked += OnClickedHeroRed;
-        _listViews[Team.Blue].OnHeroClicked += OnClickedHeroBlue;
+        _viewsLists[Team.Red].OnHeroClicked += OnClickedHeroRed;
+        _viewsLists[Team.Blue].OnHeroClicked += OnClickedHeroBlue;
     }
 
-    private void SetListViews()
+    private void InitListViews()
     {
         foreach (Team teamName in Enum.GetValues(typeof(Team)))
         {
@@ -57,33 +47,43 @@ public sealed class HeroServiceView : MonoBehaviour
             {
                 heroListView = _uiService.GetBluePlayer();
             }
-            _listViews.Add(teamName, heroListView);
+            _viewsLists.Add(teamName, heroListView);
+
+
+            IReadOnlyList<HeroView> listViews = heroListView.GetViews();
+            for (int i = 0; i < listViews.Count; i++)
+            {
+                HeroView view = listViews[i];
+                HeroModel model = view.GetComponent<HeroModel>();
+
+                heroListView.SetStats(i, model.HP, model.Damage);
+            }
         }
     }
 
     public void SetActiveTeamAndHero(InfoComponent info, bool isActive)
     {
-        _listViews[info.team].SetActiveTeam(isActive);
-        _listViews[info.team].SetActiveHero(info.id, isActive);
+        _viewsLists[info.team].SetActiveTeam(isActive);
+        _viewsLists[info.team].SetActiveHero(info.id, isActive);
     }
 
 
     public void DestroyHero(InfoComponent info)
     {
-        _listViews[info.team].OnViewDestroyed(info.id);
+        _viewsLists[info.team].OnViewDestroyed(info.id);
     }
 
     public UniTask AttackTask(InfoComponent hero, InfoComponent target)
     {
-        HeroView heroView = _listViews[hero.team].GetView(hero.id);
-        HeroView targetView = _listViews[target.team].GetView(target.id);
+        HeroView heroView = _viewsLists[hero.team].GetView(hero.id);
+        HeroView targetView = _viewsLists[target.team].GetView(target.id);
 
         return heroView.AnimateAttack(targetView);
     }
 
     public void ChangeStats(InfoComponent info, int hp, int damage)
     {
-        _listViews[info.team].SetStats(info.id, hp, damage);
+        _viewsLists[info.team].SetStats(info.id, hp, damage);
     }
 
     private void OnClickedHeroBlue(HeroView heroView)
@@ -99,7 +99,7 @@ public sealed class HeroServiceView : MonoBehaviour
 
     private void OnClickReact(Team team, HeroView heroView)
     {
-        HeroListView heroListView = _listViews[team];
+        HeroListView heroListView = _viewsLists[team];
         int index = heroListView.GetIndex(heroView);
 
         _presenter.ClickHero(team, index);
@@ -111,7 +111,7 @@ public sealed class HeroServiceView : MonoBehaviour
         _presenter.OnDestroy -= DestroyHero;
         _presenter.OnChangeStats -= ChangeStats;
 
-        _listViews[Team.Red].OnHeroClicked -= OnClickedHeroRed;
-        _listViews[Team.Blue].OnHeroClicked -= OnClickedHeroBlue;
+        _viewsLists[Team.Red].OnHeroClicked -= OnClickedHeroRed;
+        _viewsLists[Team.Blue].OnHeroClicked -= OnClickedHeroBlue;
     }
 }
