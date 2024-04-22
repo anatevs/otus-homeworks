@@ -5,7 +5,7 @@ public struct HPComponent : IComponent
     public int Value
     {
         get => _value;
-        set => _value = Mathf.Clamp(value, 0, _initValue);
+        set => _value = Mathf.Max(0, value);
     }
 
     private int _value;

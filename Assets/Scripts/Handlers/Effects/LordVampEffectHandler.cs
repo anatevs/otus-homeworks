@@ -1,18 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class LordVampEffectHandler : MonoBehaviour
+public class LordVampEffectHandler : BaseHandler<LordVampEffect>
 {
-    // Start is called before the first frame update
-    void Start()
+    private readonly bool[] _choises = new bool[2] { true, false };
+
+    public LordVampEffectHandler(EventBus eventBus) : base(eventBus)
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void RaiseEvent(LordVampEffect evnt)
     {
-        
+        EventBus.RaiseEvent(new DefaultDamageEvent(evnt.Hero, evnt.Target));
+
+        int random = Random.Range(0, _choises.Length);
+
+        if (_choises[random])
+        {
+            HPComponent hp = evnt.Hero.Get<HPComponent>();
+            hp.Value += evnt.Hero.Get<DamageComponent>().value;
+
+            evnt.Hero.Set(hp);
+        }
     }
 }

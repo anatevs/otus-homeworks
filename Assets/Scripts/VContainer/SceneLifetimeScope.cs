@@ -50,6 +50,8 @@ public sealed class SceneLifetimeScope : LifetimeScope
 
         builder.RegisterEntryPoint<DevourerEffectHandler>();
         builder.RegisterEntryPoint<HuntressEffectHandler>();
+        builder.RegisterEntryPoint<StupidOrkEffectHandler>();
+        builder.RegisterEntryPoint<LordVampEffectHandler>();
     }
 
     private void RegisterPipeline(IContainerBuilder builder)

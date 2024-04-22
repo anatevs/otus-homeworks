@@ -227,6 +227,10 @@ PrefabInstance:
       value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 9047876469813407587, guid: 291ab9f483432480c8815884e98cd0a0, type: 3}
+      propertyPath: _ability
+      value: 
+      objectReference: {fileID: 11400000, guid: be69bc7d5427c6047a8a0a003d0f1cd8, type: 2}
+    - target: {fileID: 9047876469813407587, guid: 291ab9f483432480c8815884e98cd0a0, type: 3}
       propertyPath: _initDamage
       value: 6
       objectReference: {fileID: 0}
@@ -1420,6 +1424,10 @@ PrefabInstance:
       value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 9047876469813407587, guid: 291ab9f483432480c8815884e98cd0a0, type: 3}
+      propertyPath: _ability
+      value: 
+      objectReference: {fileID: 11400000, guid: 46fc5b5fe3ea63445b5381686975f896, type: 2}
+    - target: {fileID: 9047876469813407587, guid: 291ab9f483432480c8815884e98cd0a0, type: 3}
       propertyPath: _initDamage
       value: 8
       objectReference: {fileID: 0}
@@ -2026,6 +2034,10 @@ PrefabInstance:
     - target: {fileID: 7264787356491616234, guid: 8f526bbcc058d446cbf5fd842e06ef28, type: 3}
       propertyPath: m_Name
       value: '[Audio]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7264787356491616234, guid: 8f526bbcc058d446cbf5fd842e06ef28, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7264787356491616235, guid: 8f526bbcc058d446cbf5fd842e06ef28, type: 3}
       propertyPath: m_RootOrder

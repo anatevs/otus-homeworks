@@ -19,7 +19,6 @@ public class DevourerEffectHandler : BaseHandler<DevourerEffect>
         IReadOnlyList<int> enemyValidIndexes = _heroListService.GetValidIndexes(enemyTeam);
         int randomIndex = enemyValidIndexes[Random.Range(0, enemyValidIndexes.Count)];
 
-        Debug.Log($"random index {randomIndex}");
         EventBus.RaiseEvent(new DealDamageEvent(_heroListService.GetEntity(enemyTeam, randomIndex), evnt.ExtraDamage));
     }
 }

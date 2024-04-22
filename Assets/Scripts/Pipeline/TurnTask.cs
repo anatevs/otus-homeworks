@@ -6,8 +6,6 @@ public class TurnTask : Task
     private readonly CurrentTeamData _teamData;
     private readonly EventBus _eventBus;
 
-    private readonly int _backDamage = 1;
-
     public TurnTask(EventBus eventBus, HeroListService heroListService, CurrentTeamData teamData)
     {
         _eventBus = eventBus;
@@ -18,8 +16,6 @@ public class TurnTask : Task
     protected override void OnRun()
     {
         _heroListService.OnClickEntity += OnHeroClicked;
-
-        //Debug.Log("turn task is run");
     }
 
     protected override void OnFinished()
