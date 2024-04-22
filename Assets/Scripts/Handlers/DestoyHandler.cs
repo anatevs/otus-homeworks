@@ -12,9 +12,5 @@ public sealed class DestoyHandler : BaseHandler<DestroyEvent>
         HeroEntity entity = evnt.entity;
 
         _heroListService.RemoveHero(entity);
-
-        //entity.Set(new IsActiveComponent(false));
-
-        //entity.gameObject.SetActive(false);
     }
 }

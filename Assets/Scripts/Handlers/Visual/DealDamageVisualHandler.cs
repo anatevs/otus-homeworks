@@ -1,7 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class DealDamageVisualHandler : BaseHandler<DealDamageEvent>
 {
     private readonly VisualPipeline _visualPipeline;

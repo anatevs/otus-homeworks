@@ -91,11 +91,6 @@ public sealed class HeroListService : IDisposable
         HeroEntity entity = GetEntity(info.team, info.id);
         entity.Set(new IsActiveComponent(isActive));
 
-        //if (isActive)
-        //{
-        //    _entities[team].OnNextMove();
-        //}
-
         OnSetActive?.Invoke(info, isActive);
     }
 
@@ -119,8 +114,6 @@ public sealed class HeroListService : IDisposable
 
         OnChangeHP?.Invoke(info, hp, entity.Get<DamageComponent>().value);
     }
-
-    
 
     public void PrepareNextMove(Team team)
     {

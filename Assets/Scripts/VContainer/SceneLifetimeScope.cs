@@ -45,8 +45,9 @@ public sealed class SceneLifetimeScope : LifetimeScope
         builder.RegisterEntryPoint<AttackHandler>();
         builder.RegisterEntryPoint<DealDamageHandler>();
         builder.RegisterEntryPoint<DestoyHandler>();
-
         builder.RegisterEntryPoint<NextMoveHandler>();
+
+        builder.RegisterEntryPoint<DevourerEffectHandler>();
     }
 
     private void RegisterPipeline(IContainerBuilder builder)

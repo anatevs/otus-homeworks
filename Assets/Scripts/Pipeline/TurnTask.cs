@@ -39,7 +39,6 @@ public class TurnTask : Task
         {
             HeroEntity playerHero = _heroListService.GetCurrentActive(_teamData.Player);
             _eventBus.RaiseEvent(new AttackEvent(clickedEntity, playerHero));
-            _eventBus.RaiseEvent(new DealDamageEvent(playerHero, _backDamage));
 
             _eventBus.RaiseEvent(new NextMoveEvent(playerHero));
         }

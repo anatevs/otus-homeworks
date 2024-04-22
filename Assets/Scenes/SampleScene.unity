@@ -2003,6 +2003,10 @@ PrefabInstance:
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 9047876469813407587, guid: 291ab9f483432480c8815884e98cd0a0, type: 3}
+      propertyPath: _ability
+      value: 
+      objectReference: {fileID: 11400000, guid: 4dd7772f733ffab4dace815d21a49f4f, type: 2}
+    - target: {fileID: 9047876469813407587, guid: 291ab9f483432480c8815884e98cd0a0, type: 3}
       propertyPath: _initDamage
       value: 3
       objectReference: {fileID: 0}
