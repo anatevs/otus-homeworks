@@ -20,19 +20,9 @@ public sealed class AttackHandler : BaseHandler<AttackEvent>
             effect.Target = target;
             EventBus.RaiseEvent(weapon.ability.effect);
         }
-
-        else //if doesn't have weapon
+        else
         {
-            if (!(hero.TryGet(out DamageComponent damage)))
-            {
-                Debug.Log($"damage is not possible," +
-                    $" no damage component on entity {hero}");
-            }
-            else
-            {
-                EventBus.RaiseEvent(new DealDamageEvent(hero, _backDamage));
-                EventBus.RaiseEvent(new DealDamageEvent(target, damage.value));
-            }
+            EventBus.RaiseEvent(new DefaultDamageEvent(hero, target));
         }
     }
 }

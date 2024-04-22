@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class HuntressEffectHandler : MonoBehaviour
+public class HuntressEffectHandler : BaseHandler<HuntressEffect>
 {
-    // Start is called before the first frame update
-    void Start()
+    public HuntressEffectHandler(EventBus eventBus) : base(eventBus)
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void RaiseEvent(HuntressEffect evnt)
     {
-        
+        int damage = evnt.Hero.Get<DamageComponent>().value;
+
+        EventBus.RaiseEvent(new DealDamageEvent(evnt.Target, damage));
     }
 }
