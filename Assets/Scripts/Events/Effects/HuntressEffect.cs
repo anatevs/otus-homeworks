@@ -1,4 +1,4 @@
-public class HuntressEffect : IEffect
+public struct HuntressEffect : IEffect
 {
     public AbilityType AbilityType { get => AbilityType.Weapon; }
     public HeroEntity Hero { get; set; }

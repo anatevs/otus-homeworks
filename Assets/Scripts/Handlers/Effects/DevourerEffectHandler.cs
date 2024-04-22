@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DevourerEffectHandler : BaseHandler<DevourerEffect>
 {
-    HeroListService _heroListService;
+    private readonly HeroListService _heroListService;
 
     public DevourerEffectHandler(EventBus eventBus, HeroListService heroListService) : base(eventBus)
     {
@@ -12,6 +12,8 @@ public class DevourerEffectHandler : BaseHandler<DevourerEffect>
 
     protected override void RaiseEvent(DevourerEffect evnt)
     {
+        EventBus.RaiseEvent(new DefaultDamageEvent(evnt.Hero, evnt.Target));
+
         Team enemyTeam = evnt.Target.Get<InfoComponent>().team;
 
         IReadOnlyList<int> enemyValidIndexes = _heroListService.GetValidIndexes(enemyTeam);

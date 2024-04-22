@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DevourerEffect : IEffect
+public struct DevourerEffect : IEffect
 {
     public AbilityType AbilityType { get => AbilityType.Weapon; }
     public HeroEntity Hero { get; set; }
