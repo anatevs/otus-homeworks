@@ -22,10 +22,6 @@ public class DefaultDealDamageHandler : BaseHandler<DefaultDealDamageEvent>
             hpComponent.Value -= damage;
             entity.Set(hpComponent);
 
-            Debug.Log($"{entity.Get<InfoComponent>().team}" +
-                $" {entity.Get<InfoComponent>().id}" +
-                $" hp: {entity.Get<HPComponent>().Value}");
-
             if (hpComponent.Value == 0)
             {
                 EventBus.RaiseEvent(new DestroyEvent(entity));

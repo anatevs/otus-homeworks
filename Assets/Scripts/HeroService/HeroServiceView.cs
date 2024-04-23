@@ -88,7 +88,6 @@ public sealed class HeroServiceView : MonoBehaviour
 
     private void OnClickedHeroBlue(HeroView heroView)
     {
-        Debug.Log("click on blue");
         OnClickReact(Team.Blue, heroView);
     }
 

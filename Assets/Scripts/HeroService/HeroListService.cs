@@ -91,6 +91,20 @@ public sealed class HeroListService : IDisposable
         return _entities[team].GetValidIndexes();
     }
 
+    public IReadOnlyList<HeroEntity> GetValidEntities(Team team)
+    {
+        List<HeroEntity> res = new();
+
+        IReadOnlyList<int> indexes = GetValidIndexes(team);
+        for (int i = 0; i < indexes.Count; i++)
+        {
+            HeroEntity entity = GetEntity(team, indexes[i]);
+            res.Add(entity);
+        }
+
+        return res;
+    }
+
     public void SetActive(InfoComponent info, bool isActive)
     {
         HeroEntity entity = GetEntity(info.team, info.id);

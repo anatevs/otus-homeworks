@@ -14,6 +14,7 @@ public class NextMoveHandler : BaseHandler<NextMoveEvent>
         HeroEntity prevHero = nextMoveEvent.prevHero;
 
         _teamData.SwitchTeams();
+
         Team currentTeam = _teamData.Player;
 
         _heroListService.PrepareNextMove(currentTeam);

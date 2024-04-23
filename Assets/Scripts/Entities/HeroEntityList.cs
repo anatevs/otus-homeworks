@@ -29,8 +29,6 @@ public class HeroEntityList
     public void OnRemove(HeroEntity entity)
     {
         int removedIdx = _list.IndexOf(entity);
-        //_removedIndexes.Add(removedIdx);
-        //_removedIndexes.Sort();
 
         _validIndexes.Remove(removedIdx);
     }
@@ -46,21 +44,6 @@ public class HeroEntityList
 
         _nextActive = nextUnchecked;
     }
-
-    //private int FindNextValid(int nextUnchecked)
-    //{
-    //    for (int i = 0; i < _removedIndexes.Count; i++)
-    //    {
-    //        if (_removedIndexes[i] == nextUnchecked)
-    //        {
-    //            nextUnchecked = CalcNextIndex(nextUnchecked);
-    //            return FindNextValid(nextUnchecked);
-    //        }
-    //    }
-
-    //    return nextUnchecked;
-    //}
-
 
     private int FindNextValid(int nextUnchecked)
     {

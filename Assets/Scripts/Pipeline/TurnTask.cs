@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class TurnTask : Task
 {
     private readonly HeroListService _heroListService;
@@ -21,7 +19,6 @@ public class TurnTask : Task
     protected override void OnFinished()
     {
         _heroListService.OnClickEntity -= OnHeroClicked;
-        //Debug.Log("turn task is finished");
     }
 
     private void OnHeroClicked(HeroEntity clickedEntity)
