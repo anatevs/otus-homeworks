@@ -8,27 +8,19 @@ public class DealDamageHandler : BaseHandler<DealDamageEvent>
 
     protected override void RaiseEvent(DealDamageEvent evnt)
     {
-        HeroEntity entity = evnt.entity;
+        HeroEntity entity = evnt.target;
         int damage = evnt.damage;
 
-        if (!(entity.TryGet(out HPComponent hpComponent)))
+        if (entity.TryGet<ShieldComponent>(out ShieldComponent shield))
         {
-            Debug.Log($"damage is not possible:" +
-                $" no hp component on entity {entity}");
+            IDefenceEffect effect = shield.effect;
+            effect.Target = evnt.target;
+            EventBus.RaiseEvent(effect);
         }
+
         else
         {
-            hpComponent.Value -= damage;
-            entity.Set(hpComponent);
-
-            Debug.Log($"{entity.Get<InfoComponent>().team}" +
-                $" {entity.Get<InfoComponent>().id}" +
-                $" hp: {entity.Get<HPComponent>().Value}");
-
-            if (hpComponent.Value == 0)
-            {
-                EventBus.RaiseEvent(new DestroyEvent(entity));
-            }
+            EventBus.RaiseEvent(new DefaultDealDamageEvent(evnt.target, evnt.damage));
         }
     }
 }

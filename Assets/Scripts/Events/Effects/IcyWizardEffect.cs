@@ -1,18 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class IcyWizardEffect : MonoBehaviour
+public class IcyWizardEffect : IAttackEffect
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public HeroEntity Hero { get; set; }
+    public HeroEntity Target { get; set; }
 }

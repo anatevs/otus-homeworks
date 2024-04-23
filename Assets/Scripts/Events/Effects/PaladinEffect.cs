@@ -1,18 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PaladinEffect : MonoBehaviour
+public struct PaladinEffect : IDefenceEffect
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public HeroEntity Target { get; set; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int Damage { get; set; }
+
+    [field: SerializeField]
+    public bool IsFirstDefence { get; set; }
 }

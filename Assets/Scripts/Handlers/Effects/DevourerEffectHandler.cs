@@ -12,13 +12,13 @@ public class DevourerEffectHandler : BaseHandler<DevourerEffect>
 
     protected override void RaiseEvent(DevourerEffect evnt)
     {
-        EventBus.RaiseEvent(new DefaultDamageEvent(evnt.Hero, evnt.Target));
+        EventBus.RaiseEvent(new DefaultAttackEvent(evnt.Hero, evnt.Target));
 
         Team enemyTeam = evnt.Target.Get<InfoComponent>().team;
 
         IReadOnlyList<int> enemyValidIndexes = _heroListService.GetValidIndexes(enemyTeam);
         int randomIndex = enemyValidIndexes[Random.Range(0, enemyValidIndexes.Count)];
 
-        EventBus.RaiseEvent(new DealDamageEvent(_heroListService.GetEntity(enemyTeam, randomIndex), evnt.ExtraDamage));
+        EventBus.RaiseEvent(new DefaultDealDamageEvent(_heroListService.GetEntity(enemyTeam, randomIndex), evnt.ExtraDamage));
     }
 }

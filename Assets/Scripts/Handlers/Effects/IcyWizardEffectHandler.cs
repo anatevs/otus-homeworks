@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class IcyWizardEffectHandler : MonoBehaviour
+public class IcyWizardEffectHandler : BaseHandler<IcyWizardEffect>
 {
-    // Start is called before the first frame update
-    void Start()
+    private readonly HeroListService _heroListService;
+
+    public IcyWizardEffectHandler(EventBus eventBus, HeroListService heroListService) : base(eventBus)
     {
-        
+        _heroListService = heroListService;
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void RaiseEvent(IcyWizardEffect evnt)
     {
-        
+        EventBus.RaiseEvent(new DefaultAttackEvent(evnt.Hero, evnt.Target));
+
+        evnt.Target.Add(new FreezeComponent());
     }
 }

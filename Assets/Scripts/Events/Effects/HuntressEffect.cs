@@ -1,6 +1,6 @@
-public struct HuntressEffect : IEffect
+public struct HuntressEffect : IAttackEffect
 {
-    public AbilityType AbilityType { get => AbilityType.Weapon; }
     public HeroEntity Hero { get; set; }
+
     public HeroEntity Target { get; set; }
 }

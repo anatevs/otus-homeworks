@@ -1,11 +1,11 @@
 public readonly struct DealDamageEvent : IEvent
 {
     public readonly int damage;
-    public readonly HeroEntity entity;
+    public readonly HeroEntity target;
 
-    public DealDamageEvent(HeroEntity entity, int damage)
+    public DealDamageEvent(HeroEntity initTarget, int initDamage)
     {
-        this.entity = entity;
-        this.damage = damage;
+        target = initTarget;
+        damage = initDamage;
     }
 }

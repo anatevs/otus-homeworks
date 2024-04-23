@@ -1,5 +1,5 @@
 using System.Collections;
-public class DealDamageVisualHandler : BaseHandler<DealDamageEvent>
+public class DealDamageVisualHandler : BaseHandler<DefaultDealDamageEvent>
 {
     private readonly VisualPipeline _visualPipeline;
     private readonly HeroServiceView _heroServiceView;
@@ -10,7 +10,7 @@ public class DealDamageVisualHandler : BaseHandler<DealDamageEvent>
         _heroServiceView = heroServiceView;
     }
 
-    protected override void RaiseEvent(DealDamageEvent evnt)
+    protected override void RaiseEvent(DefaultDealDamageEvent evnt)
     {
         _visualPipeline.AddTask(new DealDamageVisualTask(
             _heroServiceView,

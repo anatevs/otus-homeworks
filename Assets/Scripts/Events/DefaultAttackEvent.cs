@@ -1,9 +1,9 @@
-public readonly struct DefaultDamageEvent : IEvent
+public readonly struct DefaultAttackEvent : IEvent
 {
     public readonly HeroEntity hero;
     public readonly HeroEntity target;
 
-    public DefaultDamageEvent(HeroEntity initHero, HeroEntity initTarget)
+    public DefaultAttackEvent(HeroEntity initHero, HeroEntity initTarget)
     {
         hero = initHero;
         target = initTarget;

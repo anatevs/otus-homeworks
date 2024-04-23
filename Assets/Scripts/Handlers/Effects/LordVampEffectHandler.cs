@@ -6,12 +6,11 @@ public class LordVampEffectHandler : BaseHandler<LordVampEffect>
 
     public LordVampEffectHandler(EventBus eventBus) : base(eventBus)
     {
-
     }
 
     protected override void RaiseEvent(LordVampEffect evnt)
     {
-        EventBus.RaiseEvent(new DefaultDamageEvent(evnt.Hero, evnt.Target));
+        EventBus.RaiseEvent(new DefaultAttackEvent(evnt.Hero, evnt.Target));
 
         int random = Random.Range(0, _choises.Length);
 

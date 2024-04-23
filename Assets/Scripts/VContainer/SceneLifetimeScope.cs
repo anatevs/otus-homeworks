@@ -43,8 +43,9 @@ public sealed class SceneLifetimeScope : LifetimeScope
 
         builder.RegisterEntryPoint<ChangeActiveHandler>();
         builder.RegisterEntryPoint<AttackHandler>();
-        builder.RegisterEntryPoint<DefaultDamageHandler>();
+        builder.RegisterEntryPoint<DefaultAttackHandler>();
         builder.RegisterEntryPoint<DealDamageHandler>();
+        builder.RegisterEntryPoint<DefaultDealDamageHandler>();
         builder.RegisterEntryPoint<DestoyHandler>();
         builder.RegisterEntryPoint<NextMoveHandler>();
 
@@ -52,6 +53,7 @@ public sealed class SceneLifetimeScope : LifetimeScope
         builder.RegisterEntryPoint<HuntressEffectHandler>();
         builder.RegisterEntryPoint<StupidOrkEffectHandler>();
         builder.RegisterEntryPoint<LordVampEffectHandler>();
+        builder.RegisterEntryPoint<PaladinEffectHandler>();
     }
 
     private void RegisterPipeline(IContainerBuilder builder)

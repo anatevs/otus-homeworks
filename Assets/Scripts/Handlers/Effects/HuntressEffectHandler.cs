@@ -2,7 +2,6 @@ public class HuntressEffectHandler : BaseHandler<HuntressEffect>
 {
     public HuntressEffectHandler(EventBus eventBus) : base(eventBus)
     {
-
     }
 
     protected override void RaiseEvent(HuntressEffect evnt)

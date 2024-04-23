@@ -28,6 +28,6 @@ public class StupidOrkEffectHandler : BaseHandler<StupidOrkEffect>
             target = _heroListService.GetEntity(enemyTeam, randomIndex);
         }
 
-        EventBus.RaiseEvent(new DefaultDamageEvent(evnt.Hero, target));
+        EventBus.RaiseEvent(new DefaultAttackEvent(evnt.Hero, target));
     }
 }

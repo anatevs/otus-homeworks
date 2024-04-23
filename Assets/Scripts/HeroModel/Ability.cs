@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Ability", menuName = "Hero Model/Create ability", order = 0)]
+[CreateAssetMenu(fileName = "New ability", menuName = "Hero model/Create ability", order = 0)]
 
 public class Ability : ScriptableObject
 {

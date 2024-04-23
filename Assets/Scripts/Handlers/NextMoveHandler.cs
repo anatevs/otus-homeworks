@@ -19,6 +19,14 @@ public class NextMoveHandler : BaseHandler<NextMoveEvent>
         _heroListService.PrepareNextMove(currentTeam);
         HeroEntity currentHero = _heroListService.GetCurrentActive(currentTeam);
 
+        if (currentHero.TryGet<FreezeComponent>(out var _))
+        {
+            currentHero.Remove<FreezeComponent>();
+
+            _heroListService.PrepareNextMove(currentTeam);
+            currentHero = _heroListService.GetCurrentActive(currentTeam);
+        }
+
         EventBus.RaiseEvent(new ChangeActiveEvent(prevHero, currentHero));
     }
 }

@@ -1,9 +1,9 @@
 public readonly struct WeaponComponent : IComponent
 {
-    public readonly Ability ability;
+    public readonly IAttackEffect effect;
 
-    public WeaponComponent(Ability initAbility)
+    public WeaponComponent(IAttackEffect initEffect)
     {
-        ability = initAbility;
+        effect = initEffect;
     }
 }

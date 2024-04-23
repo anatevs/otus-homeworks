@@ -1,9 +1,9 @@
 public readonly struct ShieldComponent : IComponent
 {
-    public readonly Ability ability;
+    public readonly IDefenceEffect effect;
 
-    public ShieldComponent(Ability initAbility)
+    public ShieldComponent(IDefenceEffect initEffect)
     {
-        ability = initAbility;
+        effect = initEffect;
     }
 }

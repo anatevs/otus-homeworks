@@ -62,4 +62,12 @@ public class Entity : MonoBehaviour
     {
         _components.Remove(component.GetType());
     }
+
+    public void Remove<T>() where T : IComponent
+    {
+        if (_components.TryGetValue(typeof(T), out IComponent component))
+        {
+            _components.Remove(component.GetType());
+        }
+    }
 }

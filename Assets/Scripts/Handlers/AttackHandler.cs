@@ -13,14 +13,14 @@ public sealed class AttackHandler : BaseHandler<AttackEvent>
 
         if (hero.TryGet(out WeaponComponent weapon))
         {
-            IEffect effect = weapon.ability.effect;
+            IAttackEffect effect = weapon.effect;
             effect.Hero = hero;
             effect.Target = target;
-            EventBus.RaiseEvent(weapon.ability.effect);
+            EventBus.RaiseEvent(effect);
         }
         else
         {
-            EventBus.RaiseEvent(new DefaultDamageEvent(hero, target));
+            EventBus.RaiseEvent(new DefaultAttackEvent(hero, target));
         }
     }
 }
