@@ -2,35 +2,28 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using UI;
-using UnityEngine;
-using VContainer;
+using VContainer.Unity;
 
-public sealed class HeroServiceView : MonoBehaviour
+public sealed class HeroServiceView : IInitializable, IDisposable
 {
-    private UIService _uiService;
+    private readonly UIService _uiService;
 
-    private HeroServicePresenter _presenter;
+    private readonly HeroServicePresenter _presenter;
 
-    private readonly Dictionary<Team, HeroListView> _viewsLists = new();
+    private readonly Dictionary<Team, HeroListView> _viewLists = new();
 
-    [Inject]
-    public void Construct(HeroServicePresenter heroServicePresenter, UIService uiService)
+    public HeroServiceView(HeroServicePresenter heroServicePresenter, UIService uiService)
     {
         _presenter = heroServicePresenter;
         _uiService = uiService;
     }
 
-    private void Awake()
+    void IInitializable.Initialize()
     {
         InitListViews();
 
-        _presenter.OnSetActive += SetActiveTeamAndHero;
-        _presenter.OnDestroy += DestroyHero;
-        //_presenter.OnAttack += Attack;
-        _presenter.OnChangeStats += ChangeStats;
-
-        _viewsLists[Team.Red].OnHeroClicked += OnClickedHeroRed;
-        _viewsLists[Team.Blue].OnHeroClicked += OnClickedHeroBlue;
+        _viewLists[Team.Red].OnHeroClicked += OnClickedHeroRed;
+        _viewLists[Team.Blue].OnHeroClicked += OnClickedHeroBlue;
     }
 
     private void InitListViews()
@@ -47,7 +40,7 @@ public sealed class HeroServiceView : MonoBehaviour
             {
                 heroListView = _uiService.GetBluePlayer();
             }
-            _viewsLists.Add(teamName, heroListView);
+            _viewLists.Add(teamName, heroListView);
 
 
             IReadOnlyList<HeroView> listViews = heroListView.GetViews();
@@ -63,27 +56,26 @@ public sealed class HeroServiceView : MonoBehaviour
 
     public void SetActiveTeamAndHero(InfoComponent info, bool isActive)
     {
-        _viewsLists[info.team].SetActiveTeam(isActive);
-        _viewsLists[info.team].SetActiveHero(info.id, isActive);
+        _viewLists[info.team].SetActiveTeam(isActive);
+        _viewLists[info.team].SetActiveHero(info.id, isActive);
     }
-
 
     public void DestroyHero(InfoComponent info)
     {
-        _viewsLists[info.team].OnViewDestroyed(info.id);
+        _viewLists[info.team].OnViewDestroyed(info.id);
     }
 
     public UniTask AttackTask(InfoComponent hero, InfoComponent target)
     {
-        HeroView heroView = _viewsLists[hero.team].GetView(hero.id);
-        HeroView targetView = _viewsLists[target.team].GetView(target.id);
+        HeroView heroView = _viewLists[hero.team].GetView(hero.id);
+        HeroView targetView = _viewLists[target.team].GetView(target.id);
 
         return heroView.AnimateAttack(targetView);
     }
 
     public void ChangeStats(InfoComponent info, int hp, int damage)
     {
-        _viewsLists[info.team].SetStats(info.id, hp, damage);
+        _viewLists[info.team].SetStats(info.id, hp, damage);
     }
 
     private void OnClickedHeroBlue(HeroView heroView)
@@ -98,19 +90,15 @@ public sealed class HeroServiceView : MonoBehaviour
 
     private void OnClickReact(Team team, HeroView heroView)
     {
-        HeroListView heroListView = _viewsLists[team];
+        HeroListView heroListView = _viewLists[team];
         int index = heroListView.GetIndex(heroView);
 
         _presenter.ClickHero(team, index);
     }
 
-    void OnDisable()
+    void IDisposable.Dispose()
     {
-        _presenter.OnSetActive -= SetActiveTeamAndHero;
-        _presenter.OnDestroy -= DestroyHero;
-        _presenter.OnChangeStats -= ChangeStats;
-
-        _viewsLists[Team.Red].OnHeroClicked -= OnClickedHeroRed;
-        _viewsLists[Team.Blue].OnHeroClicked -= OnClickedHeroBlue;
+        _viewLists[Team.Red].OnHeroClicked -= OnClickedHeroRed;
+        _viewLists[Team.Blue].OnHeroClicked -= OnClickedHeroBlue;
     }
 }

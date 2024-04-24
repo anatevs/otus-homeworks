@@ -16,6 +16,7 @@ public sealed class SceneLifetimeScope : LifetimeScope
     protected override void Configure(IContainerBuilder builder)
     {
         RegisterServices(builder);
+        RegisterGameManager(builder);
         RegisterEventBus(builder);
         RegisterPipeline(builder);
         RegisterVisualPipeline(builder);
@@ -34,7 +35,14 @@ public sealed class SceneLifetimeScope : LifetimeScope
         builder.RegisterEntryPoint<HeroServicePresenter>()
             .AsSelf();
 
-        builder.RegisterComponent(_heroServiceView);
+        builder.RegisterEntryPoint<HeroServiceView>()
+            .AsSelf();
+    }
+
+    private void RegisterGameManager(IContainerBuilder builder)
+    {
+        builder.RegisterEntryPoint<GameManager>()
+            .AsSelf();
     }
 
     private void RegisterEventBus(IContainerBuilder builder)

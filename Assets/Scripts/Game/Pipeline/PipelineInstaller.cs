@@ -18,7 +18,7 @@ public sealed class PipelineInstaller : IInitializable, IDisposable
 
     void IInitializable.Initialize()
     {
-        _turnPipeline.AddTask(new StartTask());
+        _turnPipeline.AddTask(ObjectResolverExtension.ResolveInstance<StartTask>(_objectResolver));
         _turnPipeline.AddTask(ObjectResolverExtension.ResolveInstance<TurnTask>(_objectResolver));
         _turnPipeline.AddTask(ObjectResolverExtension.ResolveInstance<HandleVisualPipelineTask>(_objectResolver));
     }

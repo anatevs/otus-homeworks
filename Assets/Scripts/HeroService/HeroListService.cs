@@ -1,21 +1,12 @@
 using System.Collections.Generic;
 using UI;
 using System;
-using UnityEngine;
-using VContainer.Unity;
 
 public sealed class HeroListService : IDisposable
 {
-    public event Action<InfoComponent> OnDestroy;
-
-    public event Action<InfoComponent, bool> OnSetActive;
-
-    public event Action<InfoComponent, InfoComponent> OnAttack;
-
-    public event Action<InfoComponent, int, int> OnChangeHP;
+    public event Action<Team> OnTeamEmpty;
 
     public event Action<HeroEntity> OnClickEntity;
-
 
     private readonly UIService _uiService;
 
@@ -56,14 +47,6 @@ public sealed class HeroListService : IDisposable
             _entities.Add(teamName, new HeroEntityList(heroList));
 
         }
-
-        //maybe need to init 1st active in some other class...
-        _entities[Team.Red].Get(0).Set(new IsActiveComponent(true));
-
-        //SetActive(Team.Red, 0, true);
-        _entities[Team.Red].OnNextMove();
-
-        _uiService.GetRedPlayer().GetView(0).SetActive(true);
     }
 
     public void ClickHero(Team team, int id)
@@ -71,10 +54,13 @@ public sealed class HeroListService : IDisposable
         OnClickEntity?.Invoke(GetEntity(team, id));
     }
 
-    //public HeroEntityList GetEntityList(Team team)
-    //{
-    //    return _entities[team];
-    //}
+    public void InitActive(Team team, int index)
+    {
+        _entities[team].Get(index).Set(new IsActiveComponent(true));
+        _entities[team].OnNextMove();
+
+        _uiService.GetRedPlayer().GetView(index).SetActive(true);
+    }
 
     public HeroEntity GetCurrentActive(Team team)
     {
@@ -105,12 +91,9 @@ public sealed class HeroListService : IDisposable
         return res;
     }
 
-    public void SetActive(InfoComponent info, bool isActive)
+    public void PrepareNextMove(Team team)
     {
-        HeroEntity entity = GetEntity(info.team, info.id);
-        entity.Set(new IsActiveComponent(isActive));
-
-        OnSetActive?.Invoke(info, isActive);
+        _entities[team].OnNextMove();
     }
 
     public void RemoveHero(HeroEntity entity)
@@ -118,25 +101,10 @@ public sealed class HeroListService : IDisposable
         Team team = entity.Get<InfoComponent>().team;
         _entities[team].OnRemove(entity);
 
-        //OnDestroy?.Invoke(entity.Get<InfoComponent>());
-    }
-
-    public void Attack(HeroEntity hero, HeroEntity target)
-    {
-        OnAttack?.Invoke(hero.Get<InfoComponent>(),
-            target.Get<InfoComponent>());
-    }
-
-    public void ChangeHP(InfoComponent info, int hp)
-    {
-        HeroEntity entity = GetEntity(info.team, info.id);
-
-        OnChangeHP?.Invoke(info, hp, entity.Get<DamageComponent>().value);
-    }
-
-    public void PrepareNextMove(Team team)
-    {
-        _entities[team].OnNextMove();
+        if (_entities[team].GetValidIndexes().Count == 0)
+        {
+            OnTeamEmpty?.Invoke(team);
+        }
     }
 
     void IDisposable.Dispose()

@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using UnityEngine;
 
-public class HeroEntityList
+public sealed class HeroEntityList
 {
-    private int _currentActive = -1;
-    private int _nextActive = 0;
-    private readonly List<int> _removedIndexes = new List<int>();
+    private int _currentActive;
+    private int _nextActive;
     private readonly List<int> _validIndexes = new List<int>();
 
     private readonly List<HeroEntity> _list;
@@ -18,6 +16,9 @@ public class HeroEntityList
         {
             _validIndexes.Add(i);
         }
+
+        _currentActive = list.Count - 1;
+        _nextActive = 0;
     }
 
     public void OnNextMove()
