@@ -37,6 +37,9 @@ public sealed class SceneLifetimeScope : LifetimeScope
 
         builder.RegisterEntryPoint<HeroServiceView>()
             .AsSelf();
+
+        builder.RegisterEntryPoint<HeroServiceAudio>()
+            .AsSelf();
     }
 
     private void RegisterGameManager(IContainerBuilder builder)
@@ -65,6 +68,9 @@ public sealed class SceneLifetimeScope : LifetimeScope
         builder.RegisterEntryPoint<IcyWizardEffectHandler>();
         builder.RegisterEntryPoint<MediatorEffectHandler>();
         builder.RegisterEntryPoint<ElectroEffectHandler>();
+
+        builder.RegisterEntryPoint<StartTurnAudioHandler>();
+        builder.RegisterEntryPoint<LowHealthAudioHandler>();
     }
 
     private void RegisterPipeline(IContainerBuilder builder)

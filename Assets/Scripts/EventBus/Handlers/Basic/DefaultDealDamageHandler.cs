@@ -19,10 +19,10 @@ public class DefaultDealDamageHandler : BaseHandler<DefaultDealDamageEvent>
         }
         else
         {
-            hpComponent.Value -= damage;
+            hpComponent.CurrentHP -= damage;
             entity.Set(hpComponent);
 
-            if (hpComponent.Value == 0)
+            if (hpComponent.CurrentHP == 0)
             {
                 EventBus.RaiseEvent(new DestroyEvent(entity));
             }

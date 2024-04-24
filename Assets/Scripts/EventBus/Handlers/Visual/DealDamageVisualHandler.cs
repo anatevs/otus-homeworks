@@ -15,7 +15,7 @@ public class DealDamageVisualHandler : BaseHandler<DefaultDealDamageEvent>
         _visualPipeline.AddTask(new DealDamageVisualTask(
             _heroServiceView,
             evnt.entity.Get<InfoComponent>(),
-            evnt.entity.Get<HPComponent>().Value,
+            evnt.entity.Get<HPComponent>().CurrentHP,
             evnt.entity.Get<DamageComponent>().value));
     }
 }

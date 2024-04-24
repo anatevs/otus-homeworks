@@ -327,6 +327,7 @@ GameObject:
   - component: {fileID: 8763992113062683896}
   - component: {fileID: 9047876469813407587}
   - component: {fileID: 2248400013603729624}
+  - component: {fileID: 4090798024967528793}
   m_Layer: 5
   m_Name: HeroView
   m_TagString: Untagged
@@ -441,6 +442,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initHP: 20
   _initDamage: 10
+  _ability: {fileID: 0}
 --- !u!114 &2248400013603729624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,6 +455,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1450ef7a6bd7cd04ebbb578e8d64db01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4090798024967528793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383512545514860528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23a74a17b4ba2014e8bdd8aeccf97b26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startTurn: []
+  _lowHealth: {fileID: 0}
+  _ability: {fileID: 0}
+  _death: {fileID: 0}
 --- !u!1 &383512545822542975
 GameObject:
   m_ObjectHideFlags: 0

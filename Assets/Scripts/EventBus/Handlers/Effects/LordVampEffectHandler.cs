@@ -17,7 +17,7 @@ public class LordVampEffectHandler : BaseHandler<LordVampEffect>
         if (_choises[random])
         {
             HPComponent hp = evnt.Hero.Get<HPComponent>();
-            hp.Value += evnt.Hero.Get<DamageComponent>().value;
+            hp.CurrentHP += evnt.Hero.Get<DamageComponent>().value;
 
             evnt.Hero.Set(hp);
         }
