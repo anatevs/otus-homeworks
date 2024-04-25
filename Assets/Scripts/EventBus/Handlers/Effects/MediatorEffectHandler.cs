@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MediatorEffectHandler : BaseHandler<MediatorEffect>
+public sealed class MediatorEffectHandler : BaseHandler<MediatorEffect>
 {
     public MediatorEffectHandler(EventBus eventBus) : base(eventBus)
     {

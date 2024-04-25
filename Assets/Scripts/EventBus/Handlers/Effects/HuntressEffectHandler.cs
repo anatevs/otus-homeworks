@@ -1,4 +1,6 @@
-public class HuntressEffectHandler : BaseHandler<HuntressEffect>
+using UnityEngine;
+
+public sealed class HuntressEffectHandler : BaseHandler<HuntressEffect>
 {
     public HuntressEffectHandler(EventBus eventBus) : base(eventBus)
     {
@@ -9,5 +11,7 @@ public class HuntressEffectHandler : BaseHandler<HuntressEffect>
         int damage = evnt.Hero.Get<DamageComponent>().value;
 
         EventBus.RaiseEvent(new DealDamageEvent(evnt.Target, damage));
+
+        Debug.Log($"Huntress effect: no return damage");
     }
 }

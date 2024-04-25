@@ -1,4 +1,4 @@
-public class DealDamageVisualTask : Task
+public sealed class DealDamageVisualTask : Task
 {
     private readonly HeroServiceView _heroServiceView;
     private readonly InfoComponent _infoComponent;

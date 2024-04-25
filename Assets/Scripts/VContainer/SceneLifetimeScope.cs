@@ -63,6 +63,8 @@ public sealed class SceneLifetimeScope : LifetimeScope
         RegisterEffectHandlers(builder);
 
         RegisterAudioHandlers(builder);
+
+        RegisterEffectsAudioHandlers(builder);
     }
 
     private void RegisterEffectHandlers(IContainerBuilder builder)
@@ -75,10 +77,6 @@ public sealed class SceneLifetimeScope : LifetimeScope
         builder.RegisterEntryPoint<IcyWizardEffectHandler>();
         builder.RegisterEntryPoint<MediatorEffectHandler>();
         builder.RegisterEntryPoint<ElectroEffectHandler>();
-
-        builder.RegisterEntryPoint<EffectAudioHandler<MediatorEffect>>();
-        builder.RegisterEntryPoint<EffectAudioHandler<DevourerEffect>>();
-        builder.RegisterEntryPoint<EffectAudioHandler<ElectroEffect>>();
     }
 
     private void RegisterAudioHandlers(IContainerBuilder builder)
@@ -86,6 +84,13 @@ public sealed class SceneLifetimeScope : LifetimeScope
         builder.RegisterEntryPoint<StartTurnAudioHandler>();
         builder.RegisterEntryPoint<LowHealthAudioHandler>();
         builder.RegisterEntryPoint<DestroyAudioHandler>();
+    }
+
+    private void RegisterEffectsAudioHandlers(IContainerBuilder builder)
+    {
+        builder.RegisterEntryPoint<EffectAudioHandler<MediatorEffect>>();
+        builder.RegisterEntryPoint<EffectAudioHandler<DevourerEffect>>();
+        builder.RegisterEntryPoint<EffectAudioHandler<ElectroEffect>>();
     }
 
     private void RegisterPipeline(IContainerBuilder builder)
@@ -97,7 +102,7 @@ public sealed class SceneLifetimeScope : LifetimeScope
 
     private void RegisterVisualPipeline(IContainerBuilder builder)
     {
-        builder.Register<VisualPipeline>(Lifetime.Singleton);
+        builder.Register<AudioVisualPipeline>(Lifetime.Singleton);
 
         builder.RegisterEntryPoint<ChangeActiveVisualHandler>();
 

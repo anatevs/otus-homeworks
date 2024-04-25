@@ -1,13 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UI;
-using UnityEngine;
 using VContainer.Unity;
 using Audio;
 using Cysharp.Threading.Tasks;
 
-public class HeroServiceAudio : IInitializable, IDisposable
+public sealed class HeroServiceAudio : IInitializable, IDisposable
 {
     private readonly UIService _uiService;
 

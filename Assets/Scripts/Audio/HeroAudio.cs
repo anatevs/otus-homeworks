@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using Cysharp.Threading.Tasks;
 
 
 namespace Audio
 {
-    public class HeroAudio : MonoBehaviour
+    public sealed class HeroAudio : MonoBehaviour
     {
         [SerializeField]
         private AudioClip[] _startTurn;

@@ -1,9 +1,9 @@
-public class AttackVisualHandler : BaseHandler<AttackEvent>
+public sealed class AttackVisualHandler : BaseHandler<AttackEvent>
 {
-    private readonly VisualPipeline _visualPipeline;
+    private readonly AudioVisualPipeline _visualPipeline;
     private readonly HeroServiceView _heroServiceView;
 
-    public AttackVisualHandler(EventBus eventBus, VisualPipeline visualPipeline, HeroServiceView heroServiceView) : base(eventBus)
+    public AttackVisualHandler(EventBus eventBus, AudioVisualPipeline visualPipeline, HeroServiceView heroServiceView) : base(eventBus)
     {
         _visualPipeline = visualPipeline;
         _heroServiceView = heroServiceView;

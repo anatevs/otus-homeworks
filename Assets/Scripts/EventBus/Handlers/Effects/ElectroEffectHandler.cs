@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class ElectroEffectHandler : BaseHandler<ElectroEffect>
+public sealed class ElectroEffectHandler : BaseHandler<ElectroEffect>
 {
-    private HeroListService _heroListService;
+    private readonly HeroListService _heroListService;
 
     public ElectroEffectHandler(EventBus eventBus, HeroListService heroListService) : base(eventBus)
     {

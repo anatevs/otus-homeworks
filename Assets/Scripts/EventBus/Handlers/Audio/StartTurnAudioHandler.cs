@@ -1,11 +1,11 @@
 using Audio;
 
-public class StartTurnAudioHandler : BaseHandler<ChangeActiveEvent>
+public sealed class StartTurnAudioHandler : BaseHandler<ChangeActiveEvent>
 {
-    private readonly VisualPipeline _visualPipeline;
+    private readonly AudioVisualPipeline _visualPipeline;
     private readonly HeroServiceAudio _heroServiceAudio;
 
-    public StartTurnAudioHandler(EventBus eventBus, VisualPipeline visualPipeline, HeroServiceAudio heroServiceAudio) : base(eventBus)
+    public StartTurnAudioHandler(EventBus eventBus, AudioVisualPipeline visualPipeline, HeroServiceAudio heroServiceAudio) : base(eventBus)
     {
         _visualPipeline = visualPipeline;
         _heroServiceAudio = heroServiceAudio;

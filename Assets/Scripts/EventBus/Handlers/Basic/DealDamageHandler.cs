@@ -1,6 +1,4 @@
-using UnityEngine;
-
-public class DealDamageHandler : BaseHandler<DealDamageEvent>
+public sealed class DealDamageHandler : BaseHandler<DealDamageEvent>
 {
     public DealDamageHandler(EventBus eventBus) : base(eventBus)
     {

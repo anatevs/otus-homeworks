@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using VContainer.Unity;
 
-public sealed class GameManager : IInitializable, IDisposable
+public sealed class GameManager : IInitializable, IPostStartable, IDisposable
 {
     public event Action OnGameFinished;
 
@@ -19,9 +19,12 @@ public sealed class GameManager : IInitializable, IDisposable
 
     void IInitializable.Initialize()
     {
-        _heroListService.InitActive(_teamData.Player, _startIndex);
-
         _heroListService.OnTeamEmpty += FinishGame;
+    }
+
+    void IPostStartable.PostStart()
+    {
+        _heroListService.InitActive(_teamData.Player, _startIndex);
     }
 
     public void FinishGame(Team lostTeam)

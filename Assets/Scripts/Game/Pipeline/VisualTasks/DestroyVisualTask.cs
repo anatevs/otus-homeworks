@@ -1,4 +1,4 @@
-public class DestroyVisualTask : Task
+public sealed class DestroyVisualTask : Task
 {
     private readonly HeroServiceView _heroServiceView;
     private readonly HeroEntity _hero;

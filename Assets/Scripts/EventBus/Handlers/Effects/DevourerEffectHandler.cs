@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DevourerEffectHandler : BaseHandler<DevourerEffect>
+public sealed class DevourerEffectHandler : BaseHandler<DevourerEffect>
 {
     private readonly HeroListService _heroListService;
 

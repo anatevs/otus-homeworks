@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LordVampEffectHandler : BaseHandler<LordVampEffect>
+public sealed class LordVampEffectHandler : BaseHandler<LordVampEffect>
 {
     private readonly bool[] _choises = new bool[2] { true, false };
 
@@ -20,6 +20,8 @@ public class LordVampEffectHandler : BaseHandler<LordVampEffect>
             hp.CurrentHP += evnt.Hero.Get<DamageComponent>().value;
 
             evnt.Hero.Set(hp);
+
+            Debug.Log("Lord vamp effect: up self hp");
         }
     }
 }

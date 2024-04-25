@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DefaultDealDamageHandler : BaseHandler<DefaultDealDamageEvent>
+public sealed class DefaultDealDamageHandler : BaseHandler<DefaultDealDamageEvent>
 {
     public DefaultDealDamageHandler(EventBus eventBus) : base(eventBus)
     {
@@ -23,6 +23,7 @@ public class DefaultDealDamageHandler : BaseHandler<DefaultDealDamageEvent>
 
             if (hpComponent.CurrentHP == 0)
             {
+                Debug.Log($"{entity} has {entity.Get<HPComponent>().CurrentHP} hp");
                 EventBus.RaiseEvent(new DestroyEvent(entity));
             }
         }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class IcyWizardEffectHandler : BaseHandler<IcyWizardEffect>
+public sealed class IcyWizardEffectHandler : BaseHandler<IcyWizardEffect>
 {
     public IcyWizardEffectHandler(EventBus eventBus) : base(eventBus)
     {

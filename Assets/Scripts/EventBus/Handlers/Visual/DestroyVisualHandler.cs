@@ -1,9 +1,9 @@
 public sealed class DestroyVisualHandler : BaseHandler<DestroyEvent>
 {
-    private readonly VisualPipeline _visualPipeline;
+    private readonly AudioVisualPipeline _visualPipeline;
     private readonly HeroServiceView _heroServiceView;
 
-    public DestroyVisualHandler(EventBus eventBus, VisualPipeline visualPipeline, HeroServiceView heroServiceView) : base(eventBus)
+    public DestroyVisualHandler(EventBus eventBus, AudioVisualPipeline visualPipeline, HeroServiceView heroServiceView) : base(eventBus)
     {
         _visualPipeline = visualPipeline;
         _heroServiceView = heroServiceView;

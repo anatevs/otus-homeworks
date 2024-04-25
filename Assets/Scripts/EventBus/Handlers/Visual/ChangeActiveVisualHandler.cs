@@ -1,10 +1,10 @@
-public class ChangeActiveVisualHandler : BaseHandler<ChangeActiveEvent>
+public sealed class ChangeActiveVisualHandler : BaseHandler<ChangeActiveEvent>
 {
-    private readonly VisualPipeline _visualPipeline;
+    private readonly AudioVisualPipeline _visualPipeline;
     private readonly HeroServiceView _heroServiceView;
 
     public ChangeActiveVisualHandler(EventBus eventBus, 
-        VisualPipeline visualPipeline, 
+        AudioVisualPipeline visualPipeline, 
         HeroServiceView heroServiceView) : base(eventBus)
     {
         _visualPipeline = visualPipeline;

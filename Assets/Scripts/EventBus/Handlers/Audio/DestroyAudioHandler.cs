@@ -1,11 +1,11 @@
 using Audio;
 
-public class DestroyAudioHandler : BaseHandler<DestroyEvent>
+public sealed class DestroyAudioHandler : BaseHandler<DestroyEvent>
 {
-    private readonly VisualPipeline _visualPipeline;
+    private readonly AudioVisualPipeline _visualPipeline;
     private readonly HeroServiceAudio _heroServiceAudio;
 
-    public DestroyAudioHandler(EventBus eventBus, VisualPipeline visualPipeline, HeroServiceAudio heroServiceAudio) : base(eventBus)
+    public DestroyAudioHandler(EventBus eventBus, AudioVisualPipeline visualPipeline, HeroServiceAudio heroServiceAudio) : base(eventBus)
     {
         _visualPipeline = visualPipeline;
         _heroServiceAudio = heroServiceAudio;

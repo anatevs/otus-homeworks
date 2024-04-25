@@ -1,11 +1,11 @@
 using Audio;
 
-public class EffectAudioHandler<T> : BaseHandler<T> where T : IEffect
+public sealed class EffectAudioHandler<T> : BaseHandler<T> where T : IEffect
 {
-    private readonly VisualPipeline _visualPipeline;
+    private readonly AudioVisualPipeline _visualPipeline;
     private readonly HeroServiceAudio _heroServiceAudio;
 
-    public EffectAudioHandler(EventBus eventBus, VisualPipeline visualPipeline, HeroServiceAudio heroServiceAudio) : base(eventBus)
+    public EffectAudioHandler(EventBus eventBus, AudioVisualPipeline visualPipeline, HeroServiceAudio heroServiceAudio) : base(eventBus)
     {
         _visualPipeline = visualPipeline;
         _heroServiceAudio = heroServiceAudio;

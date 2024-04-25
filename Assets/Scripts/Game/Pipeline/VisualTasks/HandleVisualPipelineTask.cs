@@ -1,8 +1,8 @@
-public class HandleVisualPipelineTask : Task
+public sealed class HandleVisualPipelineTask : Task
 {
-    private readonly VisualPipeline _visualPipeline;
+    private readonly AudioVisualPipeline _visualPipeline;
 
-    public HandleVisualPipelineTask(VisualPipeline visualPipeline)
+    public HandleVisualPipelineTask(AudioVisualPipeline visualPipeline)
     {
         _visualPipeline = visualPipeline;
     }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DefaultAttackHandler : BaseHandler<DefaultAttackEvent>
+public sealed class DefaultAttackHandler : BaseHandler<DefaultAttackEvent>
 {
     private readonly int _backDamage = 1;
 

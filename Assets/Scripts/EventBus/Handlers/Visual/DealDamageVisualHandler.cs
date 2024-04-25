@@ -1,10 +1,9 @@
-using System.Collections;
-public class DealDamageVisualHandler : BaseHandler<DefaultDealDamageEvent>
+public sealed class DealDamageVisualHandler : BaseHandler<DefaultDealDamageEvent>
 {
-    private readonly VisualPipeline _visualPipeline;
+    private readonly AudioVisualPipeline _visualPipeline;
     private readonly HeroServiceView _heroServiceView;
 
-    public DealDamageVisualHandler(EventBus eventBus, VisualPipeline visualPipeline, HeroServiceView heroServiceView) : base(eventBus)
+    public DealDamageVisualHandler(EventBus eventBus, AudioVisualPipeline visualPipeline, HeroServiceView heroServiceView) : base(eventBus)
     {
         _visualPipeline = visualPipeline;
         _heroServiceView = heroServiceView;

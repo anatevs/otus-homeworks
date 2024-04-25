@@ -1,4 +1,4 @@
-public class CurrentTeamData
+public sealed class CurrentTeamData
 {
     public Team Player
     {

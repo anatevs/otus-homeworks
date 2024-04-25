@@ -1,6 +1,6 @@
 using Audio;
 
-public class PlaySoundAudioTask : Task
+public sealed class PlaySoundAudioTask : Task
 {
     private readonly SoundType _soundType;
     private readonly InfoComponent _infoComponent;

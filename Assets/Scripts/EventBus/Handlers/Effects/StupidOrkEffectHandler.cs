@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StupidOrkEffectHandler : BaseHandler<StupidOrkEffect>
+public sealed class StupidOrkEffectHandler : BaseHandler<StupidOrkEffect>
 {
     private readonly HeroListService _heroListService;
 
@@ -29,5 +29,8 @@ public class StupidOrkEffectHandler : BaseHandler<StupidOrkEffect>
         }
 
         EventBus.RaiseEvent(new DefaultAttackEvent(evnt.Hero, target));
+
+        Debug.Log($"Stupid ork effect: make damage to other " +
+            $"enemy number {target.Get<InfoComponent>().id}");
     }
 }

@@ -1,4 +1,4 @@
-public class NextMoveHandler : BaseHandler<NextMoveEvent>
+public sealed class NextMoveHandler : BaseHandler<NextMoveEvent>
 {
     private readonly HeroListService _heroListService;
     private readonly CurrentTeamData _teamData;

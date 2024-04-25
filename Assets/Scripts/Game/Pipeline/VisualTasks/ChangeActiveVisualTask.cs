@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class ChangeActiveVisualTask : Task
+public sealed class ChangeActiveVisualTask : Task
 {
     private readonly HeroServiceView _heroServiceView;
     private readonly InfoComponent _prevHero;

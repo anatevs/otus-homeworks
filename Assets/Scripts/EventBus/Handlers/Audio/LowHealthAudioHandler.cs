@@ -2,16 +2,16 @@ using Audio;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LowHealthAudioHandler : BaseHandler<DefaultDealDamageEvent>
+public sealed class LowHealthAudioHandler : BaseHandler<DefaultDealDamageEvent>
 {
-    private readonly VisualPipeline _visualPipeline;
+    private readonly AudioVisualPipeline _visualPipeline;
     private readonly HeroServiceAudio _heroServiceAudio;
 
     private readonly float _thresholdLevel = 0.2f;
 
     private readonly HashSet<InfoComponent> _alarmedBefore = new();
 
-    public LowHealthAudioHandler(EventBus eventBus, VisualPipeline visualPipeline, HeroServiceAudio heroServiceAudio) : base(eventBus)
+    public LowHealthAudioHandler(EventBus eventBus, AudioVisualPipeline visualPipeline, HeroServiceAudio heroServiceAudio) : base(eventBus)
     {
         _visualPipeline = visualPipeline;
         _heroServiceAudio = heroServiceAudio;

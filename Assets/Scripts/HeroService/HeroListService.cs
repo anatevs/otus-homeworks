@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UI;
 using System;
+using Audio;
 
 public sealed class HeroListService : IDisposable
 {
@@ -54,12 +55,18 @@ public sealed class HeroListService : IDisposable
         OnClickEntity?.Invoke(GetEntity(team, id));
     }
 
-    public void InitActive(Team team, int index)
+    public async void InitActive(Team team, int index)
     {
         _entities[team].Get(index).Set(new IsActiveComponent(true));
         _entities[team].OnNextMove();
 
-        _uiService.GetRedPlayer().GetView(index).SetActive(true);
+        HeroView heroView = _uiService.GetRedPlayer().GetView(index);
+        heroView.SetActive(true);
+
+        if (heroView.TryGetComponent<HeroAudio>(out HeroAudio heroAudio))
+        {
+            await heroAudio.PlaySoundAsync(SoundType.StartTurn);
+        }
     }
 
     public HeroEntity GetCurrentActive(Team team)
