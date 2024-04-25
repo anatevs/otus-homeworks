@@ -1,7 +1,5 @@
-using UnityEngine;
 using System;
 using System.Collections.Generic;
-using UnityEditor;
 
 public sealed class AttackHandler : BaseHandler<AttackEvent>
 {
@@ -50,6 +48,7 @@ public sealed class AttackHandler : BaseHandler<AttackEvent>
                 {
                     if (weapon.effect is MediatorEffect mediator)
                     {
+                        mediator.Hero = entities[i];
                         mediator.TeammateEntities = entities;
                         EventBus.RaiseEvent(mediator);
 

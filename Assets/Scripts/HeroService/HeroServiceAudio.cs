@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UI;
 using UnityEngine;
 using VContainer.Unity;
-using Sounds;
+using Audio;
+using Cysharp.Threading.Tasks;
 
 public class HeroServiceAudio : IInitializable, IDisposable
 {
@@ -16,6 +17,8 @@ public class HeroServiceAudio : IInitializable, IDisposable
     {
         _uiService = uiService;
     }
+
+
 
     void IInitializable.Initialize()
     {
@@ -56,6 +59,11 @@ public class HeroServiceAudio : IInitializable, IDisposable
 
             _heroAudioLists.Add(teamName, heroAudios);
         }
+    }
+
+    public UniTask PlaySoundTask(InfoComponent info, SoundType soundType)
+    {
+        return _heroAudioLists[info.team][info.id].PlaySoundAsync(soundType);
     }
 
     public void PlaySound(InfoComponent info, SoundType soundType)

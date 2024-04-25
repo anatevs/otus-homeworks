@@ -60,6 +60,13 @@ public sealed class SceneLifetimeScope : LifetimeScope
         builder.RegisterEntryPoint<DestoyHandler>();
         builder.RegisterEntryPoint<NextMoveHandler>();
 
+        RegisterEffectHandlers(builder);
+
+        RegisterAudioHandlers(builder);
+    }
+
+    private void RegisterEffectHandlers(IContainerBuilder builder)
+    {
         builder.RegisterEntryPoint<DevourerEffectHandler>();
         builder.RegisterEntryPoint<HuntressEffectHandler>();
         builder.RegisterEntryPoint<StupidOrkEffectHandler>();
@@ -69,8 +76,16 @@ public sealed class SceneLifetimeScope : LifetimeScope
         builder.RegisterEntryPoint<MediatorEffectHandler>();
         builder.RegisterEntryPoint<ElectroEffectHandler>();
 
+        builder.RegisterEntryPoint<EffectAudioHandler<MediatorEffect>>();
+        builder.RegisterEntryPoint<EffectAudioHandler<DevourerEffect>>();
+        builder.RegisterEntryPoint<EffectAudioHandler<ElectroEffect>>();
+    }
+
+    private void RegisterAudioHandlers(IContainerBuilder builder)
+    {
         builder.RegisterEntryPoint<StartTurnAudioHandler>();
         builder.RegisterEntryPoint<LowHealthAudioHandler>();
+        builder.RegisterEntryPoint<DestroyAudioHandler>();
     }
 
     private void RegisterPipeline(IContainerBuilder builder)

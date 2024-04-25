@@ -65,7 +65,7 @@ public sealed class HeroServiceView : IInitializable, IDisposable
         _viewLists[info.team].OnViewDestroyed(info.id);
     }
 
-    public UniTask AttackTask(InfoComponent hero, InfoComponent target)
+    public UniTask AttackTaskAsync(InfoComponent hero, InfoComponent target)
     {
         HeroView heroView = _viewLists[hero.team].GetView(hero.id);
         HeroView targetView = _viewLists[target.team].GetView(target.id);

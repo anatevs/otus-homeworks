@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using VContainer.Unity;
 
-public class GameManager : IInitializable, IDisposable
+public sealed class GameManager : IInitializable, IDisposable
 {
     public event Action OnGameFinished;
 

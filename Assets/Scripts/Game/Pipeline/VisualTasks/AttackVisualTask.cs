@@ -14,7 +14,7 @@ public class AttackVisualTask : Task
 
     protected override async void OnRun()
     {
-        await _heroServiceView.AttackTask(_hero.Get<InfoComponent>(), _target.Get<InfoComponent>());
+        await _heroServiceView.AttackTaskAsync(_hero.Get<InfoComponent>(), _target.Get<InfoComponent>());
 
         Finish();
     }

@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using Cysharp.Threading.Tasks;
 
-namespace Sounds
+
+namespace Audio
 {
     public class HeroAudio : MonoBehaviour
     {
@@ -29,14 +32,39 @@ namespace Sounds
             _sounds.Add(SoundType.Death, _death);
             if (_ability != null)
             {
-                Debug.Log($"ability to {this.name}");
                 _sounds.Add(SoundType.Ability, _ability);
             }
         }
 
-        public void PlayStartTurn()
+        public async UniTask PlaySoundAsync(SoundType soundType)
         {
-            int index = Random.Range(0, _startTurn.Length);
+            if (TryGetAudio(soundType, out var audio))
+            {
+                _audioPlayer.PlaySound(audio);
+                await UniTask.Delay(Mathf.RoundToInt(audio.length * 1000));
+            }
+
+            await UniTask.Delay(0);
+        }
+
+
+        private bool TryGetAudio(SoundType soundType, out AudioClip audio)
+        {
+            if (soundType == SoundType.StartTurn)
+            {
+                int index = UnityEngine.Random.Range(0, _startTurn.Length);
+
+                audio = _startTurn[index];
+                return true;
+            }
+
+            return _sounds.TryGetValue(soundType, out audio);
+        }
+
+
+        private void PlayStartTurn()
+        {
+            int index = UnityEngine.Random.Range(0, _startTurn.Length);
 
             _audioPlayer.PlaySound(_startTurn[index]);
         }
@@ -54,5 +82,6 @@ namespace Sounds
                 _audioPlayer.PlaySound(_sounds[soundType]);
             }
         }
+
     }
 }

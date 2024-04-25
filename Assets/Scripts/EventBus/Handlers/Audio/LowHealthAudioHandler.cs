@@ -1,4 +1,6 @@
-using Sounds;
+using Audio;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class LowHealthAudioHandler : BaseHandler<DefaultDealDamageEvent>
 {
@@ -6,6 +8,8 @@ public class LowHealthAudioHandler : BaseHandler<DefaultDealDamageEvent>
     private readonly HeroServiceAudio _heroServiceAudio;
 
     private readonly float _thresholdLevel = 0.2f;
+
+    private readonly HashSet<InfoComponent> _alarmedBefore = new();
 
     public LowHealthAudioHandler(EventBus eventBus, VisualPipeline visualPipeline, HeroServiceAudio heroServiceAudio) : base(eventBus)
     {
@@ -17,13 +21,18 @@ public class LowHealthAudioHandler : BaseHandler<DefaultDealDamageEvent>
     {
         int hp = evnt.entity.Get<HPComponent>().CurrentHP;
         int initHP = evnt.entity.Get<HPComponent>().InitHP;
+        InfoComponent info = evnt.entity.Get<InfoComponent>();
 
-        if (hp <= initHP * _thresholdLevel)
+        if (hp <= initHP * _thresholdLevel && !_alarmedBefore.Contains(info))
         {
+            Debug.Log($"{info.team} number {info.id} is less than 20%");
+
             _visualPipeline.AddTask(new PlaySoundAudioTask(
             SoundType.LowHealth,
             evnt.entity.Get<InfoComponent>(),
             _heroServiceAudio));
+
+            _alarmedBefore.Add(info);
         }
     }
 }

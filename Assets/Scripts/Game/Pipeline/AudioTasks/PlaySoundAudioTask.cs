@@ -1,4 +1,4 @@
-using Sounds;
+using Audio;
 
 public class PlaySoundAudioTask : Task
 {
@@ -13,9 +13,9 @@ public class PlaySoundAudioTask : Task
         _heroServiceAudio = heroServiceAudio;
     }
 
-    protected override void OnRun()
+    protected override async void OnRun()
     {
-        _heroServiceAudio.PlaySound(_infoComponent, _soundType);
+        await _heroServiceAudio.PlaySoundTask(_infoComponent, _soundType);
 
         Finish();
     }

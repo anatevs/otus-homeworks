@@ -4,7 +4,6 @@ public class DefaultDealDamageHandler : BaseHandler<DefaultDealDamageEvent>
 {
     public DefaultDealDamageHandler(EventBus eventBus) : base(eventBus)
     {
-
     }
 
     protected override void RaiseEvent(DefaultDealDamageEvent evnt)

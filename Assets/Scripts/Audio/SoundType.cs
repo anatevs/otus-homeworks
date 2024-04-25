@@ -1,4 +1,4 @@
-namespace Sounds
+namespace Audio
 {
     public enum SoundType
     {

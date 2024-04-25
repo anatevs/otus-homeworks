@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Sounds
+namespace Audio
 {
     public class HeroListAudio : MonoBehaviour
     {
