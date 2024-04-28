@@ -13,15 +13,15 @@ public sealed class EffectAudioHandler<T> : BaseHandler<T> where T : IEffect
 
     protected override void RaiseEvent(T evnt)
     {
-        InfoComponent info = new();
+        TeamInfoComponent info = new();
 
         if (evnt is IAttackEffect attackEffect)
         {
-            info = attackEffect.Hero.Get<InfoComponent>();
+            info = attackEffect.Hero.Get<TeamInfoComponent>();
         }
         else if (evnt is IDefenceEffect defenceEffect)
         {
-            info = defenceEffect.Target.Get<InfoComponent>();
+            info = defenceEffect.Target.Get<TeamInfoComponent>();
         }
 
         _visualPipeline.AddTask(new PlaySoundAudioTask(

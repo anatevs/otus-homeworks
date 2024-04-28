@@ -20,7 +20,7 @@ public sealed class NextMoveHandler : BaseHandler<NextMoveEvent>
         _heroListService.PrepareNextMove(currentTeam);
         HeroEntity currentHero = _heroListService.GetCurrentActive(currentTeam);
 
-        if (currentHero.TryGet<FreezeComponent>(out var _))
+        if (currentHero.TryGet<FreezeComponent>(out _))
         {
             currentHero.Remove<FreezeComponent>();
 

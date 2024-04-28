@@ -11,4 +11,9 @@ public struct MediatorEffect : IAttackEffect
     public int extraHP;
 
     public IReadOnlyList<HeroEntity> TeammateEntities { get; set; }
+
+    //public HeroEntity GetRandomTeammateEntity() 
+    //{
+
+    //}
 }

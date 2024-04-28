@@ -29,7 +29,7 @@ public sealed class TurnTask : Task
 
     private void OnHeroClicked(HeroEntity clickedEntity)
     {
-        Team team = clickedEntity.Get<InfoComponent>().team;
+        Team team = clickedEntity.Get<TeamInfoComponent>().team;
         if (team != _teamData.Enemy)
         {
             return;

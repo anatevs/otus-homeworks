@@ -5,8 +5,6 @@ public sealed class StupidOrkEffectHandler : BaseHandler<StupidOrkEffect>
 {
     private readonly HeroListService _heroListService;
 
-    private readonly bool[] _choises = new bool[2] { true, false };
-
     public StupidOrkEffectHandler(EventBus eventBus, HeroListService heroListService) : base(eventBus)
     {
         _heroListService = heroListService;
@@ -16,11 +14,11 @@ public sealed class StupidOrkEffectHandler : BaseHandler<StupidOrkEffect>
     {
         HeroEntity target = evnt.Target;
 
-        int random = Random.Range(0, _choises.Length);
+        int random = Random.Range(0, 2);
 
-        if (_choises[random] )
+        if (random == 1)
         {
-            Team enemyTeam = evnt.Target.Get<InfoComponent>().team;
+            Team enemyTeam = evnt.Target.Get<TeamInfoComponent>().team;
 
             IReadOnlyList<int> enemyValidIndexes = _heroListService.GetValidIndexes(enemyTeam);
             int randomIndex = enemyValidIndexes[Random.Range(0, enemyValidIndexes.Count)];
@@ -31,6 +29,6 @@ public sealed class StupidOrkEffectHandler : BaseHandler<StupidOrkEffect>
         EventBus.RaiseEvent(new DefaultAttackEvent(evnt.Hero, target));
 
         Debug.Log($"Stupid ork effect: make damage to other " +
-            $"enemy number {target.Get<InfoComponent>().id}");
+            $"enemy number {target.Get<TeamInfoComponent>().id}");
     }
 }

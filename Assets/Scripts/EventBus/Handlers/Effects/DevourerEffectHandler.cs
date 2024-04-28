@@ -15,7 +15,7 @@ public sealed class DevourerEffectHandler : BaseHandler<DevourerEffect>
     {
         EventBus.RaiseEvent(new DefaultAttackEvent(evnt.Hero, evnt.Target));
 
-        Team enemyTeam = evnt.Target.Get<InfoComponent>().team;
+        Team enemyTeam = evnt.Target.Get<TeamInfoComponent>().team;
 
         IReadOnlyList<int> enemyValidIndexes = _heroListService.GetValidIndexes(enemyTeam);
         int randomIndex = enemyValidIndexes[UnityEngine.Random.Range(0, enemyValidIndexes.Count)];

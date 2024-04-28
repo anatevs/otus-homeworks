@@ -41,7 +41,7 @@ public sealed class HeroListService : IDisposable
             foreach (HeroView heroView in heroListView.GetViews())
             {
                 HeroEntity entity = heroView.GetComponent<HeroEntity>();
-                entity.Add(new InfoComponent(teamName, i++));
+                entity.Add(new TeamInfoComponent(teamName, i++));
 
                 heroList.Add(entity);
             }
@@ -57,7 +57,6 @@ public sealed class HeroListService : IDisposable
 
     public async void InitActive(Team team, int index)
     {
-        _entities[team].Get(index).Set(new IsActiveComponent(true));
         _entities[team].OnNextMove();
 
         HeroView heroView = _uiService.GetRedPlayer().GetView(index);
@@ -105,7 +104,7 @@ public sealed class HeroListService : IDisposable
 
     public void RemoveHero(HeroEntity entity)
     {
-        Team team = entity.Get<InfoComponent>().team;
+        Team team = entity.Get<TeamInfoComponent>().team;
         _entities[team].OnRemove(entity);
 
         if (_entities[team].GetValidIndexes().Count == 0)

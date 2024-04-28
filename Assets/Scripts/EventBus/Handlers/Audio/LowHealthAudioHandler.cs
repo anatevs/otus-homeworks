@@ -9,7 +9,7 @@ public sealed class LowHealthAudioHandler : BaseHandler<DefaultDealDamageEvent>
 
     private readonly float _thresholdLevel = 0.2f;
 
-    private readonly HashSet<InfoComponent> _alarmedBefore = new();
+    private readonly HashSet<TeamInfoComponent> _alarmedBefore = new();
 
     public LowHealthAudioHandler(EventBus eventBus, AudioVisualPipeline visualPipeline, HeroServiceAudio heroServiceAudio) : base(eventBus)
     {
@@ -21,7 +21,7 @@ public sealed class LowHealthAudioHandler : BaseHandler<DefaultDealDamageEvent>
     {
         int hp = evnt.entity.Get<HPComponent>().CurrentHP;
         int initHP = evnt.entity.Get<HPComponent>().InitHP;
-        InfoComponent info = evnt.entity.Get<InfoComponent>();
+        TeamInfoComponent info = evnt.entity.Get<TeamInfoComponent>();
 
         if (hp <= initHP * _thresholdLevel && !_alarmedBefore.Contains(info))
         {
@@ -29,7 +29,7 @@ public sealed class LowHealthAudioHandler : BaseHandler<DefaultDealDamageEvent>
 
             _visualPipeline.AddTask(new PlaySoundAudioTask(
             SoundType.LowHealth,
-            evnt.entity.Get<InfoComponent>(),
+            evnt.entity.Get<TeamInfoComponent>(),
             _heroServiceAudio));
 
             _alarmedBefore.Add(info);

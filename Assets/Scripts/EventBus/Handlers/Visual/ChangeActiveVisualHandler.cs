@@ -15,7 +15,7 @@ public sealed class ChangeActiveVisualHandler : BaseHandler<ChangeActiveEvent>
     {
         _visualPipeline.AddTask(
             new ChangeActiveVisualTask(_heroServiceView, 
-            evnt.prevHero.Get<InfoComponent>(),
-            evnt.currentHero.Get<InfoComponent>()));
+            evnt.prevHero.Get<TeamInfoComponent>(),
+            evnt.currentHero.Get<TeamInfoComponent>()));
     }
 }

@@ -1,10 +1,10 @@
 public sealed class ChangeActiveVisualTask : Task
 {
     private readonly HeroServiceView _heroServiceView;
-    private readonly InfoComponent _prevHero;
-    private readonly InfoComponent _currentHero;
+    private readonly TeamInfoComponent _prevHero;
+    private readonly TeamInfoComponent _currentHero;
 
-    public ChangeActiveVisualTask(HeroServiceView heroServiceView, InfoComponent prevHero, InfoComponent currentHero)
+    public ChangeActiveVisualTask(HeroServiceView heroServiceView, TeamInfoComponent prevHero, TeamInfoComponent currentHero)
     {
         _heroServiceView = heroServiceView;
         _prevHero = prevHero;

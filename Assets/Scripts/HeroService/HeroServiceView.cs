@@ -54,18 +54,18 @@ public sealed class HeroServiceView : IInitializable, IDisposable
         }
     }
 
-    public void SetActiveTeamAndHero(InfoComponent info, bool isActive)
+    public void SetActiveTeamAndHero(TeamInfoComponent info, bool isActive)
     {
         _viewLists[info.team].SetActiveTeam(isActive);
         _viewLists[info.team].SetActiveHero(info.id, isActive);
     }
 
-    public void DestroyHero(InfoComponent info)
+    public void DestroyHero(TeamInfoComponent info)
     {
         _viewLists[info.team].OnViewDestroyed(info.id);
     }
 
-    public UniTask AttackTaskAsync(InfoComponent hero, InfoComponent target)
+    public UniTask AttackTaskAsync(TeamInfoComponent hero, TeamInfoComponent target)
     {
         HeroView heroView = _viewLists[hero.team].GetView(hero.id);
         HeroView targetView = _viewLists[target.team].GetView(target.id);
@@ -73,7 +73,7 @@ public sealed class HeroServiceView : IInitializable, IDisposable
         return heroView.AnimateAttack(targetView);
     }
 
-    public void ChangeStats(InfoComponent info, int hp, int damage)
+    public void ChangeStats(TeamInfoComponent info, int hp, int damage)
     {
         _viewLists[info.team].SetStats(info.id, hp, damage);
     }

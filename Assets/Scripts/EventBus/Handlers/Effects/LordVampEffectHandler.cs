@@ -2,8 +2,6 @@ using UnityEngine;
 
 public sealed class LordVampEffectHandler : BaseHandler<LordVampEffect>
 {
-    private readonly bool[] _choises = new bool[2] { true, false };
-
     public LordVampEffectHandler(EventBus eventBus) : base(eventBus)
     {
     }
@@ -12,9 +10,9 @@ public sealed class LordVampEffectHandler : BaseHandler<LordVampEffect>
     {
         EventBus.RaiseEvent(new DefaultAttackEvent(evnt.Hero, evnt.Target));
 
-        int random = Random.Range(0, _choises.Length);
+        int random = Random.Range(0, 2);
 
-        if (_choises[random])
+        if (random == 1)
         {
             HPComponent hp = evnt.Hero.Get<HPComponent>();
             hp.CurrentHP += evnt.Hero.Get<DamageComponent>().value;

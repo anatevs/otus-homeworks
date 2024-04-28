@@ -11,7 +11,7 @@ public sealed class DestroyVisualTask : Task
 
     protected override void OnRun()
     {
-        _heroServiceView.DestroyHero(_hero.Get<InfoComponent>());
+        _heroServiceView.DestroyHero(_hero.Get<TeamInfoComponent>());
         Finish();
     }
 }

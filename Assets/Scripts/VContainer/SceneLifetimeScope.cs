@@ -52,7 +52,6 @@ public sealed class SceneLifetimeScope : LifetimeScope
     {
         builder.Register<EventBus>(Lifetime.Singleton);
 
-        builder.RegisterEntryPoint<ChangeActiveHandler>();
         builder.RegisterEntryPoint<AttackHandler>();
         builder.RegisterEntryPoint<DefaultAttackHandler>();
         builder.RegisterEntryPoint<DealDamageHandler>();

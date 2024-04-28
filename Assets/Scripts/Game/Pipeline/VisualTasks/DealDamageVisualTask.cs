@@ -1,11 +1,11 @@
 public sealed class DealDamageVisualTask : Task
 {
     private readonly HeroServiceView _heroServiceView;
-    private readonly InfoComponent _infoComponent;
+    private readonly TeamInfoComponent _infoComponent;
     private readonly int _hp;
     private readonly int _damage;
 
-    public DealDamageVisualTask(HeroServiceView heroServiceView, InfoComponent infoComponent, int hp, int damage)
+    public DealDamageVisualTask(HeroServiceView heroServiceView, TeamInfoComponent infoComponent, int hp, int damage)
     {
         _heroServiceView = heroServiceView;
         _infoComponent = infoComponent;

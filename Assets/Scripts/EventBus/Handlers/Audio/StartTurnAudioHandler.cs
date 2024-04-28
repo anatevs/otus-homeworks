@@ -15,7 +15,7 @@ public sealed class StartTurnAudioHandler : BaseHandler<ChangeActiveEvent>
     {
         _visualPipeline.AddTask(new PlaySoundAudioTask(
             SoundType.StartTurn,
-            evnt.currentHero.Get<InfoComponent>(),
+            evnt.currentHero.Get<TeamInfoComponent>(),
             _heroServiceAudio));
     }
 }

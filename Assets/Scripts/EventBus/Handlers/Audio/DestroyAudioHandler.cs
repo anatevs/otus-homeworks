@@ -15,7 +15,7 @@ public sealed class DestroyAudioHandler : BaseHandler<DestroyEvent>
     {
         _visualPipeline.AddTask(new PlaySoundAudioTask(
             SoundType.Death,
-            evnt.entity.Get<InfoComponent>(),
+            evnt.entity.Get<TeamInfoComponent>(),
             _heroServiceAudio));
     }
 }

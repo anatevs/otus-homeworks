@@ -26,6 +26,5 @@ public sealed class PipelineInstaller : IInitializable, IDisposable
     void IDisposable.Dispose()
     {
         _turnPipeline.Clear();
-        _objectResolver?.Dispose();
     }
 }

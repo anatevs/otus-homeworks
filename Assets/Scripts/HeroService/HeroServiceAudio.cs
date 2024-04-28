@@ -59,12 +59,12 @@ public sealed class HeroServiceAudio : IInitializable, IDisposable
         }
     }
 
-    public UniTask PlaySoundTask(InfoComponent info, SoundType soundType)
+    public UniTask PlaySoundTask(TeamInfoComponent info, SoundType soundType)
     {
         return _heroAudioLists[info.team][info.id].PlaySoundAsync(soundType);
     }
 
-    public void PlaySound(InfoComponent info, SoundType soundType)
+    public void PlaySound(TeamInfoComponent info, SoundType soundType)
     {
         _heroAudioLists[info.team][info.id].PlaySound(soundType);
     }
