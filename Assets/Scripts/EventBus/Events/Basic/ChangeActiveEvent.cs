@@ -3,9 +3,9 @@ public readonly struct ChangeActiveEvent : IEvent
     public readonly HeroEntity prevHero;
     public readonly HeroEntity currentHero;
 
-    public ChangeActiveEvent(HeroEntity prevHero, HeroEntity currentHero)
+    public ChangeActiveEvent(HeroEntity initPrevHero, HeroEntity initCurrentHero)
     {
-        this.prevHero = prevHero;
-        this.currentHero = currentHero;
+        prevHero = initPrevHero;
+        currentHero = initCurrentHero;
     }
 }

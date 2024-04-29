@@ -2,6 +2,8 @@ using System.Collections.Generic;
 
 public sealed class HeroEntityList
 {
+    public int ValidCount => _validIndexes.Count;
+
     private int _currentActive;
     private int _nextActive;
     private readonly List<int> _validIndexes = new List<int>();

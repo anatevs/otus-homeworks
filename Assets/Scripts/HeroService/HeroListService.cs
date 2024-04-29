@@ -83,18 +83,20 @@ public sealed class HeroListService : IDisposable
         return _entities[team].GetValidIndexes();
     }
 
-    public IReadOnlyList<HeroEntity> GetValidEntities(Team team)
+    public int GetValidCount(Team team)
     {
-        List<HeroEntity> res = new();
+        return _entities[team].ValidCount;
+    }
 
-        IReadOnlyList<int> indexes = GetValidIndexes(team);
-        for (int i = 0; i < indexes.Count; i++)
+    public IEnumerable<HeroEntity> ValidEntities(Team team)
+    {
+        IReadOnlyList<int> validIndexes = GetValidIndexes(team);
+
+        for (int i = 0; i < validIndexes.Count; i++)
         {
-            HeroEntity entity = GetEntity(team, indexes[i]);
-            res.Add(entity);
+            HeroEntity entity = GetEntity(team, validIndexes[i]);
+            yield return entity;
         }
-
-        return res;
     }
 
     public void PrepareNextMove(Team team)

@@ -41,15 +41,17 @@ public sealed class AttackHandler : BaseHandler<AttackEvent>
     {
         foreach (Team team in Enum.GetValues(typeof(Team)))
         {
-            IReadOnlyList<HeroEntity> entities = _heroListService.GetValidEntities(team);
-            for (int i = 0; i < entities.Count; i++)
+            IEnumerable<HeroEntity> heroEntities = _heroListService.ValidEntities(team);
+            int validCount = _heroListService.GetValidCount(team);
+            foreach (HeroEntity entity in heroEntities)
             {
-                if (entities[i].TryGet(out WeaponComponent weapon))
+                if (entity.TryGet(out WeaponComponent weapon))
                 {
                     if (weapon.effect is MediatorEffect mediator)
                     {
-                        mediator.Hero = entities[i];
-                        mediator.TeammateEntities = entities;
+                        mediator.Hero = entity;
+                        mediator.Teammates = heroEntities;
+                        mediator.ValidCount = validCount;
                         EventBus.RaiseEvent(mediator);
 
                         return;

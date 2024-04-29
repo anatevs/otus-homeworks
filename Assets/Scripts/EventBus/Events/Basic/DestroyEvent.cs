@@ -2,8 +2,8 @@ public readonly struct DestroyEvent : IEvent
 {
     public readonly HeroEntity entity;
 
-    public DestroyEvent(HeroEntity entity)
+    public DestroyEvent(HeroEntity initEntity)
     {
-        this.entity = entity;
+        entity = initEntity;
     }
 }

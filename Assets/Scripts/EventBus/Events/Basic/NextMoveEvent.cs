@@ -2,8 +2,8 @@ public readonly struct NextMoveEvent : IEvent
 {
     public readonly HeroEntity prevHero;
 
-    public NextMoveEvent(HeroEntity prevHero)
+    public NextMoveEvent(HeroEntity initPrevHero)
     {
-        this.prevHero = prevHero;
+        prevHero = initPrevHero;
     }
 }

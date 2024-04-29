@@ -3,9 +3,9 @@ public readonly struct DefaultDealDamageEvent : IEvent
     public readonly int damage;
     public readonly HeroEntity entity;
 
-    public DefaultDealDamageEvent(HeroEntity entity, int damage)
+    public DefaultDealDamageEvent(HeroEntity initEntity, int initDamage)
     {
-        this.entity = entity;
-        this.damage = damage;
+        entity = initEntity;
+        damage = initDamage;
     }
 }

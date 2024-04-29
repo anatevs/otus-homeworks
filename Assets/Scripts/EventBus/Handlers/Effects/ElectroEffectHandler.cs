@@ -17,10 +17,10 @@ public sealed class ElectroEffectHandler : BaseHandler<ElectroEffect>
 
         foreach (Team team in Enum.GetValues(typeof(Team)))
         {
-            IReadOnlyList<HeroEntity> entities = _heroListService.GetValidEntities(team);
-            for (int i = 0; i < entities.Count; i++)
+            IEnumerable<HeroEntity> heroEntities = _heroListService.ValidEntities(team);
+            foreach(HeroEntity entity in heroEntities)
             {
-                EventBus.RaiseEvent(new DefaultDealDamageEvent(entities[i], evnt.extraDamage));
+                EventBus.RaiseEvent(new DefaultDealDamageEvent(entity, evnt.extraDamage));
             }
         }
 

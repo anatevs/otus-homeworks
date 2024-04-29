@@ -10,10 +10,7 @@ public struct MediatorEffect : IAttackEffect
     [field: SerializeField]
     public int extraHP;
 
-    public IReadOnlyList<HeroEntity> TeammateEntities { get; set; }
+    public IEnumerable<HeroEntity> Teammates { get; set; }
 
-    //public HeroEntity GetRandomTeammateEntity() 
-    //{
-
-    //}
+    public int ValidCount { get; set; }
 }
