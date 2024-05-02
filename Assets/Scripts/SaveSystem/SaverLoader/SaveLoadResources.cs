@@ -1,39 +1,27 @@
 using GameEngine;
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 
 public class SaveLoadResources : SaveLoader<ResourcesParams, ResourceService>
 {
-    private readonly ResourceService _resourceService;
-    private readonly OnSceneObjectsService _objectsOnScene;
-
-    private readonly Dictionary<string, ScriptableObject> _defaultConfigs;
-
-    public SaveLoadResources(ResourceService resourceService,  
-        OnSceneObjectsService objectsOnScene, 
-        Dictionary<string, ScriptableObject> defaultConfigs)
+    protected override void SetupParamsData(ResourcesParams resourcesParams, IObjectResolver context)
     {
-        _resourceService = resourceService;
-        _objectsOnScene = objectsOnScene;
+        ResourceService resourceService = context.Resolve<ResourceService>();
 
-        _defaultConfigs = defaultConfigs;
-    }
-
-    protected override void SetupParamsData(ResourcesParams resourcesParams)
-    {
-        LoadFromScene();
-        IEnumerable<Resource> resources = _resourceService.GetResources();
+        LoadFromScene(context);
+        IEnumerable<Resource> resources = resourceService.GetResources();
         resourcesParams.SetParams(resources);
     }
 
-    protected override void LoadDefault()
+    protected override void LoadDefault(IObjectResolver context)
     {
-        LoadFromScene();
+        LoadFromScene(context);
     }
 
-    protected override ResourcesParams ConvertDataToParams()
+    protected override ResourcesParams ConvertDataToParams(ResourceService resourceService)
     {
-        var resources = _resourceService.GetResources();
+        var resources = resourceService.GetResources();
 
         ResourcesParams resourcesParams = new ResourcesParams();
         resourcesParams.SetupResources(resources);
@@ -41,8 +29,11 @@ public class SaveLoadResources : SaveLoader<ResourcesParams, ResourceService>
         return resourcesParams;
     }
 
-    private void LoadFromScene()
+    private void LoadFromScene(IObjectResolver context)
     {
-        _resourceService.SetResources(_objectsOnScene.GetSceneObjects<Resource>());
+        ResourceService resourceService = context.Resolve<ResourceService>();
+        SceneObjectsService objectsOnScene = context.Resolve<SceneObjectsService>();
+
+        resourceService.SetResources(objectsOnScene.GetSceneObjects<Resource>());
     }
 }

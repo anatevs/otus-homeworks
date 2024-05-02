@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using VContainer;
 using Object = UnityEngine.Object;
 
 namespace GameEngine
@@ -17,6 +18,7 @@ namespace GameEngine
         [ShowInInspector, ReadOnly, JsonProperty]
         private HashSet<Unit> sceneUnits = new();
 
+        [Inject]
         public UnitManager()
         {
         }
@@ -25,7 +27,7 @@ namespace GameEngine
         {
             this.container = container;
         }
-        
+
         public void SetupUnits(IEnumerable<Unit> units)
         {
             this.sceneUnits = new HashSet<Unit>(units);

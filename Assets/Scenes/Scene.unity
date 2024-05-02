@@ -631,9 +631,6 @@ MonoBehaviour:
   - {fileID: 0}
   _unitManager:
     container: {fileID: 1263304700}
-  _unitPrefabs: {fileID: 11400000, guid: 87efdd791dede7e4e9c6e226a3eda109, type: 2}
-  defaultConfigs:
-  - {fileID: 11400000, guid: 6c1623688e82e1240ac8487bbc046ff6, type: 2}
   _gameListenersManager: {fileID: 653492624}
 --- !u!114 &653492624
 MonoBehaviour:
@@ -1103,7 +1100,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1502192415}
   m_LocalRotation: {x: 0.60876137, y: 0, z: 0, w: 0.7933534}
-  m_LocalPosition: {x: 15, y: 20, z: -10}
+  m_LocalPosition: {x: 15, y: 21, z: -8.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
