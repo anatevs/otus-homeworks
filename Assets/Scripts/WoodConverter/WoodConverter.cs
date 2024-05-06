@@ -1,13 +1,11 @@
-using UnityEngine;
-
 namespace Sample
 {
-    public class WoodConverter : MonoBehaviour
+    public class WoodConverter
     {
         public float Speed { get; set; }
 
-        public int LoadAreaVolume { get; set; }
+        public int LoadArea { get; set; }
 
-        public int UnloadAreaVolume { get; set; }
+        public int UnloadArea { get; set; }
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
-// ReSharper disable ConvertToAutoPropertyWithPrivateSetter
 
 namespace Sample
 {
@@ -26,7 +25,7 @@ namespace Sample
         [ShowInInspector, ReadOnly]
         public int NextPrice => this.config.GetPrice(this.Level + 1);
 
-        [ShowInInspector, ReadOnly]
+        [ShowInInspector]
         public Upgrade[] ruleUpgrades;
 
         private readonly UpgradeConfig config;
@@ -46,14 +45,15 @@ namespace Sample
 
         public bool IsOthersRuleTrue()
         {
-            return config.CanLevelUpRule(Level + 1, ruleUpgrades);
+            return config.CanLevelUpRule(Level, ruleUpgrades);
         }
 
+        [Button]
         public void LevelUp()
         {
             if (this.Level >= this.MaxLevel)
             {
-                throw new Exception($"Can not increment level for upgrade {this.config.id}!");
+                throw new Exception($"Level is reached Max for upgrade {this.config.id}!");
             }
 
             if (!IsOthersRuleTrue())

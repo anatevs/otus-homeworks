@@ -1,6 +1,7 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using VContainer;
 
 namespace Sample
 {
@@ -22,7 +23,7 @@ namespace Sample
         [SerializeField]
         private PriceTable priceTable;
 
-        public abstract Upgrade InstantiateUpgrade();
+        public abstract Upgrade InstantiateUpgrade(IObjectResolver objectResolver);
 
         private void OnValidate()
         {

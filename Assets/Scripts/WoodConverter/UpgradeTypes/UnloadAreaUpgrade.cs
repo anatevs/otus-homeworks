@@ -1,21 +1,20 @@
+using Sample;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using VContainer;
 
 namespace Sample
 {
-    public class ConverterSpeedUpgrade : Upgrade
+    public class UnloadAreaUpgrade : Upgrade
     {
         private WoodConverter _converter;
 
-        private readonly float _upSpeedCoef = 0.1f;
-
-        public ConverterSpeedUpgrade(UpgradeConfig config) : base(config)
+        public UnloadAreaUpgrade(UpgradeConfig config) : base(config)
         {
         }
 
-        //Inject...
+        [Inject]
         public void Construct(WoodConverter converter)
         {
             _converter = converter;
@@ -23,7 +22,7 @@ namespace Sample
 
         protected override void LevelUp(int level)
         {
-            _converter.Speed += _converter.Speed * _upSpeedCoef;
+            _converter.LoadArea *= level;
         }
     }
 }

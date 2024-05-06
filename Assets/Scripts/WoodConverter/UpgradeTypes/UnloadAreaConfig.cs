@@ -1,24 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 
 namespace Sample
 {
     [CreateAssetMenu(
-        fileName = "LoadAreaConfig",
-        menuName = "Sample/Upgrade Configs/New LoadAreaConfig"
+        fileName = "UnloadAreaConfig",
+        menuName = "Sample/Upgrade Configs/New UnloadAreaConfig"
         )]
 
-    public class ConverterLoadAreaConfig : UpgradeConfig
+    public class UnloadAreaConfig : UpgradeConfig
     {
-        public override Upgrade InstantiateUpgrade()
+        public override Upgrade InstantiateUpgrade(IObjectResolver objectResolver)
         {
-            throw new System.NotImplementedException();
+            UnloadAreaUpgrade upgrade = new UnloadAreaUpgrade(this);
+            objectResolver.Inject(upgrade);
+
+            return upgrade;
         }
 
         public override bool CanLevelUpRule(int level, Upgrade[] ruleUpgrades)
         {
-            if (ruleUpgrades.Length == 0)
+            if (ruleUpgrades == null || ruleUpgrades.Length == 0)
             {
                 Debug.Log($"no rule upgrades in config {this}");
                 return true;
