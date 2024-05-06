@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using VContainer;
-
 
 namespace Sample
 {
     [CreateAssetMenu(
         fileName = "SpeedConfig",
-        menuName = "Sample/Upgrade Configs/New SpeedConfig"
+        menuName = "Sample/Player Upgrade Configs/New SpeedConfig"
     )]
+
     public class SpeedConfig : UpgradeConfig
     {
-        public float upgradePersent;
+        public int upgradeAmount;
 
         public override Upgrade InstantiateUpgrade(IObjectResolver objectResolver)
         {

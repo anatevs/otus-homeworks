@@ -248,17 +248,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2013764860}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3fabae1e6e2c8148b7e52a807e4c83b, type: 3}
+  m_Script: {fileID: 11500000, guid: ee80feabc39014147ac0ae276295ccc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _config: {fileID: 11400000, guid: 3b5f2ff2095e8b44daef93a297bb0bb7, type: 2}
-  _testUpgrade:
-    rid: -2
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+  _initInfo:
+  - upgradeConfig: {fileID: 0}
+    value: 0
 --- !u!1 &2027878629
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +289,8 @@ MonoBehaviour:
   autoInjectGameObjects:
   - {fileID: 2027878629}
   - {fileID: 2013764860}
-  _testUpgrade: {fileID: 2013764862}
+  _playerStatsSystem: {fileID: 0}
+  _testUpgrade: {fileID: 0}
 --- !u!4 &2027878631
 Transform:
   m_ObjectHideFlags: 0

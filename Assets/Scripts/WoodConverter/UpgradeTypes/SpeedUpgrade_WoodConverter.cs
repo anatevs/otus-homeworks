@@ -5,13 +5,13 @@ using VContainer;
 
 namespace Sample
 {
-    public class SpeedUpgrade : Upgrade
+    public class SpeedUpgrade_WoodConverter : Upgrade
     {
         private WoodConverter _converter;
 
         private readonly float _upSpeedCoef;
 
-        public SpeedUpgrade(SpeedConfig config) : base(config)
+        public SpeedUpgrade_WoodConverter(SpeedConfig_WoodConverter config) : base(config)
         {
             _upSpeedCoef = config.upgradePersent / 100;
         }

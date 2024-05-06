@@ -4,26 +4,38 @@ namespace Sample
 {
     public sealed class PlayerStats
     {
-        private readonly Dictionary<string, int> stats = new();
+        private readonly Dictionary<PlayerStatType, int> _stats = new();
 
-        public void AddStat(string name, int value)
+        public void AddStat(PlayerStatType name, int value)
         {
-            this.stats.Add(name, value);
+            _stats.Add(name, value);
         }
 
-        public int GetStat(string name)
+        public int GetStat(PlayerStatType name)
         {
-            return this.stats[name];
+            return _stats[name];
         }
 
-        public IReadOnlyDictionary<string, int> GetStats()
+        public void SetStat(PlayerStatType name, int value)
         {
-            return this.stats;
+            if (_stats.ContainsKey(name))
+            {
+                _stats[name] = value;
+            }
+            else
+            {
+                _stats.Add(name, value);
+            }
         }
 
-        public void RemoveStat(string name)
+        public IReadOnlyDictionary<PlayerStatType, int> GetStats()
         {
-            this.stats.Remove(name);
+            return _stats;
+        }
+
+        public void RemoveStat(PlayerStatType name)
+        {
+            _stats.Remove(name);
         }
     }
 }

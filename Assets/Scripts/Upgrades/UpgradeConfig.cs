@@ -10,7 +10,7 @@ namespace Sample
         protected const float SPACE_HEIGHT = 10.0f;
 
         [SerializeField]
-        public string id;
+        public PlayerStatType id;
 
         [ShowInInspector]
         public UpgradeConfig[] ruleUpgradeConfigs;

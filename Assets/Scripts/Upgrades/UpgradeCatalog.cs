@@ -17,7 +17,7 @@ namespace Sample
             return this.configs;
         }
 
-        public UpgradeConfig FindUpgrade(string id)
+        public UpgradeConfig FindUpgrade(PlayerStatType id)
         {
             var length = this.configs.Length;
             for (var i = 0; i < length; i++)

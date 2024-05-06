@@ -9,7 +9,7 @@ namespace Sample
         public event Action<int> OnLevelUp;
 
         [ShowInInspector, ReadOnly]
-        public string Id => this.config.id;
+        public PlayerStatType Id => this.config.id;
 
         [ShowInInspector, ReadOnly]
         public int Level => this.currentLevel;
