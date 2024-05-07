@@ -7,7 +7,7 @@ namespace Sample
         fileName = "DamageConfig",
         menuName = "Sample/Player Upgrade Configs/New DamageConfig"
     )]
-    public class DamageConfig : UpgradeConfig
+    public sealed class DamageConfig : UpgradeConfig
     {
         public int UpgradeAmount;
 
@@ -23,24 +23,5 @@ namespace Sample
 
             return damageUpgrade;
         }
-
-        //public override bool CanLevelUpFromConstraints(int level, Upgrade[] constraintUpgrades)
-        //{
-        //    if (constraintUpgrades == null || constraintUpgrades.Length == 0)
-        //    {
-        //        Debug.Log($"no constraint upgrades in upgrade for {Id}");
-        //        return true;
-        //    }
-
-        //    for (int i = 0; i < constraintUpgrades.Length; i++)
-        //    {
-        //        if (constraintUpgrades[i].Level <= level && !constraintUpgrades[i].IsMaxLevel)
-        //        {
-        //            return false;
-        //        }
-        //    }
-
-        //    return true;
-        //}
     }
 }

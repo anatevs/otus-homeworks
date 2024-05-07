@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SpeedConfig
   m_EditorClassIdentifier: 
   Id: 2
-  ConstraintUpgradeConfigs:
+  ConstraintConfigs:
   - {fileID: 11400000, guid: ac140bc7a64a72d4a84f76bde890c5be, type: 2}
   MaxLevel: 10
   priceTable:

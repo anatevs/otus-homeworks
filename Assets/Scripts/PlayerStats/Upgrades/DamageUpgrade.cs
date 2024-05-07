@@ -2,7 +2,7 @@ using VContainer;
 
 namespace Sample
 {
-    public class DamageUpgrade : Upgrade
+    public sealed class DamageUpgrade : Upgrade
     {
         private readonly int _upgradeAmount;
 

@@ -1,12 +1,11 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Sample
 {
     public sealed class PlayerStats
     {
-        [SerializeReference, ShowInInspector]
+        [ShowInInspector]
         private readonly Dictionary<PlayerStatType, int> _stats = new();
 
         public void AddStat(PlayerStatType name, int value)

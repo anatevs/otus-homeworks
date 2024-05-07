@@ -8,7 +8,7 @@ namespace Sample
         menuName = "Sample/Player Upgrade Configs/New SpeedConfig"
     )]
 
-    public class SpeedConfig : UpgradeConfig
+    public sealed class SpeedConfig : UpgradeConfig
     {
         public int UpgradeAmount;
 

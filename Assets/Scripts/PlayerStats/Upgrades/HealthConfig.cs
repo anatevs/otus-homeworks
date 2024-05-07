@@ -8,7 +8,7 @@ namespace Sample
         menuName = "Sample/Player Upgrade Configs/New HealthConfig"
     )]
 
-    public class HealthConfig : UpgradeConfig
+    public sealed class HealthConfig : UpgradeConfig
     {
         public int UpgradeBase;
 

@@ -3,7 +3,7 @@ using VContainer;
 
 namespace Sample
 {
-    public class SpeedUpgrade : Upgrade
+    public sealed class SpeedUpgrade : Upgrade
     {
         private PlayerStats _playerStats;
 

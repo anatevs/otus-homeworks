@@ -6,7 +6,7 @@ using VContainer;
 
 namespace Sample
 {
-    public sealed class PlayerStatsSystem : MonoBehaviour
+    public sealed class PlayerStatsTest : MonoBehaviour
     {
         [SerializeField]
         private PlayerStatsInit[] _initInfo;

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: DamageConfig
   m_EditorClassIdentifier: 
   Id: 1
-  ConstraintUpgradeConfigs:
-  - {fileID: 11400000, guid: ac140bc7a64a72d4a84f76bde890c5be, type: 2}
+  ConstraintConfigs:
   - {fileID: 11400000, guid: 3d3af60fb8546924c8f3f76f05dcdf13, type: 2}
+  - {fileID: 11400000, guid: ac140bc7a64a72d4a84f76bde890c5be, type: 2}
   MaxLevel: 5
   priceTable:
     basePrice: 1

@@ -298,9 +298,8 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects:
-  - {fileID: 2027878629}
   - {fileID: 2013764860}
-  _playerStatsSystem: {fileID: 2013764862}
+  _playerStatsTest: {fileID: 2013764862}
 --- !u!4 &2027878631
 Transform:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ using VContainer;
 
 namespace Sample
 {
-    public class HealthUpgrade : Upgrade
+    public sealed class HealthUpgrade : Upgrade
     {
         private readonly int _upgradeBase;
 

@@ -7,7 +7,7 @@ using VContainer.Unity;
 public class SceneLifetimeScope : LifetimeScope
 {
     [SerializeField]
-    private PlayerStatsSystem _playerStatsSystem;
+    private PlayerStatsTest _playerStatsTest;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -25,6 +25,6 @@ public class SceneLifetimeScope : LifetimeScope
     {
         builder.Register<PlayerStats>(Lifetime.Singleton);
         builder.Register<UpgradesManager>(Lifetime.Singleton);
-        builder.RegisterComponent(_playerStatsSystem);
+        builder.RegisterComponent(_playerStatsTest);
     }
 }

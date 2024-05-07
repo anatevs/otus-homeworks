@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Gameplay.Player;
 using Sirenix.OdinInspector;
-using UnityEngine;
 
 namespace Sample
 {
