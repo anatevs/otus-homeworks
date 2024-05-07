@@ -9,63 +9,63 @@ namespace Sample
         public event Action<int> OnLevelUp;
 
         [ShowInInspector, ReadOnly]
-        public PlayerStatType Id => this.config.id;
+        public PlayerStatType Id => _config.Id;
 
         [ShowInInspector, ReadOnly]
-        public int Level => this.currentLevel;
+        public int Level => _currentLevel;
 
         [ShowInInspector, ReadOnly]
-        public int MaxLevel => this.config.maxLevel;
+        public int MaxLevel => _config.MaxLevel;
 
-        public bool IsMaxLevel => this.currentLevel == this.config.maxLevel;
-
-        [ShowInInspector, ReadOnly]
-        public float Progress => (float)this.currentLevel / this.config.maxLevel;
+        public bool IsMaxLevel => _currentLevel == _config.MaxLevel;
 
         [ShowInInspector, ReadOnly]
-        public int NextPrice => this.config.GetPrice(this.Level + 1);
+        public float Progress => (float)_currentLevel / _config.MaxLevel;
+
+        [ShowInInspector, ReadOnly]
+        public int NextPrice => _config.GetPrice(Level + 1);
 
         [ShowInInspector]
-        public Upgrade[] ruleUpgrades;
+        public Upgrade[] ConstraintUpgrades;
 
-        private readonly UpgradeConfig config;
+        private readonly UpgradeConfig _config;
 
-        private int currentLevel;
+        private int _currentLevel;
 
-        protected Upgrade(UpgradeConfig config)
+        protected Upgrade(UpgradeConfig initConfig)
         {
-            this.config = config;
-            this.currentLevel = 1;
+            _config = initConfig;
+            _currentLevel = 1;
         }
 
         public void SetupLevel(int level)
         {
-            this.currentLevel = level;
+            this._currentLevel = level;
         }
 
-        public bool IsOthersRuleTrue()
+        public bool IsNoConstraints()
         {
-            return config.CanLevelUpRule(Level, ruleUpgrades);
+            return _config.CanLevelUpFromConstraints(Level, ConstraintUpgrades);
         }
 
         [Button]
         public void LevelUp()
         {
-            if (this.Level >= this.MaxLevel)
+            if (Level >= MaxLevel)
             {
-                throw new Exception($"Level is reached Max for upgrade {this.config.id}!");
+                throw new Exception($"Level is reached Max for upgrade {_config.Id}!");
             }
 
-            if (!IsOthersRuleTrue())
+            if (!IsNoConstraints())
             {
-                Debug.Log($"rule condition is not true for upgrade {config.id}");
+                Debug.Log($"constraints condition is not true for upgrade {_config.Id}");
                 return;
             }
 
-            var nextLevel = this.Level + 1;
-            this.currentLevel = nextLevel;
-            this.LevelUp(nextLevel);
-            this.OnLevelUp?.Invoke(nextLevel);
+            var nextLevel = Level + 1;
+            _currentLevel = nextLevel;
+            LevelUp(nextLevel);
+            OnLevelUp?.Invoke(nextLevel);
         }
 
         protected abstract void LevelUp(int level);

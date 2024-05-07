@@ -1,7 +1,6 @@
 using UnityEngine;
 using VContainer;
 
-
 namespace Sample
 {
     [CreateAssetMenu(
@@ -11,8 +10,12 @@ namespace Sample
 
     public class HealthConfig : UpgradeConfig
     {
-        public int upgradeAmount;
-        public int upgradeBase;
+        public int UpgradeBase;
+
+        public HealthConfig()
+        {
+            Id = PlayerStatType.HP;
+        }
 
         public override Upgrade InstantiateUpgrade(IObjectResolver objectResolver)
         {

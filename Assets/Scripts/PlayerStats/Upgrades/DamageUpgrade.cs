@@ -12,7 +12,7 @@ namespace Sample
 
         public DamageUpgrade(DamageConfig config) : base(config)
         {
-            _upgradeAmount = config.upgradeAmount;
+            _upgradeAmount = config.UpgradeAmount;
         }
 
         [Inject]
@@ -24,7 +24,7 @@ namespace Sample
 
         protected override void LevelUp(int level)
         {
-            _playerStats.SetStat(Id, _startDamage + level * _upgradeAmount);
+            _playerStats.SetStat(Id, _startDamage + (level - 1) * _upgradeAmount);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Gameplay.Player;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace Sample
 {
@@ -10,11 +11,12 @@ namespace Sample
     public sealed class UpgradesManager
     {
         public event Action<Upgrade> OnLevelUp;
-        
+
+        [ShowInInspector]
+        private readonly MoneyStorage _moneyStorage;
+
         [ReadOnly, ShowInInspector]
         private Dictionary<PlayerStatType, Upgrade> _upgrades = new();
-
-        private readonly MoneyStorage _moneyStorage;
 
         public UpgradesManager(MoneyStorage moneyStorage)
         {
@@ -36,6 +38,16 @@ namespace Sample
             return _upgrades[id];
         }
 
+        public bool TryGetUpgrade(PlayerStatType id, out Upgrade upgrade)
+        {
+            if (_upgrades.TryGetValue(id, out upgrade))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public Upgrade[] GetAllUpgrades()
         {
             return _upgrades.Values.ToArray<Upgrade>();
@@ -43,7 +55,7 @@ namespace Sample
 
         public bool CanLevelUp(Upgrade upgrade)
         {
-            if (upgrade.IsMaxLevel || !upgrade.IsOthersRuleTrue())
+            if (upgrade.IsMaxLevel || !upgrade.IsNoConstraints())
             {
                 return false;
             }

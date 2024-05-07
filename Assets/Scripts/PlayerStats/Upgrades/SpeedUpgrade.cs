@@ -1,3 +1,4 @@
+using UnityEngine;
 using VContainer;
 
 namespace Sample
@@ -12,7 +13,7 @@ namespace Sample
 
         public SpeedUpgrade(SpeedConfig config) : base(config)
         {
-            _upgradeAmount = config.upgradeAmount;
+            _upgradeAmount = config.UpgradeAmount;
         }
 
         [Inject]
@@ -24,7 +25,7 @@ namespace Sample
 
         protected override void LevelUp(int level)
         {
-            _playerStats.SetStat(Id, _startSpeed + level * _upgradeAmount);
+            _playerStats.SetStat(Id, _startSpeed + (level - 1) * _upgradeAmount);
         }
     }
 }

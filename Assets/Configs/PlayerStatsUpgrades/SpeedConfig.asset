@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c460b55e072a90d47ba65a3eff3d6a1e, type: 3}
+  m_Script: {fileID: 11500000, guid: 5fa1b57642844ca48bb18b3e7c2f14c3, type: 3}
   m_Name: SpeedConfig
   m_EditorClassIdentifier: 
-  id: Speed
-  ruleUpgradeConfigs: []
-  maxLevel: 10
+  Id: 2
+  ConstraintUpgradeConfigs:
+  - {fileID: 11400000, guid: ac140bc7a64a72d4a84f76bde890c5be, type: 2}
+  MaxLevel: 10
   priceTable:
-    basePrice: 3
-    levels: 0000000006000000090000000c0000000f0000001200000015000000180000001b0000001e000000
-  upgradePersent: 10
+    basePrice: 2
+    levels: 000000000400000006000000080000000a0000000c0000000e000000100000001200000014000000
+  UpgradeAmount: 1

@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc1ffe9de8c60604fba9214cde91fc8e, type: 3}
-  m_Name: UnloadAreaConfig
+  m_Script: {fileID: 11500000, guid: 29430cb96063f4b48b4bf135c4057241, type: 3}
+  m_Name: HealthConfig
   m_EditorClassIdentifier: 
-  id: Unload Area
-  ruleUpgradeConfigs:
-  - {fileID: 11400000, guid: a0fef1581b82d54479b45dfa3bcbbf65, type: 2}
-  maxLevel: 5
+  Id: 0
+  ConstraintUpgradeConfigs: []
+  MaxLevel: 10
   priceTable:
-    basePrice: 2
-    levels: 000000000400000006000000080000000a000000
+    basePrice: 10
+    levels: 00000000140000001e00000028000000320000003c00000046000000500000005a00000064000000
+  UpgradeBase: 5

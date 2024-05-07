@@ -9,7 +9,12 @@ namespace Sample
     )]
     public class DamageConfig : UpgradeConfig
     {
-        public int upgradeAmount;
+        public int UpgradeAmount;
+
+        public DamageConfig()
+        {
+            Id = PlayerStatType.Damage;
+        }
 
         public override Upgrade InstantiateUpgrade(IObjectResolver objectResolver)
         {
@@ -18,5 +23,24 @@ namespace Sample
 
             return damageUpgrade;
         }
+
+        //public override bool CanLevelUpFromConstraints(int level, Upgrade[] constraintUpgrades)
+        //{
+        //    if (constraintUpgrades == null || constraintUpgrades.Length == 0)
+        //    {
+        //        Debug.Log($"no constraint upgrades in upgrade for {Id}");
+        //        return true;
+        //    }
+
+        //    for (int i = 0; i < constraintUpgrades.Length; i++)
+        //    {
+        //        if (constraintUpgrades[i].Level <= level && !constraintUpgrades[i].IsMaxLevel)
+        //        {
+        //            return false;
+        //        }
+        //    }
+
+        //    return true;
+        //}
     }
 }

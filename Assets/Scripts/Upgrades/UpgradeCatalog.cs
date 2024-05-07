@@ -10,20 +10,20 @@ namespace Sample
     public sealed class UpgradeCatalog : ScriptableObject
     {
         [SerializeField]
-        private UpgradeConfig[] configs;
+        private UpgradeConfig[] _configs;
         
         public UpgradeConfig[] GetAllUpgrades()
         {
-            return this.configs;
+            return _configs;
         }
 
         public UpgradeConfig FindUpgrade(PlayerStatType id)
         {
-            var length = this.configs.Length;
+            var length = _configs.Length;
             for (var i = 0; i < length; i++)
             {
-                var config = this.configs[i];
-                if (config.id == id)
+                var config = _configs[i];
+                if (config.Id == id)
                 {
                     return config;
                 }

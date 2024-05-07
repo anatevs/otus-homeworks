@@ -10,7 +10,7 @@ namespace Sample
 
         public HealthUpgrade(HealthConfig config) : base(config)
         {
-            _upgradeBase = config.upgradeBase;
+            _upgradeBase = config.UpgradeBase;
         }
 
         [Inject]

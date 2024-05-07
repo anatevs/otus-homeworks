@@ -10,7 +10,12 @@ namespace Sample
 
     public class SpeedConfig : UpgradeConfig
     {
-        public int upgradeAmount;
+        public int UpgradeAmount;
+
+        public SpeedConfig()
+        {
+            Id = PlayerStatType.Speed;
+        }
 
         public override Upgrade InstantiateUpgrade(IObjectResolver objectResolver)
         {

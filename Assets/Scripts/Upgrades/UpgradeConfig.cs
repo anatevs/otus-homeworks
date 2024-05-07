@@ -9,15 +9,15 @@ namespace Sample
     {
         protected const float SPACE_HEIGHT = 10.0f;
 
-        [SerializeField]
-        public PlayerStatType id;
+        [ShowInInspector, ReadOnly]
+        public PlayerStatType Id;
 
         [ShowInInspector]
-        public UpgradeConfig[] ruleUpgradeConfigs;
+        public UpgradeConfig[] ConstraintConfigs;
 
         [Range(2, 99)]
         [SerializeField]
-        public int maxLevel = 2;
+        public int MaxLevel = 2;
 
         [Space(SPACE_HEIGHT)]
         [SerializeField]
@@ -39,11 +39,30 @@ namespace Sample
 
         protected virtual void Validate()
         {
-            this.priceTable.OnValidate(this.maxLevel);
+            this.priceTable.OnValidate(this.MaxLevel);
         }
 
-        public virtual bool CanLevelUpRule(int level = 1, Upgrade[] ruleUpgrades = null)
+        public virtual bool CanLevelUpFromConstraints(int level, Upgrade[] constraintUpgrades)
         {
+            if (ConstraintConfigs == null || ConstraintConfigs.Length == 0)
+            {
+                return true;
+            }
+
+            if (constraintUpgrades == null || constraintUpgrades.Length == 0)
+            {
+                Debug.Log($"there must be constraint upgrades in upgrade {Id}");
+                return true;
+            }
+
+            for (int i = 0; i < constraintUpgrades.Length; i++)
+            {
+                if (constraintUpgrades[i].Level <= level && !constraintUpgrades[i].IsMaxLevel)
+                {
+                    return false;
+                }
+            }
+
             return true;
         }
 
