@@ -9,6 +9,8 @@ namespace Sample
     {
         public string Name => this.name;
 
+        public ItemFlags Flags => this.flags;
+
         [SerializeField]
         private string name;
 

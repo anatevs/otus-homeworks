@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using Sample;
 
 namespace Equipment
@@ -11,9 +12,19 @@ namespace Equipment
         public event Action<Item> OnItemRemoved;
         public event Action<Item> OnItemChanged; 
 
-        public void Setup(KeyValuePair<EquipmentType, Item> items)
+        private readonly Dictionary<EquipmentType, Item> _items = new();
+
+        public bool Setup(EquipmentType type, Item item)
         {
-            throw new NotImplementedException();
+            if (!_items.TryAdd(type, item))
+            {
+                Debug.Log($"character also use other " +
+                    $"equipment ({_items[type]}) at {type}");
+
+                return false;
+            }
+
+            return true;
         }
 
         public Item GetItem(EquipmentType type)
