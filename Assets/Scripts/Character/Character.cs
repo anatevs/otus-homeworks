@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
+using VContainer;
 
 namespace Sample
 {
@@ -13,6 +14,7 @@ namespace Sample
         [ShowInInspector, ReadOnly]
         private readonly Dictionary<string, int> stats;
 
+        [Inject]
         public Character()
         {
             this.stats = new Dictionary<string, int>();

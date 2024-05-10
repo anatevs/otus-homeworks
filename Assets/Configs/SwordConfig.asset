@@ -13,9 +13,16 @@ MonoBehaviour:
   m_Name: SwordConfig
   m_EditorClassIdentifier: 
   item:
-    name: 
-    flags: 0
-    components: []
+    name: Sword
+    flags: 4
+    components:
+    - rid: 6902558295026827264
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6902558295026827264
+      type: {class: EquipmentComponent, ns: , asm: Assembly-CSharp}
+      data:
+        <Type>k__BackingField: 4
+        <CharacterStat>k__BackingField: 0
+        <Value>k__BackingField: 10

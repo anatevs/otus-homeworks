@@ -10,56 +10,64 @@ namespace Equipment
     {
         public event Action<Item> OnItemAdded;
         public event Action<Item> OnItemRemoved;
-        public event Action<Item> OnItemChanged; 
+        public event Action<Item, Item> OnItemChanged; 
 
         private readonly Dictionary<EquipmentType, Item> _items = new();
 
-        public bool Setup(EquipmentType type, Item item)
+        public void Setup(KeyValuePair<EquipmentType, Item> item)
         {
-            if (!_items.TryAdd(type, item))
-            {
-                Debug.Log($"character also use other " +
-                    $"equipment ({_items[type]}) at {type}");
-
-                return false;
-            }
-
-            return true;
+            
         }
 
         public Item GetItem(EquipmentType type)
         {
-            throw new NotImplementedException();
+            return _items[type];
         }
 
         public bool TryGetItem(EquipmentType type, out Item result)
         {
-            throw new NotImplementedException();
+            return _items.TryGetValue(type, out result);
         }
 
         public void RemoveItem(EquipmentType type, Item item)
         {
-            throw new NotImplementedException();
+            _items.Remove(type);
+
+            OnItemRemoved?.Invoke(item);
         }
 
         public void AddItem(EquipmentType type, Item item)
         {
-            throw new NotImplementedException();
+            _items.Add(type, item);
+
+            OnItemAdded?.Invoke(item);
         }
 
         public void ChangeItem(EquipmentType type, Item item)
         {
-            throw new NotImplementedException();
+            Item prevItem = _items[type];
+            _items[type] = item;
+
+            OnItemChanged?.Invoke(prevItem, item);
         }
 
         public bool HasItem(EquipmentType type)
         {
-            throw new NotImplementedException();
+            return _items.ContainsKey(type);
         }
 
         public KeyValuePair<EquipmentType, Item>[] GetItems()
         {
-            throw new NotImplementedException();
+            KeyValuePair<EquipmentType, Item>[] res =
+                new KeyValuePair<EquipmentType, Item>[_items.Count];
+
+            int i = 0;
+            foreach (KeyValuePair<EquipmentType, Item> pair in _items)
+            {
+                res[i] = pair;
+            }
+
+            return res;
         }
     }
 }

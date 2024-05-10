@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 
 public class EquipmentInventoryHelper : MonoBehaviour, IDisposable
 {
@@ -15,10 +16,12 @@ public class EquipmentInventoryHelper : MonoBehaviour, IDisposable
 
     private Equipment.Equipment _equipment;
 
+    [ShowInInspector]
     private Character _character;
 
     private CharacterStatsNames _statNames;
 
+    [Inject]
     public void Construct(Inventory inventory, Equipment.Equipment equipment, Character character, CharacterStatsNames statsNames)
     {
         _inventory = inventory;
@@ -63,11 +66,21 @@ public class EquipmentInventoryHelper : MonoBehaviour, IDisposable
             EquipmentComponent component = 
                 item.GetComponent<EquipmentComponent>();
 
-            //if (_equipment.Setup(component.Type, item))
-            //{
-            //    string stat = _statNames.GetStatName(component.CharacterStat);
-            //    _character.SetStat(stat, component.Value);
-            //}
+            if (_equipment.TryGetItem(component.Type, out Item currentItem))
+            {
+                _equipment.ChangeItem(component.Type, item);
+
+                string stat = _statNames.GetStatName(component.CharacterStat);
+                int currEquipment = _character.GetStat(stat);
+                _character.SetStat(stat, component.Value - currEquipment);
+            }
+            else
+            {
+                _equipment.AddItem(component.Type, item);
+
+                string stat = _statNames.GetStatName(component.CharacterStat);
+                _character.SetStat(stat, component.Value);
+            }
         }
     }
 
