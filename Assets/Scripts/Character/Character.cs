@@ -14,11 +14,12 @@ namespace Sample
         [ShowInInspector, ReadOnly]
         private readonly Dictionary<string, int> stats;
 
-        [Inject]
         public Character()
         {
             this.stats = new Dictionary<string, int>();
         }
+
+        [Inject]
 
         public Character(params KeyValuePair<string, int>[] stats)
         {

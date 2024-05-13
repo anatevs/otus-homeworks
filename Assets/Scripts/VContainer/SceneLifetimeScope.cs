@@ -2,6 +2,7 @@ using Sample;
 using VContainer;
 using VContainer.Unity;
 using UnityEngine;
+using System.Collections.Generic;
 
 public sealed class SceneLifetimeScope : LifetimeScope
 {
@@ -11,21 +12,31 @@ public sealed class SceneLifetimeScope : LifetimeScope
     [SerializeField]
     private EquipmentInventoryHelper _equipmentHelper;
 
+    [SerializeField]
+    private InitCharacterStats _initCharacterStats;
+
+    private CharacterStatsNames _statNames;
+
     protected override void Configure(IContainerBuilder builder)
     {
-        RegisterCharacter(builder);
         RegisterStats(builder);
+        RegisterCharacter(builder);
         RegisterInventory(builder);
-    }
-
-    private void RegisterCharacter(IContainerBuilder builder)
-    {
-        builder.Register<Character>(Lifetime.Singleton);
     }
 
     private void RegisterStats(IContainerBuilder builder)
     {
-        builder.Register<CharacterStatsNames>(Lifetime.Singleton);
+        _statNames = new CharacterStatsNames();
+        builder.RegisterComponent(_statNames);
+    }
+
+    private void RegisterCharacter(IContainerBuilder builder)
+    {
+        KeyValuePair<string, int>[] initStats = 
+            _initCharacterStats.GetInitStats(_statNames);
+
+        builder.Register<Character>(Lifetime.Singleton)
+            .WithParameter(initStats);
     }
 
     private void RegisterInventory(IContainerBuilder builder)

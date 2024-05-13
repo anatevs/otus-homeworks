@@ -159,6 +159,7 @@ MonoBehaviour:
   - {fileID: 390780519}
   _inventoryContext: {fileID: 390780520}
   _equipmentHelper: {fileID: 390780522}
+  _initCharacterStats: {fileID: 11400000, guid: 6a62abd876af79445bcdfc722159be09, type: 2}
 --- !u!4 &147102810
 Transform:
   m_ObjectHideFlags: 0
