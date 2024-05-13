@@ -11,6 +11,9 @@ public sealed class EquipmentInventoryHelper : MonoBehaviour, IDisposable
     private readonly List<string> _unusedEquipmentNames = new();
 
     [ShowInInspector]
+    private readonly List<string> _inusedEquipmentNames = new();
+
+    [ShowInInspector]
     private Character _character;
 
     private Inventory _inventory;
@@ -93,7 +96,29 @@ public sealed class EquipmentInventoryHelper : MonoBehaviour, IDisposable
                 _equipment.AddItem(newEquipment.Type, newItem);
             }
 
-            _unusedEquipmentNames.Remove(newItem.Name);
+            _inusedEquipmentNames.Add(itemName);
+            _unusedEquipmentNames.Remove(itemName);
+        }
+    }
+
+    [Button]
+    private void RemoveEquipment(string itemName)
+    {
+        if (_inventory.FindItem(itemName, out Item newItem))
+        {
+            EquipmentComponent component =
+                newItem.GetComponent<EquipmentComponent>();
+
+            string stat = _statNames.GetStatName(component.CharacterStat);
+
+            if (_equipment.TryGetItem(component.Type, out Item item))
+            {
+                _equipment.RemoveItem(component.Type, item);
+                UpdateStat(stat, -component.Value);
+            }
+
+            _inusedEquipmentNames.Remove(itemName);
+            _unusedEquipmentNames.Add(itemName);
         }
     }
 

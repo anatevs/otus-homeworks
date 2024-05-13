@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Sample;
+using Sirenix.OdinInspector;
 
 namespace Equipment
 {
@@ -8,7 +9,7 @@ namespace Equipment
     {
         public event Action<Item> OnItemAdded;
         public event Action<Item> OnItemRemoved;
-        public event Action<Item, Item> OnItemChanged; 
+        public event Action<Item, Item> OnItemChanged;
 
         private readonly Dictionary<EquipmentType, Item> _items = new();
 
