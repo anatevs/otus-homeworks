@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
 
-public sealed class CharacterStatsNames
+public sealed class CharacterStatNames
 {
-    private readonly Dictionary<CharacterStat, String> _stats = new() 
+    private readonly Dictionary<CharacterStat, String> _stats = new();
+
+    public CharacterStatNames()
     {
-        {CharacterStat.Speed, "Speed"},
-        {CharacterStat.Damage, "Damage"},
-        {CharacterStat.Defence, "Defence"}
-    };
+        foreach (CharacterStat stat in Enum.GetValues(typeof(CharacterStat)))
+        {
+            _stats.Add(stat, Enum.GetName(typeof(CharacterStat), stat));
+        }
+    }
 
     public string GetStatName(CharacterStat stat)
     {

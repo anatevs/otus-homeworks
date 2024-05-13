@@ -5,26 +5,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using VContainer;
 
-public class EquipmentInventoryHelper : MonoBehaviour, IDisposable
+public sealed class EquipmentInventoryHelper : MonoBehaviour, IDisposable
 {
     [ShowInInspector]
-    private readonly List<string> _equipmentsNames = new List<string>();
+    private readonly List<string> _unusedEquipmentNames = new();
+
+    [ShowInInspector]
+    private Character _character;
 
     private Inventory _inventory;
 
     private Equipment.Equipment _equipment;
 
-    [ShowInInspector]
-    private Character _character;
-
-    private CharacterStatsNames _statNames;
+    private CharacterStatNames _statNames;
 
     [Inject]
-    public void Construct(Inventory inventory, Equipment.Equipment equipment, Character character, CharacterStatsNames statsNames)
+    public void Construct(Inventory inventory, Character character, Equipment.Equipment equipment, CharacterStatNames statsNames)
     {
         _inventory = inventory;
-        _equipment = equipment;
         _character = character;
+        _equipment = equipment;
         _statNames = statsNames;
     }
 
@@ -44,7 +44,7 @@ public class EquipmentInventoryHelper : MonoBehaviour, IDisposable
     {
         if (item.Flags.HasFlag(ItemFlags.EQUPPABLE))
         {
-            _equipmentsNames.Add(item.Name);
+            _unusedEquipmentNames.Add(item.Name);
         }
     }
 
@@ -52,7 +52,7 @@ public class EquipmentInventoryHelper : MonoBehaviour, IDisposable
     {
         if (item.Flags.HasFlag(ItemFlags.EQUPPABLE))
         {
-            _equipmentsNames.Remove(item.Name);
+            _unusedEquipmentNames.Remove(item.Name);
         }
     }
 
@@ -74,27 +74,26 @@ public class EquipmentInventoryHelper : MonoBehaviour, IDisposable
 
                 if (currStat == newStat)
                 {
-                    //int currStatVal = _character.GetStat(newStat);
                     UpdateStat(newStat, newEquipment.Value - currEquipment.Value);
-                    //_character.SetStat(newStat, _character.GetStat(newStat) - currEquipment.Value + newEquipment.Value);
                 }
                 else
                 {
                     UpdateStat(currStat, -currEquipment.Value);
                     UpdateStat(newStat, newEquipment.Value);
-                    //_character.SetStat(currStat, _character.GetStat(currStat) - currEquipment.Value);
-                    //_character.SetStat(newStat, _character.GetStat(newStat) + newEquipment.Value);
                 }
 
                 _equipment.ChangeItem(newEquipment.Type, newItem);
+
+                _unusedEquipmentNames.Add(currItem.Name);
             }
             else
             {
                 UpdateStat(newStat, newEquipment.Value);
 
                 _equipment.AddItem(newEquipment.Type, newItem);
-                //_character.SetStat(newStat, _character.GetStat(newStat) + newEquipment.Value);
             }
+
+            _unusedEquipmentNames.Remove(newItem.Name);
         }
     }
 

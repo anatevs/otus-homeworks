@@ -1,6 +1,3 @@
-using Sirenix.OdinInspector;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +8,7 @@ public sealed class InitCharacterStats : ScriptableObject
     [SerializeField]
     private StatStruct[] _statStructs;
 
-    public KeyValuePair<string, int>[] GetInitStats(CharacterStatsNames statsNames)
+    public KeyValuePair<string, int>[] GetInitStats(CharacterStatNames statsNames)
     {
         KeyValuePair<string, int>[] res = new KeyValuePair<string, int>[_statStructs.Length];
 
@@ -23,14 +20,4 @@ public sealed class InitCharacterStats : ScriptableObject
 
         return res;
     }
-}
-
-[Serializable]
-public struct StatStruct
-{
-    [SerializeField]
-    public CharacterStat Name;
-
-    [SerializeField]
-    public int Value;
 }

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
-using VContainer;
 
 namespace Sample
 {
@@ -18,8 +17,6 @@ namespace Sample
         {
             this.stats = new Dictionary<string, int>();
         }
-
-        [Inject]
 
         public Character(params KeyValuePair<string, int>[] stats)
         {

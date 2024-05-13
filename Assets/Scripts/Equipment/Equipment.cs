@@ -4,7 +4,6 @@ using Sample;
 
 namespace Equipment
 {
-    //TODO: Реализовать экипировку
     public sealed class Equipment
     {
         public event Action<Item> OnItemAdded;
@@ -12,11 +11,6 @@ namespace Equipment
         public event Action<Item, Item> OnItemChanged; 
 
         private readonly Dictionary<EquipmentType, Item> _items = new();
-
-        public void Setup(KeyValuePair<EquipmentType, Item> item)
-        {
-            
-        }
 
         public Item GetItem(EquipmentType type)
         {

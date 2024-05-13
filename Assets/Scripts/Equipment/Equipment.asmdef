@@ -2,7 +2,8 @@
     "name": "Equipment",
     "rootNamespace": "",
     "references": [
-        "GUID:563cadb801ab43b2a0cac77f70b1c177"
+        "GUID:563cadb801ab43b2a0cac77f70b1c177",
+        "GUID:cf1036045c83be946a051b4c510fa0e1"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

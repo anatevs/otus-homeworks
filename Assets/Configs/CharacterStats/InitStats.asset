@@ -12,3 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47d7ea469e2575646a5ef94b91663197, type: 3}
   m_Name: InitStats
   m_EditorClassIdentifier: 
+  _statStructs:
+  - <Name>k__BackingField: 0
+    <Value>k__BackingField: 1
+  - <Name>k__BackingField: 1
+    <Value>k__BackingField: 1
+  - <Name>k__BackingField: 2
+    <Value>k__BackingField: 0

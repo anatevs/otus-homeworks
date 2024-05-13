@@ -16,11 +16,11 @@ MonoBehaviour:
     name: ArmorBoots
     flags: 4
     components:
-    - rid: 6902558295026827271
+    - rid: 6902558295026827273
   references:
     version: 2
     RefIds:
-    - rid: 6902558295026827271
+    - rid: 6902558295026827273
       type: {class: EquipmentComponent, ns: , asm: Assembly-CSharp}
       data:
         <Type>k__BackingField: 0

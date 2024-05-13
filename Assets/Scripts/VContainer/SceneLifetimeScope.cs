@@ -15,7 +15,7 @@ public sealed class SceneLifetimeScope : LifetimeScope
     [SerializeField]
     private InitCharacterStats _initCharacterStats;
 
-    private CharacterStatsNames _statNames;
+    private CharacterStatNames _statNames;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -26,7 +26,7 @@ public sealed class SceneLifetimeScope : LifetimeScope
 
     private void RegisterStats(IContainerBuilder builder)
     {
-        _statNames = new CharacterStatsNames();
+        _statNames = new CharacterStatNames();
         builder.RegisterComponent(_statNames);
     }
 
@@ -45,6 +45,8 @@ public sealed class SceneLifetimeScope : LifetimeScope
         builder.Register<Equipment.Equipment>(Lifetime.Singleton);
         builder.RegisterComponent(_inventoryContext);
 
-        builder.RegisterComponent(_equipmentHelper);
+        builder.RegisterComponent(_equipmentHelper)
+            .AsImplementedInterfaces()
+            .AsSelf();
     }
 }
