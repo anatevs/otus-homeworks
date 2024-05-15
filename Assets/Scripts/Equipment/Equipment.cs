@@ -45,9 +45,23 @@ namespace Equipment
             OnItemChanged?.Invoke(prevItem, item);
         }
 
-        public bool HasItem(EquipmentType type)
+        public bool HasItemOfType(EquipmentType type)
         {
             return _items.ContainsKey(type);
+        }
+
+        public bool HasItem(Item item)
+        {
+            var component = item.GetComponent<EquipmentComponent>();
+            if (TryGetItem(component.Type, out var equipmentItem))
+            {
+                if (equipmentItem.Equals(item))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public KeyValuePair<EquipmentType, Item>[] GetItems()

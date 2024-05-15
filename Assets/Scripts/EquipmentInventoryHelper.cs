@@ -14,6 +14,9 @@ public sealed class EquipmentInventoryHelper : MonoBehaviour, IDisposable
     private readonly List<string> _inusedEquipmentNames = new();
 
     [ShowInInspector]
+    private EquipmentSetter _equipmentSetter;
+
+    [ShowInInspector]
     private Character _character;
 
     private Inventory _inventory;
@@ -29,18 +32,26 @@ public sealed class EquipmentInventoryHelper : MonoBehaviour, IDisposable
         _character = character;
         _equipment = equipment;
         _statNames = statsNames;
+
+        _equipmentSetter = new EquipmentSetter(_character, _inventory, _equipment, _statNames);
     }
 
     private void Awake()
     {
         _inventory.OnItemAdded += OnInventoryAdded;
         _inventory.OnItemRemoved += OnInventoryRemoved;
+
+        _equipmentSetter.OnEquipped += OnEquipped;
+        _equipmentSetter.OnUnequipped += OnUnequipped;
     }
 
     void IDisposable.Dispose()
     {
         _inventory.OnItemAdded -= OnInventoryAdded;
         _inventory.OnItemRemoved -= OnInventoryRemoved;
+
+        _equipmentSetter.OnEquipped -= OnEquipped;
+        _equipmentSetter.OnUnequipped -= OnUnequipped;
     }
 
     private void OnInventoryAdded(Item item)
@@ -59,71 +70,83 @@ public sealed class EquipmentInventoryHelper : MonoBehaviour, IDisposable
         }
     }
 
-    [Button]
-    private void UseEquipment(string itemName)
+    private void OnEquipped(string itemName)
     {
-        if (_inventory.FindItem(itemName, out Item newItem))
-        {
-            EquipmentComponent newEquipment = 
-                newItem.GetComponent<EquipmentComponent>();
-
-            string newStat = _statNames.GetStatName(newEquipment.CharacterStat);
-
-            if (_equipment.TryGetItem(newEquipment.Type, out Item currItem))
-            {
-                var currEquipment = currItem.GetComponent<EquipmentComponent>();
-
-                string currStat = _statNames.GetStatName(currEquipment.CharacterStat);
-
-                if (currStat == newStat)
-                {
-                    UpdateStat(newStat, newEquipment.Value - currEquipment.Value);
-                }
-                else
-                {
-                    UpdateStat(currStat, -currEquipment.Value);
-                    UpdateStat(newStat, newEquipment.Value);
-                }
-
-                _equipment.ChangeItem(newEquipment.Type, newItem);
-
-                _unusedEquipmentNames.Add(currItem.Name);
-            }
-            else
-            {
-                UpdateStat(newStat, newEquipment.Value);
-
-                _equipment.AddItem(newEquipment.Type, newItem);
-            }
-
-            _inusedEquipmentNames.Add(itemName);
-            _unusedEquipmentNames.Remove(itemName);
-        }
+        _inusedEquipmentNames.Add(itemName);
+        _unusedEquipmentNames.Remove(itemName);
     }
 
-    [Button]
-    private void RemoveEquipment(string itemName)
+    private void OnUnequipped(string itemName)
     {
-        if (_inventory.FindItem(itemName, out Item newItem))
-        {
-            EquipmentComponent component =
-                newItem.GetComponent<EquipmentComponent>();
-
-            string stat = _statNames.GetStatName(component.CharacterStat);
-
-            if (_equipment.TryGetItem(component.Type, out Item item))
-            {
-                _equipment.RemoveItem(component.Type, item);
-                UpdateStat(stat, -component.Value);
-            }
-
-            _inusedEquipmentNames.Remove(itemName);
-            _unusedEquipmentNames.Add(itemName);
-        }
+        _inusedEquipmentNames.Remove(itemName);
+        _unusedEquipmentNames.Add(itemName);
     }
 
-    private void UpdateStat(string statName, int addValue)
-    {
-        _character.SetStat(statName, _character.GetStat(statName) + addValue);
-    }
+    //[Button]
+    //private void UseEquipment(string itemName)
+    //{
+    //    if (_inventory.FindItem(itemName, out Item newItem))
+    //    {
+    //        EquipmentComponent newEquipment = 
+    //            newItem.GetComponent<EquipmentComponent>();
+
+    //        string newStat = _statNames.GetStatName(newEquipment.CharacterStat);
+
+    //        if (_equipment.TryGetItem(newEquipment.Type, out Item currItem))
+    //        {
+    //            var currEquipment = currItem.GetComponent<EquipmentComponent>();
+
+    //            string currStat = _statNames.GetStatName(currEquipment.CharacterStat);
+
+    //            if (currStat == newStat)
+    //            {
+    //                UpdateStat(newStat, newEquipment.Value - currEquipment.Value);
+    //            }
+    //            else
+    //            {
+    //                UpdateStat(currStat, -currEquipment.Value);
+    //                UpdateStat(newStat, newEquipment.Value);
+    //            }
+
+    //            _equipment.ChangeItem(newEquipment.Type, newItem);
+
+    //            _unusedEquipmentNames.Add(currItem.Name);
+    //        }
+    //        else
+    //        {
+    //            UpdateStat(newStat, newEquipment.Value);
+
+    //            _equipment.AddItem(newEquipment.Type, newItem);
+    //        }
+
+    //        _inusedEquipmentNames.Add(itemName);
+    //        _unusedEquipmentNames.Remove(itemName);
+    //    }
+    //}
+
+    //[Button]
+    //private void RemoveEquipment(string itemName)
+    //{
+    //    if (_inventory.FindItem(itemName, out Item newItem))
+    //    {
+    //        EquipmentComponent component =
+    //            newItem.GetComponent<EquipmentComponent>();
+
+    //        string stat = _statNames.GetStatName(component.CharacterStat);
+
+    //        if (_equipment.TryGetItem(component.Type, out Item item))
+    //        {
+    //            _equipment.RemoveItem(component.Type, item);
+    //            UpdateStat(stat, -component.Value);
+    //        }
+
+    //        _inusedEquipmentNames.Remove(itemName);
+    //        _unusedEquipmentNames.Add(itemName);
+    //    }
+    //}
+
+    //private void UpdateStat(string statName, int addValue)
+    //{
+    //    _character.SetStat(statName, _character.GetStat(statName) + addValue);
+    //}
 }

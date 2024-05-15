@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class EquipmentComponent
+public sealed class EquipmentComponent
 {
     [field: SerializeField]
     public EquipmentType Type { get; private set; }
@@ -13,4 +13,11 @@ public class EquipmentComponent
 
     [field: SerializeField]
     public int Value { get; private set; }
+
+    public EquipmentComponent(EquipmentType type, CharacterStat characterStat, int value)
+    {
+        Type = type;
+        CharacterStat = characterStat;
+        Value = value;
+    }
 }

@@ -14,7 +14,7 @@ public sealed class InitCharacterStats : ScriptableObject
 
         for (int i = 0; i < _statStructs.Length; i++)
         {
-            string statName = statsNames.GetStatName(_statStructs[i].Name);
+            string statName = statsNames.GetName(_statStructs[i].Name);
             res[i] = new KeyValuePair<string, int>(statName, _statStructs[i].Value);
         }
 

@@ -1,8 +1,12 @@
 {
-    "name": "Equipment",
+    "name": "Game",
     "rootNamespace": "",
     "references": [
+        "GUID:805e119307f6e454385008dc4fc8efce",
+        "GUID:9a0c8499cc4242cd80bbdb7a9393a200",
         "GUID:563cadb801ab43b2a0cac77f70b1c177",
+        "GUID:3c5d89e141c14530befe971898e4f68b",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
         "GUID:5cc3f8099c0b15a43a02e616cc0f332f"
     ],
     "includePlatforms": [],

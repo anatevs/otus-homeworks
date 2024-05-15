@@ -13,7 +13,7 @@ public sealed class CharacterStatNames
         }
     }
 
-    public string GetStatName(CharacterStat stat)
+    public string GetName(CharacterStat stat)
     {
         if (_stats.ContainsKey(stat))
         {

@@ -16,12 +16,12 @@ MonoBehaviour:
     name: Sword
     flags: 4
     components:
-    - rid: 6902558295026827264
+    - rid: 6902558425117884425
   references:
     version: 2
     RefIds:
-    - rid: 6902558295026827264
-      type: {class: EquipmentComponent, ns: , asm: Assembly-CSharp}
+    - rid: 6902558425117884425
+      type: {class: EquipmentComponent, ns: , asm: Game}
       data:
         <Type>k__BackingField: 4
         <CharacterStat>k__BackingField: 0
