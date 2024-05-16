@@ -16,12 +16,12 @@ MonoBehaviour:
     name: SpeedBoots
     flags: 4
     components:
-    - rid: 6902558425117884424
+    - rid: 6902558432183975942
   references:
     version: 2
     RefIds:
-    - rid: 6902558425117884424
-      type: {class: EquipmentComponent, ns: , asm: Game}
+    - rid: 6902558432183975942
+      type: {class: EquipmentComponent, ns: , asm: Equipment}
       data:
         <Type>k__BackingField: 0
         <CharacterStat>k__BackingField: 1

@@ -16,13 +16,13 @@ MonoBehaviour:
     name: BodyArmor
     flags: 4
     components:
-    - rid: 6902558425117884420
+    - rid: 6902558432183975938
   references:
     version: 2
     RefIds:
-    - rid: 6902558425117884420
-      type: {class: EquipmentComponent, ns: , asm: Game}
+    - rid: 6902558432183975938
+      type: {class: EquipmentComponent, ns: , asm: Equipment}
       data:
         <Type>k__BackingField: 1
         <CharacterStat>k__BackingField: 2
-        <Value>k__BackingField: 5
+        <Value>k__BackingField: 4

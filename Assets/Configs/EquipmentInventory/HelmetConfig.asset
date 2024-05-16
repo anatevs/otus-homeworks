@@ -16,13 +16,13 @@ MonoBehaviour:
     name: Helmet
     flags: 4
     components:
-    - rid: 6902558425117884422
+    - rid: 6902558432183975940
   references:
     version: 2
     RefIds:
-    - rid: 6902558425117884422
-      type: {class: EquipmentComponent, ns: , asm: Game}
+    - rid: 6902558432183975940
+      type: {class: EquipmentComponent, ns: , asm: Equipment}
       data:
         <Type>k__BackingField: 2
         <CharacterStat>k__BackingField: 2
-        <Value>k__BackingField: 6
+        <Value>k__BackingField: 5

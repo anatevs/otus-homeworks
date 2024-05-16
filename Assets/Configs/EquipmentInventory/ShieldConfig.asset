@@ -16,13 +16,13 @@ MonoBehaviour:
     name: Shield
     flags: 4
     components:
-    - rid: 6902558425117884423
+    - rid: 6902558432183975941
   references:
     version: 2
     RefIds:
-    - rid: 6902558425117884423
-      type: {class: EquipmentComponent, ns: , asm: Game}
+    - rid: 6902558432183975941
+      type: {class: EquipmentComponent, ns: , asm: Equipment}
       data:
         <Type>k__BackingField: 3
         <CharacterStat>k__BackingField: 2
-        <Value>k__BackingField: 8
+        <Value>k__BackingField: 7
