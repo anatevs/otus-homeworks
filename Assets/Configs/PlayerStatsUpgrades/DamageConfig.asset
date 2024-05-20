@@ -20,4 +20,4 @@ MonoBehaviour:
   priceTable:
     basePrice: 1
     levels: 0000000002000000030000000400000005000000
-  UpgradeAmount: 2
+  <UpgradeAmount>k__BackingField: 2

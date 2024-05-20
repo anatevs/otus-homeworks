@@ -42,7 +42,7 @@ namespace Sample
             this.priceTable.OnValidate(this.MaxLevel);
         }
 
-        public virtual bool CanLevelUpFromConstraints(int level, Upgrade[] constraintUpgrades)
+        public bool CanLevelUpFromConstraints(int level, Upgrade[] constraintUpgrades)
         {
             if (ConstraintConfigs == null || ConstraintConfigs.Length == 0)
             {

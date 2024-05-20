@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: HealthConfig
   m_EditorClassIdentifier: 
   Id: 0
-  ConstraintUpgradeConfigs: []
+  ConstraintConfigs: []
   MaxLevel: 10
   priceTable:
     basePrice: 10
     levels: 00000000140000001e00000028000000320000003c00000046000000500000005a00000064000000
-  UpgradeBase: 5
+  <UpgradeBase>k__BackingField: 5

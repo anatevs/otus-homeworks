@@ -10,7 +10,8 @@ namespace Sample
 
     public sealed class HealthConfig : UpgradeConfig
     {
-        public int UpgradeBase;
+        [field: SerializeField]
+        public int UpgradeBase { get; private set; }
 
         public HealthConfig()
         {

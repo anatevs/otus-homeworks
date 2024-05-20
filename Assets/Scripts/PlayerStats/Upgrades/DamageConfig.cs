@@ -9,7 +9,8 @@ namespace Sample
     )]
     public sealed class DamageConfig : UpgradeConfig
     {
-        public int UpgradeAmount;
+        [field: SerializeField]
+        public int UpgradeAmount { get; private set; }
 
         public DamageConfig()
         {

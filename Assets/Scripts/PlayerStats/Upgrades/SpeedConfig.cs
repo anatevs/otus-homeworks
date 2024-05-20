@@ -10,7 +10,8 @@ namespace Sample
 
     public sealed class SpeedConfig : UpgradeConfig
     {
-        public int UpgradeAmount;
+        [field: SerializeField]
+        public int UpgradeAmount { get; private set; }
 
         public SpeedConfig()
         {
