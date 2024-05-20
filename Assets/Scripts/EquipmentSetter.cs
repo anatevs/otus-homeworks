@@ -67,6 +67,11 @@ public class EquipmentSetter
 
             OnEquipped?.Invoke(itemName);
         }
+
+        else
+        {
+            throw new Exception($"there is no equipment item {itemName} in inventory");
+        }
     }
 
     [Button]
@@ -84,8 +89,16 @@ public class EquipmentSetter
                 _equipment.RemoveItem(component.Type, item);
                 UpdateStat(stat, -component.Value);
             }
+            else
+            {
+                throw new Exception($"there is no item {itemName} in character's equipment");
+            }
 
             OnUnequipped?.Invoke(itemName);
+        }
+        else
+        {
+            throw new Exception($"there is no item {itemName} in inventory");
         }
     }
 
