@@ -11,30 +11,30 @@ namespace Sample
         public event Action OnStateChanged;
         
         [ShowInInspector, ReadOnly]
-        private readonly Dictionary<string, int> stats;
+        private readonly Dictionary<string, float> stats;
 
         public Character()
         {
-            this.stats = new Dictionary<string, int>();
+            this.stats = new Dictionary<string, float>();
         }
 
-        public Character(params KeyValuePair<string, int>[] stats)
+        public Character(params KeyValuePair<string, float>[] stats)
         {
-            this.stats = new Dictionary<string, int>(stats);
+            this.stats = new Dictionary<string, float>(stats);
         }
 
-        public int GetStat(string name)
+        public float GetStat(string name)
         {
             return this.stats[name];
         }
 
-        public void SetStat(string name, int value)
+        public void SetStat(string name, float value)
         {
             this.stats[name] = value;
             this.OnStateChanged?.Invoke();
         }
 
-        public void RemoveStat(string name, int value)
+        public void RemoveStat(string name)
         {
             if (this.stats.Remove(name))
             {
@@ -42,7 +42,7 @@ namespace Sample
             }
         }
 
-        public KeyValuePair<string, int>[] GetStats()
+        public KeyValuePair<string, float>[] GetStats()
         {
             return this.stats.ToArray();
         }

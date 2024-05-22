@@ -1,26 +1,28 @@
-using Sample;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using VContainer;
 
-public sealed class InventoryContext : MonoBehaviour
+namespace Sample
 {
-    [SerializeReference]
-    public ItemConfig ItemConfig;
-
-    [ShowInInspector]
-    private Inventory _inventory;
-
-    [Inject]
-    public void Construct(Inventory inventory)
+    public sealed class InventoryContext : MonoBehaviour
     {
-        _inventory = inventory;
-    }
+        [SerializeReference]
+        public ItemConfig ItemConfig;
 
-    [Button]
-    public void AddItem()
-    {
-        Item item = ItemConfig.item.Clone();
-        _inventory.AddItem(item);
+        [ShowInInspector]
+        private Inventory _inventory;
+
+        [Inject]
+        public void Construct(Inventory inventory)
+        {
+            _inventory = inventory;
+        }
+
+        [Button]
+        public void AddItem()
+        {
+            Item item = ItemConfig.item.Clone();
+            _inventory.AddItem(item);
+        }
     }
 }

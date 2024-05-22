@@ -1,4 +1,4 @@
-namespace Equipment
+namespace Sample
 {
     public enum EquipmentType
     {

@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Sample;
-using Sirenix.OdinInspector;
 
-namespace Equipment
+namespace Sample
 {
     public sealed class Equipment
     {

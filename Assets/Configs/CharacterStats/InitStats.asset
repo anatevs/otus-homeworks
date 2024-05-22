@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: InitStats
   m_EditorClassIdentifier: 
   _statStructs:
-  - <Name>k__BackingField: 0
+  - <Name>k__BackingField: Damage
     <Value>k__BackingField: 1
-  - <Name>k__BackingField: 1
+  - <Name>k__BackingField: Speed
     <Value>k__BackingField: 1
-  - <Name>k__BackingField: 2
-    <Value>k__BackingField: 0
+  - <Name>k__BackingField: Health
+    <Value>k__BackingField: 5

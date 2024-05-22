@@ -1,129 +1,128 @@
-using Sample;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using VContainer;
 
-public sealed class EquipmentInventoryHelper : MonoBehaviour, IDisposable
+namespace Sample
 {
-    [ShowInInspector]
-    private readonly List<string> _unusedEquipmentNames = new();
-
-    [ShowInInspector]
-    private readonly List<string> _inusedEquipmentNames = new();
-
-    [ShowInInspector]
-    private Character _character;
-
-    private Inventory _inventory;
-
-    private Equipment.Equipment _equipment;
-
-    private CharacterStatNames _statNames;
-
-    [Inject]
-    public void Construct(Inventory inventory, Character character, Equipment.Equipment equipment, CharacterStatNames statsNames)
+    public sealed class EquipmentInventoryHelper : MonoBehaviour, IDisposable
     {
-        _inventory = inventory;
-        _character = character;
-        _equipment = equipment;
-        _statNames = statsNames;
-    }
+        [ShowInInspector]
+        private readonly List<string> _unusedEquipmentNames = new();
 
-    private void Awake()
-    {
-        _inventory.OnItemAdded += OnInventoryAdded;
-        _inventory.OnItemRemoved += OnInventoryRemoved;
-    }
+        [ShowInInspector]
+        private readonly List<string> _inusedEquipmentNames = new();
 
-    void IDisposable.Dispose()
-    {
-        _inventory.OnItemAdded -= OnInventoryAdded;
-        _inventory.OnItemRemoved -= OnInventoryRemoved;
-    }
+        [ShowInInspector]
+        private Character _character;
 
-    private void OnInventoryAdded(Item item)
-    {
-        if (item.Flags.HasFlag(ItemFlags.EQUPPABLE))
+        private Inventory _inventory;
+
+        private Equipment _equipment;
+
+        [Inject]
+        public void Construct(Inventory inventory, Character character, Equipment equipment)
         {
-            _unusedEquipmentNames.Add(item.Name);
+            _inventory = inventory;
+            _character = character;
+            _equipment = equipment;
         }
-    }
 
-    private void OnInventoryRemoved(Item item)
-    {
-        if (item.Flags.HasFlag(ItemFlags.EQUPPABLE))
+        private void Awake()
         {
-            _unusedEquipmentNames.Remove(item.Name);
+            _inventory.OnItemAdded += OnInventoryAdded;
+            _inventory.OnItemRemoved += OnInventoryRemoved;
         }
-    }
 
-    [Button]
-    private void UseEquipment(string itemName)
-    {
-        if (_inventory.FindItem(itemName, out Item newItem))
+        void IDisposable.Dispose()
         {
-            EquipmentComponent newEquipment = 
-                newItem.GetComponent<EquipmentComponent>();
+            _inventory.OnItemAdded -= OnInventoryAdded;
+            _inventory.OnItemRemoved -= OnInventoryRemoved;
+        }
 
-            string newStat = _statNames.GetStatName(newEquipment.CharacterStat);
-
-            if (_equipment.TryGetItem(newEquipment.Type, out Item currItem))
+        private void OnInventoryAdded(Item item)
+        {
+            if (item.Flags.HasFlag(ItemFlags.EQUPPABLE))
             {
-                var currEquipment = currItem.GetComponent<EquipmentComponent>();
+                _unusedEquipmentNames.Add(item.Name);
+            }
+        }
 
-                string currStat = _statNames.GetStatName(currEquipment.CharacterStat);
+        private void OnInventoryRemoved(Item item)
+        {
+            if (item.Flags.HasFlag(ItemFlags.EQUPPABLE))
+            {
+                _unusedEquipmentNames.Remove(item.Name);
+            }
+        }
 
-                if (currStat == newStat)
+        [Button]
+        private void UseEquipment(string itemName)
+        {
+            if (_inventory.FindItem(itemName, out Item newItem))
+            {
+                EquipmentComponent newEquipment =
+                    newItem.GetComponent<EquipmentComponent>();
+
+                string newStat = newEquipment.StatName;
+
+                if (_equipment.TryGetItem(newEquipment.Type, out Item currItem))
                 {
-                    UpdateStat(newStat, newEquipment.Value - currEquipment.Value);
+                    var currEquipment = currItem.GetComponent<EquipmentComponent>();
+
+                    string currStat = currEquipment.StatName;
+
+                    if (currStat == newStat)
+                    {
+                        UpdateStat(newStat, newEquipment.Value - currEquipment.Value);
+                    }
+                    else
+                    {
+                        UpdateStat(currStat, -currEquipment.Value);
+                        UpdateStat(newStat, newEquipment.Value);
+                    }
+
+                    _equipment.ChangeItem(newEquipment.Type, newItem);
+
+                    _unusedEquipmentNames.Add(currItem.Name);
                 }
                 else
                 {
-                    UpdateStat(currStat, -currEquipment.Value);
                     UpdateStat(newStat, newEquipment.Value);
+
+                    _equipment.AddItem(newEquipment.Type, newItem);
                 }
 
-                _equipment.ChangeItem(newEquipment.Type, newItem);
-
-                _unusedEquipmentNames.Add(currItem.Name);
+                _inusedEquipmentNames.Add(itemName);
+                _unusedEquipmentNames.Remove(itemName);
             }
-            else
-            {
-                UpdateStat(newStat, newEquipment.Value);
-
-                _equipment.AddItem(newEquipment.Type, newItem);
-            }
-
-            _inusedEquipmentNames.Add(itemName);
-            _unusedEquipmentNames.Remove(itemName);
         }
-    }
 
-    [Button]
-    private void RemoveEquipment(string itemName)
-    {
-        if (_inventory.FindItem(itemName, out Item newItem))
+        [Button]
+        private void RemoveEquipment(string itemName)
         {
-            EquipmentComponent component =
-                newItem.GetComponent<EquipmentComponent>();
-
-            string stat = _statNames.GetStatName(component.CharacterStat);
-
-            if (_equipment.TryGetItem(component.Type, out Item item))
+            if (_inventory.FindItem(itemName, out Item newItem))
             {
-                _equipment.RemoveItem(component.Type, item);
-                UpdateStat(stat, -component.Value);
+                EquipmentComponent component =
+                    newItem.GetComponent<EquipmentComponent>();
+
+                string stat = component.StatName;
+
+                if (_equipment.TryGetItem(component.Type, out Item item))
+                {
+                    _equipment.RemoveItem(component.Type, item);
+                    UpdateStat(stat, -component.Value);
+                }
+
+                _inusedEquipmentNames.Remove(itemName);
+                _unusedEquipmentNames.Add(itemName);
             }
-
-            _inusedEquipmentNames.Remove(itemName);
-            _unusedEquipmentNames.Add(itemName);
         }
-    }
 
-    private void UpdateStat(string statName, int addValue)
-    {
-        _character.SetStat(statName, _character.GetStat(statName) + addValue);
+        private void UpdateStat(string statName, float addValue)
+        {
+            _character.SetStat(statName, _character.GetStat(statName) + addValue);
+        }
     }
 }
