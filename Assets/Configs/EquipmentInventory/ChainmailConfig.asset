@@ -24,5 +24,5 @@ MonoBehaviour:
       type: {class: EquipmentComponent, ns: Sample, asm: Game}
       data:
         <Type>k__BackingField: 1
-        StatName: Health
+        _statName: Health
         <Value>k__BackingField: 3
