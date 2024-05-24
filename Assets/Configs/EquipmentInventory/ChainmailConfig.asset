@@ -23,6 +23,6 @@ MonoBehaviour:
     - rid: 6902558591908052994
       type: {class: EquipmentComponent, ns: Sample, asm: Game}
       data:
-        <Type>k__BackingField: 0
-        <StatName>k__BackingField: Health
+        <Type>k__BackingField: 1
+        StatName: Health
         <Value>k__BackingField: 3

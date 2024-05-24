@@ -24,5 +24,5 @@ MonoBehaviour:
       type: {class: EquipmentComponent, ns: Sample, asm: Game}
       data:
         <Type>k__BackingField: 0
-        <StatName>k__BackingField: Speed
+        StatName: Speed
         <Value>k__BackingField: 5

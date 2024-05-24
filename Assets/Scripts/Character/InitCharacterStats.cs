@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,18 @@ namespace Sample
 
             return res;
         }
+
+#if UNITY_EDITOR
+        [Button]
+        public void SetStatNames()
+        {
+            EquipmentComponent.Stats = new string[_statStructs.Length];
+            for (int i = 0; i < _statStructs.Length; i++)
+            {
+                EquipmentComponent.Stats[i] = _statStructs[i].Name;
+            }
+        }
+#endif
     }
 
     [Serializable]
