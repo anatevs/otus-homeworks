@@ -1,6 +1,5 @@
 ﻿using Game.GamePlay.Conveyor;
 using Game.GamePlay.Conveyor.Components;
-using System.Collections;
 using UnityEngine;
 
 namespace Upgrade

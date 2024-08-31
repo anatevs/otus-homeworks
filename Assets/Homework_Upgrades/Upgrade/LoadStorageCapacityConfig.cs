@@ -1,7 +1,4 @@
-﻿using Sirenix.OdinInspector;
-using Sirenix.Serialization;
-using System.Collections;
-using System.Collections.Generic;
+﻿using LevelTables;
 using UnityEngine;
 
 namespace Upgrade
@@ -10,14 +7,20 @@ namespace Upgrade
         fileName = "StorageCapacityUpgradeConfig",
         menuName = "Configs/New StorageCapacity Upgrade Config"
         )]
+
     public class LoadStorageCapacityConfig : UpgradeConfig
     {
-        [ShowInInspector]
-        private Dictionary<int, int> _levelsCapacity = new();
+        [SerializeField]
+        private LinerInterpTable _upgradeTable;
+
+        private void OnValidate()
+        {
+            _upgradeTable.Init(MaxLevel);
+        }
 
         public int GetLevelCapacity(int level)
         {
-            return _levelsCapacity[level];
+            return _upgradeTable.GetValueInt(level);
         }
     }
 }

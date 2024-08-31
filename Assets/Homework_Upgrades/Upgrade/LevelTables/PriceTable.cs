@@ -1,12 +1,12 @@
 ﻿using Sirenix.OdinInspector;
-using System.Collections;
 using UnityEngine;
 
-namespace Assets.Homework_Upgrades.Upgrade
+namespace Upgrade
 {
     [CreateAssetMenu(fileName = "PriceTable",
         menuName = "Configs/Upgrade Level Tables/New PriceTable"
         )]
+
     public class PriceTable : ScriptableObject
     {
         [SerializeField]
@@ -15,10 +15,20 @@ namespace Assets.Homework_Upgrades.Upgrade
         private readonly int _levelMin = 1;
 
         [ShowInInspector, ReadOnly]
+        private int _levelMax = 2;
+
+        [ShowInInspector, ReadOnly]
         private float[] _table;
+
+        private void OnValidate()
+        {
+            Init(_levelMax);
+        }
 
         public void Init(int levelMax)
         {
+            _levelMax = levelMax;
+
             var length = levelMax - _levelMin + 1;
             _table = new float[length];
             _table[0] = 0;

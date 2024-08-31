@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: StorageCapacityUpgradeConfig
   m_EditorClassIdentifier: 
   Id: StorageCapacity
-  MaxLevel: 2
+  MaxLevel: 7
+  _priceTable: {fileID: 11400000, guid: 711f8ce7e92ad214aa0d29a6694bed87, type: 2}
+  _upgradeTable: {fileID: 11400000, guid: dea4c6c111c474c4bae1d2a7045aef5b, type: 2}

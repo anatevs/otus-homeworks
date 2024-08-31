@@ -17,14 +17,19 @@ namespace Upgrade
 
         public int MaxLevel;
 
-        [ShowInInspector]
-        private Dictionary<int, int> _priceTable = new();
+        [SerializeField]
+        private PriceTable _priceTable;
+
+        private void OnValidate()
+        {
+            _priceTable.Init(MaxLevel);
+        }
 
         public int GetPrice(int level)
         {
             if (level <= MaxLevel)
             {
-                return _priceTable[level];
+                return (int)_priceTable.GetPrice(level);
             }
             else
             {
@@ -34,6 +39,8 @@ namespace Upgrade
 
         public void CreateUpgrade()
         {
+            //_priceTable.Init(MaxLevel);
+
 
         }
     }
