@@ -1,4 +1,5 @@
 ﻿using Game.GamePlay.Conveyor;
+using Game.GamePlay.Upgrades;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,10 +13,13 @@ namespace Upgrade
         //private UpgradeConfig[] _configs;
 
         [SerializeField]
-        private LoadStorageCapacityConfig _capacityConfig;
+        private StorageCapacityConfig _capacityConfig;
 
         [SerializeField]
         private ConveyorEntity _conveyor;
+
+        [SerializeField]
+        MoneyStorage _moneyStorage;
 
         //private readonly List<Upgrade> _upgrades = new();
 
@@ -23,15 +27,30 @@ namespace Upgrade
 
         private void Awake()
         {
-            //_conveyor = conveyor;
-
             _upgrade = new LoadStorageCapacityUpgrade(_capacityConfig, _conveyor);
+
+            _moneyStorage.EarnMoney(500);
         }
 
         [Button]
         private void OnLevelUp()
         {
-            _upgrade.LevelUp();
+            if (CanLevelUp())
+            {
+                _moneyStorage.SpendMoney(_upgrade.NextPrice);
+                _upgrade.LevelUp();
+            }
+        }
+
+        private bool CanLevelUp()
+        {
+            if (!_upgrade.CanLevelUp)
+            {
+                return false;
+            }
+
+            var price = _upgrade.NextPrice;
+            return _moneyStorage.CanSpendMoney(price);
         }
     }
 }

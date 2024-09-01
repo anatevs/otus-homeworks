@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
 
@@ -8,8 +9,10 @@ namespace Game.GamePlay.Upgrades
         public event Action<int> OnMoneyChanged;
         public event Action<int> OnMoneyEarned;
         public event Action<int> OnMoneySpent;
+
         public int Money => _money;
 
+        [ShowInInspector, ReadOnly]
         private int _money;
         
         public void EarnMoney(int amount)

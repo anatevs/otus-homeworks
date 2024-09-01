@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94633a7314e762b4f9fc87c97df36cac, type: 3}
-  m_Name: PriceTable_StorageCapacity
+  m_Name: PriceTable_LoadStorageCapacity
   m_EditorClassIdentifier: 
   _basePrice: 2

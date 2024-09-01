@@ -8,13 +8,16 @@ namespace Upgrade
         menuName = "Configs/New StorageCapacity Upgrade Config"
         )]
 
-    public class LoadStorageCapacityConfig : UpgradeConfig
+    public sealed class StorageCapacityConfig : UpgradeConfig
     {
         [SerializeField]
         private LinerInterpTable _upgradeTable;
 
-        private void OnValidate()
+
+        protected override void OnValidate()
         {
+            base.OnValidate();
+
             _upgradeTable.Init(MaxLevel);
         }
 

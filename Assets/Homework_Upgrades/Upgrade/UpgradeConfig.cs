@@ -20,7 +20,7 @@ namespace Upgrade
         [SerializeField]
         private PriceTable _priceTable;
 
-        private void OnValidate()
+        protected virtual void OnValidate()
         {
             _priceTable.Init(MaxLevel);
         }

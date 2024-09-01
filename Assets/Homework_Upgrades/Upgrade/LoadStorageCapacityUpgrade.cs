@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace Upgrade
 {
-    public class LoadStorageCapacityUpgrade : Upgrade
+    public sealed class LoadStorageCapacityUpgrade : Upgrade
     {
-        private readonly LoadStorageCapacityConfig _config;
+        private readonly StorageCapacityConfig _config;
         private readonly ConveyorEntity _conveyor;
 
-        public LoadStorageCapacityUpgrade(LoadStorageCapacityConfig config, ConveyorEntity conveyor) : base(config)
+        public LoadStorageCapacityUpgrade(StorageCapacityConfig config, ConveyorEntity conveyor) : base(config)
         {
             _config = config;
             _conveyor = conveyor;

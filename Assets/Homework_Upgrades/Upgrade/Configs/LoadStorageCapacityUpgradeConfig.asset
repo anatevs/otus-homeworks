@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8acabf6758aa0da4a8c180a35b3d05a0, type: 3}
-  m_Name: StorageCapacityUpgradeConfig
+  m_Name: LoadStorageCapacityUpgradeConfig
   m_EditorClassIdentifier: 
-  Id: StorageCapacity
+  Id: LoadStorageCapacity
   MaxLevel: 7
   _priceTable: {fileID: 11400000, guid: 711f8ce7e92ad214aa0d29a6694bed87, type: 2}
   _upgradeTable: {fileID: 11400000, guid: dea4c6c111c474c4bae1d2a7045aef5b, type: 2}
