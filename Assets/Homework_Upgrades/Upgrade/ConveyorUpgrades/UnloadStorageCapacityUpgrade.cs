@@ -1,17 +1,23 @@
 ﻿using Game.GamePlay.Conveyor.Components;
 using Game.GamePlay.Conveyor;
 using UnityEngine;
+using VContainer;
 
-namespace Upgrade
+namespace Upgrades
 {
     public sealed class UnloadStorageCapacityUpgrade : Upgrade
     {
-        private readonly StorageCapacityConfig _config;
-        private readonly ConveyorEntity _conveyor;
+        private readonly UnloadStorageCapacityConfig _config;
+        private ConveyorEntity _conveyor;
 
-        public UnloadStorageCapacityUpgrade(StorageCapacityConfig config, ConveyorEntity conveyor) : base(config)
+        public UnloadStorageCapacityUpgrade(UnloadStorageCapacityConfig config) : base(config)
         {
             _config = config;
+        }
+
+        [Inject]
+        public void Construct(ConveyorEntity conveyor)
+        {
             _conveyor = conveyor;
         }
 
@@ -21,8 +27,6 @@ namespace Upgrade
 
             _conveyor.Get<Conveyor_SetUnloadStorageComponent>()
                 .SetUnloadStorage(capacity);
-
-            //spend money
 
             Debug.Log($"unload storage capacity has been upgraded to level {level} with capacity {capacity}");
         }

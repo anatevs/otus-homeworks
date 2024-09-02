@@ -1,17 +1,9 @@
-﻿using Sirenix.OdinInspector;
-using Sirenix.Serialization;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using VContainer;
 
-namespace Upgrade
+namespace Upgrades
 {
-    [CreateAssetMenu(
-        fileName = "UpgradeConfig",
-        menuName = "Configs/New Upgrade Config"
-        )]
-
-    public class UpgradeConfig : ScriptableObject
+    public abstract class UpgradeConfig : ScriptableObject
     {
         public string Id;
 
@@ -37,11 +29,6 @@ namespace Upgrade
             }
         }
 
-        public void CreateUpgrade()
-        {
-            //_priceTable.Init(MaxLevel);
-
-
-        }
+        public abstract Upgrade CreateUpgrade(IObjectResolver objectResolver);
     }
 }

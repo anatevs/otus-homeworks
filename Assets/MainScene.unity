@@ -132,6 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 233234445}
+  - component: {fileID: 233234446}
   m_Layer: 0
   m_Name: System
   m_TagString: Untagged
@@ -154,6 +155,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &233234446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233234444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 686ac0d9fda0c3545be1aaeb7a0df3db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: 
+  autoRun: 1
+  autoInjectGameObjects: []
+  _conveyorEntity: {fileID: 796642127}
+  _upgradeSystem: {fileID: 1108177746}
 --- !u!1 &796642126
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +270,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5da27586836974469df7e3e7e0ebbc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _capacityConfig: {fileID: 11400000, guid: 05b9b040fcb4a4d409b6911a2f83ab22, type: 2}
+  _configs:
+  - {fileID: 11400000, guid: 05b9b040fcb4a4d409b6911a2f83ab22, type: 2}
+  - {fileID: 11400000, guid: 82760e9aca8deff419d31b2ccd012c4c, type: 2}
+  - {fileID: 11400000, guid: d1c328c4e20377c44b7a2b0a1a30e1e5, type: 2}
   _conveyor: {fileID: 796642127}
   _moneyStorage: {fileID: 1499034260}
 --- !u!4 &1108177747
@@ -279,6 +301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1499034261}
   - component: {fileID: 1499034260}
+  - component: {fileID: 1499034262}
   m_Layer: 0
   m_Name: MoneyStorage
   m_TagString: Untagged
@@ -313,6 +336,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1499034262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499034259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0721c14daa20cfd4f8947cab0a49403f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moneyStorage: {fileID: 1499034260}
 --- !u!1 &1983079841
 GameObject:
   m_ObjectHideFlags: 0

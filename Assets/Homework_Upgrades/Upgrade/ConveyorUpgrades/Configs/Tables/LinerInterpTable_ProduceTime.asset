@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03ac94886f9d40940b54dac01e9d2e79, type: 3}
-  m_Name: LinerInterpTable_LoadStorageCapacity
+  m_Name: LinerInterpTable_ProduceTime
   m_EditorClassIdentifier: 
-  _startValue: 1
-  _endValue: 80
+  _isIntValues: 0
+  _startValue: 10
+  _endValue: 2

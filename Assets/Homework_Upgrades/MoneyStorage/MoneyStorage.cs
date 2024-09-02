@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
 
-namespace Game.GamePlay.Upgrades
+namespace Upgrades
 {
     public class MoneyStorage : MonoBehaviour, IMoneyStorage
     {
@@ -18,11 +18,17 @@ namespace Game.GamePlay.Upgrades
         public void EarnMoney(int amount)
         {
             _money += amount;
+
+            OnMoneyEarned(_money);
+            OnMoneyChanged(_money);
         }
 
         public void SpendMoney(int amount)
         {
             _money -= amount;
+
+            OnMoneySpent(_money);
+            OnMoneyChanged(_money);
         }
 
         public bool CanSpendMoney(int amount)

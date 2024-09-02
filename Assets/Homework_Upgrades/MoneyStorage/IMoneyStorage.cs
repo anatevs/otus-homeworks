@@ -1,6 +1,6 @@
 using System;
 
-namespace Game.GamePlay.Upgrades
+namespace Upgrades
 {
     public interface IMoneyStorage
     {

@@ -1,19 +1,15 @@
 ﻿using Game.GamePlay.Conveyor;
-using Game.GamePlay.Upgrades;
 using Sirenix.OdinInspector;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 
-namespace Upgrade
+namespace Upgrades
 {
-    public class UpgradeSystem : MonoBehaviour
+    public sealed class UpgradeSystem : MonoBehaviour
     {
-        //[SerializeField]
-        //private UpgradeConfig[] _configs;
-
         [SerializeField]
-        private StorageCapacityConfig _capacityConfig;
+        private UpgradeConfig[] _configs;
 
         [SerializeField]
         private ConveyorEntity _conveyor;
@@ -21,35 +17,43 @@ namespace Upgrade
         [SerializeField]
         MoneyStorage _moneyStorage;
 
-        //private readonly List<Upgrade> _upgrades = new();
+        [ShowInInspector]
+        private readonly List<string> _idHelper = new();
 
-        private LoadStorageCapacityUpgrade _upgrade;
+        private readonly Dictionary<string, Upgrade> _upgrades = new();
 
-        private void Awake()
+        [Inject]
+        public void Construct(IObjectResolver objectResolver)
         {
-            _upgrade = new LoadStorageCapacityUpgrade(_capacityConfig, _conveyor);
-
-            _moneyStorage.EarnMoney(500);
-        }
-
-        [Button]
-        private void OnLevelUp()
-        {
-            if (CanLevelUp())
+            foreach (var config in _configs)
             {
-                _moneyStorage.SpendMoney(_upgrade.NextPrice);
-                _upgrade.LevelUp();
+                var upgrade = config.CreateUpgrade(objectResolver);
+                _upgrades.Add(config.Id, upgrade);
+
+                _idHelper.Add(config.Id);
             }
         }
 
-        private bool CanLevelUp()
+        [Button]
+        private void OnLevelUp(string Id)
         {
-            if (!_upgrade.CanLevelUp)
+            var upgrade = _upgrades[Id];
+
+            if (CanLevelUp(upgrade))
+            {
+                _moneyStorage.SpendMoney(upgrade.NextPrice);
+                upgrade.LevelUp();
+            }
+        }
+
+        private bool CanLevelUp(Upgrade upgrade)
+        {
+            if (!upgrade.CanLevelUp)
             {
                 return false;
             }
 
-            var price = _upgrade.NextPrice;
+            var price = upgrade.NextPrice;
             return _moneyStorage.CanSpendMoney(price);
         }
     }

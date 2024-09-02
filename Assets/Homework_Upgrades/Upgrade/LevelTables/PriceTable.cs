@@ -1,7 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Upgrade
+namespace Upgrades
 {
     [CreateAssetMenu(fileName = "PriceTable",
         menuName = "Configs/Upgrade Level Tables/New PriceTable"

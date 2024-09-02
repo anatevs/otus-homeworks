@@ -10,6 +10,9 @@ namespace LevelTables
     public class LinerInterpTable : ScriptableObject
     {
         [SerializeField]
+        private bool _isIntValues;
+
+        [SerializeField]
         private float _startValue;
 
         [SerializeField]
@@ -22,6 +25,8 @@ namespace LevelTables
 
         [ShowInInspector, ReadOnly]
         private float[] _table;
+
+        private int[] _intTable;
 
         private float _slopeTangent;
 
@@ -39,20 +44,47 @@ namespace LevelTables
             var length = levelMax - _levelMin + 1;
 
             _table = new float[length];
+
             for (int i = 0; i < length; i++)
             {
-                _table[i] = (int)EvaluateValue(i + 1);
+                var value = EvaluateValue(i + 1);
+
+                if (_isIntValues)
+                {
+                    value = (int)value;
+                }
+
+                _table[i] = value;
+            }
+
+            if (_isIntValues)
+            {
+                _intTable = new int[length];
+
+                for (int i = 0; i < length; i++)
+                {
+                    _intTable[i] = (int)_table[i];
+                }
             }
         }
 
         public float GetValue(int level)
         {
-            return _table[level - _levelMin];
+            if (_isIntValues)
+            {
+                throw new System.Exception("you request a float value from the table that suppose to contain int values");
+            }
+            return _table[GetLevelIndex(level)];
         }
 
         public int GetValueInt(int level)
         {
-            return (int)GetValue(level);
+            return _intTable[GetLevelIndex(level)];
+        }
+
+        private int GetLevelIndex(int level)
+        {
+            return level - _levelMin;
         }
 
         private float EvaluateValue(int level)
