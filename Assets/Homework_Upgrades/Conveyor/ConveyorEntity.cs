@@ -7,7 +7,7 @@ namespace Game.GamePlay.Conveyor
     public class ConveyorEntity : MonoEntityBase
     {
         [SerializeField] private ConveyorModel _model;
-        
+
         private void Awake()
         {
             Add(new Conveyor_SetLoadStorageComponent(_model.LoadStorageCapacity));

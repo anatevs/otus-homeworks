@@ -1,5 +1,4 @@
-﻿using Game.GamePlay.Conveyor;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 using VContainer;
@@ -10,9 +9,6 @@ namespace Upgrades
     {
         [SerializeField]
         private UpgradeConfig[] _configs;
-
-        [SerializeField]
-        private ConveyorEntity _conveyor;
 
         [SerializeField]
         MoneyStorage _moneyStorage;

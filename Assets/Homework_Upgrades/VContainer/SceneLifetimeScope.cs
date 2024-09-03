@@ -1,13 +1,12 @@
 using VContainer;
 using VContainer.Unity;
 using UnityEngine;
-using Game.GamePlay.Conveyor;
 using Upgrades;
 
 public class SceneLifetimeScope : LifetimeScope
 {
     [SerializeField]
-    private ConveyorEntity _conveyorEntity;
+    private ConveyorModel _conveyorModel;
 
     [SerializeField]
     private UpgradeSystem _upgradeSystem;
@@ -19,7 +18,7 @@ public class SceneLifetimeScope : LifetimeScope
 
     private void ConfigureConveyorUpgrades(IContainerBuilder builder)
     {
-        builder.RegisterComponent(_conveyorEntity);
+        builder.RegisterComponent(_conveyorModel);
 
         builder.RegisterComponent(_upgradeSystem);
     }

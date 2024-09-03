@@ -19,16 +19,16 @@ namespace Upgrades
         {
             _money += amount;
 
-            OnMoneyEarned(_money);
-            OnMoneyChanged(_money);
+            OnMoneyEarned?.Invoke(_money);
+            OnMoneyChanged?.Invoke(_money);
         }
 
         public void SpendMoney(int amount)
         {
             _money -= amount;
 
-            OnMoneySpent(_money);
-            OnMoneyChanged(_money);
+            OnMoneySpent?.Invoke(_money);
+            OnMoneyChanged?.Invoke(_money);
         }
 
         public bool CanSpendMoney(int amount)

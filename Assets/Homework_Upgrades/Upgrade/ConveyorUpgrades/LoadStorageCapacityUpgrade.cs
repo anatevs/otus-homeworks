@@ -1,6 +1,4 @@
-﻿using Game.GamePlay.Conveyor;
-using Game.GamePlay.Conveyor.Components;
-using UnityEngine;
+﻿using UnityEngine;
 using VContainer;
 
 namespace Upgrades
@@ -8,7 +6,7 @@ namespace Upgrades
     public sealed class LoadStorageCapacityUpgrade : Upgrade
     {
         private readonly LoadStorageCapacityConfig _config;
-        private ConveyorEntity _conveyor;
+        private ConveyorModel _conveyorModel;
 
         public LoadStorageCapacityUpgrade(LoadStorageCapacityConfig config) : base(config)
         {
@@ -16,17 +14,16 @@ namespace Upgrades
         }
 
         [Inject]
-        public void Construct(ConveyorEntity conveyor)
+        public void Construct(ConveyorModel conveyorModel)
         {
-            _conveyor = conveyor;
+            _conveyorModel = conveyorModel;
         }
 
         protected override void OnUpgrade(int level)
         {
             var capacity = _config.GetLevelCapacity(level);
 
-            _conveyor.Get<Conveyor_SetLoadStorageComponent>()
-                .SetLoadStorage(capacity);
+            _conveyorModel.LoadStorageCapacity.Value = capacity;
 
             Debug.Log($"conv storage capacity has been upgraded to level {level} with capacity {capacity}");
         }
