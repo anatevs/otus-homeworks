@@ -9,6 +9,5 @@ namespace Scripts.Chest
         [SerializeField]
         private float _awaitingTime;
 
-
     }
 }
