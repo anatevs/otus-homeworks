@@ -42,7 +42,7 @@ namespace Scripts.Chest
 
             if (_currentSpan > _awaitingSpan)
             {
-                Debug.Log($"chest {gameObject.name} is ready to open!");
+                //Debug.Log($"chest {gameObject.name} is ready to open!");
                 ResetCounter();
             }
         }

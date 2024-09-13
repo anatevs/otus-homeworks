@@ -1,5 +1,8 @@
+using Newtonsoft.Json;
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace Scripts
 {
@@ -12,6 +15,8 @@ namespace Scripts
         [SerializeField]
         private float _requestPeriod_Sec = 1;
 
+        private const string SERVICE_NAME = "http://worldtimeapi.org/api/ip";
+
         private DateTime _currentTime;
 
         private float _periodCounter;
@@ -19,6 +24,12 @@ namespace Scripts
         private void Awake()
         {
             _currentTime = DateTime.Now;
+            _periodCounter = _requestPeriod_Sec;
+        }
+
+        private void Start()
+        {
+            StartCoroutine(RequestTime());
         }
 
         private void Update()
@@ -31,5 +42,34 @@ namespace Scripts
                 _periodCounter = 0;
             }
         }
+
+        private IEnumerator RequestTime()
+        {
+            UnityWebRequest request = UnityWebRequest.Get(SERVICE_NAME);
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                string timeJSON = request.downloadHandler.text;
+                ServerTimeData serverTimeData = JsonConvert.DeserializeObject<ServerTimeData>(timeJSON);
+                Debug.Log(serverTimeData.datetime);
+
+                yield return new WaitForSeconds(RequestPeriod_Sec);
+                StartCoroutine(RequestTime());
+                yield break;
+            }
+            else
+            {
+                Debug.Log("server reading error");
+
+                yield return new WaitForSeconds(RequestPeriod_Sec);
+                StartCoroutine(RequestTime());
+            }
+        }
+    }
+
+    public class ServerTimeData
+    {
+        public string datetime;
     }
 }
