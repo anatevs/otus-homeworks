@@ -19,6 +19,12 @@ namespace Scripts
 
         private DateTime _currentTime;
 
+        private DateTime _currentServerTime;
+
+        private ServerTimeData _serverTimeData;
+
+        private TimeSpan _allowedDifference = TimeSpan.FromMinutes(5);
+
         private float _periodCounter;
 
         private void Awake()
@@ -51,8 +57,10 @@ namespace Scripts
             if (request.result == UnityWebRequest.Result.Success)
             {
                 string timeJSON = request.downloadHandler.text;
-                ServerTimeData serverTimeData = JsonConvert.DeserializeObject<ServerTimeData>(timeJSON);
-                Debug.Log(serverTimeData.datetime);
+                _serverTimeData = JsonConvert.DeserializeObject<ServerTimeData>(timeJSON);
+
+                _currentServerTime = DateTime.Parse(_serverTimeData.datetime);
+                Debug.Log(_currentServerTime);
 
                 yield return new WaitForSeconds(RequestPeriod_Sec);
                 StartCoroutine(RequestTime());
