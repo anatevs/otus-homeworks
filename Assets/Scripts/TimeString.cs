@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Scripts
 {
-    public class TimeLogger : MonoBehaviour
+    public class TimeString : MonoBehaviour
     {
         void Start()
         {

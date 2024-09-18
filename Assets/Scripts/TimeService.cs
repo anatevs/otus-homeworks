@@ -1,8 +1,9 @@
 using Newtonsoft.Json;
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
+using Cysharp.Threading.Tasks;
+using System.Threading;
 
 namespace Scripts
 {
@@ -13,65 +14,106 @@ namespace Scripts
         public float RequestPeriod_Sec => _requestPeriod_Sec;
 
         [SerializeField]
-        private float _requestPeriod_Sec = 1;
+        private float _requestPeriod_Sec;
 
-        private const string SERVICE_NAME = "http://worldtimeapi.org/api/ip";
+        [SerializeField]
+        private int _allowedDiscrapancy_Sec = 5;
+
+        private const string SERVICE_UTC_URL = "http://worldtimeapi.org/api/timezone/UTC";
 
         private DateTime _currentTime;
 
-        private DateTime _currentServerTime;
+        private DateTime _currentUTCTime;
 
-        private ServerTimeData _serverTimeData;
+        private TimeSpan _startSpan;
 
-        private TimeSpan _allowedDifference = TimeSpan.FromMinutes(5);
+        private TimeSpan _currentSpan;
 
-        private float _periodCounter;
+        private TimeSpan _allowedDiscrepancy;
+
+        private bool _isDeviceTimeCorrect;
+
+        private CancellationTokenSource _cancellation = new();
 
         private void Awake()
         {
-            _currentTime = DateTime.Now;
-            _periodCounter = _requestPeriod_Sec;
+            _isDeviceTimeCorrect = true;
+            _allowedDiscrepancy = 
+                TimeSpan.FromMinutes(_allowedDiscrapancy_Sec);
         }
 
-        private void Start()
+        private async void Start()
         {
-            StartCoroutine(RequestTime());
+            _startSpan = await GetSpanLocalUTC();
+            _currentTime = DateTime.Now;
+
+            CheckDeviceTime().Forget();
         }
 
         private void Update()
         {
-            _periodCounter += Time.deltaTime;
-
-            if (_periodCounter >= RequestPeriod_Sec )
+            if (_isDeviceTimeCorrect)
             {
                 _currentTime = DateTime.Now;
-                _periodCounter = 0;
             }
         }
 
-        private IEnumerator RequestTime()
+        private async UniTaskVoid CheckDeviceTime()
         {
-            UnityWebRequest request = UnityWebRequest.Get(SERVICE_NAME);
-            yield return request.SendWebRequest();
+            await UniTask.WaitForSeconds(_requestPeriod_Sec);
+            _currentSpan = await GetSpanLocalUTC();
 
-            if (request.result == UnityWebRequest.Result.Success)
+            if (TimeSpan.Compare(
+                (_startSpan - _currentSpan).Duration(),
+                _allowedDiscrepancy) == 1
+                )
             {
-                string timeJSON = request.downloadHandler.text;
-                _serverTimeData = JsonConvert.DeserializeObject<ServerTimeData>(timeJSON);
-
-                _currentServerTime = DateTime.Parse(_serverTimeData.datetime);
-                Debug.Log(_currentServerTime);
-
-                yield return new WaitForSeconds(RequestPeriod_Sec);
-                StartCoroutine(RequestTime());
-                yield break;
+                _isDeviceTimeCorrect = false;
+                throw new Exception(
+                    $"a system time has been changed for more than" +
+                    $" {_allowedDiscrepancy.TotalMinutes} minutes");
             }
             else
             {
-                Debug.Log("server reading error");
+                CheckDeviceTime().Forget();
+            }
+        }
 
-                yield return new WaitForSeconds(RequestPeriod_Sec);
-                StartCoroutine(RequestTime());
+        private async UniTask<TimeSpan> GetSpanLocalUTC()
+        {
+            _currentUTCTime = await RequestServerTime();
+
+            return (DateTime.Now - _currentUTCTime);
+        }
+
+        private async UniTask<DateTime> RequestServerTime()
+        {
+            using (UnityWebRequest request = UnityWebRequest.Get(SERVICE_UTC_URL))
+            {
+                var operation = request.SendWebRequest();
+
+                while (!operation.isDone)
+                {
+                    await UniTask.Yield();
+                }
+
+                if (request.result == UnityWebRequest.Result.Success)
+                {
+                    string timeJSON = request.downloadHandler.text;
+
+                    var serverTime = JsonConvert.DeserializeObject<ServerTimeData>(timeJSON);
+
+                    //Debug.Log($"server: {serverTime.datetime}");
+
+                    return DateTime.Parse(serverTime.datetime,
+                        null,
+                        System.Globalization.DateTimeStyles.AdjustToUniversal);
+                }
+
+                else
+                {
+                    return await RequestServerTime();
+                }
             }
         }
     }
