@@ -39,15 +39,15 @@ namespace Scripts
         {
             _isDeviceTimeCorrect = true;
             _allowedDiscrepancy = 
-                TimeSpan.FromMinutes(_allowedDiscrapancy_Sec);
+                TimeSpan.FromSeconds(_allowedDiscrapancy_Sec);
         }
 
         private async void Start()
         {
-            _startSpan = await GetSpanLocalUTC();
+            _startSpan = await GetLocalUTCDiffAsync();
             _currentTime = DateTime.Now;
 
-            CheckDeviceTime().Forget();
+            CheckDeviceTimeAsync().Forget();
         }
 
         private void Update()
@@ -58,10 +58,10 @@ namespace Scripts
             }
         }
 
-        private async UniTaskVoid CheckDeviceTime()
+        private async UniTaskVoid CheckDeviceTimeAsync()
         {
             await UniTask.WaitForSeconds(_requestPeriod_Sec);
-            _currentSpan = await GetSpanLocalUTC();
+            _currentSpan = await GetLocalUTCDiffAsync();
 
             if (TimeSpan.Compare(
                 (_startSpan - _currentSpan).Duration(),
@@ -75,18 +75,18 @@ namespace Scripts
             }
             else
             {
-                CheckDeviceTime().Forget();
+                CheckDeviceTimeAsync().Forget();
             }
         }
 
-        private async UniTask<TimeSpan> GetSpanLocalUTC()
+        private async UniTask<TimeSpan> GetLocalUTCDiffAsync()
         {
-            _currentUTCTime = await RequestServerTime();
+            _currentUTCTime = await RequestServerUTCTimeAsync();
 
             return (DateTime.Now - _currentUTCTime);
         }
 
-        private async UniTask<DateTime> RequestServerTime()
+        private async UniTask<DateTime> RequestServerUTCTimeAsync()
         {
             using (UnityWebRequest request = UnityWebRequest.Get(SERVICE_UTC_URL))
             {
@@ -103,8 +103,6 @@ namespace Scripts
 
                     var serverTime = JsonConvert.DeserializeObject<ServerTimeData>(timeJSON);
 
-                    //Debug.Log($"server: {serverTime.datetime}");
-
                     return DateTime.Parse(serverTime.datetime,
                         null,
                         System.Globalization.DateTimeStyles.AdjustToUniversal);
@@ -112,7 +110,7 @@ namespace Scripts
 
                 else
                 {
-                    return await RequestServerTime();
+                    return await RequestServerUTCTimeAsync();
                 }
             }
         }
