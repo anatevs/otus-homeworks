@@ -5,11 +5,17 @@ namespace Scripts.Chest
 {
     public class ChestTimer : MonoBehaviour
     {
+        public TimeSpan CurrentSpan
+        {
+            get => _currentSpan;
+            set { _currentSpan = value; }
+        }
+
         [SerializeField]
         private TimeStruct _awaitingTime;
 
         [SerializeField]
-        private Chest _chest;
+        private ChestAnim _chestAnim;
 
         [SerializeField]
         private TimeService _timeService;
@@ -22,14 +28,17 @@ namespace Scripts.Chest
 
         private TimeSpan _currentSpan;
 
-        private void Start()
+        private void Awake()
         {
-            _startTime = _timeService.CurrentTime;
-
             _awaitingSpan = new TimeSpan(
                 _awaitingTime.Hours,
                 _awaitingTime.Minutes,
                 _awaitingTime.Seconds);
+        }
+
+        private void Start()
+        {
+            _startTime = _timeService.CurrentTime;
         }
 
         private void Update()
@@ -48,6 +57,24 @@ namespace Scripts.Chest
         private void ResetCounter()
         {
             _startTime = _timeService.CurrentTime;
+        }
+
+        private TimeSpan StructToTimeSpan(TimeStruct timeStruct)
+        {
+            return new TimeSpan(
+                    timeStruct.Hours,
+                    timeStruct.Minutes,
+                    timeStruct.Seconds);
+        }
+
+        private TimeStruct TimeSpanToStruct(TimeSpan timeSpan)
+        {
+            return new TimeStruct()
+            {
+                Hours = timeSpan.Hours,
+                Minutes = timeSpan.Minutes,
+                Seconds = timeSpan.Seconds
+            };
         }
     }
 

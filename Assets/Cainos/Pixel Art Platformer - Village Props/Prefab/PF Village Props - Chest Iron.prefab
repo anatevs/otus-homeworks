@@ -95,7 +95,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6930122694965717509}
   - component: {fileID: 6491913702539827632}
-  - component: {fileID: 6034050384429988995}
   m_Layer: 0
   m_Name: PF Village Props - Chest Iron
   m_TagString: Untagged
@@ -139,16 +138,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6034050384429988995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6930122694965717508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 564a40ab997e88549a733c999c980526, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 6491913702539827632}

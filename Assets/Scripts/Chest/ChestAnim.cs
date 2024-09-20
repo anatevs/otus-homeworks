@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Scripts.Chest
 {
-    public class Chest : MonoBehaviour
+    public class ChestAnim : MonoBehaviour
     {
         public event Action OnOpened;
         public event Action OnClosed;
