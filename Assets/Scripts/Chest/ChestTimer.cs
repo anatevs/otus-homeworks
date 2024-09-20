@@ -20,6 +20,8 @@ namespace Scripts.Chest
         [SerializeField]
         private TimeService _timeService;
 
+       private string _name;
+
         private DateTime _startTime;
 
         private DateTime _currentTime;

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.Chest
+namespace Scripts.Chest
 {
     public class ChestsTimeData : MonoBehaviour
     {
