@@ -908,7 +908,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ebd53a392d20c42a20b96fd614384d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteAnimation: {fileID: 268602927}
+  _buttonAnimation: {fileID: 268602927}
 --- !u!1 &1569686570
 GameObject:
   m_ObjectHideFlags: 0
@@ -982,7 +982,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1585558107}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4a7d24cc33702a4ea9c8b59af1b43dc, type: 3}
   m_Name: 
@@ -991,7 +991,6 @@ MonoBehaviour:
     <Hours>k__BackingField: 0
     <Minutes>k__BackingField: 0
     <Seconds>k__BackingField: 10
-  _chestAnim: {fileID: 0}
   _timeService: {fileID: 1793382004}
 --- !u!114 &1585558110
 MonoBehaviour:
@@ -1220,6 +1219,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1853618461}
+  - component: {fileID: 1853618463}
+  - component: {fileID: 1853618462}
   m_Layer: 5
   m_Name: Chest
   m_TagString: Untagged
@@ -1249,6 +1250,37 @@ RectTransform:
   m_AnchoredPosition: {x: 149, y: -170}
   m_SizeDelta: {x: 64, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1853618462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853618460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff5f34673e20b8546b8bc7f19be3a6ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _chestButton: {fileID: 1534305179}
+  _chestTimer: {fileID: 1853618463}
+--- !u!114 &1853618463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853618460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4a7d24cc33702a4ea9c8b59af1b43dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _awaitingTime:
+    <Hours>k__BackingField: 0
+    <Minutes>k__BackingField: 0
+    <Seconds>k__BackingField: 10
+  _timeService: {fileID: 1793382004}
 --- !u!1 &1982255113
 GameObject:
   m_ObjectHideFlags: 0

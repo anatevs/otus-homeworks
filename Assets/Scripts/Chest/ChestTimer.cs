@@ -5,6 +5,8 @@ namespace Scripts.Chest
 {
     public class ChestTimer : MonoBehaviour
     {
+        public event Action OnCounted;
+
         public TimeSpan CurrentSpan
         {
             get => _currentSpan;
@@ -14,13 +16,13 @@ namespace Scripts.Chest
         [SerializeField]
         private TimeStruct _awaitingTime;
 
-        [SerializeField]
-        private ChestAnim _chestAnim;
+        //[SerializeField]
+        //private ChestAnim _chestAnim;
 
         [SerializeField]
         private TimeService _timeService;
 
-       private string _name;
+        private string _name;
 
         private DateTime _startTime;
 
@@ -30,34 +32,47 @@ namespace Scripts.Chest
 
         private TimeSpan _currentSpan;
 
+        private bool _isCounted;
+
         private void Awake()
         {
             _awaitingSpan = new TimeSpan(
                 _awaitingTime.Hours,
                 _awaitingTime.Minutes,
                 _awaitingTime.Seconds);
+
+            _currentSpan = new TimeSpan(0, 0, 0);
         }
 
         private void Start()
         {
             _startTime = _timeService.CurrentTime;
+
+            Debug.Log($"start {_startTime}");
         }
 
         private void Update()
         {
             _currentTime = _timeService.CurrentTime;
 
+            Debug.Log($"current {_currentTime}");
+
             _currentSpan = _currentTime - _startTime;
 
-            if (_currentSpan > _awaitingSpan)
+            if (_currentSpan > _awaitingSpan && !_isCounted)
             {
-                //Debug.Log($"chest {gameObject.name} is ready to open!");
-                ResetCounter();
+                Debug.Log($"chest {gameObject.name} is ready to open!");
+                _isCounted = true;
+
+                OnCounted?.Invoke();
+
+                //ResetCounter();
             }
         }
 
-        private void ResetCounter()
+        public void ResetCounter()
         {
+            _isCounted = false;
             _startTime = _timeService.CurrentTime;
         }
 

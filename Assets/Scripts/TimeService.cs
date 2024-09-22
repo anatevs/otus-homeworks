@@ -35,20 +35,25 @@ namespace Scripts
 
         private CancellationTokenSource _cancellation = new();
 
-        private void Awake()
+        private async void Awake()
         {
             _isDeviceTimeCorrect = true;
             _allowedDiscrepancy = 
                 TimeSpan.FromSeconds(_allowedDiscrapancy_Sec);
-        }
 
-        private async void Start()
-        {
             _startSpan = await GetLocalUTCDiffAsync();
             _currentTime = DateTime.Now;
 
             CheckDeviceTimeAsync().Forget();
         }
+
+        //private async void Start()
+        //{
+        //    _startSpan = await GetLocalUTCDiffAsync();
+        //    _currentTime = DateTime.Now;
+
+        //    CheckDeviceTimeAsync().Forget();
+        //}
 
         private void Update()
         {
