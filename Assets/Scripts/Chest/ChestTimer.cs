@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using VContainer;
 
 namespace Scripts.Chest
 {
@@ -16,13 +17,8 @@ namespace Scripts.Chest
         [SerializeField]
         private TimeStruct _awaitingTime;
 
-        //[SerializeField]
-        //private ChestAnim _chestAnim;
-
-        [SerializeField]
+        [Inject]
         private TimeService _timeService;
-
-        private string _name;
 
         private DateTime _startTime;
 
@@ -55,7 +51,7 @@ namespace Scripts.Chest
         {
             _currentTime = _timeService.CurrentTime;
 
-            Debug.Log($"current {_currentTime}");
+            //Debug.Log($"current {_currentTime}");
 
             _currentSpan = _currentTime - _startTime;
 
