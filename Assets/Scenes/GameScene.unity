@@ -366,7 +366,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 268602921}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ed418775c092b3458981ac101fbfd31, type: 3}
+  m_Script: {fileID: 11500000, guid: 7cbc459cd59641b43b02315a19524aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &526535623
@@ -473,7 +473,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -42}
-  m_SizeDelta: {x: 100, y: 30}
+  m_SizeDelta: {x: 110, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &706260937
 MonoBehaviour:
@@ -495,7 +495,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10h00m
+  m_text: 01h00m00s
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -843,6 +843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonAnimation: {fileID: 268602927}
+  _counterText: {fileID: 706260937}
 --- !u!1 &1728278811
 GameObject:
   m_ObjectHideFlags: 0
