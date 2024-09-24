@@ -10,6 +10,7 @@ namespace Atomic.AI
 {
     public static class BlackboardAPI
     {
+        public const int PatrolPoints = 1; // GameObject : class
         public const int StoppingDistance = 2; // float
         public const int Character = 3; // GameObject : class
         public const int Waypoints = 4; // Transform[] : class
@@ -22,6 +23,22 @@ namespace Atomic.AI
 
 
         ///Extensions
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasPatrolPoints(this IBlackboard obj) => obj.HasObject(PatrolPoints);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static GameObject  GetPatrolPoints(this IBlackboard obj) => obj.GetObject<GameObject >(PatrolPoints);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetPatrolPoints(this IBlackboard obj, out GameObject  value) => obj.TryGetObject(PatrolPoints, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetPatrolPoints(this IBlackboard obj, GameObject  value) => obj.SetObject(PatrolPoints, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelPatrolPoints(this IBlackboard obj) => obj.DelObject(PatrolPoints);
+
+
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool HasStoppingDistance(this IBlackboard obj) => obj.HasFloat(StoppingDistance);
 

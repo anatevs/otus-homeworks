@@ -1,12 +1,10 @@
 using Atomic.AI;
 using Sample;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scripts.AI
 {
-    public class FollowBehaviour : IAIUpdate
+    public class FollowBehavior : IAIUpdate
     {
         public void OnUpdate(IBlackboard blackboard, float deltaTime)
         {
