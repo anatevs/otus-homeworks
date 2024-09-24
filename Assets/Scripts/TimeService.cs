@@ -4,20 +4,21 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Cysharp.Threading.Tasks;
 using System.Threading;
+using VContainer.Unity;
 
 namespace Scripts
 {
-    public class TimeService : MonoBehaviour
+    public class TimeService : ITickable //MonoBehaviour
     {
         public DateTime CurrentTime => _currentTime;
 
-        public float RequestPeriod_Sec => _requestPeriod_Sec;
+        private TimeServiceConfig _config;
 
-        [SerializeField]
-        private float _requestPeriod_Sec;
+        //[SerializeField]
+        //private float _requestPeriod_Sec;
 
-        [SerializeField]
-        private int _allowedDiscrapancy_Sec = 5;
+        //[SerializeField]
+        //private int _allowedDiscrapancy_Sec = 5;
 
         private const string SERVICE_UTC_URL = "http://worldtimeapi.org/api/timezone/UTC";
 
@@ -33,18 +34,16 @@ namespace Scripts
 
         private bool _isDeviceTimeCorrect;
 
-        private CancellationTokenSource _cancellation = new();
-
-        //private async void Awake()
-        //{
-        //    await InitAsync();
-        //}
+        public TimeService(TimeServiceConfig config)
+        {
+            _config = config;
+        }
 
         public async UniTask InitAsync()
         {
             _isDeviceTimeCorrect = true;
             _allowedDiscrepancy =
-                TimeSpan.FromSeconds(_allowedDiscrapancy_Sec);
+                TimeSpan.FromSeconds(_config.AllowedDiscrapancy_Sec);
 
             _startSpan = await GetLocalUTCDiffAsync();
             _currentTime = DateTime.Now;
@@ -52,7 +51,8 @@ namespace Scripts
             CheckDeviceTimeAsync().Forget();
         }
 
-        private void Update()
+        //private void Update()
+        void ITickable.Tick()
         {
             if (_isDeviceTimeCorrect)
             {
@@ -62,7 +62,7 @@ namespace Scripts
 
         private async UniTaskVoid CheckDeviceTimeAsync()
         {
-            await UniTask.WaitForSeconds(_requestPeriod_Sec);
+            await UniTask.WaitForSeconds(_config.RequestPeriod_Sec);
             _currentSpan = await GetLocalUTCDiffAsync();
 
             if (TimeSpan.Compare(

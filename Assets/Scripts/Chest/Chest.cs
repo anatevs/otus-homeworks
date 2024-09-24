@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Scripts.Chest
 {
@@ -23,6 +22,11 @@ namespace Scripts.Chest
             _chestButton.OnClicked -= _chestTimer.ResetCounter;
 
             _chestTimer.OnCounted -= _chestButton.MakeInteractable;
+        }
+
+        private void Update()
+        {
+            _chestButton.UpdateCounterText(_chestTimer.RemainderSpan);
         }
     }
 }

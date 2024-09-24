@@ -8,16 +8,15 @@ namespace Scripts.Chest
     {
         public event Action OnCounted;
 
-        public TimeSpan CurrentSpan
-        {
-            get => _currentSpan;
-            set { _currentSpan = value; }
-        }
+        public TimeSpan RemainderSpan => _remainderSpan;
+        //{
+        //    get => _currentSpan;
+        //    set { _currentSpan = value; }
+        //}
 
         [SerializeField]
         private TimeStruct _awaitingTime;
 
-        [Inject]
         private TimeService _timeService;
 
         private DateTime _startTime;
@@ -28,7 +27,15 @@ namespace Scripts.Chest
 
         private TimeSpan _currentSpan;
 
+        private TimeSpan _remainderSpan;
+
         private bool _isCounted;
+
+        [Inject]
+        public void Construct(TimeService timeService)
+        {
+            _timeService = timeService;
+        }
 
         private void Awake()
         {
@@ -59,10 +66,13 @@ namespace Scripts.Chest
             {
                 Debug.Log($"chest {gameObject.name} is ready to open!");
                 _isCounted = true;
+                _remainderSpan = TimeSpan.Zero;
 
                 OnCounted?.Invoke();
-
-                //ResetCounter();
+            }
+            if (!_isCounted)
+            {
+                _remainderSpan = _awaitingSpan - _currentSpan;
             }
         }
 

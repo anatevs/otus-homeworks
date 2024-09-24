@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7570446142135283648}
   - component: {fileID: 3766129146740629043}
-  - component: {fileID: 5550923177401006970}
   - component: {fileID: -3933420336681494331}
   m_Layer: 0
   m_Name: LoadingScene
@@ -50,22 +49,10 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
-  _timeService: {fileID: 5550923177401006970}
+  _timeServConfig:
+    RequestPeriod_Sec: 60
+    AllowedDiscrapancy_Sec: 10
   _loadingGame: {fileID: -3933420336681494331}
---- !u!114 &5550923177401006970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 407167792534133910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5124b977b6229448827263f9322202, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _requestPeriod_Sec: 5
-  _allowedDiscrapancy_Sec: 5
 --- !u!114 &-3933420336681494331
 MonoBehaviour:
   m_ObjectHideFlags: 0

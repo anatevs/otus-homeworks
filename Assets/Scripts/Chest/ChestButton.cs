@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,12 +13,15 @@ namespace Scripts.Chest
         [SerializeField]
         private ChestUIAnim _buttonAnimation;
 
+        [SerializeField]
+        private TMP_Text _counterText;
+
         private Button _button;
 
         private void Awake()
         {
             _button = GetComponent<Button>();
-            
+
             MakeDisabled();
 
             _button.onClick.AddListener(_buttonAnimation.Open);
@@ -32,6 +36,11 @@ namespace Scripts.Chest
         public void MakeInteractable()
         {
             ChangeInteractable(true);
+        }
+
+        public void UpdateCounterText(TimeSpan remainder)
+        {
+            _counterText.text = remainder.ToString(@"hh\hmm\mss\s");
         }
 
         private void DoOnClick()

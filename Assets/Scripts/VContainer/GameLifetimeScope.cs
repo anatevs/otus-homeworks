@@ -7,7 +7,7 @@ using Scripts.Scenes;
 public class GameLifetimeScope : LifetimeScope
 {
     [SerializeField]
-    private TimeService _timeService;
+    private TimeServiceConfig _timeServConfig;
 
     [SerializeField]
     private LoadingGame _loadingGame;
@@ -20,7 +20,9 @@ public class GameLifetimeScope : LifetimeScope
 
     private void RegisterTimeService(IContainerBuilder builder)
     {
-        builder.RegisterComponent(_timeService);
+        builder.RegisterEntryPoint<TimeService>()
+            .WithParameter(_timeServConfig)
+            .AsSelf();
     }
 
     private void RegisterSceneLoader(IContainerBuilder builder)
