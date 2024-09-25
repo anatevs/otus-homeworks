@@ -8,7 +8,8 @@ namespace Scripts.AI
     {
         public void OnUpdate(IBlackboard blackboard, float deltaTime)
         {
-            if (blackboard.TryGetCharacter(out var character) &&
+            if (blackboard.HasFollowTag() &&
+                blackboard.TryGetCharacter(out var character) &&
                 blackboard.TryGetTargetObject(out var target) &&
                 blackboard.TryGetStoppingDistance(out var stoppingDistance))
             {

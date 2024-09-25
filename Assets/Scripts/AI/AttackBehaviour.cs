@@ -13,7 +13,8 @@ namespace Scripts.AI
 
         public void OnUpdate(IBlackboard blackboard, float deltaTime)
         {
-            if (blackboard.TryGetCharacter(out var character) &&
+            if (blackboard.HasAttackTag() &&
+                blackboard.TryGetCharacter(out var character) &&
                 blackboard.TryGetTargetObject(out var target))
             {
                 var direction = (target.transform.position - character.transform.position).normalized;

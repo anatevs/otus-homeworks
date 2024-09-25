@@ -13,7 +13,8 @@ namespace Scripts.AI
 
         public void OnUpdate(IBlackboard blackboard, float deltaTime)
         {
-            if (blackboard.TryGetCharacter(out var character) &&
+            if (blackboard.HasPatrolTag() &&
+                blackboard.TryGetCharacter(out var character) &&
                 blackboard.TryGetWaypoints(out var waypoints))
             {
                 var direction = GetOnPointDirection(character.transform.position, waypoints);

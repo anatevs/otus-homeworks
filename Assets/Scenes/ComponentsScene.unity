@@ -549,11 +549,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 45.309, y: 0, z: 0}
---- !u!1 &1243383412 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6331299613952233196, guid: 561f91cd1fa624d77afd738c1708ba8d, type: 3}
-  m_PrefabInstance: {fileID: 951819667664011787}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1254137050
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,7 +660,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   installers:
   - rid: 8256015668321189888
-  - rid: 8256015668321189889
   - rid: 8256015668321189890
   - rid: 8256015675585462273
   - rid: 8256015675585462278
@@ -679,16 +673,11 @@ MonoBehaviour:
       data:
         key: 3
         value: {fileID: 134904403}
-    - rid: 8256015668321189889
-      type: {class: GameObjectInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
-      data:
-        key: 6
-        value: {fileID: 1243383412}
     - rid: 8256015668321189890
       type: {class: FloatInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
       data:
         key: 2
-        value: 1
+        value: 2.5
     - rid: 8256015675585462273
       type: {class: GameObjectInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
       data:
@@ -728,6 +717,10 @@ MonoBehaviour:
   initialBehaviours:
   - rid: 8256015675585462282
   - rid: 8256015675585462285
+  - rid: 8256015675585462286
+  - rid: 8256015675585462287
+  - rid: 8256015675585462289
+  - rid: 8256015675585462288
   controlState: 1
   updateMode: 0
   references:
@@ -741,6 +734,18 @@ MonoBehaviour:
           m_Bits: 2048
     - rid: 8256015675585462285
       type: {class: TargetReasoner, ns: Assets.Scripts.AI, asm: Assembly-CSharp}
+    - rid: 8256015675585462286
+      type: {class: CharacterReasoner, ns: Assets.Scripts.AI, asm: Assembly-CSharp}
+    - rid: 8256015675585462287
+      type: {class: PatrolBehaviour, ns: Scripts.AI, asm: Assembly-CSharp}
+      data:
+        _distancePrecision: 0.5
+    - rid: 8256015675585462288
+      type: {class: AttackBehaviour, ns: Scripts.AI, asm: Assembly-CSharp}
+      data:
+        _shootPeriod_sec: 1
+    - rid: 8256015675585462289
+      type: {class: FollowBehaviour, ns: Scripts.AI, asm: Assembly-CSharp}
 --- !u!1001 &951819667664011787
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -758,7 +763,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7634629523243706486, guid: 561f91cd1fa624d77afd738c1708ba8d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.94
+      value: 5.7
       objectReference: {fileID: 0}
     - target: {fileID: 7634629523243706486, guid: 561f91cd1fa624d77afd738c1708ba8d, type: 3}
       propertyPath: m_LocalPosition.y
