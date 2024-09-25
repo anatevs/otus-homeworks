@@ -10,7 +10,7 @@ namespace Atomic.AI
 {
     public static class BlackboardAPI
     {
-        public const int PatrolPoints = 1; // GameObject : class
+        public const int TargetColliders = 1; // Collider[] : class
         public const int StoppingDistance = 2; // float
         public const int Character = 3; // GameObject : class
         public const int Waypoints = 4; // Transform[] : class
@@ -20,23 +20,24 @@ namespace Atomic.AI
         public const int AttackTag = 8; // Tag
         public const int PatrolTag = 9; // Tag
         public const int FollowTag = 10; // Tag
+        public const int SensorPosition = 11; // Transform : class
 
 
         ///Extensions
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool HasPatrolPoints(this IBlackboard obj) => obj.HasObject(PatrolPoints);
+		public static bool HasTargetColliders(this IBlackboard obj) => obj.HasObject(TargetColliders);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static GameObject  GetPatrolPoints(this IBlackboard obj) => obj.GetObject<GameObject >(PatrolPoints);
+		public static Collider[]  GetTargetColliders(this IBlackboard obj) => obj.GetObject<Collider[] >(TargetColliders);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetPatrolPoints(this IBlackboard obj, out GameObject  value) => obj.TryGetObject(PatrolPoints, out value);
+		public static bool TryGetTargetColliders(this IBlackboard obj, out Collider[]  value) => obj.TryGetObject(TargetColliders, out value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetPatrolPoints(this IBlackboard obj, GameObject  value) => obj.SetObject(PatrolPoints, value);
+		public static void SetTargetColliders(this IBlackboard obj, Collider[]  value) => obj.SetObject(TargetColliders, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DelPatrolPoints(this IBlackboard obj) => obj.DelObject(PatrolPoints);
+		public static bool DelTargetColliders(this IBlackboard obj) => obj.DelObject(TargetColliders);
 
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -163,6 +164,22 @@ namespace Atomic.AI
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetFollowTag(this IBlackboard obj) => obj.SetTag(FollowTag);
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasSensorPosition(this IBlackboard obj) => obj.HasObject(SensorPosition);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Transform  GetSensorPosition(this IBlackboard obj) => obj.GetObject<Transform >(SensorPosition);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetSensorPosition(this IBlackboard obj, out Transform  value) => obj.TryGetObject(SensorPosition, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetSensorPosition(this IBlackboard obj, Transform  value) => obj.SetObject(SensorPosition, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelSensorPosition(this IBlackboard obj) => obj.DelObject(SensorPosition);
 
     }
 }

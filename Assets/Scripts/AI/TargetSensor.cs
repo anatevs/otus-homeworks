@@ -10,48 +10,50 @@ namespace Scripts.AI
 
         public void OnUpdate(IBlackboard blackboard, float deltaTime)
         {
-            if (FindClosestTarget(blackboard, out var target))
+            if (FindClosestTarget(blackboard, out var colliders))
             {
-                blackboard.SetTargetObject(target);
+                blackboard.SetTargetColliders(colliders);
             }
             else
             {
-                blackboard.DelTargetObject();
+                blackboard.DelTargetColliders();
             }
         }
 
-        private bool FindClosestTarget(IBlackboard blackboard, out GameObject target)
+        private bool FindClosestTarget(IBlackboard blackboard, out Collider[] colliders)
         {
-            if (blackboard.TryGetCharacter(out var character) &&
-                blackboard.TryGetAttackDistance(out var attackDistance)
+            if (blackboard.TryGetAttackDistance(out var attackDistance) &&
+                blackboard.TryGetSensorPosition(out var sensorTransform)
                 )
             {
-                var characterPos = character.transform.position;
-                characterPos.y = 0;
+                var sensorPos = sensorTransform.position;
+                sensorPos.y = 0;
 
-                var colliders = Physics.OverlapSphere(characterPos, attackDistance, _targetLayer);
+                var inDistanceColliders = Physics.OverlapSphere(sensorPos, attackDistance, _targetLayer);
 
-                if (colliders.Length > 0)
+                if (inDistanceColliders.Length > 0)
                 {
-                    var nearestCollider = colliders[0];
-                    var sqrMagnNearest = (nearestCollider.transform.position - characterPos).sqrMagnitude;
+                    //var nearestCollider = colliders[0];
+                    //var sqrMagnNearest = (nearestCollider.transform.position - characterPos).sqrMagnitude;
 
-                    foreach (var collider in colliders)
-                    {
-                        var currentMagn = (collider.transform.position - characterPos).sqrMagnitude;
-                        if (currentMagn < sqrMagnNearest)
-                        {
-                            sqrMagnNearest = currentMagn;
-                            nearestCollider = collider;
-                        }
-                    }
+                    //foreach (var collider in colliders)
+                    //{
+                    //    var currentMagn = (collider.transform.position - characterPos).sqrMagnitude;
+                    //    if (currentMagn < sqrMagnNearest)
+                    //    {
+                    //        sqrMagnNearest = currentMagn;
+                    //        nearestCollider = collider;
+                    //    }
+                    //}
 
-                    target = nearestCollider.gameObject;
+                    //target = nearestCollider.gameObject;
+
+                    colliders = inDistanceColliders;
                     return true;
                 }
             }
 
-            target = null;
+            colliders = null;
             return false;
         }
     }
