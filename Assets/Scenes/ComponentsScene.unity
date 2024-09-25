@@ -295,7 +295,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &649535566
 Transform:
   m_ObjectHideFlags: 0
@@ -346,7 +346,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 743961656}
-  - component: {fileID: 743961655}
   m_Layer: 0
   m_Name: PatrolPoints
   m_TagString: Untagged
@@ -354,23 +353,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &743961655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 743961654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6cf1a66a9a91374489e01ee4b505696, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _points:
-  - {fileID: 410059985}
-  - {fileID: 177320978}
-  - {fileID: 1254137051}
-  _distancePrecision: 0.5
 --- !u!4 &743961656
 Transform:
   m_ObjectHideFlags: 0
@@ -653,7 +635,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1702531171
 Transform:
   m_ObjectHideFlags: 0
@@ -686,6 +668,8 @@ MonoBehaviour:
   - rid: 8256015668321189889
   - rid: 8256015668321189890
   - rid: 8256015675585462273
+  - rid: 8256015675585462278
+  - rid: 8256015675585462280
   references:
     version: 2
     RefIds:
@@ -709,6 +693,19 @@ MonoBehaviour:
       data:
         key: 1
         value: {fileID: 743961654}
+    - rid: 8256015675585462278
+      type: {class: TransformArrayInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: 4
+        value:
+        - {fileID: 410059985}
+        - {fileID: 177320978}
+        - {fileID: 1254137051}
+    - rid: 8256015675585462280
+      type: {class: FloatInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: 7
+        value: 3
 --- !u!114 &1702531173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,14 +720,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blackboard: {fileID: 1702531172}
   initialBehaviours:
-  - rid: 8256015675585462274
+  - rid: 8256015675585462281
   controlState: 1
   updateMode: 0
   references:
     version: 2
     RefIds:
-    - rid: 8256015675585462274
-      type: {class: PatrolBehavior, ns: Scripts.AI, asm: Assembly-CSharp}
+    - rid: 8256015675585462281
+      type: {class: DetectTargetBehaviour, ns: Scripts.AI, asm: Assembly-CSharp}
 --- !u!1001 &951819667664011787
 PrefabInstance:
   m_ObjectHideFlags: 0
