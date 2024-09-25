@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Scripts.AI
 {
-    public class FollowBehavior : IAIUpdate
+    public class FollowBehaviour : IAIUpdate
     {
         public void OnUpdate(IBlackboard blackboard, float deltaTime)
         {
