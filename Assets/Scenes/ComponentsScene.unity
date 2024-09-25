@@ -720,14 +720,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blackboard: {fileID: 1702531172}
   initialBehaviours:
-  - rid: 8256015675585462281
+  - rid: 8256015675585462282
   controlState: 1
   updateMode: 0
   references:
     version: 2
     RefIds:
-    - rid: 8256015675585462281
-      type: {class: DetectTargetBehaviour, ns: Scripts.AI, asm: Assembly-CSharp}
+    - rid: 8256015675585462282
+      type: {class: TargetSensor, ns: Scripts.AI, asm: Assembly-CSharp}
+      data:
+        _targetLayer:
+          serializedVersion: 2
+          m_Bits: 2048
 --- !u!1001 &951819667664011787
 PrefabInstance:
   m_ObjectHideFlags: 0
