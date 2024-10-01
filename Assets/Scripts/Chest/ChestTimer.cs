@@ -9,19 +9,19 @@ namespace Scripts.Chest
         public event Action OnCounted;
 
         public TimeSpan RemainderSpan => _remainderSpan;
-        //{
-        //    get => _currentSpan;
-        //    set { _currentSpan = value; }
-        //}
 
-        [SerializeField]
-        private TimeStruct _awaitingTime;
+        //[SerializeField]
+        //private TimeStruct _awaitingTime; //config
 
         private TimeService _timeService;
 
-        private DateTime _startTime;
+        private AppInOutTimeService _appInOutTimeService;
 
-        private DateTime _currentTime;
+        private ChestsData _chestsData;
+
+        private ChestParams _chestsParams;
+
+        private DateTime _startTime;
 
         private TimeSpan _awaitingSpan;
 
@@ -32,44 +32,43 @@ namespace Scripts.Chest
         private bool _isCounted;
 
         [Inject]
-        public void Construct(TimeService timeService)
+        public void Construct(TimeService timeService,
+            AppInOutTimeService inOutTimeService,
+            ChestsData chestsData
+            )
         {
+            Debug.Log("timer ctor");
+
+
             _timeService = timeService;
+
+            _appInOutTimeService = inOutTimeService;
+
+            _chestsData = chestsData;
+
+            _chestsParams = _chestsData.GetChestParams(
+                gameObject.GetComponent<Chest>().ChestID);
         }
 
         private void Awake()
         {
-            _awaitingSpan = new TimeSpan(
-                _awaitingTime.Hours,
-                _awaitingTime.Minutes,
-                _awaitingTime.Seconds);
+            _awaitingSpan = StructToTimeSpan(_chestsParams.TimeToOpen);
 
-            _currentSpan = new TimeSpan(0, 0, 0);
-        }
-
-        private void Start()
-        {
-            _startTime = _timeService.CurrentTime;
+            ResetCounter();
 
             Debug.Log($"start {_startTime}");
+
+            _currentSpan = _awaitingSpan - _appInOutTimeService.GetOfflineTime();
+
+            CheckAndMakeOnCounted();
         }
 
         private void Update()
         {
-            _currentTime = _timeService.CurrentTime;
+            _currentSpan = _timeService.CurrentTime - _startTime;
 
-            //Debug.Log($"current {_currentTime}");
+            CheckAndMakeOnCounted();
 
-            _currentSpan = _currentTime - _startTime;
-
-            if (_currentSpan > _awaitingSpan && !_isCounted)
-            {
-                Debug.Log($"chest {gameObject.name} is ready to open!");
-                _isCounted = true;
-                _remainderSpan = TimeSpan.Zero;
-
-                OnCounted?.Invoke();
-            }
             if (!_isCounted)
             {
                 _remainderSpan = _awaitingSpan - _currentSpan;
@@ -80,6 +79,18 @@ namespace Scripts.Chest
         {
             _isCounted = false;
             _startTime = _timeService.CurrentTime;
+        }
+
+        private void CheckAndMakeOnCounted()
+        {
+            if (_currentSpan > _awaitingSpan && !_isCounted)
+            {
+                Debug.Log($"chest {gameObject.name} is ready to open!");
+                _isCounted = true;
+                _remainderSpan = TimeSpan.Zero;
+
+                OnCounted?.Invoke();
+            }
         }
 
         private TimeSpan StructToTimeSpan(TimeStruct timeStruct)
@@ -99,18 +110,5 @@ namespace Scripts.Chest
                 Seconds = timeSpan.Seconds
             };
         }
-    }
-
-    [Serializable]
-    public struct TimeStruct
-    {
-        [field: SerializeField]
-        public int Hours { get; set; }
-
-        [field: SerializeField]
-        public int Minutes { get; set; }
-
-        [field: SerializeField]
-        public int Seconds { get; set; }
     }
 }

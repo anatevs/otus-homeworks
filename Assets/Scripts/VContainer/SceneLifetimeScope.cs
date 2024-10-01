@@ -6,15 +6,18 @@ using UnityEngine;
 public class SceneLifetimeScope : LifetimeScope
 {
     [SerializeField]
-    private ChestTimer _chestTimer;
+    private ChestTimer[] _chestTimers;
 
     protected override void Configure(IContainerBuilder builder)
     {
-        RegisterChests(builder);
+        InjectChests();
     }
 
-    private void RegisterChests(IContainerBuilder builder)
+    private void InjectChests()
     {
-        builder.RegisterComponent(_chestTimer);
+        foreach (var chest in _chestTimers)
+        {
+            autoInjectGameObjects.Add(chest.gameObject);
+        }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Scripts.Chest
+namespace Assets.SaveLoad
 {
-    public class ChestsTimeData : MonoBehaviour
+    public class SaveLoadAppInOutTime : MonoBehaviour
     {
 
         // Use this for initialization

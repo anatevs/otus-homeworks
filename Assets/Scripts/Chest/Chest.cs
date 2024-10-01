@@ -4,11 +4,16 @@ namespace Scripts.Chest
 {
     public class Chest : MonoBehaviour
     {
+        public string ChestID => _chestConfig.Params.ChestID;
+
         [SerializeField]
         private ChestButton _chestButton;
 
         [SerializeField]
         private ChestTimer _chestTimer;
+
+        [SerializeField]
+        private ChestConfig _chestConfig;
 
         private void Awake()
         {
