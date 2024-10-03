@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Assets.SaveLoad
+namespace Scripts.SaveLoadNamespace
 {
-    public class SaveLoadAppInOutTime : MonoBehaviour
+    public sealed class SaveLoadStartFinishTime : MonoBehaviour
     {
 
         // Use this for initialization

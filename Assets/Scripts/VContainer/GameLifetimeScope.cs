@@ -5,9 +5,9 @@ using Scripts;
 using Scripts.Scenes;
 using Scripts.Chest;
 using UnityEditor;
-using Scripts.SaveLoad;
+using Scripts.SaveLoadNamespace;
 
-public class GameLifetimeScope : LifetimeScope
+public sealed class GameLifetimeScope : LifetimeScope
 {
     [SerializeField]
     private TimeServiceConfig _timeServConfig;
@@ -33,19 +33,24 @@ public class GameLifetimeScope : LifetimeScope
             .WithParameter(_timeServConfig)
             .AsSelf();
 
-        builder.Register<AppInOutTimeService>(Lifetime.Singleton);
+        builder.Register<StartFinishTimeService>(Lifetime.Singleton);
     }
 
     private void RegisterSaveLoad(IContainerBuilder builder)
     {
-        var saveLoadChests = new SaveLoadChests(_groupChestsConfig);
+        //var saveLoadChests = new SaveLoadChests(_groupChestsConfig);
 
-        builder.RegisterComponent(saveLoadChests);
+        builder.Register<SaveLoadChests>(Lifetime.Singleton)
+            .WithParameter(_groupChestsConfig)
+            .AsImplementedInterfaces()
+            .AsSelf();
 
 
-        var chestsData = saveLoadChests.Load();
+        //var chestsData = saveLoadChests.Load();
 
-        builder.RegisterComponent(chestsData);
+        //builder.RegisterComponent(chestsData);
+
+        builder.Register<AppQuitManager>(Lifetime.Singleton);
     }
 
     private void RegisterSceneLoader(IContainerBuilder builder)

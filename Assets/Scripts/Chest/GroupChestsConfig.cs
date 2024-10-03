@@ -7,7 +7,7 @@ namespace Scripts.Chest
         menuName = "Configs/New Group Chests Config"
         )]
 
-    public class GroupChestsConfig : ScriptableObject
+    public sealed class GroupChestsConfig : ScriptableObject
     {
         public ChestConfig[] Configs;
     }

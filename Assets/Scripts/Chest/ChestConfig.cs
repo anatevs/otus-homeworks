@@ -7,7 +7,7 @@ namespace Scripts.Chest
         fileName = "ChestConfig",
         menuName = "Configs/New Chest Configs"
         )]
-    public class ChestConfig : ScriptableObject
+    public sealed class ChestConfig : ScriptableObject
     {
         public ChestParams Params;
 

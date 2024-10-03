@@ -3,20 +3,42 @@ using Scripts.Chest;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scripts.SaveLoad
+namespace Scripts.SaveLoadNamespace
 {
-    public class SaveLoadChests
+    public sealed class SaveLoadChests : ISaveLoad
     {
         private const string SAVE_LOAD_KEY = "SaveLoadChests";
 
         private readonly GroupChestsConfig _config;
+
+        private readonly ChestsData _chestsData = new();
 
         public SaveLoadChests(GroupChestsConfig config)
         {
             _config = config;
         }
 
-        public ChestsData Load()
+        public void Load()
+        {
+            _chestsData.SetupChestsData(LoadChests());
+        }
+
+        public void Save()
+        {
+            SaveChests(_chestsData);
+        }
+
+        public ChestsData GetChestData()
+        {
+            return _chestsData;
+        }
+
+        public void SetChestData(string id, ChestParams chest)
+        {
+            _chestsData.AddChest(id, chest);
+        }
+
+        private ChestsData LoadChests()
         {
             if (PlayerPrefs.HasKey(SAVE_LOAD_KEY))
             {
@@ -30,17 +52,19 @@ namespace Scripts.SaveLoad
                 }
             }
 
-            return LoadDefault();
+            return LoadDefaultChests();
         }
 
-        public void Save(ChestsData data)
+        private void SaveChests(ChestsData data)
         {
             var jsonData = JsonConvert.SerializeObject(data);
 
-            PlayerPrefs.SetString(SAVE_LOAD_KEY, jsonData);
+            Debug.Log($"data to save: {jsonData}");
+
+            //PlayerPrefs.SetString(SAVE_LOAD_KEY, jsonData);
         }
 
-        private ChestsData LoadDefault()
+        private ChestsData LoadDefaultChests()
         {
             Dictionary<string, ChestParams> dataDict = new();
 

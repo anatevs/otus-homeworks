@@ -8,23 +8,17 @@ using VContainer.Unity;
 
 namespace Scripts
 {
-    public class TimeService : ITickable //MonoBehaviour
+    public sealed class TimeService : ITickable
     {
         public DateTime CurrentTime => _currentTime;
 
         private TimeServiceConfig _config;
 
-        //[SerializeField]
-        //private float _requestPeriod_Sec;
-
-        //[SerializeField]
-        //private int _allowedDiscrapancy_Sec = 5;
-
         private const string SERVICE_UTC_URL = "http://worldtimeapi.org/api/timezone/UTC";
 
         private DateTime _currentTime;
 
-        private DateTime _currentUTCTime;
+        private DateTime _currentUTCTimeServer;
 
         private TimeSpan _startSpan;
 
@@ -51,7 +45,6 @@ namespace Scripts
             CheckDeviceTimeAsync().Forget();
         }
 
-        //private void Update()
         void ITickable.Tick()
         {
             if (_isDeviceTimeCorrect)
@@ -83,9 +76,9 @@ namespace Scripts
 
         private async UniTask<TimeSpan> GetLocalUTCDiffAsync()
         {
-            _currentUTCTime = await RequestServerUTCTimeAsync();
+            _currentUTCTimeServer = await RequestServerUTCTimeAsync();
 
-            return (DateTime.Now - _currentUTCTime);
+            return (DateTime.Now - _currentUTCTimeServer);
         }
 
         private async UniTask<DateTime> RequestServerUTCTimeAsync()

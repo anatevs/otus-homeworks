@@ -2,7 +2,7 @@
 
 namespace Scripts.Chest
 {
-    public class Chest : MonoBehaviour
+    public sealed class Chest : MonoBehaviour
     {
         public string ChestID => _chestConfig.Params.ChestID;
 
@@ -15,7 +15,7 @@ namespace Scripts.Chest
         [SerializeField]
         private ChestConfig _chestConfig;
 
-        private void Awake()
+        private void OnEnable()
         {
             _chestButton.OnClicked += _chestTimer.ResetCounter;
 

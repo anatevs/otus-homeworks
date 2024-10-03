@@ -1,15 +1,14 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scripts.Chest
 {
-    public class ChestsData
+    public sealed class ChestsData
     {
-        //public Dictionary<string, ChestParams> Params => _chestsDict;
-
         [JsonProperty]
-        private Dictionary<string, ChestParams> _chestsDict = new();
+        private readonly Dictionary<string, ChestParams> _chestsDict = new();
 
         public void SetupChestsData(Dictionary<string, ChestParams> chestsDict)
         {
@@ -18,6 +17,18 @@ namespace Scripts.Chest
             foreach (var chest in chestsDict)
             {
                 _chestsDict.Add(chest.Key, chest.Value);
+            }
+        }
+
+        public void SetupChestsData(ChestsData chestsData)
+        {
+            _chestsDict.Clear();
+
+            var ids = chestsData.GetChestsID();
+
+            foreach (var id in ids)
+            {
+                AddChest(id, chestsData.GetChestParams(id));
             }
         }
 
@@ -36,6 +47,20 @@ namespace Scripts.Chest
         public ChestParams GetChestParams(string id)
         {
             return _chestsDict[id];
+        }
+
+        public string[] GetChestsID()
+        {
+            var ids = new string[_chestsDict.Count];
+
+            int i = 0;
+            foreach(var chest in _chestsDict.Keys)
+            {
+                ids[i] = chest;
+                i++;
+            }
+
+            return ids;
         }
     }
 }

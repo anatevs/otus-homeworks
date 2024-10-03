@@ -1,24 +1,36 @@
 using Cysharp.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+using Scripts.SaveLoadNamespace;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer;
 
 namespace Scripts.Scenes
 {
-    public class LoadingGame : MonoBehaviour
+    public sealed class LoadingGame : MonoBehaviour
     {
         private TimeService _timeService;
+
+        private IEnumerable<ISaveLoad> _saveLoads;
 
         private readonly int _gameSceneID = 1;
 
         [Inject]
-        public void Construct(TimeService timeService)
+        public void Construct(TimeService timeService, IEnumerable<ISaveLoad> saveLoads)
         {
             _timeService = timeService;
+
+            _saveLoads = saveLoads;
         }
 
-        private async void Start ()
+        private async void Start()
         {
+            foreach (var saveLoad in _saveLoads)
+            {
+                saveLoad.Load();
+            }
+
             await _timeService.InitAsync();
 
             await SceneManager.LoadSceneAsync(_gameSceneID);

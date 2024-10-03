@@ -1,10 +1,11 @@
+using Scripts.SaveLoadNamespace;
 using System;
 using UnityEngine;
 using VContainer;
 
 namespace Scripts.Chest
 {
-    public class ChestTimer : MonoBehaviour
+    public sealed class ChestTimer : MonoBehaviour
     {
         public event Action OnCounted;
 
@@ -13,9 +14,13 @@ namespace Scripts.Chest
         //[SerializeField]
         //private TimeStruct _awaitingTime; //config
 
+        private string _chestID;
+
         private TimeService _timeService;
 
-        private AppInOutTimeService _appInOutTimeService;
+        private StartFinishTimeService _appInOutTimeService;
+
+        private SaveLoadChests _saveLoadChests;
 
         private ChestsData _chestsData;
 
@@ -33,24 +38,25 @@ namespace Scripts.Chest
 
         [Inject]
         public void Construct(TimeService timeService,
-            AppInOutTimeService inOutTimeService,
-            ChestsData chestsData
+            StartFinishTimeService inOutTimeService,
+            SaveLoadChests saveLoadChests
+            //ChestsData chestsData
             )
         {
-            Debug.Log("timer ctor");
-
-
             _timeService = timeService;
 
             _appInOutTimeService = inOutTimeService;
 
-            _chestsData = chestsData;
+            _saveLoadChests = saveLoadChests;
 
-            _chestsParams = _chestsData.GetChestParams(
-                gameObject.GetComponent<Chest>().ChestID);
+            //_chestsData = chestsData;
+
+            _chestID = gameObject.GetComponent<Chest>().ChestID;
+
+            _chestsParams = _saveLoadChests.GetChestData().GetChestParams(_chestID);
         }
 
-        private void Awake()
+        private void Start()
         {
             _awaitingSpan = StructToTimeSpan(_chestsParams.TimeToOpen);
 
@@ -58,27 +64,31 @@ namespace Scripts.Chest
 
             Debug.Log($"start {_startTime}");
 
-            _currentSpan = _awaitingSpan - _appInOutTimeService.GetOfflineTime();
-
-            CheckAndMakeOnCounted();
+            _currentSpan = _awaitingSpan + _appInOutTimeService.GetOfflineTime();
         }
 
         private void Update()
         {
-            _currentSpan = _timeService.CurrentTime - _startTime;
-
             CheckAndMakeOnCounted();
 
             if (!_isCounted)
             {
                 _remainderSpan = _awaitingSpan - _currentSpan;
             }
+
+            _currentSpan = _timeService.CurrentTime - _startTime;
+
+            _chestsParams.TimeToOpen = TimeSpanToStruct(_remainderSpan);
+            _saveLoadChests.SetChestData(_chestID, _chestsParams);
         }
 
         public void ResetCounter()
         {
             _isCounted = false;
             _startTime = _timeService.CurrentTime;
+            _currentSpan = _timeService.CurrentTime - _startTime;
+
+            //new chest params... (reward type and amount, upd timeToOpen)
         }
 
         private void CheckAndMakeOnCounted()
