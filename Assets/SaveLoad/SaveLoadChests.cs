@@ -1,70 +1,21 @@
-using Newtonsoft.Json;
-using Scripts.Chest;
+﻿using Scripts.Chest;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scripts.SaveLoadNamespace
 {
-    public sealed class SaveLoadChests : ISaveLoad
+    public class SaveLoadChests : SaveLoad<ChestsData>
     {
-        private const string SAVE_LOAD_KEY = "SaveLoadChests";
+        protected override string SaveLoadKey => "SaveLoadChests";
 
         private readonly GroupChestsConfig _config;
-
-        private readonly ChestsData _chestsData = new();
 
         public SaveLoadChests(GroupChestsConfig config)
         {
             _config = config;
         }
 
-        public void Load()
-        {
-            _chestsData.SetupChestsData(LoadChests());
-        }
-
-        public void Save()
-        {
-            SaveChests(_chestsData);
-        }
-
-        public ChestsData GetChestData()
-        {
-            return _chestsData;
-        }
-
-        public void SetChestData(string id, ChestParams chest)
-        {
-            _chestsData.AddChest(id, chest);
-        }
-
-        private ChestsData LoadChests()
-        {
-            if (PlayerPrefs.HasKey(SAVE_LOAD_KEY))
-            {
-                var jsonData = PlayerPrefs.GetString(SAVE_LOAD_KEY);
-
-                var data = JsonConvert.DeserializeObject<ChestsData>(jsonData);
-
-                if (data != null)
-                {
-                    return data;
-                }
-            }
-
-            return LoadDefaultChests();
-        }
-
-        private void SaveChests(ChestsData data)
-        {
-            var jsonData = JsonConvert.SerializeObject(data);
-
-            Debug.Log($"data to save: {jsonData}");
-
-            //PlayerPrefs.SetString(SAVE_LOAD_KEY, jsonData);
-        }
-
-        private ChestsData LoadDefaultChests()
+        protected override ChestsData LoadDefaultData()
         {
             Dictionary<string, ChestParams> dataDict = new();
 
@@ -77,6 +28,11 @@ namespace Scripts.SaveLoadNamespace
             data.SetupChestsData(dataDict);
 
             return data;
+        }
+
+        public void SetChestData(string id, ChestParams chest)
+        {
+            _data.AddChest(id, chest);
         }
     }
 }

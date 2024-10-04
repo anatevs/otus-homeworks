@@ -1,21 +1,22 @@
 ﻿using System.Collections;
 using UnityEngine;
+using System;
 
 namespace Scripts.SaveLoadNamespace
 {
-    public sealed class SaveLoadStartFinishTime : MonoBehaviour
+    public sealed class SaveLoadStartFinishTime : SaveLoad<StartFinishTimeData>
     {
+        protected override string SaveLoadKey => "StartFinishData";
 
-        // Use this for initialization
-        void Start()
+        protected override StartFinishTimeData LoadDefaultData()
         {
-
+            var data = new StartFinishTimeData();
+            return data;
         }
 
-        // Update is called once per frame
-        void Update()
+        protected override void SetupData(StartFinishTimeData data)
         {
-
+            data.AddStartTime(DateTime.Now);
         }
     }
 }

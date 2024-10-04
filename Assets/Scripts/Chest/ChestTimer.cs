@@ -11,18 +11,15 @@ namespace Scripts.Chest
 
         public TimeSpan RemainderSpan => _remainderSpan;
 
-        //[SerializeField]
-        //private TimeStruct _awaitingTime; //config
-
         private string _chestID;
 
         private TimeService _timeService;
 
-        private StartFinishTimeService _appInOutTimeService;
+        //private StartFinishTimeData _appInOutTimeService;
+
+        private SaveLoadStartFinishTime _startFinishTime;
 
         private SaveLoadChests _saveLoadChests;
-
-        private ChestsData _chestsData;
 
         private ChestParams _chestsParams;
 
@@ -38,33 +35,36 @@ namespace Scripts.Chest
 
         [Inject]
         public void Construct(TimeService timeService,
-            StartFinishTimeService inOutTimeService,
-            SaveLoadChests saveLoadChests
-            //ChestsData chestsData
+            //StartFinishTimeData inOutTimeService,
+            SaveLoadChests saveLoadChests,
+            SaveLoadStartFinishTime srartFinishTime
             )
         {
             _timeService = timeService;
 
-            _appInOutTimeService = inOutTimeService;
+            //_appInOutTimeService = inOutTimeService;
+
+            _startFinishTime = srartFinishTime;
 
             _saveLoadChests = saveLoadChests;
 
-            //_chestsData = chestsData;
-
             _chestID = gameObject.GetComponent<Chest>().ChestID;
 
-            _chestsParams = _saveLoadChests.GetChestData().GetChestParams(_chestID);
+            _chestsParams = _saveLoadChests.GetData().GetChestParams(_chestID);
         }
 
         private void Start()
         {
-            _awaitingSpan = StructToTimeSpan(_chestsParams.TimeToOpen);
+            _awaitingSpan = StructToTimeSpan(_chestsParams.AwaitingTime);
 
             ResetCounter();
 
             Debug.Log($"start {_startTime}");
 
-            _currentSpan = _awaitingSpan + _appInOutTimeService.GetOfflineTime();
+            //_currentSpan = _awaitingSpan + _appInOutTimeService.GetOfflineTime();
+
+            _currentSpan = _awaitingSpan +
+                _startFinishTime.GetData().GetOfflineTime();
         }
 
         private void Update()
@@ -78,7 +78,7 @@ namespace Scripts.Chest
 
             _currentSpan = _timeService.CurrentTime - _startTime;
 
-            _chestsParams.TimeToOpen = TimeSpanToStruct(_remainderSpan);
+            _chestsParams.AwaitingTime = TimeSpanToStruct(_remainderSpan);
             _saveLoadChests.SetChestData(_chestID, _chestsParams);
         }
 

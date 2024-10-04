@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Scripts.Chest
 {
@@ -20,18 +18,6 @@ namespace Scripts.Chest
             }
         }
 
-        public void SetupChestsData(ChestsData chestsData)
-        {
-            _chestsDict.Clear();
-
-            var ids = chestsData.GetChestsID();
-
-            foreach (var id in ids)
-            {
-                AddChest(id, chestsData.GetChestParams(id));
-            }
-        }
-
         public void AddChest(string id, ChestParams chest)
         {
             if (_chestsDict.ContainsKey(id))
@@ -47,20 +33,6 @@ namespace Scripts.Chest
         public ChestParams GetChestParams(string id)
         {
             return _chestsDict[id];
-        }
-
-        public string[] GetChestsID()
-        {
-            var ids = new string[_chestsDict.Count];
-
-            int i = 0;
-            foreach(var chest in _chestsDict.Keys)
-            {
-                ids[i] = chest;
-                i++;
-            }
-
-            return ids;
         }
     }
 }

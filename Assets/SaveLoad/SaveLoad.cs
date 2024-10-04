@@ -1,27 +1,41 @@
 ﻿using Newtonsoft.Json;
+using Scripts.Chest;
 using UnityEngine;
 
 namespace Scripts.SaveLoadNamespace
 {
     public abstract class SaveLoad<TData> : ISaveLoad
     {
-        protected string SaveLoadKey { get; }
+        protected abstract string SaveLoadKey { get; }
+
+        protected TData _data;
+
+        public TData GetData()
+        {
+            return _data;
+        }
 
         public void Save()
         {
-
+            SaveData(_data);
         }
 
         public void Load()
         {
+            _data = LoadData();
 
+            SetupData(_data);
         }
 
         public TData LoadData()
         {
             if (PlayerPrefs.HasKey(SaveLoadKey))
             {
-                return LoadFromSaved();
+                var jsonData = PlayerPrefs.GetString(SaveLoadKey);
+
+                var data = JsonConvert.DeserializeObject<TData>(jsonData);
+
+                return data;
             }
 
             return LoadDefaultData();
@@ -31,11 +45,13 @@ namespace Scripts.SaveLoadNamespace
         {
             var jsonData = JsonConvert.SerializeObject(data);
 
-            PlayerPrefs.SetString(SaveLoadKey, jsonData);
+            Debug.Log($"data to save: {jsonData}");
+
+            //PlayerPrefs.SetString(SaveLoadKey, jsonData);
         }
 
-        protected abstract TData LoadFromSaved();
-
         protected abstract TData LoadDefaultData();
+
+        protected virtual void SetupData(TData data) { }
     }
 }

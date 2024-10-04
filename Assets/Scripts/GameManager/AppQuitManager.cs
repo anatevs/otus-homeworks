@@ -20,14 +20,6 @@ namespace Scripts.SaveLoadNamespace
             _saveLoads.Add(saveLoad);
         }
 
-        //private void Awake()
-        //{
-        //    foreach (var saveLoad in _saveLoads)
-        //    {
-        //        saveLoad.Load();
-        //    }
-        //}
-
         private void OnApplicationQuit()
         {
             if (_saveLoads.Count != 0)

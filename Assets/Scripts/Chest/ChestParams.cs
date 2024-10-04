@@ -12,6 +12,8 @@ namespace Scripts.Chest
 
         public string RewardAmout;
 
-        public TimeStruct TimeToOpen;
+        public TimeStruct AwaitingTime;
+
+        public TimeStruct RemainingTime;
     }
 }

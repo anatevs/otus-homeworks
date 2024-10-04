@@ -33,11 +33,15 @@ public sealed class GameLifetimeScope : LifetimeScope
             .WithParameter(_timeServConfig)
             .AsSelf();
 
-        builder.Register<StartFinishTimeService>(Lifetime.Singleton);
+        //builder.Register<StartFinishTimeData>(Lifetime.Singleton);
     }
 
     private void RegisterSaveLoad(IContainerBuilder builder)
     {
+        builder.Register<SaveLoadStartFinishTime>(Lifetime.Singleton)
+            .AsImplementedInterfaces()
+            .AsSelf();
+
         //var saveLoadChests = new SaveLoadChests(_groupChestsConfig);
 
         builder.Register<SaveLoadChests>(Lifetime.Singleton)

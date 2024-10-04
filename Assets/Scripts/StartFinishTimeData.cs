@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace Scripts
 {
-    public sealed class StartFinishTimeService
+    public sealed class StartFinishTimeData
     {
-        private AppInOutStruct _info = new()
+        [JsonProperty]
+        private AppStartFinishTimeStruct _info = new()
         {
             AppStart = new(),
             AppFinish = new()
@@ -25,9 +27,9 @@ namespace Scripts
             _info.AppFinish.Add(utcStr);
         }
 
-        public AppInOutStruct GetLocalTimeStrings()
+        public AppStartFinishTimeStruct GetLocalTimeStrings()
         {
-            var res = new AppInOutStruct();
+            var res = new AppStartFinishTimeStruct();
 
             foreach (var item in _info.AppStart)
             {
@@ -98,7 +100,7 @@ namespace Scripts
     }
 
     [Serializable]
-    public struct AppInOutStruct
+    public struct AppStartFinishTimeStruct
     {
         public List<string> AppStart; //utc
 
