@@ -24,7 +24,7 @@ namespace Scripts.SaveLoadNamespace
         {
             _data = LoadData();
 
-            SetupData(_data);
+            SetupLoadData(_data);
         }
 
         public TData LoadData()
@@ -43,15 +43,19 @@ namespace Scripts.SaveLoadNamespace
 
         public void SaveData(TData data)
         {
+            SetupSaveData(data);
+
             var jsonData = JsonConvert.SerializeObject(data);
 
             Debug.Log($"data to save: {jsonData}");
 
-            //PlayerPrefs.SetString(SaveLoadKey, jsonData);
+            PlayerPrefs.SetString(SaveLoadKey, jsonData);
         }
 
         protected abstract TData LoadDefaultData();
 
-        protected virtual void SetupData(TData data) { }
+        protected virtual void SetupLoadData(TData data) { }
+
+        protected virtual void SetupSaveData(TData data) { }
     }
 }

@@ -15,8 +15,6 @@ namespace Scripts.Chest
 
         private TimeService _timeService;
 
-        //private StartFinishTimeData _appInOutTimeService;
-
         private SaveLoadStartFinishTime _startFinishTime;
 
         private SaveLoadChests _saveLoadChests;
@@ -35,14 +33,11 @@ namespace Scripts.Chest
 
         [Inject]
         public void Construct(TimeService timeService,
-            //StartFinishTimeData inOutTimeService,
             SaveLoadChests saveLoadChests,
             SaveLoadStartFinishTime srartFinishTime
             )
         {
             _timeService = timeService;
-
-            //_appInOutTimeService = inOutTimeService;
 
             _startFinishTime = srartFinishTime;
 
@@ -56,19 +51,17 @@ namespace Scripts.Chest
         private void Start()
         {
             _awaitingSpan = StructToTimeSpan(_chestsParams.AwaitingTime);
+            _remainderSpan = StructToTimeSpan(_chestsParams.RemainingTime);
 
-            ResetCounter();
+            var offlineTime = _startFinishTime.GetData().GetOfflineTime();
 
-            Debug.Log($"start {_startTime}");
-
-            //_currentSpan = _awaitingSpan + _appInOutTimeService.GetOfflineTime();
-
-            _currentSpan = _awaitingSpan +
-                _startFinishTime.GetData().GetOfflineTime();
+            _startTime = _timeService.CurrentTime - (offlineTime + _awaitingSpan - _remainderSpan);
         }
 
         private void Update()
         {
+            _currentSpan = _timeService.CurrentTime - _startTime;
+
             CheckAndMakeOnCounted();
 
             if (!_isCounted)
@@ -76,9 +69,7 @@ namespace Scripts.Chest
                 _remainderSpan = _awaitingSpan - _currentSpan;
             }
 
-            _currentSpan = _timeService.CurrentTime - _startTime;
-
-            _chestsParams.AwaitingTime = TimeSpanToStruct(_remainderSpan);
+            _chestsParams.RemainingTime = TimeSpanToStruct(_remainderSpan);
             _saveLoadChests.SetChestData(_chestID, _chestsParams);
         }
 

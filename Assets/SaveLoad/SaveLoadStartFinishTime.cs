@@ -14,9 +14,14 @@ namespace Scripts.SaveLoadNamespace
             return data;
         }
 
-        protected override void SetupData(StartFinishTimeData data)
+        protected override void SetupLoadData(StartFinishTimeData data)
         {
             data.AddStartTime(DateTime.Now);
+        }
+
+        protected override void SetupSaveData(StartFinishTimeData data)
+        {
+            data.AddFinishTime(DateTime.Now);
         }
     }
 }

@@ -21,7 +21,10 @@ namespace Scripts.SaveLoadNamespace
 
             foreach (var chest in _config.Configs)
             {
-                dataDict.Add(chest.Params.ChestID, chest.Params);
+                var defaultParams = chest.Params;
+                defaultParams.RemainingTime = defaultParams.AwaitingTime;
+
+                dataDict.Add(chest.Params.ChestID, defaultParams);
             }
 
             var data = new ChestsData();
