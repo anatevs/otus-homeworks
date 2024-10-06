@@ -16,8 +16,12 @@ MonoBehaviour:
     ChestID: GoldenChest
     RewardType: gold
     RewardAmout: 10
-    TimeToOpen:
+    AwaitingTime:
       <Hours>k__BackingField: 0
       <Minutes>k__BackingField: 0
       <Seconds>k__BackingField: 15
+    RemainingTime:
+      <Hours>k__BackingField: 0
+      <Minutes>k__BackingField: 0
+      <Seconds>k__BackingField: 0
   _prefab: {fileID: 2667824348872281721, guid: f7869295e04f3ae41865e34b9e4e0c30, type: 3}

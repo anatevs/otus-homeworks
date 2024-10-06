@@ -1,18 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class IReward : MonoBehaviour
+namespace Scripts.Reward
 {
-    // Start is called before the first frame update
-    void Start()
+    public interface IReward
     {
-        
-    }
+        public int RewardAmount { get; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void MakeReward();
     }
 }

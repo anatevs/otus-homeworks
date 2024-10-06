@@ -16,8 +16,12 @@ MonoBehaviour:
     ChestID: WoodenChest
     RewardType: rub
     RewardAmout: 100
-    TimeToOpen:
+    AwaitingTime:
+      <Hours>k__BackingField: 0
+      <Minutes>k__BackingField: 3
+      <Seconds>k__BackingField: 0
+    RemainingTime:
       <Hours>k__BackingField: 0
       <Minutes>k__BackingField: 0
-      <Seconds>k__BackingField: 10
+      <Seconds>k__BackingField: 0
   _prefab: {fileID: 7314231982886042066, guid: b2dc014fb62681042b50ce924caa26c4, type: 3}
