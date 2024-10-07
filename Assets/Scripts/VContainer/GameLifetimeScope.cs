@@ -6,6 +6,7 @@ using Scripts.Scenes;
 using Scripts.Chest;
 using UnityEditor;
 using Scripts.SaveLoadNamespace;
+using Scripts.MoneyNamespace;
 
 public sealed class GameLifetimeScope : LifetimeScope
 {
@@ -18,11 +19,16 @@ public sealed class GameLifetimeScope : LifetimeScope
     [SerializeField]
     private GroupChestsConfig _groupChestsConfig;
 
+    [SerializeField]
+    private CurrencyConfig _currencyConfig;
+
     protected override void Configure(IContainerBuilder builder)
     {
         RegisterTimeService(builder);
 
         RegisterSaveLoad(builder);
+
+        RegisterMoneyStorages(builder);
 
         RegisterSceneLoader(builder);
     }
@@ -55,6 +61,12 @@ public sealed class GameLifetimeScope : LifetimeScope
         //builder.RegisterComponent(chestsData);
 
         builder.Register<AppQuitManager>(Lifetime.Singleton);
+    }
+
+    private void RegisterMoneyStorages(IContainerBuilder builder)
+    {
+        builder.Register<MoneyStoragesRepository>(Lifetime.Singleton)
+            .WithParameter(_currencyConfig);
     }
 
     private void RegisterSceneLoader(IContainerBuilder builder)

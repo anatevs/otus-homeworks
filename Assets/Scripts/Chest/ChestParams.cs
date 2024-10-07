@@ -10,7 +10,7 @@ namespace Scripts.Chest
 
         public string RewardType;
 
-        public string RewardAmout;
+        public int RewardValue;
 
         public TimeStruct AwaitingTime;
 

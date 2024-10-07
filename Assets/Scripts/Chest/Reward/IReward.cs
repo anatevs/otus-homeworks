@@ -1,8 +1,8 @@
-namespace Scripts.Reward
+namespace Scripts.Chest.Reward
 {
     public interface IReward
     {
-        public int RewardAmount { get; }
+        public int Value { get; }
 
         public void MakeReward();
     }

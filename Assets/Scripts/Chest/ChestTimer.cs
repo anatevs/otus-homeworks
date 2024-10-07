@@ -11,15 +11,9 @@ namespace Scripts.Chest
 
         public TimeSpan RemainderSpan => _remainderSpan;
 
-        private string _chestID;
-
         private TimeService _timeService;
 
         private SaveLoadStartFinishTime _startFinishTime;
-
-        private SaveLoadChests _saveLoadChests;
-
-        private ChestParams _chestsParams;
 
         private DateTime _startTime;
 
@@ -33,25 +27,20 @@ namespace Scripts.Chest
 
         [Inject]
         public void Construct(TimeService timeService,
-            SaveLoadChests saveLoadChests,
-            SaveLoadStartFinishTime srartFinishTime
+            SaveLoadStartFinishTime startFinishTime
             )
         {
             _timeService = timeService;
 
-            _startFinishTime = srartFinishTime;
-
-            _saveLoadChests = saveLoadChests;
-
-            _chestID = gameObject.GetComponent<Chest>().ChestID;
-
-            _chestsParams = _saveLoadChests.GetData().GetChestParams(_chestID);
+            _startFinishTime = startFinishTime;
         }
 
         private void Start()
         {
-            _awaitingSpan = StructToTimeSpan(_chestsParams.AwaitingTime);
-            _remainderSpan = StructToTimeSpan(_chestsParams.RemainingTime);
+            var chest = gameObject.GetComponent<Chest>();
+
+            _awaitingSpan = StructToTimeSpan(chest.ChestData.AwaitingTime);
+            _remainderSpan = StructToTimeSpan(chest.ChestData.RemainingTime);
 
             var offlineTime = _startFinishTime.GetData().GetOfflineTime();
 
@@ -68,9 +57,6 @@ namespace Scripts.Chest
             {
                 _remainderSpan = _awaitingSpan - _currentSpan;
             }
-
-            _chestsParams.RemainingTime = TimeSpanToStruct(_remainderSpan);
-            _saveLoadChests.SetChestData(_chestID, _chestsParams);
         }
 
         public void ResetCounter()
@@ -100,16 +86,6 @@ namespace Scripts.Chest
                     timeStruct.Hours,
                     timeStruct.Minutes,
                     timeStruct.Seconds);
-        }
-
-        private TimeStruct TimeSpanToStruct(TimeSpan timeSpan)
-        {
-            return new TimeStruct()
-            {
-                Hours = timeSpan.Hours,
-                Minutes = timeSpan.Minutes,
-                Seconds = timeSpan.Seconds
-            };
         }
     }
 }

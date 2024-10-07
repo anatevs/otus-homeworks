@@ -145,7 +145,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2667824348872281722}
   - component: {fileID: 2667824348872281720}
-  - component: {fileID: 2667824348872281721}
+  - component: {fileID: 5497318377573494532}
+  - component: {fileID: 8985855307193107177}
   m_Layer: 5
   m_Name: GoldenChest
   m_TagString: Untagged
@@ -187,11 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4a7d24cc33702a4ea9c8b59af1b43dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _awaitingTime:
-    <Hours>k__BackingField: 0
-    <Minutes>k__BackingField: 0
-    <Seconds>k__BackingField: 10
---- !u!114 &2667824348872281721
+--- !u!114 &5497318377573494532
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,12 +197,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 2667824348872281723}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff5f34673e20b8546b8bc7f19be3a6ef, type: 3}
+  m_Script: {fileID: 11500000, guid: 4afb1ec045adf3141a9e5f919c2f4d86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _chestButton: {fileID: 2667824349593195772}
   _chestTimer: {fileID: 2667824348872281720}
+  _chest: {fileID: 8985855307193107177}
+--- !u!114 &8985855307193107177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2667824348872281723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 824ad586ffaf5b241a3afa4f7ecdd7fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _chestTimer: {fileID: 2667824348872281720}
   _chestConfig: {fileID: 11400000, guid: 7dc5cd457d3a10a448611012b80e539c, type: 2}
+  _rewardConfig: {fileID: 11400000, guid: b2bd72c67287d6a4b8d6c205f7d58023, type: 2}
 --- !u!1 &2667824349593195761
 GameObject:
   m_ObjectHideFlags: 0

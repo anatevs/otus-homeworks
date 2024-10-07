@@ -54,6 +54,7 @@ MonoBehaviour:
     AllowedDiscrapancy_Sec: 10
   _loadingGame: {fileID: -3933420336681494331}
   _groupChestsConfig: {fileID: 11400000, guid: 4827b82e1ae3fa345a1ce9ac68a08c17, type: 2}
+  _currencyConfig: {fileID: 11400000, guid: 457c46467c366f742a01d542ddb46b5f, type: 2}
 --- !u!114 &-3933420336681494331
 MonoBehaviour:
   m_ObjectHideFlags: 0

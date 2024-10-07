@@ -10,8 +10,5 @@ namespace Scripts.Chest
     public sealed class ChestConfig : ScriptableObject
     {
         public ChestParams Params;
-
-        [SerializeField]
-        private Chest _prefab;
     }
 }
