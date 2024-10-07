@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Scripts.Chest.Reward
 {
-    public class MoneyReward : IReward
+    public sealed class MoneyReward : IReward
     {
         public string Currency => _currency;
 

@@ -1,7 +1,7 @@
 using VContainer;
 using VContainer.Unity;
 using UnityEngine;
-using Scripts;
+using Scripts.Time;
 using Scripts.Scenes;
 using Scripts.Chest;
 using UnityEditor;

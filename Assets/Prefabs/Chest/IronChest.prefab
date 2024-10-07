@@ -147,6 +147,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2536971186169564725}
   - component: {fileID: 2536971186169564727}
+  - component: {fileID: 5120688673335475084}
+  - component: {fileID: 8822734424367404672}
   m_Layer: 5
   m_Name: IronChest
   m_TagString: Untagged
@@ -188,6 +190,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4a7d24cc33702a4ea9c8b59af1b43dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5120688673335475084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2536971186169564724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4afb1ec045adf3141a9e5f919c2f4d86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _chestButton: {fileID: 2536971185279833267}
+  _chestTimer: {fileID: 2536971186169564727}
+  _chest: {fileID: 8822734424367404672}
+--- !u!114 &8822734424367404672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2536971186169564724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 824ad586ffaf5b241a3afa4f7ecdd7fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _chestTimer: {fileID: 2536971186169564727}
+  _chestConfig: {fileID: 11400000, guid: 932bbe559883bdc4ebea534e912944c8, type: 2}
+  _rewardConfig: {fileID: 11400000, guid: 6c2af91b287a4ee4ab5b38547911fb4f, type: 2}
 --- !u!1 &2536971187182541039
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,7 +423,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -6929924221510541977, guid: 19e07f9d107e445408633f50457d456e,
+  m_Sprite: {fileID: 5233871863560122000, guid: 19e07f9d107e445408633f50457d456e,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -412,7 +444,7 @@ Animator:
   m_GameObject: {fileID: 4046311506611590080}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d5ff5db027889374da979b377d0be4c6, type: 2}
+  m_Controller: {fileID: 9100000, guid: 03d7a943209ed944ab55018910b34e16, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

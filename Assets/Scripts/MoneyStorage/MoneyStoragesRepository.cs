@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Scripts.MoneyNamespace
 {
-    public class MoneyStoragesRepository
+    public sealed class MoneyStoragesRepository
     {
         public string[] Currencies => _currensies;
 

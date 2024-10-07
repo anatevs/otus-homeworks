@@ -5,7 +5,7 @@ using VContainer;
 
 namespace Scripts.SaveLoadNamespace
 {
-    public class AppQuitManager : MonoBehaviour
+    public sealed class AppQuitManager : MonoBehaviour
     {
         private List<ISaveLoad> _saveLoads = new();
 

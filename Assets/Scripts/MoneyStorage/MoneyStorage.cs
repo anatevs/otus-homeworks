@@ -2,7 +2,7 @@
 
 namespace Scripts.MoneyNamespace
 {
-    public class MoneyStorage : IMoneyStorage
+    public sealed class MoneyStorage : IMoneyStorage
     {
         public event Action<int, int> OnMoneyChanged;
 
@@ -12,7 +12,7 @@ namespace Scripts.MoneyNamespace
 
         private int _amount;
 
-        protected string _currency;
+        private string _currency;
 
         public MoneyStorage(string currency)
         {

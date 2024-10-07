@@ -619,6 +619,7 @@ MonoBehaviour:
   _chestTimers:
   - {fileID: 1853618463}
   - {fileID: 6099335871333247084}
+  - {fileID: 4667898313557601363}
   _appQuitManager: {fileID: 1793382007}
 --- !u!1 &1818978678
 GameObject:
@@ -874,7 +875,7 @@ PrefabInstance:
     - target: {fileID: 2536971186169564724, guid: d646019df555bf14eb13f74691c7ff3f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2536971186169564725, guid: d646019df555bf14eb13f74691c7ff3f,
         type: 3}
@@ -983,6 +984,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d646019df555bf14eb13f74691c7ff3f, type: 3}
+--- !u!114 &4667898313557601363 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2536971186169564727, guid: d646019df555bf14eb13f74691c7ff3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 4667898313557601362}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4a7d24cc33702a4ea9c8b59af1b43dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6099335871333247083 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2667824348872281722, guid: f7869295e04f3ae41865e34b9e4e0c30,
