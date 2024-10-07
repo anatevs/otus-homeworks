@@ -1,9 +1,10 @@
-﻿using System;
+﻿using UnityEngine;
 
 namespace Scripts
 {
-    [Serializable]
-    public struct TimeServiceConfig
+    [CreateAssetMenu(fileName = "TimeServiceConfig",
+        menuName = "Configs/New TimeServiceConfig")]
+    public class TimeServiceConfig : ScriptableObject
     {
         public float RequestPeriod_Sec;
 

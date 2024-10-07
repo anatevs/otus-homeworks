@@ -613,7 +613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: GameLifetimeScope
+    TypeName: LoadLifetimeScope
   autoRun: 1
   autoInjectGameObjects: []
   _chestTimers:

@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6e24e52963b5fb47b6db8dcee546d81, type: 3}
-  m_Name: WoodenChestConfig
+  m_Name: GoldenChestConfig
   m_EditorClassIdentifier: 
   Params:
-    ChestID: WoodenChest
-    RewardType: rub
+    ChestID: GoldenChest
+    RewardType: gold
     RewardValue: 10
     AwaitingTime:
       <Hours>k__BackingField: 0
-      <Minutes>k__BackingField: 3
-      <Seconds>k__BackingField: 0
+      <Minutes>k__BackingField: 0
+      <Seconds>k__BackingField: 5
     RemainingTime:
       <Hours>k__BackingField: 0
       <Minutes>k__BackingField: 0

@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7570446142135283648}
-  - component: {fileID: 3766129146740629043}
   - component: {fileID: -3933420336681494331}
+  - component: {fileID: 599942618839856973}
   m_Layer: 0
   m_Name: LoadingScene
   m_TagString: Untagged
@@ -33,7 +33,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3766129146740629043
+--- !u!114 &-3933420336681494331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407167792534133910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73a02e06e2b562b49bc1c091083c25d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &599942618839856973
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,21 +61,7 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
-  _timeServConfig:
-    RequestPeriod_Sec: 60
-    AllowedDiscrapancy_Sec: 10
+  _timeServConfig: {fileID: 11400000, guid: f389e29537d9bff42b17066337c2b9ed, type: 2}
   _loadingGame: {fileID: -3933420336681494331}
   _groupChestsConfig: {fileID: 11400000, guid: 4827b82e1ae3fa345a1ce9ac68a08c17, type: 2}
   _currencyConfig: {fileID: 11400000, guid: 457c46467c366f742a01d542ddb46b5f, type: 2}
---- !u!114 &-3933420336681494331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 407167792534133910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73a02e06e2b562b49bc1c091083c25d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -8,7 +8,7 @@ using UnityEditor;
 using Scripts.SaveLoadNamespace;
 using Scripts.MoneyNamespace;
 
-public sealed class GameLifetimeScope : LifetimeScope
+public sealed class LoadLifetimeScope : LifetimeScope
 {
     [SerializeField]
     private TimeServiceConfig _timeServConfig;
