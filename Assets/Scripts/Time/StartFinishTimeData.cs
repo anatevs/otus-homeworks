@@ -6,6 +6,8 @@ namespace Scripts.Time
 {
     public sealed class StartFinishTimeData
     {
+        public AppStartFinishTimeStruct Info => _info;
+
         [JsonProperty]
         private AppStartFinishTimeStruct _info = new()
         {

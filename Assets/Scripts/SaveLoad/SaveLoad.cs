@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Scripts.Chest;
 using UnityEngine;
 
 namespace Scripts.SaveLoadNamespace
@@ -46,8 +45,6 @@ namespace Scripts.SaveLoadNamespace
             SetupSaveData(data);
 
             var jsonData = JsonConvert.SerializeObject(data);
-
-            Debug.Log($"data to save: {jsonData}");
 
             PlayerPrefs.SetString(SaveLoadKey, jsonData);
         }

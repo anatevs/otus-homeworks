@@ -57,12 +57,6 @@ public sealed class LoadLifetimeScope : LifetimeScope
         builder.Register<AppQuitManager>(Lifetime.Singleton);
     }
 
-    private void RegisterMoneyStorages(IContainerBuilder builder)
-    {
-        //builder.Register<MoneyStoragesData>(Lifetime.Singleton)
-        //    .WithParameter(_currencyConfig);
-    }
-
     private void RegisterSceneLoader(IContainerBuilder builder)
     {
         builder.RegisterComponent(_loadingGame);

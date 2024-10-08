@@ -65,15 +65,12 @@ namespace Scripts.Chest
             _isCounted = false;
             _startTime = _timeService.CurrentTime;
             _currentSpan = _timeService.CurrentTime - _startTime;
-
-            //new chest params... (reward type and amount, upd timeToOpen)
         }
 
         private void CheckAndMakeOnCounted()
         {
             if (_currentSpan > _awaitingSpan && !_isCounted)
             {
-                Debug.Log($"chest {gameObject.name} is ready to open!");
                 _isCounted = true;
                 _remainderSpan = TimeSpan.Zero;
 

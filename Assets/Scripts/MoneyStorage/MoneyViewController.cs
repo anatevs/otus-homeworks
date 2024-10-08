@@ -25,13 +25,13 @@ namespace Scripts.MoneyNamespace
             _moneyView = gameObject.GetComponent<MoneyView>();
 
             _moneyStorage = _saveLoadMoney.GetData().GetStorage(_moneyView.Currency);
+
+            _moneyView.SetupMoneyView(_moneyStorage.Value, _moneyStorage.Value);
         }
 
         private void OnEnable()
         {
             _moneyStorage.OnMoneyChanged += _moneyView.SetupMoneyView;
-
-            _moneyStorage.Change(0);
         }
 
         private void OnDisable()

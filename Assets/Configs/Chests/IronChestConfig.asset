@@ -18,8 +18,8 @@ MonoBehaviour:
     RewardValue: 10
     AwaitingTime:
       <Hours>k__BackingField: 0
-      <Minutes>k__BackingField: 0
-      <Seconds>k__BackingField: 8
+      <Minutes>k__BackingField: 3
+      <Seconds>k__BackingField: 0
     RemainingTime:
       <Hours>k__BackingField: 0
       <Minutes>k__BackingField: 0

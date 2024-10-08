@@ -7,12 +7,12 @@ using VContainer;
 
 namespace Scripts.Chest
 {
+    [RequireComponent(typeof(ChestTimer))]
     public class Chest : MonoBehaviour
     {
         public ChestParams ChestData => _chestsParams;
 
-        [SerializeField]
-        private ChestTimer _chestTimer;
+        public MoneyReward Reward => _reward;
 
         [SerializeField]
         private ChestConfig _chestConfig;
@@ -20,13 +20,13 @@ namespace Scripts.Chest
         [SerializeField]
         private RewardConfig _rewardConfig;
 
+        private ChestTimer _chestTimer;
+
         private string _chestID;
 
         private SaveLoadChests _saveLoadChests;
 
-        private SaveLoadMoney _saveLoadMoney;
-
-        //private MoneyStoragesData _moneyStorages;
+        private MoneyStoragesData _moneyStorages;
 
         private MoneyReward _reward;
 
@@ -38,17 +38,18 @@ namespace Scripts.Chest
         {
             _saveLoadChests = saveLoadChests;
 
-            _saveLoadMoney = saveLoadMoney;
-            //_moneyStorages = moneyStorages;
+            _moneyStorages = saveLoadMoney.GetData();
 
             _chestID = _chestConfig.Params.ChestID;
 
             _chestsParams = _saveLoadChests.GetData().GetChestParams(_chestID);
         }
 
-        private void OnEnable()
+        private void Awake()
         {
-            _reward = new MoneyReward(_chestsParams.RewardType, _chestsParams.RewardValue, _saveLoadMoney);
+            _chestTimer = gameObject.GetComponent<ChestTimer>();
+
+            _reward = new MoneyReward(_chestsParams.RewardType, _chestsParams.RewardValue, _moneyStorages);
         }
 
         private void Update()
@@ -59,14 +60,11 @@ namespace Scripts.Chest
 
         public void GoToNextReward()
         {
-            //Debug.Log($"rewarded with {_chestsParams.RewardValue} {_chestsParams.RewardType} from chest {_chestID}");
-
             _reward.MakeReward();
 
-            var rewardParams = _rewardConfig.GetRewardInfo();
+            var (Currency, Value) = _rewardConfig.GetRewardInfo();
 
-            Debug.Log($"next reward is {rewardParams.Value} {rewardParams.Currency} for chest {_chestID}");
-            _reward = new MoneyReward(rewardParams.Currency, rewardParams.Value, _saveLoadMoney);
+            _reward = new MoneyReward(Currency, Value, _moneyStorages);
 
             _chestsParams.RewardType = _reward.Currency;
             _chestsParams.RewardValue = _reward.Value;

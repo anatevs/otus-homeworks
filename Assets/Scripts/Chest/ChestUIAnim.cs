@@ -24,7 +24,6 @@ namespace Scripts.Chest
 
         public void DoOnOpened()
         {
-            Debug.Log("opened");
             OnOpened?.Invoke();
         }
     }
