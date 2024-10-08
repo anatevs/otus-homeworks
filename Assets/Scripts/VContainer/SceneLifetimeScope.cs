@@ -3,6 +3,7 @@ using VContainer;
 using VContainer.Unity;
 using UnityEngine;
 using Scripts.SaveLoadNamespace;
+using Scripts.MoneyNamespace;
 
 public sealed class SceneLifetimeScope : LifetimeScope
 {
@@ -11,6 +12,9 @@ public sealed class SceneLifetimeScope : LifetimeScope
 
     [SerializeField]
     private AppQuitManager _appQuitManager;
+
+    [SerializeField]
+    private MoneyView[] _moneyStorageViews;
 
     protected override void Configure(IContainerBuilder builder)
     {

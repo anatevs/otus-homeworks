@@ -8,7 +8,7 @@ namespace Scripts.MoneyNamespace
 
         public string Currency { get; }
 
-        public int Amount { get; }
+        public int Value { get; }
 
         public void Change(int diffAmount);
     }

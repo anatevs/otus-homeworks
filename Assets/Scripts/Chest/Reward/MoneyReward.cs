@@ -32,7 +32,7 @@ namespace Scripts.Chest.Reward
         {
             _storage.Change(_value);
 
-            Debug.Log($"{_currency} storage: {_moneyStorages.GetStorage(_currency).Amount}");
+            Debug.Log($"{_currency} storage: {_moneyStorages.GetStorage(_currency).Value}");
         }
     }
 }

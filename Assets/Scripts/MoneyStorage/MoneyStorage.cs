@@ -6,11 +6,11 @@ namespace Scripts.MoneyNamespace
     {
         public event Action<int, int> OnMoneyChanged;
 
-        public int Amount => _amount;
+        public int Value => _value;
 
         public string Currency { get; }
 
-        private int _amount;
+        private int _value;
 
         private string _currency;
 
@@ -21,10 +21,10 @@ namespace Scripts.MoneyNamespace
 
         public void Change(int diffAmount)
         {
-            var oldAmount = _amount;
-            _amount += diffAmount;
+            var prevValue = _value;
+            _value += diffAmount;
 
-            OnMoneyChanged?.Invoke(oldAmount, _amount);
+            OnMoneyChanged?.Invoke(prevValue, _value);
         }
     }
 }
