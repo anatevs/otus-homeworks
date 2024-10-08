@@ -24,7 +24,9 @@ namespace Scripts.Chest
 
         private SaveLoadChests _saveLoadChests;
 
-        private MoneyStoragesRepository _moneyStorages;
+        private SaveLoadMoney _saveLoadMoney;
+
+        //private MoneyStoragesData _moneyStorages;
 
         private MoneyReward _reward;
 
@@ -32,11 +34,12 @@ namespace Scripts.Chest
 
         [Inject]
         public void Construct(SaveLoadChests saveLoadChests,
-            MoneyStoragesRepository moneyStorages)
+            SaveLoadMoney saveLoadMoney)
         {
             _saveLoadChests = saveLoadChests;
 
-            _moneyStorages = moneyStorages;
+            _saveLoadMoney = saveLoadMoney;
+            //_moneyStorages = moneyStorages;
 
             _chestID = _chestConfig.Params.ChestID;
 
@@ -45,7 +48,7 @@ namespace Scripts.Chest
 
         private void OnEnable()
         {
-            _reward = new MoneyReward(_chestsParams.RewardType, _chestsParams.RewardValue, _moneyStorages);
+            _reward = new MoneyReward(_chestsParams.RewardType, _chestsParams.RewardValue, _saveLoadMoney);
         }
 
         private void Update()
@@ -63,7 +66,7 @@ namespace Scripts.Chest
             var rewardParams = _rewardConfig.GetRewardInfo();
 
             Debug.Log($"next reward is {rewardParams.Value} {rewardParams.Currency} for chest {_chestID}");
-            _reward = new MoneyReward(rewardParams.Currency, rewardParams.Value, _moneyStorages);
+            _reward = new MoneyReward(rewardParams.Currency, rewardParams.Value, _saveLoadMoney);
 
             _chestsParams.RewardType = _reward.Currency;
             _chestsParams.RewardValue = _reward.Value;

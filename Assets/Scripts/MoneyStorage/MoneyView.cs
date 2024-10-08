@@ -13,11 +13,6 @@ namespace Scripts.MoneyNamespace
         [SerializeField]
         private string _currency;
 
-        private void Start()
-        {
-            SetupMoneyView(0, 0);
-        }
-
         public void SetupMoneyView(int prevValue, int newValue)
         {
             _text.text = $"{_currency}: {newValue}";

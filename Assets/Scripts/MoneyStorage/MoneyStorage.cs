@@ -8,15 +8,16 @@ namespace Scripts.MoneyNamespace
 
         public int Value => _value;
 
-        public string Currency { get; }
+        public string Currency => _currency;
 
         private int _value;
 
         private string _currency;
 
-        public MoneyStorage(string currency)
+        public MoneyStorage(MoneyStorageParams storageParams)
         {
-            _currency = currency;
+            _currency = storageParams.Currency;
+            _value = storageParams.Value;
         }
 
         public void Change(int diffAmount)

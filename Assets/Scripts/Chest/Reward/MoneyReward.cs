@@ -1,4 +1,5 @@
 ﻿using Scripts.MoneyNamespace;
+using Scripts.SaveLoadNamespace;
 using UnityEngine;
 
 namespace Scripts.Chest.Reward
@@ -11,26 +12,28 @@ namespace Scripts.Chest.Reward
 
         private readonly int _value;
 
-        private readonly MoneyStorage _storage;
+        private SaveLoadMoney _saveLoadMoney;
+        //private readonly MoneyStorage _storage;
 
 
-        private MoneyStoragesRepository _moneyStorages;
+        private readonly MoneyStoragesData _moneyStorages;
         private readonly string _currency;
 
-        public MoneyReward(string currency, int value, MoneyStoragesRepository moneyStorages)
+        public MoneyReward(string currency, int value, SaveLoadMoney saveLoadMoney)
         {
             _value = value;
 
-            _storage = moneyStorages.GetStorage(currency);
+            _saveLoadMoney = saveLoadMoney;
+            //_storage = moneyStorages.GetStorage(currency);
 
 
-            _moneyStorages = moneyStorages;
+            _moneyStorages = _saveLoadMoney.GetData();
             _currency = currency;
         }
 
         public void MakeReward()
         {
-            _storage.Change(_value);
+            _saveLoadMoney.GetData().GetStorage(_currency).Change(_value);
 
             Debug.Log($"{_currency} storage: {_moneyStorages.GetStorage(_currency).Value}");
         }

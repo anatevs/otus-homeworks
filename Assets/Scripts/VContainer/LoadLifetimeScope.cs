@@ -28,8 +28,6 @@ public sealed class LoadLifetimeScope : LifetimeScope
 
         RegisterSaveLoad(builder);
 
-        RegisterMoneyStorages(builder);
-
         RegisterSceneLoader(builder);
     }
 
@@ -38,8 +36,6 @@ public sealed class LoadLifetimeScope : LifetimeScope
         builder.RegisterEntryPoint<TimeService>()
             .WithParameter(_timeServConfig)
             .AsSelf();
-
-        //builder.Register<StartFinishTimeData>(Lifetime.Singleton);
     }
 
     private void RegisterSaveLoad(IContainerBuilder builder)
@@ -48,25 +44,23 @@ public sealed class LoadLifetimeScope : LifetimeScope
             .AsImplementedInterfaces()
             .AsSelf();
 
-        //var saveLoadChests = new SaveLoadChests(_groupChestsConfig);
-
         builder.Register<SaveLoadChests>(Lifetime.Singleton)
             .WithParameter(_groupChestsConfig)
             .AsImplementedInterfaces()
             .AsSelf();
 
-
-        //var chestsData = saveLoadChests.Load();
-
-        //builder.RegisterComponent(chestsData);
+        builder.Register<SaveLoadMoney>(Lifetime.Singleton)
+            .WithParameter(_currencyConfig)
+            .AsImplementedInterfaces()
+            .AsSelf();
 
         builder.Register<AppQuitManager>(Lifetime.Singleton);
     }
 
     private void RegisterMoneyStorages(IContainerBuilder builder)
     {
-        builder.Register<MoneyStoragesRepository>(Lifetime.Singleton)
-            .WithParameter(_currencyConfig);
+        //builder.Register<MoneyStoragesData>(Lifetime.Singleton)
+        //    .WithParameter(_currencyConfig);
     }
 
     private void RegisterSceneLoader(IContainerBuilder builder)
