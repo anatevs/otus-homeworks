@@ -3,23 +3,24 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Missile
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - Character
+  - Effects
+  - Dummy
   - Enemy
+  - Character
   - 
-  - EnemyBullet
-  - PlayerBullet
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
