@@ -1,0 +1,187 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8592208267307261352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7908850661401803348}
+  - component: {fileID: 1472456009438823048}
+  - component: {fileID: 1139570273369341844}
+  m_Layer: 0
+  m_Name: '[AI-unloadResources]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7908850661401803348
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8592208267307261352}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.6, y: 0, z: -1.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1472456009438823048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8592208267307261352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e09c0b93b7484545a4777c934e99a69b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  installers:
+  - rid: 4531774068201095181
+  - rid: 4531774068201095182
+  - rid: 4531774068201095183
+  - rid: 4531774068201095184
+  - rid: 4531774068201095189
+  - rid: 6729916301361283090
+  references:
+    version: 2
+    RefIds:
+    - rid: 4531774068201095181
+      type: {class: GameObjectInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: 1
+        value: {fileID: 0}
+    - rid: 4531774068201095182
+      type: {class: TransformArrayInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: 8
+        value:
+        - {fileID: 0}
+        - {fileID: 0}
+        - {fileID: 0}
+    - rid: 4531774068201095183
+      type: {class: FloatInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: 5
+        value: 0.25
+    - rid: 4531774068201095184
+      type: {class: IntInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: 9
+        value: 0
+    - rid: 4531774068201095189
+      type: {class: FloatInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: 10
+        value: 1
+    - rid: 6729916301361283090
+      type: {class: GameObjectInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: 6
+        value: {fileID: 0}
+--- !u!114 &1139570273369341844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8592208267307261352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3e9c8d94b5478cb462ccae006f52f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blackboard: {fileID: 1472456009438823048}
+  initialRoot:
+    rid: 6729916301361283081
+  controlState: 1
+  updateMode: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 6729916301361283081
+      type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: MoveToBarn
+        nodes:
+        - rid: 6729916301361283086
+        - rid: 6729916301361283089
+        - rid: 6729916301361283091
+    - rid: 6729916301361283086
+      type: {class: BTNodeCondition, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: IsCharacterResoursesFull
+        condition:
+          rid: 6729916301361283116
+    - rid: 6729916301361283089
+      type: {class: MoveToTargetBTNode, ns: Game.Engine, asm: Assembly-CSharp}
+      data:
+        targetKey: 6
+    - rid: 6729916301361283091
+      type: {class: BTNodeSelector, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: TryUnloadToBarn
+        nodes:
+        - rid: 6729916301361283135
+        - rid: 6729916301361283140
+    - rid: 6729916301361283116
+      type: {class: IsObjectResourceStorageFullCondition, ns: Game.Engine, asm: Assembly-CSharp}
+      data:
+        _objectKey: 1
+    - rid: 6729916301361283135
+      type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: IsBarnFull
+        nodes:
+        - rid: 6729916301361283136
+        - rid: 6729916301361283138
+    - rid: 6729916301361283136
+      type: {class: BTNodeCondition, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: IsFull
+        condition:
+          rid: 6729916301361283137
+    - rid: 6729916301361283137
+      type: {class: IsObjectResourceStorageFullCondition, ns: Game.Engine, asm: Assembly-CSharp}
+      data:
+        _objectKey: 6
+    - rid: 6729916301361283138
+      type: {class: BTNodeAction, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: ShowBarnFullText
+        actions:
+        - rid: 6729916301361283139
+    - rid: 6729916301361283139
+      type: {class: ShowObjectAIAction, ns: , asm: Assembly-CSharp}
+      data:
+        _isShow: 1
+        _objectToShow: {fileID: 0}
+    - rid: 6729916301361283140
+      type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: UnloadToBarn
+        nodes:
+        - rid: 6729916301361283141
+        - rid: 6729916301361283143
+    - rid: 6729916301361283141
+      type: {class: BTNodeAction, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: HideBarnFullText
+        actions:
+        - rid: 6729916301361283142
+    - rid: 6729916301361283142
+      type: {class: ShowObjectAIAction, ns: , asm: Assembly-CSharp}
+      data:
+        _isShow: 0
+        _objectToShow: {fileID: 0}
+    - rid: 6729916301361283143
+      type: {class: UnloadToBarnBTNode, ns: Game.Engine, asm: Assembly-CSharp}
