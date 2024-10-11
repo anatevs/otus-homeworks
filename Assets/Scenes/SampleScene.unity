@@ -622,6 +622,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 900156167}
     m_Modifications:
+    - target: {fileID: 4572267695099945186, guid: 0f4972a2262354909a5531c2642e78a1, type: 3}
+      propertyPath: current
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7397029312916841986, guid: 0f4972a2262354909a5531c2642e78a1, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -873,6 +877,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8994793847325045474, guid: aa6ded41125af4819a020872e5b32e8c, type: 3}
   m_PrefabInstance: {fileID: 506882319}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &580498683 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5310893115516053068, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+  m_PrefabInstance: {fileID: 1969170156}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &666032860
 PrefabInstance:
@@ -1350,75 +1359,89 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blackboard: {fileID: 1131779158}
   initialRoot:
-    rid: 4531774068201095202
+    rid: 6729916301361283081
   controlState: 1
   updateMode: 0
   references:
     version: 2
     RefIds:
-    - rid: 4531774068201095202
-      type: {class: BTNodeAborter, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
-      data:
-        node:
-          rid: 4531774068201095204
-        conditions:
-        - rid: 4531774068201095214
-    - rid: 4531774068201095204
-      type: {class: BTNodeSelector, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
-      data:
-        name: Root
-        nodes:
-        - rid: 4531774068201095215
-        - rid: 4531774068201095206
-    - rid: 4531774068201095206
+    - rid: 6729916301361283081
       type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
       data:
-        name: Patrol
+        name: MoveToBarn
         nodes:
-        - rid: 6729916301361283074
-        - rid: 6729916301361283075
-        - rid: 6729916301361283076
-        - rid: 6729916301361283077
-    - rid: 4531774068201095214
-      type: {class: HasEnemyBlackboardCondition, ns: Engine, asm: Assembly-CSharp}
-    - rid: 4531774068201095215
-      type: {class: BTNodeDecorator, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
-      data:
-        node:
-          rid: 4531774068201095216
-        enableActions: []
-        disableActions: []
-        updateActions: []
-        abortActions: []
-    - rid: 4531774068201095216
-      type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
-      data:
-        name: Attack
-        nodes:
-        - rid: 4531774068201095217
-        - rid: 4531774068201095218
-    - rid: 4531774068201095217
+        - rid: 6729916301361283086
+        - rid: 6729916301361283089
+        - rid: 6729916301361283091
+    - rid: 6729916301361283086
       type: {class: BTNodeCondition, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
       data:
-        name: HasTarget
+        name: IsCharacterResoursesFull
         condition:
-          rid: 4531774068201095219
-    - rid: 4531774068201095218
+          rid: 6729916301361283116
+    - rid: 6729916301361283089
       type: {class: MoveToTargetBTNode, ns: Game.Engine, asm: Assembly-CSharp}
       data:
-        targetKey: 12
-    - rid: 4531774068201095219
-      type: {class: HasEnemyBlackboardCondition, ns: Engine, asm: Assembly-CSharp}
-    - rid: 6729916301361283074
-      type: {class: AssignWaypointBTNode, ns: Game.Engine, asm: Assembly-CSharp}
-    - rid: 6729916301361283075
-      type: {class: MoveToTargetBTNode, ns: Game.Engine, asm: Assembly-CSharp}
+        targetKey: 6
+    - rid: 6729916301361283091
+      type: {class: BTNodeSelector, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
       data:
-        targetKey: 3
-    - rid: 6729916301361283076
-      type: {class: WaypointPauseBTNode, ns: Game.Engine, asm: Assembly-CSharp}
-    - rid: 6729916301361283077
-      type: {class: NextWaypointBTNode, ns: Game.Engine, asm: Assembly-CSharp}
+        name: TryUnloadToBarn
+        nodes:
+        - rid: 6729916301361283135
+        - rid: 6729916301361283140
+    - rid: 6729916301361283116
+      type: {class: IsObjectResourceStorageFullCondition, ns: Game.Engine, asm: Assembly-CSharp}
+      data:
+        _objectKey: 1
+    - rid: 6729916301361283135
+      type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: IsBarnFull
+        nodes:
+        - rid: 6729916301361283136
+        - rid: 6729916301361283138
+    - rid: 6729916301361283136
+      type: {class: BTNodeCondition, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: IsFull
+        condition:
+          rid: 6729916301361283137
+    - rid: 6729916301361283137
+      type: {class: IsObjectResourceStorageFullCondition, ns: Game.Engine, asm: Assembly-CSharp}
+      data:
+        _objectKey: 6
+    - rid: 6729916301361283138
+      type: {class: BTNodeAction, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: ShowBarnFullText
+        actions:
+        - rid: 6729916301361283139
+    - rid: 6729916301361283139
+      type: {class: ShowObjectAIAction, ns: , asm: Assembly-CSharp}
+      data:
+        _isShow: 1
+        _objectToShow: {fileID: 580498683}
+    - rid: 6729916301361283140
+      type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: UnloadToBarn
+        nodes:
+        - rid: 6729916301361283141
+        - rid: 6729916301361283143
+    - rid: 6729916301361283141
+      type: {class: BTNodeAction, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: HideBarnFullText
+        actions:
+        - rid: 6729916301361283142
+    - rid: 6729916301361283142
+      type: {class: ShowObjectAIAction, ns: , asm: Assembly-CSharp}
+      data:
+        _isShow: 0
+        _objectToShow: {fileID: 580498683}
+    - rid: 6729916301361283143
+      type: {class: UnloadToBarnBTNode, ns: Game.Engine, asm: Assembly-CSharp}
 --- !u!1001 &1163636013
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2083,9 +2106,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2540389589518119226, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+      propertyPath: m_Name
+      value: '[AI]'
+      objectReference: {fileID: 0}
     - target: {fileID: 4455923611556452129, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
       propertyPath: installers.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4455923611556452129, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
       propertyPath: installers.Array.data[0]
@@ -2109,7 +2136,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4455923611556452129, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
       propertyPath: installers.Array.data[5]
-      value: 4531774068201095198
+      value: 6729916301361283090
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455923611556452129, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+      propertyPath: installers.Array.data[6]
+      value: 6729916301361283130
       objectReference: {fileID: 0}
     - target: {fileID: 4455923611556452129, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
       propertyPath: managedReferences[4531774068201095171]
@@ -2153,6 +2184,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4455923611556452129, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
       propertyPath: managedReferences[4531774068201095198]
+      value: Modules.AI.Blackboard Atomic.AI.GameObjectInstaller
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455923611556452129, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+      propertyPath: managedReferences[6729916301361283090]
+      value: Modules.AI.Blackboard Atomic.AI.GameObjectInstaller
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455923611556452129, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+      propertyPath: managedReferences[6729916301361283130]
       value: Modules.AI.Blackboard Atomic.AI.GameObjectInstaller
       objectReference: {fileID: 0}
     - target: {fileID: 4455923611556452129, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
@@ -2200,6 +2239,14 @@ PrefabInstance:
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4455923611556452129, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+      propertyPath: managedReferences[6729916301361283090].key
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455923611556452129, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+      propertyPath: managedReferences[6729916301361283130].key
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455923611556452129, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
       propertyPath: managedReferences[4531774068201095170].value
       value: 
       objectReference: {fileID: 1959699243}
@@ -2240,6 +2287,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1959699243}
     - target: {fileID: 4455923611556452129, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+      propertyPath: managedReferences[6729916301361283090].value
+      value: 
+      objectReference: {fileID: 1959699243}
+    - target: {fileID: 4455923611556452129, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+      propertyPath: managedReferences[6729916301361283130].value
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455923611556452129, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
       propertyPath: managedReferences[8910567683058040833].value
       value: 
       objectReference: {fileID: 382842414}
@@ -2275,6 +2330,14 @@ PrefabInstance:
       propertyPath: managedReferences[4531774068201095182].value.Array.data[2]
       value: 
       objectReference: {fileID: 1064540796}
+    - target: {fileID: 5310893115516053068, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5631840772496047568, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+      propertyPath: current
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7455131854162157427, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
       propertyPath: m_Name
       value: Character

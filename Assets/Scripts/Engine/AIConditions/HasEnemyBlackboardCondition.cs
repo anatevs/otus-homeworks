@@ -1,7 +1,6 @@
 using Atomic.AI;
-using Game;
 
-namespace Engine
+namespace Game.Engine
 {
     public sealed class HasEnemyBlackboardCondition : IBlackboardCondition
     {

@@ -1,0 +1,167 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2023099881218166473
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4023126491041078902}
+  - component: {fileID: 8041162228120304588}
+  - component: {fileID: 6020488817668862599}
+  m_Layer: 0
+  m_Name: '[AILesson]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4023126491041078902
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023099881218166473}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.6, y: 0, z: -1.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8041162228120304588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023099881218166473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e09c0b93b7484545a4777c934e99a69b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  installers:
+  - rid: 4531774068201095181
+  - rid: 4531774068201095182
+  - rid: 4531774068201095183
+  - rid: 4531774068201095184
+  - rid: 4531774068201095189
+  references:
+    version: 2
+    RefIds:
+    - rid: 4531774068201095181
+      type: {class: GameObjectInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: 1
+        value: {fileID: 0}
+    - rid: 4531774068201095182
+      type: {class: TransformArrayInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: 8
+        value:
+        - {fileID: 0}
+        - {fileID: 0}
+        - {fileID: 0}
+    - rid: 4531774068201095183
+      type: {class: FloatInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: 5
+        value: 0.25
+    - rid: 4531774068201095184
+      type: {class: IntInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: 9
+        value: 0
+    - rid: 4531774068201095189
+      type: {class: FloatInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: 10
+        value: 1
+--- !u!114 &6020488817668862599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023099881218166473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3e9c8d94b5478cb462ccae006f52f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blackboard: {fileID: 8041162228120304588}
+  initialRoot:
+    rid: 4531774068201095202
+  controlState: 1
+  updateMode: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 4531774068201095202
+      type: {class: BTNodeAborter, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        node:
+          rid: 4531774068201095204
+        conditions:
+        - rid: 6729916301361283079
+    - rid: 4531774068201095204
+      type: {class: BTNodeSelector, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: Root
+        nodes:
+        - rid: 4531774068201095215
+        - rid: 4531774068201095206
+    - rid: 4531774068201095206
+      type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: Patrol
+        nodes:
+        - rid: 6729916301361283074
+        - rid: 6729916301361283075
+        - rid: 6729916301361283076
+        - rid: 6729916301361283077
+    - rid: 4531774068201095215
+      type: {class: BTNodeDecorator, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        node:
+          rid: 4531774068201095216
+        enableActions: []
+        disableActions: []
+        updateActions: []
+        abortActions: []
+    - rid: 4531774068201095216
+      type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: Attack
+        nodes:
+        - rid: 4531774068201095217
+        - rid: 4531774068201095218
+    - rid: 4531774068201095217
+      type: {class: BTNodeCondition, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: HasTarget
+        condition:
+          rid: 6729916301361283080
+    - rid: 4531774068201095218
+      type: {class: MoveToTargetBTNode, ns: Game.Engine, asm: Assembly-CSharp}
+      data:
+        targetKey: 12
+    - rid: 6729916301361283074
+      type: {class: AssignWaypointBTNode, ns: Game.Engine, asm: Assembly-CSharp}
+    - rid: 6729916301361283075
+      type: {class: MoveToTargetBTNode, ns: Game.Engine, asm: Assembly-CSharp}
+      data:
+        targetKey: 3
+    - rid: 6729916301361283076
+      type: {class: WaypointPauseBTNode, ns: Game.Engine, asm: Assembly-CSharp}
+    - rid: 6729916301361283077
+      type: {class: NextWaypointBTNode, ns: Game.Engine, asm: Assembly-CSharp}
+    - rid: 6729916301361283079
+      type: {class: HasEnemyBlackboardCondition, ns: Game.Engine, asm: Assembly-CSharp}
+    - rid: 6729916301361283080
+      type: {class: HasEnemyBlackboardCondition, ns: Game.Engine, asm: Assembly-CSharp}
