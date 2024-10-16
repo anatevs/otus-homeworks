@@ -1,14 +1,13 @@
 ﻿using Sirenix.OdinInspector;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Resources
 {
-    public class ResourcesContainer : MonoBehaviour
+    public class PlayerResources : MonoBehaviour
     {
         [ShowInInspector]
-        private Dictionary<string, ResourceStorage> _resources;
+        private Dictionary<string, ResourceStorage> _resources = new();
 
         public void AddResource(ResourceInfo resource)
         {
@@ -27,15 +26,16 @@ namespace Resources
                 Debug.Log($"there is no resource {resourceID} in {gameObject.name} resources");
             }
         }
-    }
 
-    [Serializable]
-    public struct ResourceInfo
-    {
-        public string ID;
+        public ResourceStorage GetResource(string resourceID)
+        {
+            if (!_resources.TryGetValue(resourceID, out var storage))
+            {
+                Debug.Log($"there is no resource {resourceID} in {name}");
+                return null;
+            }
 
-        public int Capacity;
-
-        public int Count;
+            return storage;
+        }
     }
 }

@@ -7,8 +7,11 @@ namespace Atomic.AI
 {
     public static class BlackboardAPI
     {
+        public const int Character = 1; // Class: GameObject
+        public const int Target = 2; // Class: Transform
 
 
         ///Extensions
+
     }
 }
