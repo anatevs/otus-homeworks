@@ -14,7 +14,7 @@ namespace Game.Engine
 
         private void Awake()
         {
-            _animator = this.GetComponent<Animator>();
+            _animator = GetComponent<Animator>();
         }
 
         private void LateUpdate()

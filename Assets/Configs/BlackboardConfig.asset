@@ -15,8 +15,18 @@ MonoBehaviour:
   Namespace: Atomic.AI
   directoryPath: Assets/Plugins/AI/Blackboards/Scripts
   className: BlackboardAPI
-  imports: []
+  imports:
+  - UnityEngine
   keys:
   - id: 0
     name: UNDEFINED
     type: 
+  - id: 1
+    name: Character
+    type: 'GameObject : class'
+  - id: 2
+    name: Target
+    type: 'Transform : class'
+  - id: 3
+    name: Waypoints
+    type: 'GameObject : class'

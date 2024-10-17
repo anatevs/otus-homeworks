@@ -319,6 +319,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2197074333859340304}
+  - component: {fileID: 1118920667}
+  - component: {fileID: 1118920668}
   m_Layer: 0
   m_Name: '[AI]'
   m_TagString: Untagged
@@ -341,6 +343,53 @@ Transform:
   m_Father: {fileID: 2248434285133749092}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1118920667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2540389589518119226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e09c0b93b7484545a4777c934e99a69b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  installers:
+  - rid: 6729916433045651457
+  references:
+    version: 2
+    RefIds:
+    - rid: 6729916433045651457
+      type: {class: GameObjectInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: 1
+        value: {fileID: 7455131854162157427}
+--- !u!114 &1118920668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2540389589518119226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3e9c8d94b5478cb462ccae006f52f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blackboard: {fileID: 1118920667}
+  initialRoot:
+    rid: 6729916433045651456
+  controlState: 1
+  updateMode: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 6729916433045651456
+      type: {class: BTNodeSelector, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: HarvestAndUnloading
+        nodes: []
 --- !u!1 &2729591373148564147
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,7 +981,7 @@ GameObject:
   - component: {fileID: 3011317373241119557}
   - component: {fileID: 5631840772496047568}
   - component: {fileID: 9171852966772238074}
-  - component: {fileID: 5529379250020755419}
+  - component: {fileID: 1118920672}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -976,7 +1025,7 @@ MonoBehaviour:
   _harvestComponent: {fileID: 8489095016137750506}
   _overlapSphereComponent: {fileID: 3011317373241119557}
   _takeResourceComponent: {fileID: 9171852966772238074}
-  _resourceStorage: {fileID: 5529379250020755419}
+  _resourceStorage: {fileID: 5631840772496047568}
 --- !u!114 &8765604542818359786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -989,7 +1038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8f4943d77ac42bc9d323993ac3be320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  _moveSpeed: 3
 --- !u!114 &3000718845113086620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1032,7 +1081,7 @@ MonoBehaviour:
   radius: 0.5
   layerMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 0
   queryTriggerInteraction: 1
 --- !u!114 &5631840772496047568
 MonoBehaviour:
@@ -1061,7 +1110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   extractCount: 1
---- !u!114 &5529379250020755419
+--- !u!114 &1118920672
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1070,11 +1119,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7455131854162157427}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 117c7fe85adb45f7be0c70cf50fb3755, type: 3}
+  m_Script: {fileID: 11500000, guid: 0251a7c124c44f6459166e8c4e0eaf86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  capacity: 10
-  current: 0
+  _configs:
+  - {fileID: 11400000, guid: c220674c28770a54eb590a8195f088dc, type: 2}
 --- !u!1 &7484532441032762191
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,11 +1,11 @@
-using Resources;
+using ResourcesStorage;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace ConveyorScripts
 {
-    public class Conveyor
+    public sealed class Conveyor
     {
         private string _loadID;
 

@@ -452,7 +452,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 497361959}
-  - component: {fileID: 497361960}
   m_Layer: 0
   m_Name: Mob
   m_TagString: Untagged
@@ -476,18 +475,6 @@ Transform:
   m_Father: {fileID: 1245868255}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &497361960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 497361958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0251a7c124c44f6459166e8c4e0eaf86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &577730049
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,6 +484,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 577730050}
+  - component: {fileID: 577730051}
   m_Layer: 0
   m_Name: Waypoints
   m_TagString: Untagged
@@ -525,6 +513,25 @@ Transform:
   m_Father: {fileID: 641173322}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &577730051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577730049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55984ca956290f845be86eaa4020e13e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _waypoints:
+  - {fileID: 2131820711}
+  - {fileID: 1293396544}
+  - {fileID: 388552242}
+  - {fileID: 1152594448}
+  - {fileID: 1494054701}
+  - {fileID: 784239457}
 --- !u!1 &641173321
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,6 +604,54 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 497361959}
     m_Modifications:
+    - target: {fileID: 1118920667, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+      propertyPath: installers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118920667, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+      propertyPath: installers.Array.data[1]
+      value: 6729916433045651459
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118920667, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+      propertyPath: installers.Array.data[2]
+      value: 6729916433045651460
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118920667, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+      propertyPath: managedReferences[6729916433045651458]
+      value: Modules.AI.Blackboard Atomic.AI.ComponentInstaller
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118920667, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+      propertyPath: managedReferences[6729916433045651459]
+      value: Modules.AI.Blackboard Atomic.AI.GameObjectInstaller
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118920667, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+      propertyPath: managedReferences[6729916433045651460]
+      value: Modules.AI.Blackboard Atomic.AI.GameObjectInstaller
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118920667, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+      propertyPath: managedReferences[6729916433045651458].key
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118920667, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+      propertyPath: managedReferences[6729916433045651459].key
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118920667, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+      propertyPath: managedReferences[6729916433045651460].key
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118920667, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+      propertyPath: managedReferences[6729916433045651458].value
+      value: 
+      objectReference: {fileID: 577730050}
+    - target: {fileID: 1118920667, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+      propertyPath: managedReferences[6729916433045651459].value
+      value: 
+      objectReference: {fileID: 577730049}
+    - target: {fileID: 1118920667, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
+      propertyPath: managedReferences[6729916433045651460].value
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2248434285133749092, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -652,52 +707,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2248434285133749092, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
   m_PrefabInstance: {fileID: 1118920664}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1118920666 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2540389589518119226, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-  m_PrefabInstance: {fileID: 1118920664}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1118920667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1118920666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e09c0b93b7484545a4777c934e99a69b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  installers: []
-  references:
-    version: 2
-    RefIds: []
---- !u!114 &1118920668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1118920666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e3e9c8d94b5478cb462ccae006f52f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blackboard: {fileID: 1118920667}
-  initialRoot:
-    rid: 6729916433045651456
-  controlState: 1
-  updateMode: 0
-  references:
-    version: 2
-    RefIds:
-    - rid: 6729916433045651456
-      type: {class: BTNodeSelector, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
-      data:
-        name: HarvestAndUnloading
-        nodes: []
 --- !u!1 &1152594447
 GameObject:
   m_ObjectHideFlags: 0

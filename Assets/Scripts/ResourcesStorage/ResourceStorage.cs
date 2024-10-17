@@ -1,10 +1,10 @@
 using UnityEngine;
 using System;
 
-namespace Resources
+namespace ResourcesStorage
 {
     [Serializable]
-    public class ResourceStorage
+    public sealed class ResourceStorage
     {
         [SerializeField]
         private int _capacity;

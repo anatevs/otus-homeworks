@@ -2,12 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Resources
+namespace ResourcesStorage
 {
-    public class PlayerResources : MonoBehaviour
+    public sealed class PlayerResources : MonoBehaviour
     {
         [ShowInInspector]
         private Dictionary<string, ResourceStorage> _resources = new();
+
+        [SerializeField]
+        private ResourceStorageConfig[] _configs;
+
+        private void OnEnable()
+        {
+            foreach (var config in _configs)
+            {
+                AddResource(config.Info);
+            }
+        }
 
         public void AddResource(ResourceInfo resource)
         {

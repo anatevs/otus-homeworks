@@ -2,39 +2,37 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-// ReSharper disable MemberInitializerValueIgnored
-
 namespace Game.Engine
 {
     public sealed class MoveComponent : MonoBehaviour
     {
         public event Action OnMove;
-        
-        public bool IsMoving => this.isMoving;
-        public Vector3 MoveDirection => this.moveDirection;
+
+        public bool IsMoving => _isMoving;
+        public Vector3 MoveDirection => _moveDirection;
 
         [SerializeField]
-        private float moveSpeed = 3.0f;
+        private float _moveSpeed = 3.0f;
 
         [ShowInInspector, ReadOnly]
-        private Vector3 moveDirection;
+        private Vector3 _moveDirection;
 
         [ShowInInspector, ReadOnly]
-        private bool isMoving;
+        private bool _isMoving;
 
         public void MoveStep(Vector3 direction)
         {
-            this.moveDirection = direction;
-            this.isMoving = true;
+            _moveDirection = direction;
+            _isMoving = true;
         }
 
         private void FixedUpdate()
         {
-            if (this.isMoving)
+            if (_isMoving)
             {
-                this.transform.position += this.moveSpeed * Time.fixedDeltaTime * this.moveDirection;
-                this.OnMove?.Invoke();
-                this.isMoving = false;
+                transform.position += _moveSpeed * Time.fixedDeltaTime * _moveDirection;
+                OnMove?.Invoke();
+                _isMoving = false;
             }
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Resources
+namespace ResourcesStorage
 {
     [Serializable]
     public struct ResourceInfo
