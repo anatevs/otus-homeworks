@@ -6,6 +6,8 @@ namespace ResourcesStorage
     [Serializable]
     public sealed class ResourceStorage
     {
+        public bool IsEmpty => _count == 0;
+
         [SerializeField]
         private int _capacity;
 

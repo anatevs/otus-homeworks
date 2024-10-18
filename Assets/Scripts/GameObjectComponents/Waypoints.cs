@@ -4,8 +4,13 @@ namespace GameObjectComponents
 {
     public class Waypoints : MonoBehaviour
     {
+        public float StopDistance => _stopDistance;
+
         [SerializeField]
         private Transform[] _waypoints;
+
+        [SerializeField]
+        private float _stopDistance;
 
         private int _currentIndex;
 

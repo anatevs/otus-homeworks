@@ -8,11 +8,16 @@ namespace GameObjectCompoonents
     {
         private static readonly int ChopAnimHash = Animator.StringToHash("Chop");
 
-        [SerializeField]
-        private ResourceStorageConfig _config;
+        public float TreeStopDistance => _treeStopDistance;
 
         [ShowInInspector]
         private ResourceStorage _resourceStorage;
+
+        [SerializeField]
+        private ResourceStorageConfig _config;
+
+        [SerializeField]
+        private float _treeStopDistance;
 
         private void Awake()
         {

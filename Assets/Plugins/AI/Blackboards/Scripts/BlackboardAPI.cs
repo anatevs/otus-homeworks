@@ -11,6 +11,8 @@ namespace Atomic.AI
         public const int Character = 1; // GameObject : class
         public const int Target = 2; // Transform : class
         public const int Waypoints = 3; // GameObject : class
+        public const int TargetDistance = 4; // float
+        public const int TreesService = 5; // GameObject : class
 
 
         ///Extensions
@@ -60,6 +62,38 @@ namespace Atomic.AI
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool DelWaypoints(this IBlackboard obj) => obj.DelObject(Waypoints);
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasTargetDistance(this IBlackboard obj) => obj.HasFloat(TargetDistance);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static float GetTargetDistance(this IBlackboard obj) => obj.GetFloat(TargetDistance);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetTargetDistance(this IBlackboard obj, out float value) => obj.TryGetFloat(TargetDistance, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetTargetDistance(this IBlackboard obj, float value) => obj.SetFloat(TargetDistance, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelTargetDistance(this IBlackboard obj) => obj.DelFloat(TargetDistance);
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasTreesService(this IBlackboard obj) => obj.HasObject(TreesService);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static GameObject  GetTreesService(this IBlackboard obj) => obj.GetObject<GameObject >(TreesService);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetTreesService(this IBlackboard obj, out GameObject  value) => obj.TryGetObject(TreesService, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetTreesService(this IBlackboard obj, GameObject  value) => obj.SetObject(TreesService, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelTreesService(this IBlackboard obj) => obj.DelObject(TreesService);
 
     }
 }

@@ -1,21 +1,21 @@
 using Atomic.AI;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using GameObjectComponents;
 
 namespace AI
 {
-    public class NextWaypointBTNode : BTNode
+    public sealed class NextWaypointBTNode : BTNode
     {
         protected override BTResult OnUpdate(IBlackboard blackboard, float deltaTime)
         {
-            if (!(blackboard.TryGetCharacter(out var character) &&
-                blackboard.TryGetWaypoints(out var waypoints)
-                ))
+            if (!blackboard.TryGetWaypoints(out var waypointsGO))
             {
                 return BTResult.FAILURE;
             }
 
+            var waypoints = waypointsGO.GetComponent<Waypoints>();
+
+            blackboard.SetTarget(waypoints.GetNextWaypoint());
+            blackboard.SetTargetDistance(waypoints.StopDistance);
 
             return BTResult.SUCCESS;
         }

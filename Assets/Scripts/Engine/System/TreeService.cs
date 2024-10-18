@@ -3,26 +3,21 @@ using UnityEngine;
 
 namespace Game.Engine
 {
-    ///Содержит информацию о всех ресурсах на карте
     public sealed class TreeService : MonoBehaviour
     {
-        public IReadOnlyList<GameObject> Trees => this.trees;
+        public IReadOnlyList<GameObject> Trees => _trees;
 
-        private GameObject[] trees;
-        
-        private void Awake()
-        {
-            this.trees = GameObject.FindGameObjectsWithTag(GameObjectTags.Tree);
-        }
-        
+        [SerializeField]
+        private GameObject[] _trees;
+
         public bool FindClosest(Vector3 position, out GameObject closestResource)
         {
             float minDistance = float.MaxValue;
             closestResource = default;
 
-            for (int i = 0, count = this.trees.Length; i < count; i++)
+            for (int i = 0, count = _trees.Length; i < count; i++)
             {
-                GameObject resource = this.trees[i];
+                GameObject resource = _trees[i];
                 if (!resource.activeSelf)
                 {
                     continue;
@@ -42,7 +37,5 @@ namespace Game.Engine
 
             return closestResource != default;
         }
-
-        
     }
 }

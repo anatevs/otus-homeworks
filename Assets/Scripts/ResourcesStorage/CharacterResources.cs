@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ResourcesStorage
 {
-    public sealed class PlayerResources : MonoBehaviour
+    public sealed class CharacterResources : MonoBehaviour
     {
         [ShowInInspector]
         private Dictionary<string, ResourceStorage> _resources = new();
@@ -38,15 +38,9 @@ namespace ResourcesStorage
             }
         }
 
-        public ResourceStorage GetResource(string resourceID)
+        public bool TryGetResourceStorage(string resourceID, out ResourceStorage storage)
         {
-            if (!_resources.TryGetValue(resourceID, out var storage))
-            {
-                Debug.Log($"there is no resource {resourceID} in {name}");
-                return null;
-            }
-
-            return storage;
+            return _resources.TryGetValue(resourceID, out storage);
         }
     }
 }
