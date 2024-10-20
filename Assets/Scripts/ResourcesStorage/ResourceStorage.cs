@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Globalization;
 
 namespace ResourcesStorage
 {
@@ -14,6 +15,8 @@ namespace ResourcesStorage
         public bool IsEmpty => _count == 0;
 
         public int Count => _count;
+
+        public int Capacity => _capacity;
 
         [SerializeField]
         private ResourceID _resourceIDConfig;
@@ -41,11 +44,17 @@ namespace ResourcesStorage
             OnStateChanged?.Invoke();
         }
 
-        public bool TryAddResource(int value, out int enabledValue)
+        public bool TryAddResource(string id, int value, out int enabledValue)
         {
-            if (!CanAddResources(value))
+            if (id != ResourceID)
             {
                 enabledValue = 0;
+                return false;
+            }
+
+            if (!CanAddResources(value))
+            {
+                enabledValue = _capacity - _count;
                 return false;
             }
 
@@ -54,11 +63,17 @@ namespace ResourcesStorage
             return true;
         }
 
-        public bool TryRemoveResource(int value, out int enabledValue)
+        public bool TryRemoveResource(string id, int value, out int enabledValue)
         {
-            if (!CanRemoveResources(value))
+            if (id != ResourceID)
             {
                 enabledValue = 0;
+                return false;
+            }
+
+            if (!CanRemoveResources(value))
+            {
+                enabledValue = _count;
                 return false;
             }
 
@@ -67,12 +82,12 @@ namespace ResourcesStorage
             return true;
         }
 
-        private bool CanAddResources(int value)
+        public bool CanAddResources(int value)
         {
             return _count + value <= _capacity;
         }
 
-        private bool CanRemoveResources(int value)
+        public bool CanRemoveResources(int value)
         {
             return _count - value >= 0;
         }

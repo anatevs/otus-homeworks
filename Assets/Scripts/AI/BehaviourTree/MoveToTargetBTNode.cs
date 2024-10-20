@@ -1,7 +1,7 @@
 ﻿using Atomic.AI;
 using Game.Engine;
 
-namespace Assets.Scripts.AI.BehaviourTree
+namespace AI
 {
     public sealed class MoveToTargetBTNode : BTNode
     {

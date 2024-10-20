@@ -1,10 +1,9 @@
 ﻿using Atomic.AI;
 using Game.Engine;
-using UnityEngine;
 
-namespace Assets.Scripts.AI.BehaviourTree
+namespace AI
 {
-    public class HarvestBTNode : BTNode
+    public sealed class HarvestBTNode : BTNode
     {
         protected override BTResult OnUpdate(IBlackboard blackboard, float deltaTime)
         {
