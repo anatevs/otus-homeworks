@@ -1,22 +1,12 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 
 namespace ResourcesStorage
 {
-    public class ResourceStorage : MonoBehaviour
+    [Serializable]
+    public sealed class ResourceStoragePlainCS
     {
-        public event Action OnStateChanged;
-
-        public string ResourceID => _resourceIDConfig.ID;
-
         public bool IsFull => _count == _capacity;
-
-        public bool IsEmpty => _count == 0;
-
-        public int Count => _count;
-
-        [SerializeField]
-        private ResourceID _resourceIDConfig;
 
         [SerializeField]
         private int _capacity;
@@ -24,21 +14,20 @@ namespace ResourcesStorage
         [SerializeField]
         private int _count;
 
-        public bool IsNotFull()
+        public ResourceStoragePlainCS(int capacity, int count)
         {
-            return _count < _capacity;
+            _capacity = capacity;
+            _count = count;
         }
 
         public void AddResource(int value)
         {
-            _count = Mathf.Min(_count + value, _capacity);
-            OnStateChanged?.Invoke();
+            _count = Math.Min(_count + value, _capacity);
         }
 
         public void RemoveResource(int value)
         {
-            _count = Mathf.Max(_count - value, 0);
-            OnStateChanged?.Invoke();
+            _count = Math.Max(_count + value, 0);
         }
 
         public bool TryAddResource(int value, out int enabledValue)
@@ -67,14 +56,28 @@ namespace ResourcesStorage
             return true;
         }
 
-        private bool CanAddResources(int value)
+        public bool CanAddResources(int value)
         {
-            return _count + value <= _capacity;
+            var newValue = _count + value;
+
+            if (newValue > _capacity)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        private bool CanRemoveResources(int value)
+        public bool CanRemoveResources(int value)
         {
-            return _count - value >= 0;
+            var newValue = _count - value;
+
+            if (newValue < 0)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

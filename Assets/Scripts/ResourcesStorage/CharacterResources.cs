@@ -6,27 +6,18 @@ namespace ResourcesStorage
 {
     public sealed class CharacterResources : MonoBehaviour
     {
-        [ShowInInspector]
-        private Dictionary<string, ResourceStorage> _resources = new();
+        [ShowInInspector, ReadOnly]
+        private readonly Dictionary<string, ResourceStorage> _resources = new();
 
-        [SerializeField]
-        private ResourceStorageConfig[] _configs;
-
-        private void OnEnable()
+        private void Awake()
         {
-            foreach (var config in _configs)
+            var storages = GetComponents<ResourceStorage>();
+            foreach (var storage in storages)
             {
-                AddResource(config.Info);
-            }
-        }
-
-        public void AddResource(ResourceInfo resource)
-        {
-            var storage = new ResourceStorage(resource.Capacity, resource.Count);
-
-            if (!_resources.TryAdd(resource.ID, storage))
-            {
-                _resources[resource.ID] = storage;
+                if (!_resources.TryAdd(storage.ResourceID, storage))
+                {
+                    Debug.Log($"ResourceStorage with id {storage.ResourceID} is also exist in {gameObject.name}");
+                }
             }
         }
 
@@ -41,6 +32,11 @@ namespace ResourcesStorage
         public bool TryGetResourceStorage(string resourceID, out ResourceStorage storage)
         {
             return _resources.TryGetValue(resourceID, out storage);
+        }
+
+        public ResourceStorage GetResourceStorage(string resourceID)
+        {
+            return _resources[resourceID];
         }
     }
 }

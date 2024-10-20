@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AI
 {
-    public class IsResourceStorageEmptyBlackboardCondition : IBlackboardCondition
+    public sealed class IsResourceStorageFullBlackboardCondition : IBlackboardCondition
     {
         [SerializeField]
         private string _storageID;
@@ -29,7 +29,7 @@ namespace AI
                 return false;
             }
 
-            return resourceStorage.IsEmpty;
+            return resourceStorage.IsFull;
         }
     }
 }

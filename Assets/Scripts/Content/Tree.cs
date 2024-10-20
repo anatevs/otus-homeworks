@@ -1,33 +1,44 @@
 using Game.Engine;
+using ResourcesStorage;
 using UnityEngine;
 
 namespace Game.Content
 {
+    [RequireComponent(typeof(ResourceStorage))]
     public sealed class Tree : MonoBehaviour
     {
         private static readonly int ChopAnimHash = Animator.StringToHash("Chop");
+
+        public float TreeStopDistance => _treeStopDistance;
 
         [SerializeField]
         private Animator _animator;
 
         [SerializeField]
-        private ResourceStorageComponent storage;
+        private float _treeStopDistance;
+
+        private ResourceStorage _resourceStorage;
+
+        private void Awake()
+        {
+            _resourceStorage = GetComponent<ResourceStorage>();
+        }
 
         private void OnEnable()
         {
-            this.storage.OnStateChanged += this.OnStateChanged;
+            _resourceStorage.OnStateChanged += OnStateChanged;
         }
 
         private void OnDisable()
         {
-            this.storage.OnStateChanged -= this.OnStateChanged;
+            _resourceStorage.OnStateChanged -= OnStateChanged;
         }
 
         private void OnStateChanged()
         {
-            if (this.storage.IsEmpty())
+            if (_resourceStorage.IsEmpty)
             {
-                this.gameObject.SetActive(false);
+                gameObject.SetActive(false);
             }
             else
             {

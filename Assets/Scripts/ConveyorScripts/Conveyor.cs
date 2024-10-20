@@ -15,16 +15,16 @@ namespace ConveyorScripts
 
         private int _unloadCapacity;
 
-        private ResourceStorage _loadStorage;
+        private ResourceStoragePlainCS _loadStorage;
 
-        private ResourceStorage _unloadStorage;
+        private ResourceStoragePlainCS _unloadStorage;
 
         private (int InValue, int OutValue) _conversionRatio;
 
         public Conveyor(int loadValue, int unloadValue, (int, int) convertionRatio)
         {
-            _loadStorage = new ResourceStorage(_loadCapacity, loadValue);
-            _unloadStorage = new ResourceStorage(_unloadCapacity, unloadValue);
+            _loadStorage = new ResourceStoragePlainCS(_loadCapacity, loadValue);
+            _unloadStorage = new ResourceStoragePlainCS(_unloadCapacity, unloadValue);
             _conversionRatio = convertionRatio;
         }
 

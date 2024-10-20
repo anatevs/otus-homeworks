@@ -13,6 +13,7 @@ namespace Atomic.AI
         public const int Waypoints = 3; // GameObject : class
         public const int TargetDistance = 4; // float
         public const int TreesService = 5; // GameObject : class
+        public const int Conveyor = 6; // GameObject : class
 
 
         ///Extensions
@@ -94,6 +95,22 @@ namespace Atomic.AI
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool DelTreesService(this IBlackboard obj) => obj.DelObject(TreesService);
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasConveyor(this IBlackboard obj) => obj.HasObject(Conveyor);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static GameObject  GetConveyor(this IBlackboard obj) => obj.GetObject<GameObject >(Conveyor);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetConveyor(this IBlackboard obj, out GameObject  value) => obj.TryGetObject(Conveyor, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetConveyor(this IBlackboard obj, GameObject  value) => obj.SetObject(Conveyor, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelConveyor(this IBlackboard obj) => obj.DelObject(Conveyor);
 
     }
 }

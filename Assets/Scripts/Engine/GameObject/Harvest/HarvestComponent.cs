@@ -12,24 +12,24 @@ namespace Game.Engine
         public bool IsHarvesting => _coroutine != null;
 
         [SerializeField]
-        private float duration = 0.5f;
+        private float _duration = 0.5f;
 
         [SerializeField]
-        private float postDelay =0.25f;
+        private float _postDelay = 0.25f;
 
-        private readonly AndCondition condition = new();
+        private readonly AndCondition _condition = new();
         
         private Coroutine _coroutine;
         private Action _processAction;
-        
+
         public void SetProcessAction(Action action)
         {
             _processAction = action;
         }
-        
+
         public void AddCondition(Func<bool> condition)
         {
-            this.condition.AddCondition(condition);
+            _condition.AddCondition(condition);
         }
         
         public bool StartHarvest()
@@ -39,13 +39,13 @@ namespace Game.Engine
                 return false;
             }
 
-            if (!this.condition.Invoke())
+            if (!_condition.Invoke())
             {
-                return false; 
+                return false;
             }
 
-            _coroutine = this.StartCoroutine(this.HarvestRoutine());
-            this.OnStarted?.Invoke();
+            _coroutine = StartCoroutine(HarvestRoutine());
+            OnStarted?.Invoke();
             return true;
         }
 
@@ -56,19 +56,19 @@ namespace Game.Engine
                 return false;
             }
 
-            this.StopCoroutine(_coroutine);
+            StopCoroutine(_coroutine);
             _coroutine = null;
             return true;
         }
         
         private IEnumerator HarvestRoutine()
         {
-            yield return new WaitForSeconds(this.duration);
+            yield return new WaitForSeconds(_duration);
             _processAction?.Invoke();
-            yield return new WaitForSeconds(this.postDelay);
+            yield return new WaitForSeconds(_postDelay);
             
             _coroutine = null;
-            this.OnEnded?.Invoke();
+            OnEnded?.Invoke();
         }
     }
 }

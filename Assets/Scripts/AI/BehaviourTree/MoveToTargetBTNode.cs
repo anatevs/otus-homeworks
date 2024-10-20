@@ -1,11 +1,9 @@
 ﻿using Atomic.AI;
 using Game.Engine;
-using System.Collections;
-using UnityEngine;
 
 namespace Assets.Scripts.AI.BehaviourTree
 {
-    public class MoveToTargetBTNode : BTNode
+    public sealed class MoveToTargetBTNode : BTNode
     {
         protected override BTResult OnUpdate(IBlackboard blackboard, float deltaTime)
         {

@@ -1,4 +1,5 @@
 using Game.Engine;
+using ResourcesStorage;
 using UnityEngine;
 
 namespace Game.Content
@@ -23,17 +24,25 @@ namespace Game.Content
         private TakeResourceComponent _takeResourceComponent;
 
         [Header("Storage")]
+        //[SerializeField]
+        //private ResourceStorageComponent _resourceStorage;
+
         [SerializeField]
-        private ResourceStorageComponent _resourceStorage;
+        private CharacterResources _characterResources;
+
+        [SerializeField]
+        private ResourceID _resourceIDConfig;
+
+        private ResourceStorage _harvestingStorage;
 
         private void OnEnable()
         {
-            _moveComponent.OnMove += this.OnMove;
+            _moveComponent.OnMove += OnMove;
         }
 
         private void OnDisable()
         {
-            _moveComponent.OnMove -= this.OnMove;
+            _moveComponent.OnMove -= OnMove;
         }
 
         private void OnMove()
@@ -43,13 +52,17 @@ namespace Game.Content
 
         private void Start()
         {
-            _harvestComponent.AddCondition(_resourceStorage.IsNotFull);
-            _harvestComponent.SetProcessAction(this.RaycastResources);
+            _harvestingStorage = _characterResources.GetResourceStorage(_resourceIDConfig.ID);
+
+            _harvestComponent.AddCondition(_harvestingStorage.IsNotFull);
+
+            //_harvestComponent.AddCondition(_resourceStorage.IsNotFull);
+            _harvestComponent.SetProcessAction(RaycastResources);
         }
 
         private void RaycastResources()
         {
-            _overlapSphereComponent.OverlapSphere(this.HarvestResource);
+            _overlapSphereComponent.OverlapSphere(HarvestResource);
         }
 
         private bool HarvestResource(GameObject target)

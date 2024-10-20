@@ -6,16 +6,16 @@ namespace Game.Engine
     [Serializable]
     public sealed class AndCondition
     {
-        private readonly List<Func<bool>> conditions = new();
+        private readonly List<Func<bool>> _conditions = new();
 
         public void AddCondition(Func<bool> condition)
         {
-            this.conditions.Add(condition);
+            _conditions.Add(condition);
         }
 
         public bool Invoke()
         {
-            foreach (var member in this.conditions)
+            foreach (var member in _conditions)
             {
                 if (!member.Invoke())
                 {

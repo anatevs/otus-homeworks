@@ -9,13 +9,13 @@ namespace Game.Engine
         private static readonly Collider[] buffer = new Collider[32];
 
         [SerializeField]
-        private Transform center;
+        private Transform _center;
 
         [SerializeField]
-        private float radius;
+        private float _radius;
 
         [SerializeField]
-        private LayerMask layerMask;
+        private LayerMask _layerMask;
 
         [SerializeField]
         private QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.Ignore;
@@ -24,10 +24,10 @@ namespace Game.Engine
         public void OverlapSphere(Predicate<GameObject> action)
         {
             int size = Physics.OverlapSphereNonAlloc(
-                this.center.position,
-                this.radius,
+                this._center.position,
+                this._radius,
                 buffer,
-                this.layerMask,
+                this._layerMask,
                 this.queryTriggerInteraction
             );
 
@@ -44,10 +44,10 @@ namespace Game.Engine
         
         private void OnDrawGizmos()
         {
-            if (this.center != null)
+            if (this._center != null)
             {
                 Gizmos.color = Color.blue;
-                Gizmos.DrawWireSphere(this.center.position, this.radius);
+                Gizmos.DrawWireSphere(this._center.position, this._radius);
             }
         }
     }

@@ -14,17 +14,17 @@ namespace Game.Engine
 
         private void Awake()
         {
-            _animator = this.GetComponent<Animator>();
+            _animator = GetComponent<Animator>();
         }
 
         private void OnEnable()
         {
-            _harvestComponent.OnStarted += this.OnHarvestStarted;
+            _harvestComponent.OnStarted += OnHarvestStarted;
         }
 
         private void OnDisable()
         {
-            _harvestComponent.OnStarted -= this.OnHarvestStarted;
+            _harvestComponent.OnStarted -= OnHarvestStarted;
         }
 
         private void OnHarvestStarted()

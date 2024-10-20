@@ -320,7 +320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2197074333859340304}
   - component: {fileID: 1118920667}
-  - component: {fileID: 1118920668}
+  - component: {fileID: 6516779218378405903}
   m_Layer: 0
   m_Name: '[AI]'
   m_TagString: Untagged
@@ -357,6 +357,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   installers:
   - rid: 6729916433045651457
+  - rid: 6729916433045651459
+  - rid: 6729916433045651469
+  - rid: 6729916433045651486
   references:
     version: 2
     RefIds:
@@ -365,7 +368,22 @@ MonoBehaviour:
       data:
         key: 1
         value: {fileID: 7455131854162157427}
---- !u!114 &1118920668
+    - rid: 6729916433045651459
+      type: {class: GameObjectInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: 3
+        value: {fileID: 0}
+    - rid: 6729916433045651469
+      type: {class: GameObjectInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: 5
+        value: {fileID: 0}
+    - rid: 6729916433045651486
+      type: {class: GameObjectInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: 6
+        value: {fileID: 0}
+--- !u!114 &6516779218378405903
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -379,17 +397,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blackboard: {fileID: 1118920667}
   initialRoot:
-    rid: 6729916433045651456
+    rid: 6729916433045651478
   controlState: 1
   updateMode: 0
   references:
     version: 2
     RefIds:
-    - rid: 6729916433045651456
-      type: {class: BTNodeSelector, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+    - rid: 6729916433045651478
+      type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
       data:
-        name: HarvestAndUnloading
-        nodes: []
+        name: 
+        nodes:
+        - rid: 6729916433045651482
+        - rid: 6729916433045651479
+        - rid: 6729916433045651480
+        - rid: 6729916433045651481
+    - rid: 6729916433045651479
+      type: {class: FindNearestTreeBTNode, ns: Assets.Scripts.AI.BehaviourTree, asm: Assembly-CSharp}
+    - rid: 6729916433045651480
+      type: {class: MoveToTargetBTNode, ns: Assets.Scripts.AI.BehaviourTree, asm: Assembly-CSharp}
+    - rid: 6729916433045651481
+      type: {class: HarvestBTNode, ns: Assets.Scripts.AI.BehaviourTree, asm: Assembly-CSharp}
+    - rid: 6729916433045651482
+      type: {class: BTNodeCondition, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: StorageIsNotFull
+        condition:
+          rid: 6729916433045651484
+    - rid: 6729916433045651484
+      type: {class: NotBlackboardCondition, ns: Atomic.AI, asm: Atomic.AI.Elements}
+      data:
+        condition:
+          rid: 6729916433045651485
+    - rid: 6729916433045651485
+      type: {class: IsResourceStorageFullBlackboardCondition, ns: AI, asm: Assembly-CSharp}
+      data:
+        _storageID: Log
 --- !u!1 &2729591373148564147
 GameObject:
   m_ObjectHideFlags: 0
@@ -979,9 +1022,9 @@ GameObject:
   - component: {fileID: 3000718845113086620}
   - component: {fileID: 8489095016137750506}
   - component: {fileID: 3011317373241119557}
-  - component: {fileID: 5631840772496047568}
   - component: {fileID: 9171852966772238074}
   - component: {fileID: 1118920672}
+  - component: {fileID: 1118920678}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -1025,7 +1068,8 @@ MonoBehaviour:
   _harvestComponent: {fileID: 8489095016137750506}
   _overlapSphereComponent: {fileID: 3011317373241119557}
   _takeResourceComponent: {fileID: 9171852966772238074}
-  _resourceStorage: {fileID: 5631840772496047568}
+  _characterResources: {fileID: 1118920672}
+  _resourceIDConfig: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
 --- !u!114 &8765604542818359786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1063,8 +1107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc200f48ccaf469084940e737b352c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.6
-  postDelay: 0.3
+  _duration: 0.5
+  _postDelay: 0.25
 --- !u!114 &3011317373241119557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1077,26 +1121,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a084c1397bfe4fdb98dc40f4e535c778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  center: {fileID: 7186569023086594475}
-  radius: 0.5
-  layerMask:
+  _center: {fileID: 7186569023086594475}
+  _radius: 0.5
+  _layerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   queryTriggerInteraction: 1
---- !u!114 &5631840772496047568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7455131854162157427}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 117c7fe85adb45f7be0c70cf50fb3755, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  capacity: 10
-  current: 0
 --- !u!114 &9171852966772238074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1109,7 +1139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c24efd5861b488386fa1acf65848400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extractCount: 1
+  _resourceIDConfig: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
+  _extractCount: 1
 --- !u!114 &1118920672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1122,8 +1153,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0251a7c124c44f6459166e8c4e0eaf86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _configs:
-  - {fileID: 11400000, guid: c220674c28770a54eb590a8195f088dc, type: 2}
+--- !u!114 &1118920678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7455131854162157427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb94a67458ec58343be3947e581652d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceIDConfig: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
+  _capacity: 10
+  _count: 0
 --- !u!1 &7484532441032762191
 GameObject:
   m_ObjectHideFlags: 0

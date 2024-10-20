@@ -1,12 +1,10 @@
 ﻿using Atomic.AI;
 using Game.Engine;
-using GameObjectCompoonents;
-using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.AI.BehaviourTree
 {
-    public class FindNearestTreeBTNode : BTNode
+    public sealed class FindNearestTreeBTNode : BTNode
     {
         protected override BTResult OnUpdate(IBlackboard blackboard, float deltaTime)
         {
@@ -26,7 +24,7 @@ namespace Assets.Scripts.AI.BehaviourTree
             }
 
             blackboard.SetTarget(closestTree.transform);
-            blackboard.SetTargetDistance(closestTree.GetComponent<TreeComponent>().TreeStopDistance);
+            blackboard.SetTargetDistance(closestTree.GetComponent<Game.Content.Tree>().TreeStopDistance);
             return BTResult.SUCCESS;
         }
     }
