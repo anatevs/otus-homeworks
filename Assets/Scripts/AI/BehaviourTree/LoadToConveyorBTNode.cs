@@ -18,7 +18,7 @@ namespace AI
             var conveyor = conveyorGO.GetComponent<ConveyorComponent>();
             var resourceID = conveyor.LoadID;
 
-            var characterStorages = characterGO.GetComponent<CharacterResources>();
+            var characterStorages = characterGO.GetComponent<ResourcesContainer>();
             var characterStorage = characterStorages.GetResourceStorage(resourceID);
 
             if (!conveyor.TryLoadConveyor(resourceID, characterStorage.Count, out var enabledValue))

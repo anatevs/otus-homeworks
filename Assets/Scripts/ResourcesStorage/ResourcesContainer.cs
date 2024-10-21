@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ResourcesStorage
 {
-    public sealed class CharacterResources : MonoBehaviour
+    public sealed class ResourcesContainer : MonoBehaviour
     {
         [ShowInInspector, ReadOnly]
         private readonly Dictionary<string, ResourceStorage> _resources = new();
@@ -12,6 +12,8 @@ namespace ResourcesStorage
         private void Awake()
         {
             var storages = GetComponents<ResourceStorage>();
+            //var storages = GetComponentsInChildren<ResourceStorage>();
+
             foreach (var storage in storages)
             {
                 if (!_resources.TryAdd(storage.ResourceID, storage))

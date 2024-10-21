@@ -31,7 +31,7 @@ namespace Game.Engine
         {
             _condition.AddCondition(condition);
         }
-        
+
         public bool StartHarvest()
         {
             if (_coroutine != null)

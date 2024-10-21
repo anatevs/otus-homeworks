@@ -397,29 +397,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blackboard: {fileID: 1118920667}
   initialRoot:
-    rid: 6729916433045651501
+    rid: 6729916433045651526
   controlState: 1
   updateMode: 0
   references:
     version: 2
     RefIds:
-    - rid: 6729916433045651501
+    - rid: 6729916433045651526
       type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
       data:
-        name: 
+        name: WorkWithConveyor
         nodes:
-        - rid: 6729916433045651502
-        - rid: 6729916433045651503
-        - rid: 6729916433045651504
-    - rid: 6729916433045651502
+        - rid: 6729916433045651534
+        - rid: 6729916433045651533
+        - rid: 6729916433045651532
+        - rid: 6729916433045651535
+        - rid: 6729916433045651536
+    - rid: 6729916433045651532
+      type: {class: LoadToConveyorBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916433045651533
+      type: {class: MoveToTargetBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916433045651534
       type: {class: SetTargetBTNode, ns: AI, asm: Assembly-CSharp}
       data:
         _target: {fileID: 0}
         _stopDistance: 0.25
-    - rid: 6729916433045651503
-      type: {class: MoveToTargetBTNode, ns: AI, asm: Assembly-CSharp}
-    - rid: 6729916433045651504
-      type: {class: LoadToConveyorBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916433045651535
+      type: {class: SetHarvestConveyorUnloadBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916433045651536
+      type: {class: HarvestBTNode, ns: AI, asm: Assembly-CSharp}
 --- !u!1 &2729591373148564147
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,6 +1018,7 @@ GameObject:
   - component: {fileID: 9171852966772238074}
   - component: {fileID: 1118920672}
   - component: {fileID: 1118920678}
+  - component: {fileID: 7848461586944787009}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -1154,6 +1161,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resourceIDConfig: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
   _capacity: 10
+  _count: 20
+--- !u!114 &7848461586944787009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7455131854162157427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb94a67458ec58343be3947e581652d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceIDConfig: {fileID: 11400000, guid: 2f6a949503dc6df4b8072cded8440c67, type: 2}
+  _capacity: 500
   _count: 0
 --- !u!1 &7484532441032762191
 GameObject:

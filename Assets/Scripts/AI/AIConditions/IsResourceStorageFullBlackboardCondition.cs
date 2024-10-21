@@ -17,7 +17,7 @@ namespace AI
                 return false;
             }
 
-            if (!character.TryGetComponent<CharacterResources>(out var characterResources))
+            if (!character.TryGetComponent<ResourcesContainer>(out var characterResources))
             {
                 Debug.Log($"no CharacterResources at {character.name}!");
                 return false;

@@ -52,7 +52,7 @@ namespace ResourcesStorage
                 return false;
             }
 
-            if (!CanAddResources(value))
+            if (!CanAddResources(id, value))
             {
                 enabledValue = _capacity - _count;
                 return false;
@@ -71,7 +71,7 @@ namespace ResourcesStorage
                 return false;
             }
 
-            if (!CanRemoveResources(value))
+            if (!CanRemoveResources(id, value))
             {
                 enabledValue = _count;
                 return false;
@@ -82,14 +82,24 @@ namespace ResourcesStorage
             return true;
         }
 
-        public bool CanAddResources(int value)
+        public bool CanAddResources(string id, int value)
         {
+            if (id != ResourceID)
+            {
+                return false;
+            }
+
             return _count + value <= _capacity;
         }
 
-        public bool CanRemoveResources(int value)
+        public bool CanRemoveResources(string id, int value)
         {
-            return _count - value >= 0;
+            if (id != ResourceID)
+            {
+                return false;
+            }
+
+            return _count >= value;
         }
     }
 }

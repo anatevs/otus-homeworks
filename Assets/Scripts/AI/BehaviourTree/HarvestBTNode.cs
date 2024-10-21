@@ -7,12 +7,12 @@ namespace AI
     {
         protected override BTResult OnUpdate(IBlackboard blackboard, float deltaTime)
         {
-            if (!blackboard.TryGetCharacter(out var character))
+            if (!blackboard.TryGetHarvest(out var harvestGO))
             {
                 return BTResult.FAILURE;
             }
 
-            var harvest = character.GetComponent<HarvestComponent>();
+            var harvest = harvestGO.GetComponent<HarvestComponent>();
 
             if (harvest.IsHarvesting)
             {

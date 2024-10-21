@@ -30,3 +30,12 @@ MonoBehaviour:
   - id: 3
     name: Waypoints
     type: 'GameObject : class'
+  - id: 4
+    name: TargetDistance
+    type: float
+  - id: 5
+    name: TreesService
+    type: 'GameObject : class'
+  - id: 6
+    name: Conveyor
+    type: 'GameObject : class'

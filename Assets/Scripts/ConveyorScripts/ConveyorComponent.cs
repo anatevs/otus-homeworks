@@ -1,4 +1,5 @@
-﻿using ResourcesStorage;
+﻿using Game.Engine;
+using ResourcesStorage;
 using UnityEngine;
 
 namespace Conveyor
@@ -8,6 +9,8 @@ namespace Conveyor
         public string LoadID => _loadStorage.ResourceID;
 
         public string UnloadID => _unloadStorage.ResourceID;
+
+        public HarvestComponent UnloadHarvest => _unloadHarvest;
 
         [SerializeField]
         private ResourceStorage _loadStorage;
@@ -22,19 +25,20 @@ namespace Conveyor
         private int _conversionOutValue;
 
         [SerializeField]
-        private Transform _loadPoint;
-
-        [SerializeField]
-        private Transform _unloadPoint;
-
-        [SerializeField]
-        private float _stopDistance;
+        private HarvestComponent _unloadHarvest;
 
         private (int InValue, int OutValue) _conversionRatio;
 
         private void Awake()
         {
             _conversionRatio = (_conversionInValue, _conversionOutValue);
+        }
+
+        public void Start()
+        {
+            _unloadHarvest.AddCondition(CanMakeOneCycleConversion);
+
+            _unloadHarvest.SetProcessAction(MakeOneCycleConvertion);
         }
 
         public void LoadToConveyor(int value)
@@ -52,22 +56,16 @@ namespace Conveyor
             return _loadStorage.TryAddResource(id, value, out enabledValue);
         }
 
-        public bool TryUnloadConveyor(string id, int value, out int enabledValue)
+        public bool TryUnloadConveyor(string id, out int unloadedValue)
         {
-            return _unloadStorage.TryRemoveResource(id, value, out enabledValue);
+            return _unloadStorage.TryRemoveResource(id, _unloadStorage.Count, out unloadedValue);
         }
 
-        public void Convert()
-        {
-            var cyclesNumber = GetConvertionInfo(_loadStorage.Capacity, out _);
 
-            for (int cycle = 0; cycle < cyclesNumber; cycle++)
-            {
-                if (!TryMakeOneCycleConversion())
-                {
-                    break;
-                }
-            }
+        public void MakeOneCycleConvertion()
+        {
+            _loadStorage.RemoveResource(_conversionRatio.InValue);
+            _unloadStorage.AddResource(_conversionRatio.OutValue);
         }
 
         private int GetConvertionInfo(int inResources, out int outResources)
@@ -79,15 +77,15 @@ namespace Conveyor
             return cyclesNumber;
         }
 
-        private bool TryMakeOneCycleConversion()
+        private bool CanMakeOneCycleConversion()
         {
-            if (!_loadStorage.CanRemoveResources(_conversionRatio.InValue))
+            if (!_loadStorage.CanRemoveResources(LoadID, _conversionRatio.InValue))
             {
                 Debug.Log($"need at least {_conversionRatio.InValue} in load conveyor with {_loadStorage.ResourceID} resources");
                 return false;
             }
 
-            if (!_unloadStorage.CanAddResources(_conversionRatio.OutValue))
+            if (!_unloadStorage.CanAddResources(UnloadID, _conversionRatio.OutValue))
             {
                 Debug.Log($"need at least {_conversionRatio.OutValue} free space in unload conveyor with {_unloadStorage.ResourceID} resources");
                 return false;

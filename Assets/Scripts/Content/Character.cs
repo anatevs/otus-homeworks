@@ -24,11 +24,8 @@ namespace Game.Content
         private TakeResourceComponent _takeResourceComponent;
 
         [Header("Storage")]
-        //[SerializeField]
-        //private ResourceStorageComponent _resourceStorage;
-
         [SerializeField]
-        private CharacterResources _characterResources;
+        private ResourcesContainer _characterResources;
 
         [SerializeField]
         private ResourceID _resourceIDConfig;
@@ -56,7 +53,6 @@ namespace Game.Content
 
             _harvestComponent.AddCondition(_harvestingStorage.IsNotFull);
 
-            //_harvestComponent.AddCondition(_resourceStorage.IsNotFull);
             _harvestComponent.SetProcessAction(RaycastResources);
         }
 
@@ -69,7 +65,7 @@ namespace Game.Content
         {
             return target.CompareTag(GameObjectTags.Tree) &&
                    target.activeSelf &&
-                   _takeResourceComponent.TakeResources(target);
+                   _takeResourceComponent.TakeResources(target, _resourceIDConfig.ID);
         }
     }
 }

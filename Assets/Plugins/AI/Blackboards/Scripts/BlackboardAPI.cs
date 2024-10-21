@@ -14,6 +14,8 @@ namespace Atomic.AI
         public const int TargetDistance = 4; // float
         public const int TreesService = 5; // GameObject : class
         public const int Conveyor = 6; // GameObject : class
+        public const int Harvest = 7; // GameObject : class
+        public const int HarvestingID = 8; // string
 
 
         ///Extensions
@@ -111,6 +113,23 @@ namespace Atomic.AI
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool DelConveyor(this IBlackboard obj) => obj.DelObject(Conveyor);
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasHarvest(this IBlackboard obj) => obj.HasObject(Harvest);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static GameObject  GetHarvest(this IBlackboard obj) => obj.GetObject<GameObject >(Harvest);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetHarvest(this IBlackboard obj, out GameObject  value) => obj.TryGetObject(Harvest, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetHarvest(this IBlackboard obj, GameObject  value) => obj.SetObject(Harvest, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelHarvest(this IBlackboard obj) => obj.DelObject(Harvest);
+
 
     }
 }
