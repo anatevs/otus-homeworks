@@ -6,8 +6,12 @@ namespace ResourcesStorage
 {
     public sealed class ResourcesContainer : MonoBehaviour
     {
+        public List<string> IDs => _ids;
+
         [ShowInInspector, ReadOnly]
         private readonly Dictionary<string, ResourceStorage> _resources = new();
+
+        private readonly List<string> _ids = new();
 
         private void Awake()
         {
@@ -20,6 +24,8 @@ namespace ResourcesStorage
                 {
                     Debug.Log($"ResourceStorage with id {storage.ResourceID} is also exist in {gameObject.name}");
                 }
+
+                _ids.Add(storage.ResourceID);
             }
         }
 

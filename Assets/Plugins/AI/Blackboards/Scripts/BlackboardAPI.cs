@@ -15,7 +15,7 @@ namespace Atomic.AI
         public const int TreesService = 5; // GameObject : class
         public const int Conveyor = 6; // GameObject : class
         public const int Harvest = 7; // GameObject : class
-        public const int HarvestingID = 8; // string
+        public const int HarvestingID = 8; // string : class
 
 
         ///Extensions
@@ -130,6 +130,21 @@ namespace Atomic.AI
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool DelHarvest(this IBlackboard obj) => obj.DelObject(Harvest);
 
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasHarvestingID(this IBlackboard obj) => obj.HasObject(HarvestingID);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static string  GetHarvestingID(this IBlackboard obj) => obj.GetObject<string >(HarvestingID);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetHarvestingID(this IBlackboard obj, out string  value) => obj.TryGetObject(HarvestingID, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetHarvestingID(this IBlackboard obj, string  value) => obj.SetObject(HarvestingID, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelHarvestingID(this IBlackboard obj) => obj.DelObject(HarvestingID);
 
     }
 }

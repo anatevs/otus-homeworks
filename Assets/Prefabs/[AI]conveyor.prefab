@@ -1,0 +1,185 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1667406780825391165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1667406780825391160}
+  - component: {fileID: 1667406780825391163}
+  - component: {fileID: 1667406780825391162}
+  m_Layer: 0
+  m_Name: '[AI]conveyor'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1667406780825391160
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667406780825391165}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1667406780825391163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667406780825391165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e09c0b93b7484545a4777c934e99a69b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  installers:
+  - rid: 6729916433045651457
+  - rid: 6729916433045651459
+  - rid: 6729916433045651469
+  - rid: 6729916433045651486
+  references:
+    version: 2
+    RefIds:
+    - rid: 6729916433045651457
+      type: {class: GameObjectInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: 1
+        value: {fileID: 0}
+    - rid: 6729916433045651459
+      type: {class: GameObjectInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: 3
+        value: {fileID: 0}
+    - rid: 6729916433045651469
+      type: {class: GameObjectInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: 5
+        value: {fileID: 0}
+    - rid: 6729916433045651486
+      type: {class: GameObjectInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: 6
+        value: {fileID: 0}
+--- !u!114 &1667406780825391162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667406780825391165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3e9c8d94b5478cb462ccae006f52f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blackboard: {fileID: 1667406780825391163}
+  initialRoot:
+    rid: 6729916433045651553
+  controlState: 1
+  updateMode: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 6729916433045651553
+      type: {class: BTNodeSelector, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: 
+        nodes:
+        - rid: 6729916433045651554
+        - rid: 6729916433045651575
+        - rid: 6729916433045651567
+    - rid: 6729916433045651554
+      type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: LoadToConveyorAndConversion
+        nodes:
+        - rid: 6729916433045651573
+        - rid: 6729916433045651555
+        - rid: 6729916433045651556
+        - rid: 6729916433045651557
+    - rid: 6729916433045651555
+      type: {class: SetTargetBTNode, ns: AI, asm: Assembly-CSharp}
+      data:
+        _target: {fileID: 0}
+        _stopDistance: 0.25
+    - rid: 6729916433045651556
+      type: {class: MoveToTargetBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916433045651557
+      type: {class: LoadToConveyorBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916433045651567
+      type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: UnloadConveyor
+        nodes:
+        - rid: 6729916433045651580
+        - rid: 6729916433045651568
+        - rid: 6729916433045651569
+        - rid: 6729916433045651570
+        - rid: 6729916433045651571
+        - rid: 6729916433045651572
+    - rid: 6729916433045651568
+      type: {class: SetTargetBTNode, ns: AI, asm: Assembly-CSharp}
+      data:
+        _target: {fileID: 0}
+        _stopDistance: 0.25
+    - rid: 6729916433045651569
+      type: {class: MoveToTargetBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916433045651570
+      type: {class: SetHarvestCharacterBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916433045651571
+      type: {class: SetHarvestingID, ns: AI, asm: Assembly-CSharp}
+      data:
+        _resourceID: {fileID: 11400000, guid: 2f6a949503dc6df4b8072cded8440c67, type: 2}
+    - rid: 6729916433045651572
+      type: {class: HarvestBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916433045651573
+      type: {class: BTNodeCondition, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: CharacterLogStorageIsFull
+        condition:
+          rid: 6729916433045651574
+    - rid: 6729916433045651574
+      type: {class: IsResourceStorageFullBlackboardCondition, ns: AI, asm: Assembly-CSharp}
+      data:
+        _resourceID: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
+    - rid: 6729916433045651575
+      type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: Conversion
+        nodes:
+        - rid: 6729916433045651576
+        - rid: 6729916433045651578
+        - rid: 6729916433045651579
+    - rid: 6729916433045651576
+      type: {class: BTNodeCondition, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: LoadIsNotEmpty
+        condition:
+          rid: 6729916433045651577
+    - rid: 6729916433045651577
+      type: {class: ConveyorLoadIsNotEmptyBlackboardCondition, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916433045651578
+      type: {class: SetHarvestConveyorUnloadBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916433045651579
+      type: {class: HarvestBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916433045651580
+      type: {class: BTNodeCondition, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: UnloadIsNotEmpty
+        condition:
+          rid: 6729916433045651581
+    - rid: 6729916433045651581
+      type: {class: ConveyorUnloadIsNotEmptyBlackboardCondition, ns: AI, asm: Assembly-CSharp}

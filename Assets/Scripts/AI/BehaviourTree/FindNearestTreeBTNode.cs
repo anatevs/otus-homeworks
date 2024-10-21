@@ -2,7 +2,7 @@
 using Game.Engine;
 using UnityEngine;
 
-namespace Assets.Scripts.AI.BehaviourTree
+namespace AI
 {
     public sealed class FindNearestTreeBTNode : BTNode
     {

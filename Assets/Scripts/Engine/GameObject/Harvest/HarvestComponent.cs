@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Game.Engine
 {
@@ -21,15 +22,26 @@ namespace Game.Engine
         
         private Coroutine _coroutine;
         private Action _processAction;
+        private Action<string> _processActionID;
 
         public void SetProcessAction(Action action)
         {
             _processAction = action;
         }
 
+        public void SetProcessActionID(Action<string> action)
+        {
+            _processActionID = action;
+        }
+
         public void AddCondition(Func<bool> condition)
         {
             _condition.AddCondition(condition);
+        }
+
+        public void AddCondition(string id, Func<bool> condition)
+        {
+            _condition.AddCondition(id, condition);
         }
 
         public bool StartHarvest()
@@ -45,6 +57,23 @@ namespace Game.Engine
             }
 
             _coroutine = StartCoroutine(HarvestRoutine());
+            OnStarted?.Invoke();
+            return true;
+        }
+
+        public bool StartHarvest(string id)
+        {
+            if (_coroutine != null)
+            {
+                return false;
+            }
+
+            if (!_condition.Invoke(id))
+            {
+                return false;
+            }
+
+            _coroutine = StartCoroutine(HarvestRoutineID(id));
             OnStarted?.Invoke();
             return true;
         }
@@ -67,6 +96,16 @@ namespace Game.Engine
             _processAction?.Invoke();
             yield return new WaitForSeconds(_postDelay);
             
+            _coroutine = null;
+            OnEnded?.Invoke();
+        }
+
+        private IEnumerator HarvestRoutineID(string id)
+        {
+            yield return new WaitForSeconds(_duration);
+            _processActionID?.Invoke(id);
+            yield return new WaitForSeconds(_postDelay);
+
             _coroutine = null;
             OnEnded?.Invoke();
         }

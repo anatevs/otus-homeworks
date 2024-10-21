@@ -19,10 +19,22 @@ namespace AI
                 return BTResult.RUNNING;
             }
 
-            if (!harvest.StartHarvest())
+            if (!blackboard.TryGetHarvestingID(out var id))
             {
-                return BTResult.FAILURE;
+                if (!harvest.StartHarvest())
+                {
+                    return BTResult.FAILURE;
+                }
             }
+            else
+            {
+                if (!harvest.StartHarvest(id))
+                {
+                    return BTResult.FAILURE;
+                }
+            }
+
+            blackboard.DelHarvestingID();
 
             return BTResult.SUCCESS;
         }

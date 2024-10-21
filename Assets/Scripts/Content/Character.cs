@@ -1,5 +1,6 @@
 using Game.Engine;
 using ResourcesStorage;
+using System;
 using UnityEngine;
 
 namespace Game.Content
@@ -53,7 +54,15 @@ namespace Game.Content
 
             _harvestComponent.AddCondition(_harvestingStorage.IsNotFull);
 
+            foreach (var id in _characterResources.IDs)
+            {
+                var storage = _characterResources.GetResourceStorage(id);
+                _harvestComponent.AddCondition(id, storage.IsNotFull);
+            }
+
             _harvestComponent.SetProcessAction(RaycastResources);
+
+            _harvestComponent.SetProcessActionID(RaycastResourcesID);
         }
 
         private void RaycastResources()
@@ -66,6 +75,18 @@ namespace Game.Content
             return target.CompareTag(GameObjectTags.Tree) &&
                    target.activeSelf &&
                    _takeResourceComponent.TakeResources(target, _resourceIDConfig.ID);
+        }
+
+        private void RaycastResourcesID(string id)
+        {
+            _overlapSphereComponent.OverlapSphere(HarvestResourceID(id));
+        }
+
+        private Predicate<GameObject> HarvestResourceID(string id)
+        {
+            return (target) => target.activeSelf &&
+            (target.CompareTag(GameObjectTags.Tree) || target.CompareTag(GameObjectTags.UnloadConveyor)) &&
+            _takeResourceComponent.TakeResources(target, id);
         }
     }
 }

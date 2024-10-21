@@ -320,7 +320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2197074333859340304}
   - component: {fileID: 1118920667}
-  - component: {fileID: 3547723985626746781}
+  - component: {fileID: 6751838927523502693}
   m_Layer: 0
   m_Name: '[AI]'
   m_TagString: Untagged
@@ -383,7 +383,7 @@ MonoBehaviour:
       data:
         key: 6
         value: {fileID: 0}
---- !u!114 &3547723985626746781
+--- !u!114 &6751838927523502693
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -397,35 +397,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blackboard: {fileID: 1118920667}
   initialRoot:
-    rid: 6729916433045651526
+    rid: 6729916557337296902
   controlState: 1
   updateMode: 0
   references:
     version: 2
     RefIds:
-    - rid: 6729916433045651526
+    - rid: 6729916557337296902
       type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
       data:
-        name: WorkWithConveyor
+        name: 
         nodes:
-        - rid: 6729916433045651534
-        - rid: 6729916433045651533
-        - rid: 6729916433045651532
-        - rid: 6729916433045651535
-        - rid: 6729916433045651536
-    - rid: 6729916433045651532
-      type: {class: LoadToConveyorBTNode, ns: AI, asm: Assembly-CSharp}
-    - rid: 6729916433045651533
+        - rid: 6729916557337296908
+        - rid: 6729916557337296904
+        - rid: 6729916557337296905
+        - rid: 6729916557337296906
+        - rid: 6729916557337296907
+    - rid: 6729916557337296904
       type: {class: MoveToTargetBTNode, ns: AI, asm: Assembly-CSharp}
-    - rid: 6729916433045651534
+    - rid: 6729916557337296905
+      type: {class: SetHarvestCharacterBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916557337296906
+      type: {class: SetHarvestingID, ns: AI, asm: Assembly-CSharp}
+      data:
+        _resourceID: {fileID: 11400000, guid: 2f6a949503dc6df4b8072cded8440c67, type: 2}
+    - rid: 6729916557337296907
+      type: {class: HarvestBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916557337296908
       type: {class: SetTargetBTNode, ns: AI, asm: Assembly-CSharp}
       data:
         _target: {fileID: 0}
-        _stopDistance: 0.25
-    - rid: 6729916433045651535
-      type: {class: SetHarvestConveyorUnloadBTNode, ns: AI, asm: Assembly-CSharp}
-    - rid: 6729916433045651536
-      type: {class: HarvestBTNode, ns: AI, asm: Assembly-CSharp}
+        _stopDistance: 0.1
 --- !u!1 &2729591373148564147
 GameObject:
   m_ObjectHideFlags: 0
@@ -1133,7 +1135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c24efd5861b488386fa1acf65848400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resourceIDConfig: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
   _extractCount: 1
 --- !u!114 &1118920672
 MonoBehaviour:
@@ -1161,7 +1162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resourceIDConfig: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
   _capacity: 10
-  _count: 20
+  _count: 0
 --- !u!114 &7848461586944787009
 MonoBehaviour:
   m_ObjectHideFlags: 0

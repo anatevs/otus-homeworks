@@ -12,6 +12,10 @@ namespace Conveyor
 
         public HarvestComponent UnloadHarvest => _unloadHarvest;
 
+        public bool LoadIsEmpty => _loadStorage.IsEmpty;
+
+        public bool UnloadIsEmpty => _unloadStorage.IsEmpty;
+
         [SerializeField]
         private ResourceStorage _loadStorage;
 

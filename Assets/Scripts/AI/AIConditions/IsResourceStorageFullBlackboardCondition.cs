@@ -7,7 +7,7 @@ namespace AI
     public sealed class IsResourceStorageFullBlackboardCondition : IBlackboardCondition
     {
         [SerializeField]
-        private string _storageID;
+        private ResourceID _resourceID;
 
         public bool Invoke(IBlackboard blackboard)
         {
@@ -23,9 +23,9 @@ namespace AI
                 return false;
             }
 
-            if (!characterResources.TryGetResourceStorage(_storageID, out var resourceStorage))
+            if (!characterResources.TryGetResourceStorage(_resourceID.ID, out var resourceStorage))
             {
-                Debug.Log($"no ResourceStorage {_storageID} in {character.name} CharacterResources!");
+                Debug.Log($"no ResourceStorage {_resourceID.ID} in {character.name} CharacterResources!");
                 return false;
             }
 
