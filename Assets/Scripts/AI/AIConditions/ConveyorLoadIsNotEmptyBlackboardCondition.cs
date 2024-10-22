@@ -1,7 +1,5 @@
 ﻿using Atomic.AI;
-using Conveyor;
-using System.Collections;
-using UnityEngine;
+using Game.Engine;
 
 namespace AI
 {
@@ -14,7 +12,7 @@ namespace AI
                 return false;
             }
 
-            var conveyor = conveyorGO.GetComponent<ConveyorComponent>();
+            var conveyor = conveyorGO.GetComponent<Conveyor>();
 
             return !conveyor.LoadIsEmpty;
         }

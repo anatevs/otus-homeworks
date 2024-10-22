@@ -1,11 +1,9 @@
 ﻿using Atomic.AI;
-using Conveyor;
-using System.Collections;
-using UnityEngine;
+using Game.Engine;
 
 namespace AI
 {
-    public class ConveyorUnloadIsNotEmptyBlackboardCondition : IBlackboardCondition
+    public sealed class ConveyorUnloadIsNotEmptyBlackboardCondition : IBlackboardCondition
     {
         public bool Invoke(IBlackboard blackboard)
         {
@@ -14,7 +12,7 @@ namespace AI
                 return false;
             }
 
-            var conveyor = conveyorGO.GetComponent<ConveyorComponent>();
+            var conveyor = conveyorGO.GetComponent<Conveyor>();
 
             return !conveyor.UnloadIsEmpty;
         }

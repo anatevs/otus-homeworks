@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System;
-using System.Globalization;
 
-namespace ResourcesStorage
+namespace Game.Engine
 {
     public class ResourceStorage : MonoBehaviour
     {

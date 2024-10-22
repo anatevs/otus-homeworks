@@ -1,10 +1,8 @@
-﻿using Game.Engine;
-using ResourcesStorage;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Conveyor
+namespace Game.Engine
 {
-    public class ConveyorComponent : MonoBehaviour
+    public class Conveyor : MonoBehaviour
     {
         public string LoadID => _loadStorage.ResourceID;
 

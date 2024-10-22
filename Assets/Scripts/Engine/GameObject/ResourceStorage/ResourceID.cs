@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ResourcesStorage
+namespace Game.Engine
 {
     [CreateAssetMenu(fileName = "ResourceID",
         menuName = "Configs/ResourceID config")]

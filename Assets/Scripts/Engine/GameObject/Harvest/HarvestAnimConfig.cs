@@ -1,12 +1,11 @@
-﻿using ResourcesStorage;
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace Game.Engine
 {
     [CreateAssetMenu(fileName = "HarvestAnimConfig",
         menuName = "Configs/HarvestAnimation")]
-    public class HarvestAnimConfig : ScriptableObject
+    public sealed class HarvestAnimConfig : ScriptableObject
     {
         public IDAnimationNames[] Names;
     }

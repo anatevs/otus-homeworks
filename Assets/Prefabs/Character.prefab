@@ -397,37 +397,171 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blackboard: {fileID: 1118920667}
   initialRoot:
-    rid: 6729916557337296902
+    rid: 6729916557337296909
   controlState: 1
   updateMode: 0
   references:
     version: 2
     RefIds:
-    - rid: 6729916557337296902
-      type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+    - rid: 6729916557337296909
+      type: {class: BTNodeSelector, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
       data:
         name: 
         nodes:
-        - rid: 6729916557337296908
-        - rid: 6729916557337296904
-        - rid: 6729916557337296905
-        - rid: 6729916557337296906
-        - rid: 6729916557337296907
-    - rid: 6729916557337296904
+        - rid: 6729916557337296926
+        - rid: 6729916557337296949
+    - rid: 6729916557337296926
+      type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: WorkWithConveyor
+        nodes:
+        - rid: 6729916557337296962
+        - rid: 6729916557337296966
+    - rid: 6729916557337296949
+      type: {class: BTNodeSelector, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: HarvestLogsOrPatrol
+        nodes:
+        - rid: 6729916557337296950
+        - rid: 6729916557337296951
+    - rid: 6729916557337296950
+      type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: HarvestingLogs
+        nodes:
+        - rid: 6729916557337296952
+        - rid: 6729916557337296953
+        - rid: 6729916557337296954
+        - rid: 6729916557337296955
+        - rid: 6729916557337296956
+    - rid: 6729916557337296951
+      type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: Patrol
+        nodes:
+        - rid: 6729916557337296959
+        - rid: 6729916557337296957
+        - rid: 6729916557337296958
+    - rid: 6729916557337296952
+      type: {class: FindNearestTreeBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916557337296953
       type: {class: MoveToTargetBTNode, ns: AI, asm: Assembly-CSharp}
-    - rid: 6729916557337296905
+    - rid: 6729916557337296954
       type: {class: SetHarvestCharacterBTNode, ns: AI, asm: Assembly-CSharp}
-    - rid: 6729916557337296906
+    - rid: 6729916557337296955
       type: {class: SetHarvestingID, ns: AI, asm: Assembly-CSharp}
       data:
-        _resourceID: {fileID: 11400000, guid: 2f6a949503dc6df4b8072cded8440c67, type: 2}
-    - rid: 6729916557337296907
+        _resourceID: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
+    - rid: 6729916557337296956
       type: {class: HarvestBTNode, ns: AI, asm: Assembly-CSharp}
-    - rid: 6729916557337296908
+    - rid: 6729916557337296957
+      type: {class: NextWaypointBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916557337296958
+      type: {class: MoveToTargetBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916557337296959
+      type: {class: BTNodeCondition, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: CharacterLogsIsNotFull
+        condition:
+          rid: 6729916557337296960
+    - rid: 6729916557337296960
+      type: {class: NotBlackboardCondition, ns: Atomic.AI, asm: Atomic.AI.Elements}
+      data:
+        condition:
+          rid: 6729916557337296961
+    - rid: 6729916557337296961
+      type: {class: IsCharacterStorageFullBlackboardCondition, ns: AI, asm: Assembly-CSharp}
+      data:
+        _resourceID: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
+    - rid: 6729916557337296962
+      type: {class: BTNodeCondition, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: CharcterLogsIsFull
+        condition:
+          rid: 6729916557337296963
+    - rid: 6729916557337296963
+      type: {class: IsCharacterStorageFullBlackboardCondition, ns: AI, asm: Assembly-CSharp}
+      data:
+        _resourceID: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
+    - rid: 6729916557337296966
+      type: {class: BTNodeSelector, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: WorkWithConveyor
+        nodes:
+        - rid: 6729916557337296967
+        - rid: 6729916557337296968
+        - rid: 6729916557337296969
+    - rid: 6729916557337296967
+      type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: LoadToConveyor
+        nodes:
+        - rid: 6729916557337296971
+        - rid: 6729916557337296972
+        - rid: 6729916557337296973
+    - rid: 6729916557337296968
+      type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: Conversion
+        nodes:
+        - rid: 6729916557337296974
+        - rid: 6729916557337296975
+        - rid: 6729916557337296976
+    - rid: 6729916557337296969
+      type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: UnloadConveyor
+        nodes:
+        - rid: 6729916557337296977
+        - rid: 6729916557337296978
+        - rid: 6729916557337296979
+        - rid: 6729916557337296980
+        - rid: 6729916557337296981
+        - rid: 6729916557337296982
+    - rid: 6729916557337296971
       type: {class: SetTargetBTNode, ns: AI, asm: Assembly-CSharp}
       data:
         _target: {fileID: 0}
-        _stopDistance: 0.1
+        _stopDistance: 0.25
+    - rid: 6729916557337296972
+      type: {class: MoveToTargetBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916557337296973
+      type: {class: LoadToConveyorBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916557337296974
+      type: {class: BTNodeCondition, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: LoadIsNotEmpty
+        condition:
+          rid: 6729916557337296983
+    - rid: 6729916557337296975
+      type: {class: SetHarvestConveyorUnloadBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916557337296976
+      type: {class: HarvestBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916557337296977
+      type: {class: BTNodeCondition, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: UnloadIsNotEmpty
+        condition:
+          rid: 6729916557337296984
+    - rid: 6729916557337296978
+      type: {class: SetTargetBTNode, ns: AI, asm: Assembly-CSharp}
+      data:
+        _target: {fileID: 0}
+        _stopDistance: 0.25
+    - rid: 6729916557337296979
+      type: {class: MoveToTargetBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916557337296980
+      type: {class: SetHarvestCharacterBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916557337296981
+      type: {class: SetHarvestingID, ns: AI, asm: Assembly-CSharp}
+      data:
+        _resourceID: {fileID: 11400000, guid: 2f6a949503dc6df4b8072cded8440c67, type: 2}
+    - rid: 6729916557337296982
+      type: {class: HarvestBTNode, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916557337296983
+      type: {class: ConveyorLoadIsNotEmptyBlackboardCondition, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916557337296984
+      type: {class: ConveyorUnloadIsNotEmptyBlackboardCondition, ns: AI, asm: Assembly-CSharp}
 --- !u!1 &2729591373148564147
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,7 +1003,7 @@ GameObject:
   - component: {fileID: 7720057089454331928}
   - component: {fileID: 3170078563231725475}
   - component: {fileID: 8154423351844821436}
-  - component: {fileID: 911941008513497651}
+  - component: {fileID: 2120222670}
   m_Layer: 0
   m_Name: '[Visual]'
   m_TagString: Untagged
@@ -927,7 +1061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveComponent: {fileID: 8765604542818359786}
---- !u!114 &911941008513497651
+--- !u!114 &2120222670
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -936,10 +1070,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6865267348873668467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ade37e8c6bce44c9a467072ec91f9cb5, type: 3}
+  m_Script: {fileID: 11500000, guid: ecaaaeed56d09ad4e97a46c7bb8e594a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _harvestComponent: {fileID: 8489095016137750506}
+  _harvestAnimConfig: {fileID: 11400000, guid: 1e00369a2e224574cbde4c5b3196a97e, type: 2}
 --- !u!1 &7199983468824933355
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,7 +1296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _resourceIDConfig: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
-  _capacity: 10
+  _capacity: 9
   _count: 0
 --- !u!114 &7848461586944787009
 MonoBehaviour:

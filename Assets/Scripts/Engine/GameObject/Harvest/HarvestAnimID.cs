@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game.Engine
 {
     [RequireComponent(typeof(Animator))]
-    public class HarvestAnimID : MonoBehaviour
+    public sealed class HarvestAnimID : MonoBehaviour
     {
         private static readonly Dictionary<string, int> AnimHashes = new();
 

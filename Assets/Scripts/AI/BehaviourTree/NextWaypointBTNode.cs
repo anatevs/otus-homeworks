@@ -1,5 +1,5 @@
 using Atomic.AI;
-using GameObjectComponents;
+using Game.Engine;
 
 namespace AI
 {
@@ -14,7 +14,18 @@ namespace AI
 
             var waypoints = waypointsGO.GetComponent<Waypoints>();
 
-            blackboard.SetTarget(waypoints.GetNextWaypoint());
+            if (blackboard.TryGetTarget(out var targetGO))
+            {
+                if (!waypoints.TargetIsWaypoint(targetGO.transform))
+                {
+                    blackboard.SetTarget(waypoints.GetAndSetNearestWaypoint(targetGO.transform));
+                    blackboard.SetTargetDistance(waypoints.StopDistance);
+
+                    return BTResult.SUCCESS;
+                }
+            }
+
+            blackboard.SetTarget(waypoints.GetAndSetNextWaypoint());
             blackboard.SetTargetDistance(waypoints.StopDistance);
 
             return BTResult.SUCCESS;

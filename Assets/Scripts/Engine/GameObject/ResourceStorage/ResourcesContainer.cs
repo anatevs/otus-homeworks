@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ResourcesStorage
+namespace Game.Engine
 {
     public sealed class ResourcesContainer : MonoBehaviour
     {

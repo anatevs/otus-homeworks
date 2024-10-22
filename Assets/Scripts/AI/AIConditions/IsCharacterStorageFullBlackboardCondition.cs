@@ -1,10 +1,10 @@
 ﻿using Atomic.AI;
-using ResourcesStorage;
 using UnityEngine;
+using Game.Engine;
 
 namespace AI
 {
-    public sealed class IsResourceStorageFullBlackboardCondition : IBlackboardCondition
+    public sealed class IsCharacterStorageFullBlackboardCondition : IBlackboardCondition
     {
         [SerializeField]
         private ResourceID _resourceID;

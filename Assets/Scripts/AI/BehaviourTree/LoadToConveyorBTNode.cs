@@ -1,7 +1,5 @@
 ﻿using Atomic.AI;
-using Conveyor;
-using ResourcesStorage;
-using UnityEngine;
+using Game.Engine;
 
 namespace AI
 {
@@ -15,11 +13,11 @@ namespace AI
                 return BTResult.FAILURE;
             }
 
-            var conveyor = conveyorGO.GetComponent<ConveyorComponent>();
+            var conveyor = conveyorGO.GetComponent<Conveyor>();
             var resourceID = conveyor.LoadID;
 
-            var characterStorages = characterGO.GetComponent<ResourcesContainer>();
-            var characterStorage = characterStorages.GetResourceStorage(resourceID);
+            var storages = characterGO.GetComponent<ResourcesContainer>();
+            var characterStorage = storages.GetResourceStorage(resourceID);
 
             if (!conveyor.TryLoadConveyor(resourceID, characterStorage.Count, out var enabledValue))
             {
