@@ -9,7 +9,9 @@ namespace Game.Engine
     {
         public event Action OnStarted;
         public event Action OnEnded;
-        
+
+        public event Action<string> OnStartedID;
+
         public bool IsHarvesting => _coroutine != null;
 
         [SerializeField]
@@ -74,7 +76,8 @@ namespace Game.Engine
             }
 
             _coroutine = StartCoroutine(HarvestRoutineID(id));
-            OnStarted?.Invoke();
+            //OnStarted?.Invoke();
+            OnStartedID?.Invoke(id);
             return true;
         }
 
