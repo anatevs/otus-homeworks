@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 6810040801840628924}
-  _treeStopDistance: 1
+  _treeStopDistance: 1.5
 --- !u!136 &5040754119573048071
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -180,5 +180,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _resourceIDConfig: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
-  _capacity: 5
-  _count: 5
+  _capacity: 10
+  _count: 10

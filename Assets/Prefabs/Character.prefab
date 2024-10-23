@@ -408,15 +408,8 @@ MonoBehaviour:
       data:
         name: 
         nodes:
-        - rid: 6729916557337296926
+        - rid: 6729916557337296996
         - rid: 6729916557337296949
-    - rid: 6729916557337296926
-      type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
-      data:
-        name: WorkWithConveyor
-        nodes:
-        - rid: 6729916557337296962
-        - rid: 6729916557337296966
     - rid: 6729916557337296949
       type: {class: BTNodeSelector, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
       data:
@@ -430,6 +423,7 @@ MonoBehaviour:
         name: HarvestingLogs
         nodes:
         - rid: 6729916557337296952
+        - rid: 6729916557337296993
         - rid: 6729916557337296953
         - rid: 6729916557337296954
         - rid: 6729916557337296955
@@ -473,95 +467,111 @@ MonoBehaviour:
       type: {class: IsCharacterStorageFullBlackboardCondition, ns: AI, asm: Assembly-CSharp}
       data:
         _resourceID: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
-    - rid: 6729916557337296962
+    - rid: 6729916557337296993
       type: {class: BTNodeCondition, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
       data:
-        name: CharcterLogsIsFull
+        name: CharacterLogsIsNotFull
         condition:
-          rid: 6729916557337296963
-    - rid: 6729916557337296963
+          rid: 6729916557337296994
+    - rid: 6729916557337296994
+      type: {class: NotBlackboardCondition, ns: Atomic.AI, asm: Atomic.AI.Elements}
+      data:
+        condition:
+          rid: 6729916557337296995
+    - rid: 6729916557337296995
       type: {class: IsCharacterStorageFullBlackboardCondition, ns: AI, asm: Assembly-CSharp}
       data:
         _resourceID: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
-    - rid: 6729916557337296966
+    - rid: 6729916557337296996
       type: {class: BTNodeSelector, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
       data:
         name: WorkWithConveyor
         nodes:
-        - rid: 6729916557337296967
-        - rid: 6729916557337296968
-        - rid: 6729916557337296969
-    - rid: 6729916557337296967
+        - rid: 6729916557337296997
+        - rid: 6729916557337296998
+        - rid: 6729916557337296999
+    - rid: 6729916557337296997
       type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
       data:
         name: LoadToConveyor
         nodes:
-        - rid: 6729916557337296971
-        - rid: 6729916557337296972
-        - rid: 6729916557337296973
-    - rid: 6729916557337296968
+        - rid: 6729916557337297016
+        - rid: 6729916557337297000
+        - rid: 6729916557337297001
+        - rid: 6729916557337297002
+    - rid: 6729916557337296998
       type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
       data:
         name: Conversion
         nodes:
-        - rid: 6729916557337296974
-        - rid: 6729916557337296975
-        - rid: 6729916557337296976
-    - rid: 6729916557337296969
+        - rid: 6729916557337297003
+        - rid: 6729916557337297004
+        - rid: 6729916557337297005
+    - rid: 6729916557337296999
       type: {class: BTNodeSequence, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
       data:
         name: UnloadConveyor
         nodes:
-        - rid: 6729916557337296977
-        - rid: 6729916557337296978
-        - rid: 6729916557337296979
-        - rid: 6729916557337296980
-        - rid: 6729916557337296981
-        - rid: 6729916557337296982
-    - rid: 6729916557337296971
+        - rid: 6729916557337297006
+        - rid: 6729916557337297007
+        - rid: 6729916557337297008
+        - rid: 6729916557337297009
+        - rid: 6729916557337297010
+        - rid: 6729916557337297011
+    - rid: 6729916557337297000
       type: {class: SetTargetBTNode, ns: AI, asm: Assembly-CSharp}
       data:
         _target: {fileID: 0}
         _stopDistance: 0.25
-    - rid: 6729916557337296972
+    - rid: 6729916557337297001
       type: {class: MoveToTargetBTNode, ns: AI, asm: Assembly-CSharp}
-    - rid: 6729916557337296973
+    - rid: 6729916557337297002
       type: {class: LoadToConveyorBTNode, ns: AI, asm: Assembly-CSharp}
-    - rid: 6729916557337296974
+    - rid: 6729916557337297003
       type: {class: BTNodeCondition, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
       data:
         name: LoadIsNotEmpty
         condition:
-          rid: 6729916557337296983
-    - rid: 6729916557337296975
+          rid: 6729916557337297012
+    - rid: 6729916557337297004
       type: {class: SetHarvestConveyorUnloadBTNode, ns: AI, asm: Assembly-CSharp}
-    - rid: 6729916557337296976
+    - rid: 6729916557337297005
       type: {class: HarvestBTNode, ns: AI, asm: Assembly-CSharp}
-    - rid: 6729916557337296977
+    - rid: 6729916557337297006
       type: {class: BTNodeCondition, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
       data:
         name: UnloadIsNotEmpty
         condition:
-          rid: 6729916557337296984
-    - rid: 6729916557337296978
+          rid: 6729916557337297013
+    - rid: 6729916557337297007
       type: {class: SetTargetBTNode, ns: AI, asm: Assembly-CSharp}
       data:
         _target: {fileID: 0}
         _stopDistance: 0.25
-    - rid: 6729916557337296979
+    - rid: 6729916557337297008
       type: {class: MoveToTargetBTNode, ns: AI, asm: Assembly-CSharp}
-    - rid: 6729916557337296980
+    - rid: 6729916557337297009
       type: {class: SetHarvestCharacterBTNode, ns: AI, asm: Assembly-CSharp}
-    - rid: 6729916557337296981
+    - rid: 6729916557337297010
       type: {class: SetHarvestingID, ns: AI, asm: Assembly-CSharp}
       data:
         _resourceID: {fileID: 11400000, guid: 2f6a949503dc6df4b8072cded8440c67, type: 2}
-    - rid: 6729916557337296982
+    - rid: 6729916557337297011
       type: {class: HarvestBTNode, ns: AI, asm: Assembly-CSharp}
-    - rid: 6729916557337296983
+    - rid: 6729916557337297012
       type: {class: ConveyorLoadIsNotEmptyBlackboardCondition, ns: AI, asm: Assembly-CSharp}
-    - rid: 6729916557337296984
+    - rid: 6729916557337297013
       type: {class: ConveyorUnloadIsNotEmptyBlackboardCondition, ns: AI, asm: Assembly-CSharp}
+    - rid: 6729916557337297016
+      type: {class: BTNodeCondition, ns: Atomic.AI, asm: Atomic.AI.BehaviourTree}
+      data:
+        name: CharacterLogStorageIsFull
+        condition:
+          rid: 6729916557337297017
+    - rid: 6729916557337297017
+      type: {class: IsCharacterStorageFullBlackboardCondition, ns: AI, asm: Assembly-CSharp}
+      data:
+        _resourceID: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
 --- !u!1 &2729591373148564147
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,6 +1166,7 @@ GameObject:
   - component: {fileID: 1118920672}
   - component: {fileID: 1118920678}
   - component: {fileID: 7848461586944787009}
+  - component: {fileID: 1128210258}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -1213,6 +1224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8f4943d77ac42bc9d323993ac3be320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _agent: {fileID: 1128210258}
   _moveSpeed: 3
 --- !u!114 &3000718845113086620
 MonoBehaviour:
@@ -1296,7 +1308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _resourceIDConfig: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
-  _capacity: 9
+  _capacity: 3
   _count: 0
 --- !u!114 &7848461586944787009
 MonoBehaviour:
@@ -1313,6 +1325,28 @@ MonoBehaviour:
   _resourceIDConfig: {fileID: 11400000, guid: 2f6a949503dc6df4b8072cded8440c67, type: 2}
   _capacity: 500
   _count: 0
+--- !u!195 &1128210258
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7455131854162157427}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 600
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &7484532441032762191
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,3 +39,6 @@ MonoBehaviour:
   - id: 6
     name: Conveyor
     type: 'GameObject : class'
+  - id: 7
+    name: HarvestingID
+    type: 'string : class'

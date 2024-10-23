@@ -83,7 +83,6 @@ namespace Game.Engine
         {
             if (!_loadStorage.CanRemoveResources(LoadID, _conversionRatio.InValue))
             {
-                Debug.Log($"need at least {_conversionRatio.InValue} in load conveyor with {_loadStorage.ResourceID} resources");
                 return false;
             }
 

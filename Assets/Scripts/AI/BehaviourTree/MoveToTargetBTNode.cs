@@ -22,7 +22,7 @@ namespace AI
                 return BTResult.SUCCESS;
             }
 
-            character.GetComponent<MoveComponent>().MoveStep(direction.normalized);
+            character.GetComponent<MoveComponent>().MoveStepAgent(target.transform.position, stopDistance);
 
             return BTResult.RUNNING;
         }

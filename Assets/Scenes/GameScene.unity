@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 156e472ac9047614da9c387b83e57a79, type: 2}
 --- !u!1 &66029884
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +234,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &214180846
 Transform:
@@ -329,7 +329,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &357177833
 Transform:
@@ -339,7 +339,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 357177832}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2}
+  m_LocalPosition: {x: 0, y: 0, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -363,7 +363,7 @@ GameObject:
   m_TagString: UnloadConveyor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &376335976
 Transform:
@@ -395,7 +395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resourceIDConfig: {fileID: 11400000, guid: 2f6a949503dc6df4b8072cded8440c67, type: 2}
   _capacity: 45
-  _count: 8
+  _count: 0
 --- !u!114 &376335978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,8 +408,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc200f48ccaf469084940e737b352c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _duration: 0.25
-  _postDelay: 0.25
+  _duration: 0.1
+  _postDelay: 0.05
 --- !u!65 &376335979
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -453,38 +453,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 577730050}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &497361958
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 497361959}
-  m_Layer: 0
-  m_Name: Mob
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &497361959
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 497361958}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1118920665}
-  m_Father: {fileID: 1245868255}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &577730049
 GameObject:
@@ -593,7 +561,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &695551996
 Transform:
@@ -626,7 +594,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &737041538
 Transform:
@@ -681,7 +649,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 497361959}
+    m_TransformParent: {fileID: 1245868255}
     m_Modifications:
     - target: {fileID: 1118920667, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
       propertyPath: managedReferences[6729916433045651459].value
@@ -695,10 +663,6 @@ PrefabInstance:
       propertyPath: managedReferences[6729916433045651486].value
       value: 
       objectReference: {fileID: 1283752054}
-    - target: {fileID: 1118920678, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: _capacity
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 2248434285133749092, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -721,15 +685,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2248434285133749092, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2248434285133749092, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2248434285133749092, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2248434285133749092, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -744,689 +708,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[-2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296926]
-      value: Atomic.AI.BehaviourTree Atomic.AI.BTNodeSequence
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296927]
-      value: Atomic.AI.BehaviourTree Atomic.AI.BTNodeCondition
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296928]
-      value: Assembly-CSharp AI.IsCharacterStorageFullBlackboardCondition
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296929]
-      value: Assembly-CSharp AI.SetTargetBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296930]
-      value: Assembly-CSharp AI.MoveToTargetBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296931]
-      value: Atomic.AI.BehaviourTree Atomic.AI.BTNodeCondition
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296932]
-      value: Atomic.AI.Elements Atomic.AI.NotBlackboardCondition
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296933]
-      value: Assembly-CSharp AI.IsCharacterStorageFullBlackboardCondition
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296934]
-      value: Atomic.AI.BehaviourTree Atomic.AI.BTNodeSequence
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296935]
-      value: Atomic.AI.BehaviourTree Atomic.AI.BTNodeCondition
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296936]
-      value: Atomic.AI.Elements Atomic.AI.NotBlackboardCondition
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296937]
-      value: Assembly-CSharp AI.IsCharacterStorageFullBlackboardCondition
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296938]
-      value: Atomic.AI.BehaviourTree Atomic.AI.BTNodeSelector
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296939]
-      value: Atomic.AI.BehaviourTree Atomic.AI.BTNodeSequence
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296940]
-      value: Atomic.AI.BehaviourTree Atomic.AI.BTNodeSequence
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296941]
-      value: Assembly-CSharp AI.FindNearestTreeBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296942]
-      value: Assembly-CSharp AI.MoveToTargetBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296943]
-      value: Assembly-CSharp AI.SetHarvestCharacterBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296944]
-      value: Assembly-CSharp AI.SetHarvestingID
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296945]
-      value: Assembly-CSharp AI.HarvestBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296946]
-      value: Assembly-CSharp AI.NextWaypointBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296947]
-      value: Assembly-CSharp AI.MoveToTargetBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296948]
-      value: Atomic.AI.BehaviourTree Atomic.AI.BTNodeSelector
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296949]
-      value: Atomic.AI.BehaviourTree Atomic.AI.BTNodeSelector
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296950]
-      value: Atomic.AI.BehaviourTree Atomic.AI.BTNodeSequence
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296951]
-      value: Atomic.AI.BehaviourTree Atomic.AI.BTNodeSequence
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296952]
-      value: Assembly-CSharp AI.FindNearestTreeBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296953]
-      value: Assembly-CSharp AI.MoveToTargetBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296954]
-      value: Assembly-CSharp AI.SetHarvestCharacterBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296955]
-      value: Assembly-CSharp AI.SetHarvestingID
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296956]
-      value: Assembly-CSharp AI.HarvestBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296957]
-      value: Assembly-CSharp AI.NextWaypointBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296958]
-      value: Assembly-CSharp AI.MoveToTargetBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296959]
-      value: Atomic.AI.BehaviourTree Atomic.AI.BTNodeCondition
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296960]
-      value: Atomic.AI.Elements Atomic.AI.NotBlackboardCondition
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296961]
-      value: Assembly-CSharp AI.IsCharacterStorageFullBlackboardCondition
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296962]
-      value: Atomic.AI.BehaviourTree Atomic.AI.BTNodeCondition
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296963]
-      value: Assembly-CSharp AI.IsCharacterStorageFullBlackboardCondition
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296964]
-      value: Assembly-CSharp AI.LoadToConveyorBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296965]
-      value: Atomic.AI.BehaviourTree Atomic.AI.BTNodeSelector
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296966]
-      value: Atomic.AI.BehaviourTree Atomic.AI.BTNodeSelector
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296967]
-      value: Atomic.AI.BehaviourTree Atomic.AI.BTNodeSequence
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296968]
-      value: Atomic.AI.BehaviourTree Atomic.AI.BTNodeSequence
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296969]
-      value: Atomic.AI.BehaviourTree Atomic.AI.BTNodeSequence
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296970]
-      value: Atomic.AI.BehaviourTree Atomic.AI.BTNodeCondition
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296971]
-      value: Assembly-CSharp AI.SetTargetBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296972]
-      value: Assembly-CSharp AI.MoveToTargetBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296973]
-      value: Assembly-CSharp AI.LoadToConveyorBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296974]
-      value: Atomic.AI.BehaviourTree Atomic.AI.BTNodeCondition
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296975]
-      value: Assembly-CSharp AI.SetHarvestConveyorUnloadBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296976]
-      value: Assembly-CSharp AI.HarvestBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296977]
-      value: Atomic.AI.BehaviourTree Atomic.AI.BTNodeCondition
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296978]
-      value: Assembly-CSharp AI.SetTargetBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296979]
-      value: Assembly-CSharp AI.MoveToTargetBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296980]
-      value: Assembly-CSharp AI.SetHarvestCharacterBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296981]
-      value: Assembly-CSharp AI.SetHarvestingID
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296982]
-      value: Assembly-CSharp AI.HarvestBTNode
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296983]
-      value: Assembly-CSharp AI.ConveyorLoadIsNotEmptyBlackboardCondition
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296984]
-      value: Assembly-CSharp AI.ConveyorUnloadIsNotEmptyBlackboardCondition
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296926].name
-      value: WorkWithConveyor
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296927].name
-      value: LogsStorageIsFull
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296931].name
-      value: LogsStorageIsNotFull
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296934].name
-      value: HarvestingLogsAndPatrol
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296935].name
-      value: LogsStorageIsNotFull
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296938].name
-      value: HarvestLogsOrPatrol
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296939].name
-      value: HarvestingLogs
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296940].name
-      value: Patrol
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296948].name
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296949].name
-      value: HarvestLogsOrPatrol
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296950].name
-      value: HarvestingLogs
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296951].name
-      value: Patrol
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296959].name
-      value: CharacterLogsIsNotFull
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296962].name
-      value: CharcterLogsIsFull
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296965].name
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296966].name
-      value: WorkWithConveyor
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296967].name
-      value: LoadToConveyor
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296968].name
-      value: Conversion
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296969].name
-      value: UnloadConveyor
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296970].name
-      value: CharacterLogStorageIsFull
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296974].name
-      value: LoadIsNotEmpty
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296977].name
-      value: UnloadIsNotEmpty
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296929]._target
+      propertyPath: managedReferences[6729916557337297000]._target
       value: 
       objectReference: {fileID: 1395568668}
     - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296971]._target
-      value: 
-      objectReference: {fileID: 1395568668}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296978]._target
+      propertyPath: managedReferences[6729916557337297007]._target
       value: 
       objectReference: {fileID: 357177833}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296927].condition
-      value: 6729916557337296928
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296931].condition
-      value: 6729916557337296932
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296932].condition
-      value: 6729916557337296933
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296935].condition
-      value: 6729916557337296936
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296936].condition
-      value: 6729916557337296937
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296959].condition
-      value: 6729916557337296960
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296960].condition
-      value: 6729916557337296961
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296962].condition
-      value: 6729916557337296963
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296970].condition
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296974].condition
-      value: 6729916557337296983
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296977].condition
-      value: 6729916557337296984
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296928]._resourceID
-      value: 
-      objectReference: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296933]._resourceID
-      value: 
-      objectReference: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296937]._resourceID
-      value: 
-      objectReference: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296944]._resourceID
-      value: 
-      objectReference: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296955]._resourceID
-      value: 
-      objectReference: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296961]._resourceID
-      value: 
-      objectReference: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296963]._resourceID
-      value: 
-      objectReference: {fileID: 11400000, guid: c8bc61c47015c324f850553c2777df4c, type: 2}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296981]._resourceID
-      value: 
-      objectReference: {fileID: 11400000, guid: 2f6a949503dc6df4b8072cded8440c67, type: 2}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296929]._stopDistance
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296971]._stopDistance
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296978]._stopDistance
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296909].nodes.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296916].nodes.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296926].nodes.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296934].nodes.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296938].nodes.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296939].nodes.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296940].nodes.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296948].nodes.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296949].nodes.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296950].nodes.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296951].nodes.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296965].nodes.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296966].nodes.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296967].nodes.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296968].nodes.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296969].nodes.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296909].nodes.Array.data[0]
-      value: 6729916557337296926
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296909].nodes.Array.data[1]
-      value: 6729916557337296949
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296909].nodes.Array.data[2]
-      value: 6729916557337296949
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296916].nodes.Array.data[0]
-      value: 6729916557337296917
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296916].nodes.Array.data[1]
-      value: 6729916557337296923
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296916].nodes.Array.data[2]
-      value: 6729916557337296923
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296926].nodes.Array.data[0]
-      value: 6729916557337296962
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296926].nodes.Array.data[1]
-      value: 6729916557337296966
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296926].nodes.Array.data[2]
-      value: 6729916557337296930
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296926].nodes.Array.data[3]
-      value: 6729916557337296964
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296926].nodes.Array.data[4]
-      value: 6729916557337296965
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296934].nodes.Array.data[0]
-      value: 6729916557337296935
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296934].nodes.Array.data[1]
-      value: 6729916557337296938
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296938].nodes.Array.data[0]
-      value: 6729916557337296939
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296938].nodes.Array.data[1]
-      value: 6729916557337296940
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296939].nodes.Array.data[0]
-      value: 6729916557337296941
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296939].nodes.Array.data[1]
-      value: 6729916557337296942
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296939].nodes.Array.data[2]
-      value: 6729916557337296943
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296939].nodes.Array.data[3]
-      value: 6729916557337296944
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296939].nodes.Array.data[4]
-      value: 6729916557337296945
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296940].nodes.Array.data[0]
-      value: 6729916557337296946
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296940].nodes.Array.data[1]
-      value: 6729916557337296947
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296949].nodes.Array.data[0]
-      value: 6729916557337296950
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296949].nodes.Array.data[1]
-      value: 6729916557337296951
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296950].nodes.Array.data[0]
-      value: 6729916557337296952
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296950].nodes.Array.data[1]
-      value: 6729916557337296953
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296950].nodes.Array.data[2]
-      value: 6729916557337296954
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296950].nodes.Array.data[3]
-      value: 6729916557337296955
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296950].nodes.Array.data[4]
-      value: 6729916557337296956
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296951].nodes.Array.data[0]
-      value: 6729916557337296959
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296951].nodes.Array.data[1]
-      value: 6729916557337296957
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296951].nodes.Array.data[2]
-      value: 6729916557337296958
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296966].nodes.Array.data[0]
-      value: 6729916557337296967
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296966].nodes.Array.data[1]
-      value: 6729916557337296968
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296966].nodes.Array.data[2]
-      value: 6729916557337296969
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296967].nodes.Array.data[0]
-      value: 6729916557337296971
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296967].nodes.Array.data[1]
-      value: 6729916557337296972
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296967].nodes.Array.data[2]
-      value: 6729916557337296973
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296967].nodes.Array.data[3]
-      value: 6729916557337296973
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296968].nodes.Array.data[0]
-      value: 6729916557337296974
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296968].nodes.Array.data[1]
-      value: 6729916557337296975
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296968].nodes.Array.data[2]
-      value: 6729916557337296976
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296969].nodes.Array.data[0]
-      value: 6729916557337296977
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296969].nodes.Array.data[1]
-      value: 6729916557337296978
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296969].nodes.Array.data[2]
-      value: 6729916557337296979
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296969].nodes.Array.data[3]
-      value: 6729916557337296980
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296969].nodes.Array.data[4]
-      value: 6729916557337296981
-      objectReference: {fileID: 0}
-    - target: {fileID: 6751838927523502693, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
-      propertyPath: managedReferences[6729916557337296969].nodes.Array.data[5]
-      value: 6729916557337296982
-      objectReference: {fileID: 0}
     - target: {fileID: 7455131854162157427, guid: e5bfb4e1a1a4d4f059efedc672db885b, type: 3}
       propertyPath: m_Name
       value: Character
@@ -1497,7 +785,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 497361959}
+  - {fileID: 1118920665}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1517,7 +805,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1275922917
 Transform:
@@ -1578,7 +866,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1283752055
 Transform:
@@ -1612,7 +900,7 @@ MonoBehaviour:
   _loadStorage: {fileID: 1275922918}
   _unloadStorage: {fileID: 376335977}
   _conversionInValue: 1
-  _conversionOutValue: 3
+  _conversionOutValue: 2
   _unloadHarvest: {fileID: 376335978}
 --- !u!1 &1293396543
 GameObject:
@@ -1659,7 +947,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1395568668
 Transform:
@@ -1714,21 +1002,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1818835171}
     m_Modifications:
-    - target: {fileID: 6336790563532962286, guid: aa6ded41125af4819a020872e5b32e8c, type: 3}
-      propertyPath: _count
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336790563532962286, guid: aa6ded41125af4819a020872e5b32e8c, type: 3}
-      propertyPath: _capacity
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 8617706012052154456, guid: aa6ded41125af4819a020872e5b32e8c, type: 3}
       propertyPath: m_Name
       value: Tree
-      objectReference: {fileID: 0}
-    - target: {fileID: 8617706012052154456, guid: aa6ded41125af4819a020872e5b32e8c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8994793847325045474, guid: aa6ded41125af4819a020872e5b32e8c, type: 3}
       propertyPath: m_RootOrder
@@ -1793,6 +1069,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1818835171}
     m_Modifications:
+    - target: {fileID: 3572802413937496799, guid: aa6ded41125af4819a020872e5b32e8c, type: 3}
+      propertyPath: _treeStopDistance
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6336790563532962286, guid: aa6ded41125af4819a020872e5b32e8c, type: 3}
       propertyPath: _count
       value: 1
@@ -1811,7 +1091,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8994793847325045474, guid: aa6ded41125af4819a020872e5b32e8c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.36
+      value: 2.59
       objectReference: {fileID: 0}
     - target: {fileID: 8994793847325045474, guid: aa6ded41125af4819a020872e5b32e8c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1877,7 +1157,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1805190723
 Transform:
@@ -2088,13 +1368,12 @@ GameObject:
   - component: {fileID: 1881544491}
   - component: {fileID: 1881544494}
   - component: {fileID: 1881544493}
-  - component: {fileID: 1881544492}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1881544491
 Transform:
@@ -2111,19 +1390,6 @@ Transform:
   m_Father: {fileID: 695551996}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1881544492
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1881544490}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1881544493
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2188,7 +1454,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1891668678
 Transform:

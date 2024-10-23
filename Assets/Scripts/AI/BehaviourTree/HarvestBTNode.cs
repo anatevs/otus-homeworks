@@ -1,5 +1,6 @@
 ﻿using Atomic.AI;
 using Game.Engine;
+using UnityEngine;
 
 namespace AI
 {
@@ -9,6 +10,7 @@ namespace AI
         {
             if (!blackboard.TryGetHarvest(out var harvestGO))
             {
+                blackboard.DelHarvestingID();
                 return BTResult.FAILURE;
             }
 
@@ -23,6 +25,7 @@ namespace AI
             {
                 if (!harvest.StartHarvest())
                 {
+                    blackboard.DelHarvestingID();
                     return BTResult.FAILURE;
                 }
             }
@@ -30,6 +33,7 @@ namespace AI
             {
                 if (!harvest.StartHarvest(id))
                 {
+                    blackboard.DelHarvestingID();
                     return BTResult.FAILURE;
                 }
             }

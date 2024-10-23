@@ -1,6 +1,7 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Game.Engine
 {
@@ -12,6 +13,9 @@ namespace Game.Engine
         public Vector3 MoveDirection => _moveDirection;
 
         [SerializeField]
+        private NavMeshAgent _agent;
+
+        [SerializeField]
         private float _moveSpeed = 3.0f;
 
         [ShowInInspector, ReadOnly]
@@ -20,10 +24,17 @@ namespace Game.Engine
         [ShowInInspector, ReadOnly]
         private bool _isMoving;
 
-        public void MoveStep(Vector3 direction)
+        private void Start()
         {
-            _moveDirection = direction;
+            _agent.updateRotation = true;
+        }
+
+        public void MoveStepAgent(Vector3 target, float stoppingDistance)
+        {
+            _agent.SetDestination(target);
             _isMoving = true;
+
+            _agent.stoppingDistance = stoppingDistance;
         }
 
         private void FixedUpdate()
@@ -32,6 +43,15 @@ namespace Game.Engine
             {
                 transform.position += _moveSpeed * Time.fixedDeltaTime * _moveDirection;
                 OnMove?.Invoke();
+                _isMoving = false;
+            }
+
+            if (_agent.pathStatus == NavMeshPathStatus.PathPartial)
+            {
+                _isMoving = true;
+            }
+            else if (_agent.pathStatus == NavMeshPathStatus.PathComplete)
+            {
                 _isMoving = false;
             }
         }
