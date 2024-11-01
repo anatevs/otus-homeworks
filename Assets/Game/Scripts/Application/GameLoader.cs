@@ -1,3 +1,4 @@
+using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
 
 namespace SampleGame
@@ -11,9 +12,10 @@ namespace SampleGame
         }
         
         //TODO: Сделать через Addressables
-        public void LoadGame()
+        public async void LoadGame()
         {
-            SceneManager.LoadScene("Game");
+            await Addressables.LoadSceneAsync("Assets/Game/Scenes/Game.unity").Task;
+            //SceneManager.LoadScene("Game");
         }
     }
 }
