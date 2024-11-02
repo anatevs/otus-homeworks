@@ -10,8 +10,6 @@ namespace SampleGame
         [SerializeField]
         private LocationsLoader _locationsLoader;
 
-        private readonly string _triggerString = "[Trigger";
-
         public void Move(Vector3 direction, float deltaTime)
         {
             transform.position += direction * (deltaTime * _speed);
@@ -22,13 +20,13 @@ namespace SampleGame
             return transform.position;
         }
 
-        public void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
             var name = other.gameObject.name;
 
-            if (name.Contains(_triggerString))
+            if (TriggersNames.IsTriggerName(name))
             {
-                var locationIndex = name[(_triggerString.Length)..^1];
+                var locationIndex = TriggersNames.GetTriggerIndex(name);
 
                 _locationsLoader.LoadLocation(locationIndex);
             }
