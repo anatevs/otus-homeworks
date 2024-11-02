@@ -6,19 +6,19 @@ namespace SampleGame
     public sealed class PauseButton : MonoBehaviour
     {
         [SerializeField]
-        private Button button;
+        private Button _button;
         
         [SerializeField]
-        private PauseScreen pauseScreen;
+        private PauseScreen _pauseScreen;
 
         private void OnEnable()
         {
-            this.button.onClick.AddListener(this.pauseScreen.Show);
+            _button.onClick.AddListener(_pauseScreen.Show);
         }
 
         private void OnDisable()
         {
-            this.button.onClick.RemoveListener(this.pauseScreen.Show);
+            _button.onClick.RemoveListener(_pauseScreen.Show);
         }
     }
 }

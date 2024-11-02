@@ -10,20 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Default Local Group
+  m_Name: SceneLocations
   m_EditorClassIdentifier: 
-  m_GroupName: Default Local Group
+  m_GroupName: SceneLocations
   m_Data:
     m_SerializedData: []
-  m_GUID: 547ab7a1a446ee740bd01e8eff01b9f3
+  m_GUID: bb952c27b942ebc42aeb2da958cdca5e
   m_SerializeEntries:
-  - m_GUID: be9bfa09430ff456eb76851b15fa7fd2
-    m_Address: Assets/Game/Scenes/Game.unity
+  - m_GUID: 4477c1e2bdf3b1649bc6fd446866dea9
+    m_Address: Assets/Game/Prefabs/Gameplay/SceneLocations/Location2.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2a971fcbfef4b451f82c4da85c65aee1
-    m_Address: Assets/Game/Scenes/Menu.unity
+  - m_GUID: ee5cd43a1a9626f40ae0645ae993778b
+    m_Address: Assets/Game/Prefabs/Gameplay/SceneLocations/Location3.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c7a84b769fc6ddc4982c50adf6e8dbf8
+    m_Address: Assets/Game/Prefabs/Gameplay/SceneLocations/Location4.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -31,5 +36,5 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: f4b58522eb93552429d576f2c3222482, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 08225102678cf81458db6ecddab5a942, type: 2}
-    - {fileID: 11400000, guid: 2ed9bd522c6694b4abacc7e24381734d, type: 2}
+    - {fileID: 11400000, guid: bb540fd36f7784a4382cf2847f48d030, type: 2}
+    - {fileID: 11400000, guid: ff677ce5d6661aa4e929ce66053253ea, type: 2}

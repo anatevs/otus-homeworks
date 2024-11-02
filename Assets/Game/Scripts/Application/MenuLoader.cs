@@ -1,3 +1,4 @@
+using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
 
 namespace SampleGame
@@ -5,9 +6,10 @@ namespace SampleGame
     public sealed class MenuLoader
     {
         //TODO: Сделать через Addressables
-        public void LoadMenu()
+        public async void LoadMenu()
         {
-            SceneManager.LoadScene("Menu");
+            await Addressables.LoadSceneAsync("Assets/Game/Scenes/Menu.unity").Task;
+            //SceneManager.LoadScene("Menu");
         }
     }
 }

@@ -6,41 +6,41 @@ namespace SampleGame
     public sealed class GameInstaller : MonoInstaller
     {
         [SerializeField]
-        private CameraConfig cameraConfig;
+        private CameraConfig _cameraConfig;
 
         [SerializeField]
-        private new Camera camera;
+        private Camera _camera;
         
         [SerializeField]
-        private InputConfig inputConfig;
+        private InputConfig _inputConfig;
 
         public override void InstallBindings()
         {
-            this.Container
+            Container
                 .Bind<Camera>()
-                .FromInstance(this.camera);
+                .FromInstance(_camera);
 
-            this.Container
+            Container
                 .Bind<ICharacter>()
                 .FromComponentInHierarchy()
                 .AsSingle();
 
-            this.Container
+            Container
                 .BindInterfacesTo<MoveController>()
                 .AsCached()
                 .NonLazy();
             
-            this.Container
+            Container
                 .Bind<IMoveInput>()
                 .To<MoveInput>()
                 .AsSingle()
-                .WithArguments(this.inputConfig)
+                .WithArguments(_inputConfig)
                 .NonLazy();
 
-            this.Container
+            Container
                 .BindInterfacesTo<CameraFollower>()
                 .AsCached()
-                .WithArguments(this.cameraConfig.cameraOffset)
+                .WithArguments(_cameraConfig.cameraOffset)
                 .NonLazy();
         }
     }
