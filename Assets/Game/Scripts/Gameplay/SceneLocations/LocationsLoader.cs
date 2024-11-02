@@ -1,16 +1,12 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-
 namespace SampleGame
 {
-    public class LocationsTriggers : MonoBehaviour
+    public class LocationsLoader : MonoBehaviour
     {
         [SerializeField]
         private Transform _locationsParent;
-
-        [SerializeField]
-        private int _locationIndex = 2;
 
         private readonly string[] _locationName = new string[2]
         {
@@ -18,12 +14,7 @@ namespace SampleGame
             ".prefab"
         };
 
-        private void Start()
-        {
-            LoadLocation(_locationIndex);
-        }
-
-        public async void LoadLocation(int locationIndex)
+        public async void LoadLocation(string locationIndex)
         {
             var path = $"{_locationName[0]}{locationIndex}{_locationName[1]}";
 

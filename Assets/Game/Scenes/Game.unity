@@ -1519,6 +1519,10 @@ PrefabInstance:
       propertyPath: _speed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 8598691192054498683, guid: eb3686ca2092740f296aaaca3ccbc891, type: 3}
+      propertyPath: _locationsLoader
+      value: 
+      objectReference: {fileID: 1366530280}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
