@@ -2049,7 +2049,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _locationsParent: {fileID: 1366530279}
-  _locationIndex: 2
 --- !u!1001 &1574097922
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2434,6 +2433,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 3552979791091288748, guid: 4d3b77ff19d204d1cb351de63cb12c50, type: 3}
+      propertyPath: _locationsLoader
+      value: 
+      objectReference: {fileID: 1366530280}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

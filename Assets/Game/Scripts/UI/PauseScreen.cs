@@ -12,10 +12,13 @@ namespace SampleGame
         [SerializeField]
         private Button _exitButton;
 
+        [SerializeField]
+        private LocationsLoader _locationsLoader;
+
         private MenuLoader _menuLoader;
 
         [Inject]
-        public void Construct(MenuLoader menuLoader, GameLoader gameLoader)
+        public void Construct(MenuLoader menuLoader)
         {
             _menuLoader = menuLoader;
             gameObject.SetActive(false);
@@ -25,12 +28,14 @@ namespace SampleGame
         {
             _resumeButton.onClick.AddListener(Hide);
             _exitButton.onClick.AddListener(_menuLoader.LoadMenu);
+            _exitButton.onClick.AddListener(_locationsLoader.UnloadLocations);
         }
 
         private void OnDisable()
         {
             _resumeButton.onClick.RemoveListener(Hide);
             _exitButton.onClick.RemoveListener(_menuLoader.LoadMenu);
+            _exitButton.onClick.RemoveListener(_locationsLoader.UnloadLocations);
         }
 
         public void Show()

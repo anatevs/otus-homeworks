@@ -2,19 +2,19 @@
 {
     public static class TriggersNames
     {
-        private static readonly string[] _nameTemplate = 
+        private static readonly string[] _namePattern = 
             new string[2] { "[Trigger", "]" };
 
         public static bool IsTriggerName(string name)
         {
-            return name.Contains(_nameTemplate[0]) &&
-                name.Contains(_nameTemplate[1]);
+            return name.Contains(_namePattern[0]) &&
+                name.Contains(_namePattern[1]);
         }
 
         public static string GetTriggerIndex(string triggerName)
         {
-            return triggerName[(_nameTemplate[0].Length)..
-                ^_nameTemplate[1].Length];
+            return triggerName[(_namePattern[0].Length)..
+                ^_namePattern[1].Length];
         }
     }
 }

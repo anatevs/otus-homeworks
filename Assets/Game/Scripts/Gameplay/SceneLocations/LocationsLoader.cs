@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace SampleGame
 {
-    public class LocationsLoader : MonoBehaviour
+    public sealed class LocationsLoader : MonoBehaviour
     {
         [SerializeField]
         private Transform _locationsParent;
@@ -16,6 +17,8 @@ namespace SampleGame
         };
 
         private readonly List<string> _loadedLocations = new();
+
+        private readonly List<AsyncOperationHandle<GameObject>> _operationHandles = new(); 
 
         public async void LoadLocation(string locationIndex)
         {
@@ -30,11 +33,20 @@ namespace SampleGame
 
             var prefab = await operation.Task;
 
-            Instantiate(prefab, _locationsParent);
+            var location = Instantiate(prefab, _locationsParent);
 
             _loadedLocations.Add(locationIndex);
+            _operationHandles.Add(operation);
+        }
 
-            Addressables.Release(operation);
+        public void UnloadLocations()
+        {
+            foreach (var operation in _operationHandles)
+            {
+                Addressables.ReleaseInstance(operation);
+            }
+
+            _loadedLocations.Clear();
         }
 
         private bool IsLocationLoaded(string locationIndex)
